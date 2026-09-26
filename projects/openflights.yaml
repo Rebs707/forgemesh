@@ -1,0 +1,10 @@
+bronze_database_url: mysql+pymysql://root:password@localhost:3307/bronze_openflights
+description: OpenFlights airports, airlines and routes dataset
+gold_database_url: mysql+pymysql://root:password@localhost:3307/gold_openflights
+name: openflights
+named_graph_uri: http://mesh.local/graph/openflights
+ontology_named_graph_uri: http://mesh.local/graph/openflights/ontology
+ontology_path: owl/openflights_rigor_260527_001.owl
+rdf_dataset_name: openflights-mesh
+rdf_source_name: openflights
+silver_database_url: mysql+pymysql://root:password@localhost:3307/silver_openflights

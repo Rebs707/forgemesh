@@ -1,0 +1,1967 @@
+<?xml version="1.0" encoding="utf-8"?>
+<rdf:RDF
+   xmlns:fm="http://forgemesh.ai/ontology#"
+   xmlns:owl="http://www.w3.org/2002/07/owl#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#"
+   xmlns:skos="http://www.w3.org/2004/02/skos/core#"
+>
+  <rdf:Description rdf:about="http://mesh.local/ontology/synthea#hasDispenses">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#DatatypeProperty"/>
+    <rdfs:comment xml:lang="en">Information about the dispenses of the medication.</rdfs:comment>
+    <rdfs:domain rdf:resource="http://mesh.local/ontology/synthea#Medication"/>
+    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+    <fm:sourceColumn>raw_medications.dispenses</fm:sourceColumn>
+    <fm:sqlType>TEXT</fm:sqlType>
+    <fm:nullRate>0.00</fm:nullRate>
+    <skos:altLabel xml:lang="en">dispenses</skos:altLabel>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://mesh.local/ontology/synthea#hasPayer">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#ObjectProperty"/>
+    <rdfs:comment xml:lang="en">Links an encounter to the payer responsible for the services.</rdfs:comment>
+    <rdfs:comment xml:lang="en">The payer of the medication.</rdfs:comment>
+    <rdfs:domain rdf:nodeID="N3a1b477d3d2d476ead8bcd7418c96666"/>
+    <rdfs:range rdf:resource="http://mesh.local/ontology/synthea#Payer"/>
+    <fm:sourceForeignKey>raw_encounters.payer -&gt; Payer</fm:sourceForeignKey>
+    <rdfs:label xml:lang="en">has payer</rdfs:label>
+    <skos:altLabel xml:lang="en">payer</skos:altLabel>
+    <fm:sourceColumn>raw_medications.payer</fm:sourceColumn>
+    <fm:sqlType>TEXT</fm:sqlType>
+    <fm:nullRate>0.00</fm:nullRate>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://mesh.local/ontology/synthea#HampshireCountyCounty">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+    <rdf:type rdf:resource="http://mesh.local/ontology/synthea#County"/>
+    <rdfs:label>Hampshire County</rdfs:label>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://mesh.local/ontology/synthea#hasEncounterCode">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#ObjectProperty"/>
+    <rdfs:comment xml:lang="en">The code of the encounter.</rdfs:comment>
+    <rdfs:domain rdf:resource="http://mesh.local/ontology/synthea#Encounter"/>
+    <rdfs:range rdf:resource="http://mesh.local/ontology/synthea#SnomedctConcept"/>
+    <fm:sourceColumn>raw_encounters.code</fm:sourceColumn>
+    <fm:sqlType>TEXT</fm:sqlType>
+    <fm:nullRate>0.00</fm:nullRate>
+    <skos:altLabel xml:lang="en">code</skos:altLabel>
+    <rdfs:subPropertyOf rdf:resource="http://mesh.local/ontology/synthea#hasCode"/>
+    <fm:terminologySystem>SNOMED CT</fm:terminologySystem>
+    <fm:terminologyBindingConfidence rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">1.0</fm:terminologyBindingConfidence>
+    <fm:terminologyBindingMethod>value-set-overlap</fm:terminologyBindingMethod>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="N8543ba43be064e2da6fb7f89ad7c2eca">
+    <rdf:first rdf:resource="http://mesh.local/ontology/synthea#Encounter"/>
+    <rdf:rest rdf:nodeID="N70871d7543b14effb59089ac5ec7466c"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://mesh.local/ontology/synthea#hasEncounterReasoncode">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#ObjectProperty"/>
+    <rdfs:domain rdf:resource="http://mesh.local/ontology/synthea#Encounter"/>
+    <rdfs:range rdf:resource="http://mesh.local/ontology/synthea#SnomedctConcept"/>
+    <rdfs:subPropertyOf rdf:resource="http://mesh.local/ontology/synthea#hasReasoncode"/>
+    <skos:altLabel xml:lang="en">reasoncode</skos:altLabel>
+    <fm:sourceColumn>raw_encounters.reasoncode</fm:sourceColumn>
+    <fm:sqlType>TEXT</fm:sqlType>
+    <fm:nullRate>0.37</fm:nullRate>
+    <fm:terminologySystem>SNOMED CT</fm:terminologySystem>
+    <fm:terminologyBindingConfidence rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">1.0</fm:terminologyBindingConfidence>
+    <fm:terminologyBindingMethod>value-set-overlap</fm:terminologyBindingMethod>
+    <rdfs:comment xml:lang="en">The reasoncode of the encounter.</rdfs:comment>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://mesh.local/ontology/synthea#FGender">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+    <rdf:type rdf:resource="http://mesh.local/ontology/synthea#Gender"/>
+    <rdfs:label>F</rdfs:label>
+    <skos:exactMatch rdf:resource="http://terminology.hl7.org/CodeSystem/v2-0001#F"/>
+    <fm:terminologySystem>HL7 Administrative Sex</fm:terminologySystem>
+    <fm:terminologyBindingConfidence rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">1.0</fm:terminologyBindingConfidence>
+    <fm:terminologyBindingMethod>value-set-overlap</fm:terminologyBindingMethod>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://mesh.local/ontology/synthea#hasProcedureReasoncode">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#ObjectProperty"/>
+    <rdfs:domain rdf:resource="http://mesh.local/ontology/synthea#Procedure"/>
+    <rdfs:range rdf:resource="http://mesh.local/ontology/synthea#SnomedctConcept"/>
+    <rdfs:comment xml:lang="en">The reasoncode of the procedure.</rdfs:comment>
+    <skos:altLabel xml:lang="en">reasoncode</skos:altLabel>
+    <fm:sourceColumn>raw_procedures.reasoncode</fm:sourceColumn>
+    <fm:sqlType>TEXT</fm:sqlType>
+    <fm:nullRate>0.55</fm:nullRate>
+    <rdfs:subPropertyOf rdf:resource="http://mesh.local/ontology/synthea#hasReasoncode"/>
+    <fm:terminologySystem>SNOMED CT</fm:terminologySystem>
+    <fm:terminologyBindingConfidence rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">1.0</fm:terminologyBindingConfidence>
+    <fm:terminologyBindingMethod>value-set-overlap</fm:terminologyBindingMethod>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://mesh.local/ontology/synthea#hasDrivers">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#DatatypeProperty"/>
+    <rdfs:comment xml:lang="en">The driver's license information of the patient.</rdfs:comment>
+    <rdfs:domain rdf:resource="http://mesh.local/ontology/synthea#Patient"/>
+    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+    <fm:sourceColumn>raw_patients.drivers</fm:sourceColumn>
+    <fm:sqlType>TEXT</fm:sqlType>
+    <fm:nullRate>0.15</fm:nullRate>
+    <skos:altLabel xml:lang="en">drivers</skos:altLabel>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://mesh.local/ontology/synthea#hasMedicationPayer">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#DatatypeProperty"/>
+    <rdfs:domain rdf:resource="http://mesh.local/ontology/synthea#Medication"/>
+    <rdfs:range rdf:resource="http://mesh.local/ontology/synthea#Payer"/>
+    <rdfs:subPropertyOf rdf:resource="http://mesh.local/ontology/synthea#hasPayer"/>
+    <skos:altLabel xml:lang="en">payer</skos:altLabel>
+    <fm:sourceColumn>raw_medications.payer</fm:sourceColumn>
+    <fm:sqlType>TEXT</fm:sqlType>
+    <fm:nullRate>0.00</fm:nullRate>
+    <rdfs:comment xml:lang="en">The payer of the medication.</rdfs:comment>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://mesh.local/ontology/synthea#hasMedicationDescription">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#ObjectProperty"/>
+    <rdfs:comment xml:lang="en">A description of the medication.</rdfs:comment>
+    <rdfs:domain rdf:resource="http://mesh.local/ontology/synthea#Medication"/>
+    <rdfs:range rdf:resource="http://mesh.local/ontology/synthea#RxnormConcept"/>
+    <fm:sourceColumn>raw_medications.description</fm:sourceColumn>
+    <fm:sqlType>TEXT</fm:sqlType>
+    <fm:nullRate>0.00</fm:nullRate>
+    <skos:altLabel xml:lang="en">description</skos:altLabel>
+    <rdfs:subPropertyOf rdf:resource="http://mesh.local/ontology/synthea#hasDescription"/>
+    <fm:terminologySystem>RxNorm</fm:terminologySystem>
+    <fm:terminologyBindingConfidence rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">1.0</fm:terminologyBindingConfidence>
+    <fm:terminologyBindingMethod>value-set-overlap</fm:terminologyBindingMethod>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://mesh.local/ontology/synthea#hasPayerCoverage">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#DatatypeProperty"/>
+    <rdfs:comment xml:lang="en">The payer coverage of the nf91b5cc971a443189669399de2a24553.</rdfs:comment>
+    <rdfs:domain rdf:nodeID="Nc1b48c489f1d42378bf21e308a04aa57"/>
+    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+    <skos:altLabel xml:lang="en">payer_coverage</skos:altLabel>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://mesh.local/ontology/synthea#County">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
+    <rdfs:label xml:lang="en">County</rdfs:label>
+    <rdfs:comment xml:lang="en">The county of residence of the patient.</rdfs:comment>
+    <fm:sourceTable>raw_patients</fm:sourceTable>
+    <owl:equivalentClass rdf:nodeID="N145042512f714623a1534390d910f3b1"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://forgemesh.ai/ontology#sourceColumn">
+    <rdfs:label xml:lang="en">source column</rdfs:label>
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#AnnotationProperty"/>
+    <rdfs:comment xml:lang="en">The bronze column (table.column) from which this property was derived.</rdfs:comment>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://mesh.local/ontology/synthea#hasProcedureStop">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#DatatypeProperty"/>
+    <rdfs:comment xml:lang="en">The stop of the procedure.</rdfs:comment>
+    <rdfs:domain rdf:resource="http://mesh.local/ontology/synthea#Procedure"/>
+    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#dateTime"/>
+    <fm:sourceColumn>raw_procedures.stop</fm:sourceColumn>
+    <fm:sqlType>TEXT</fm:sqlType>
+    <fm:nullRate>0.00</fm:nullRate>
+    <skos:altLabel xml:lang="en">stop</skos:altLabel>
+    <rdfs:subPropertyOf rdf:resource="http://mesh.local/ontology/synthea#hasStop"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://mesh.local/ontology/synthea#hasLat">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#DatatypeProperty"/>
+    <rdfs:comment xml:lang="en">The latitude of the patient's location.</rdfs:comment>
+    <rdfs:domain rdf:resource="http://mesh.local/ontology/synthea#Patient"/>
+    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+    <fm:sourceColumn>raw_patients.lat</fm:sourceColumn>
+    <fm:sqlType>TEXT</fm:sqlType>
+    <fm:nullRate>0.00</fm:nullRate>
+    <skos:altLabel xml:lang="en">lat</skos:altLabel>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="N2e9d3bccf6684bd9872275c818c96789">
+    <rdf:first rdf:resource="http://mesh.local/ontology/synthea#HampdenCountyCounty"/>
+    <rdf:rest rdf:nodeID="Nf4ba127abe5645978920f5846ccf4f1f"/>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="N9cd3e916158a478fa567fd7ffec1539e">
+    <rdf:first rdf:resource="http://mesh.local/ontology/synthea#N25023Fips"/>
+    <rdf:rest rdf:nodeID="N419e673694014742a7df1fd7af9d52a2"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://mesh.local/ontology/synthea#Race">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
+    <rdfs:label xml:lang="en">Race</rdfs:label>
+    <rdfs:comment xml:lang="en">The race of the patient.</rdfs:comment>
+    <fm:sourceTable>raw_patients</fm:sourceTable>
+    <owl:equivalentClass rdf:nodeID="N3f6215a2986f4abebb1319343f2793c8"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://mesh.local/ontology/synthea#hasConditionStart">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#DatatypeProperty"/>
+    <rdfs:comment xml:lang="en">The start of the condition.</rdfs:comment>
+    <rdfs:domain rdf:resource="http://mesh.local/ontology/synthea#Condition"/>
+    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#dateTime"/>
+    <fm:sourceColumn>raw_conditions.start</fm:sourceColumn>
+    <fm:sqlType>TEXT</fm:sqlType>
+    <fm:nullRate>0.00</fm:nullRate>
+    <skos:altLabel xml:lang="en">start</skos:altLabel>
+    <rdfs:subPropertyOf rdf:resource="http://mesh.local/ontology/synthea#hasStart"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://mesh.local/ontology/synthea#hasEncounterDescription">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#ObjectProperty"/>
+    <rdfs:comment xml:lang="en">The description of the encounter.</rdfs:comment>
+    <rdfs:domain rdf:resource="http://mesh.local/ontology/synthea#Encounter"/>
+    <rdfs:range rdf:resource="http://mesh.local/ontology/synthea#SnomedctConcept"/>
+    <fm:sourceColumn>raw_encounters.description</fm:sourceColumn>
+    <fm:sqlType>TEXT</fm:sqlType>
+    <fm:nullRate>0.00</fm:nullRate>
+    <skos:altLabel xml:lang="en">description</skos:altLabel>
+    <rdfs:subPropertyOf rdf:resource="http://mesh.local/ontology/synthea#hasDescription"/>
+    <fm:terminologySystem>SNOMED CT</fm:terminologySystem>
+    <fm:terminologyBindingConfidence rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">1.0</fm:terminologyBindingConfidence>
+    <fm:terminologyBindingMethod>value-set-overlap</fm:terminologyBindingMethod>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="Naccf32ee8a83407b8778c2806a21f3d7">
+    <owl:oneOf rdf:nodeID="N8c7ec673807c4b88a40b3447b0ce67d5"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://mesh.local/ontology/synthea#hasEncounterPayerCoverage">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#DatatypeProperty"/>
+    <rdfs:domain rdf:resource="http://mesh.local/ontology/synthea#Encounter"/>
+    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+    <rdfs:subPropertyOf rdf:resource="http://mesh.local/ontology/synthea#hasPayerCoverage"/>
+    <skos:altLabel xml:lang="en">payer_coverage</skos:altLabel>
+    <fm:sourceColumn>raw_encounters.payer_coverage</fm:sourceColumn>
+    <fm:sqlType>TEXT</fm:sqlType>
+    <fm:nullRate>0.00</fm:nullRate>
+    <rdfs:comment xml:lang="en">The payer coverage of the encounter.</rdfs:comment>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://mesh.local/ontology/synthea#hasMedicationReasoncode">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#ObjectProperty"/>
+    <rdfs:domain rdf:resource="http://mesh.local/ontology/synthea#Medication"/>
+    <rdfs:range rdf:resource="http://mesh.local/ontology/synthea#SnomedctConcept"/>
+    <rdfs:label xml:lang="en">has reasoncode</rdfs:label>
+    <rdfs:comment xml:lang="en">The reasoncode of the medication.</rdfs:comment>
+    <skos:altLabel xml:lang="en">reasoncode</skos:altLabel>
+    <fm:sourceColumn>raw_medications.reasoncode</fm:sourceColumn>
+    <fm:sqlType>TEXT</fm:sqlType>
+    <fm:nullRate>0.15</fm:nullRate>
+    <rdfs:subPropertyOf rdf:resource="http://mesh.local/ontology/synthea#hasReasoncode"/>
+    <fm:terminologySystem>SNOMED CT</fm:terminologySystem>
+    <fm:terminologyBindingConfidence rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">1.0</fm:terminologyBindingConfidence>
+    <fm:terminologyBindingMethod>value-set-overlap</fm:terminologyBindingMethod>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://mesh.local/ontology/synthea#Procedure">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
+    <rdfs:label xml:lang="en">Procedure</rdfs:label>
+    <rdfs:comment xml:lang="en">A medical procedure performed on a patient.</rdfs:comment>
+    <fm:sourceTable>raw_procedures</fm:sourceTable>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://mesh.local/ontology/synthea#Prefix">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
+    <rdfs:label xml:lang="en">Prefix</rdfs:label>
+    <rdfs:comment xml:lang="en">The prefix of a patient's name.</rdfs:comment>
+    <fm:sourceTable>raw_patients</fm:sourceTable>
+    <owl:equivalentClass rdf:nodeID="Nad2b876f495f4f058f1c7f5624ce3a9b"/>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="N50bebba24df14d478f8fd802f57e3b06">
+    <rdf:first rdf:resource="http://mesh.local/ontology/synthea#Procedure"/>
+    <rdf:rest rdf:resource="http://www.w3.org/1999/02/22-rdf-syntax-ns#nil"/>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="N9fac69607253475b82a71b463b850d3d">
+    <rdf:first rdf:resource="http://mesh.local/ontology/synthea#N8555BaseEncounterCost"/>
+    <rdf:rest rdf:nodeID="Ndf56e92c8374469da24d940038ce4384"/>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="Nd2d6c823459a4a7489712c68dbb1cae6">
+    <rdf:first rdf:resource="http://mesh.local/ontology/synthea#Encounter"/>
+    <rdf:rest rdf:nodeID="Ne2d1eda24b1c42e28df3e5dab1160309"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://mesh.local/ontology/synthea#N12500BaseEncounterCost">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+    <rdf:type rdf:resource="http://mesh.local/ontology/synthea#BaseEncounterCost"/>
+    <rdfs:label>125.00</rdfs:label>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://forgemesh.ai/ontology#limitation">
+    <rdfs:label xml:lang="en">limitation</rdfs:label>
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#AnnotationProperty"/>
+    <rdfs:comment xml:lang="en">A known limitation of this class or property that proof narrators should surface to query consumers. Multiple values allowed.</rdfs:comment>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://mesh.local/ontology/synthea#hasFirst">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#DatatypeProperty"/>
+    <rdfs:comment xml:lang="en">The first name of the patient.</rdfs:comment>
+    <rdfs:domain rdf:resource="http://mesh.local/ontology/synthea#Patient"/>
+    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+    <fm:sourceColumn>raw_patients.first</fm:sourceColumn>
+    <fm:sqlType>TEXT</fm:sqlType>
+    <fm:nullRate>0.00</fm:nullRate>
+    <skos:altLabel xml:lang="en">first</skos:altLabel>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://mesh.local/ontology/synthea#Gender">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
+    <rdfs:label xml:lang="en">Gender</rdfs:label>
+    <rdfs:comment xml:lang="en">The gender of the patient.</rdfs:comment>
+    <fm:sourceTable>raw_patients</fm:sourceTable>
+    <skos:closeMatch rdf:resource="http://terminology.hl7.org/CodeSystem/v2-0001"/>
+    <owl:equivalentClass rdf:nodeID="Naccf32ee8a83407b8778c2806a21f3d7"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://mesh.local/ontology/synthea#hasReasonCode">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#ObjectProperty"/>
+    <rdfs:comment xml:lang="en">The reason code for the encounter.</rdfs:comment>
+    <rdfs:domain rdf:resource="http://mesh.local/ontology/synthea#Encounter"/>
+    <rdfs:range rdf:resource="http://mesh.local/ontology/synthea#SnomedctConcept"/>
+    <fm:sourceColumn>raw_encounters.reasoncode</fm:sourceColumn>
+    <fm:sqlType>TEXT</fm:sqlType>
+    <fm:nullRate>0.37</fm:nullRate>
+    <fm:terminologySystem>SNOMED CT</fm:terminologySystem>
+    <fm:terminologyBindingConfidence rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">1.0</fm:terminologyBindingConfidence>
+    <fm:terminologyBindingMethod>value-set-overlap</fm:terminologyBindingMethod>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://mesh.local/ontology/synthea#hasMedicationCode">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#ObjectProperty"/>
+    <rdfs:comment xml:lang="en">The code representing the medication.</rdfs:comment>
+    <rdfs:domain rdf:resource="http://mesh.local/ontology/synthea#Medication"/>
+    <rdfs:range rdf:resource="http://mesh.local/ontology/synthea#RxnormConcept"/>
+    <fm:sourceColumn>raw_medications.code</fm:sourceColumn>
+    <fm:sqlType>TEXT</fm:sqlType>
+    <fm:nullRate>0.00</fm:nullRate>
+    <skos:altLabel xml:lang="en">code</skos:altLabel>
+    <rdfs:subPropertyOf rdf:resource="http://mesh.local/ontology/synthea#hasCode"/>
+    <fm:terminologySystem>RxNorm</fm:terminologySystem>
+    <fm:terminologyBindingConfidence rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">1.0</fm:terminologyBindingConfidence>
+    <fm:terminologyBindingMethod>value-set-overlap</fm:terminologyBindingMethod>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://mesh.local/ontology/synthea#hasEncounterOrganization">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#DatatypeProperty"/>
+    <rdfs:comment xml:lang="en">The organization associated with the encounter.</rdfs:comment>
+    <rdfs:domain rdf:resource="http://mesh.local/ontology/synthea#Encounter"/>
+    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+    <fm:sourceColumn>raw_encounters.organization</fm:sourceColumn>
+    <fm:sqlType>TEXT</fm:sqlType>
+    <fm:nullRate>0.00</fm:nullRate>
+    <skos:altLabel xml:lang="en">organization</skos:altLabel>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://mesh.local/ontology/synthea#NorfolkCountyCounty">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+    <rdf:type rdf:resource="http://mesh.local/ontology/synthea#County"/>
+    <rdfs:label>Norfolk County</rdfs:label>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://mesh.local/ontology/synthea#hasProcedureBaseCost">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#DatatypeProperty"/>
+    <rdfs:comment xml:lang="en">The base cost of the procedure.</rdfs:comment>
+    <rdfs:domain rdf:resource="http://mesh.local/ontology/synthea#Procedure"/>
+    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+    <fm:sourceColumn>raw_procedures.base_cost</fm:sourceColumn>
+    <fm:sqlType>TEXT</fm:sqlType>
+    <fm:nullRate>0.00</fm:nullRate>
+    <skos:altLabel xml:lang="en">base_cost</skos:altLabel>
+    <rdfs:subPropertyOf rdf:resource="http://mesh.local/ontology/synthea#hasBaseCost"/>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="N04fe46d3ce774382a3a56fb43a37adf2">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
+    <owl:unionOf rdf:nodeID="N8cc976fa01fe414abb3a8aaf1b028f57"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://mesh.local/ontology/synthea#Encounterclass">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
+    <rdfs:label xml:lang="en">Encounterclass</rdfs:label>
+    <owl:equivalentClass rdf:nodeID="Nd424b7ee475d4ca680615e72b236fac0"/>
+    <rdfs:comment xml:lang="en">Controlled vocabulary of the distinct values of source column(s) raw_encounters.encounterclass.</rdfs:comment>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://mesh.local/ontology/synthea#AsianRace">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+    <rdf:type rdf:resource="http://mesh.local/ontology/synthea#Race"/>
+    <rdfs:label>asian</rdfs:label>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://mesh.local/ontology/synthea#hasAddress">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#DatatypeProperty"/>
+    <rdfs:comment xml:lang="en">The address of the patient.</rdfs:comment>
+    <rdfs:domain rdf:resource="http://mesh.local/ontology/synthea#Patient"/>
+    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+    <fm:sourceColumn>raw_patients.address</fm:sourceColumn>
+    <fm:sqlType>TEXT</fm:sqlType>
+    <fm:nullRate>0.00</fm:nullRate>
+    <skos:altLabel xml:lang="en">address</skos:altLabel>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://mesh.local/ontology/synthea#hasEthnicity">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#ObjectProperty"/>
+    <rdfs:comment xml:lang="en">Links a patient to their ethnicity.</rdfs:comment>
+    <rdfs:domain rdf:resource="http://mesh.local/ontology/synthea#Patient"/>
+    <rdfs:range rdf:resource="http://mesh.local/ontology/synthea#Ethnicity"/>
+    <fm:sourceForeignKey>raw_patients.ethnicity -&gt; Ethnicity</fm:sourceForeignKey>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="N1fde37e3c0ce42c7a5595012fc0958ed">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
+    <owl:unionOf rdf:nodeID="N50a3ad67e1fb46ed8dac875e5b573f01"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://mesh.local/ontology/synthea#hasProcedureDescription">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#ObjectProperty"/>
+    <rdfs:comment xml:lang="en">The description of the procedure.</rdfs:comment>
+    <rdfs:domain rdf:resource="http://mesh.local/ontology/synthea#Procedure"/>
+    <rdfs:range rdf:resource="http://mesh.local/ontology/synthea#SnomedctConcept"/>
+    <fm:sourceColumn>raw_procedures.description</fm:sourceColumn>
+    <fm:sqlType>TEXT</fm:sqlType>
+    <fm:nullRate>0.00</fm:nullRate>
+    <skos:altLabel xml:lang="en">description</skos:altLabel>
+    <rdfs:subPropertyOf rdf:resource="http://mesh.local/ontology/synthea#hasDescription"/>
+    <fm:terminologySystem>SNOMED CT</fm:terminologySystem>
+    <fm:terminologyBindingConfidence rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">1.0</fm:terminologyBindingConfidence>
+    <fm:terminologyBindingMethod>value-set-overlap</fm:terminologyBindingMethod>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://forgemesh.ai/ontology#loadRunId">
+    <rdfs:comment xml:lang="en">The RDF pipeline run ID for the materialisation that wrote this named graph. Attached to the graph node itself as a load stamp.</rdfs:comment>
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#AnnotationProperty"/>
+    <rdfs:label xml:lang="en">load run ID</rdfs:label>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://forgemesh.ai/ontology#terminologyBindingConfidence">
+    <rdfs:comment xml:lang="en">Confidence (0.0 to 1.0) that this external concept binding is correct, derived from value-set overlap and structural signals. Bindings below TERM_BIND_CONFIDENCE_FLOOR are surfaced for review in the binding sidecar, never asserted as skos:exactMatch. Present on every individual carrying an external concept binding.</rdfs:comment>
+    <rdfs:label xml:lang="en">terminology binding confidence</rdfs:label>
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#AnnotationProperty"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://mesh.local/ontology/synthea#D18ef2e6Ef40324cBe5434a5ee865625Payer">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+    <rdf:type rdf:resource="http://mesh.local/ontology/synthea#Payer"/>
+    <rdfs:label>d18ef2e6-ef40-324c-be54-34a5ee865625</rdfs:label>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://mesh.local/ontology/synthea#Ethnicity">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
+    <rdfs:label xml:lang="en">Ethnicity</rdfs:label>
+    <rdfs:comment xml:lang="en">The ethnicity of the patient.</rdfs:comment>
+    <fm:sourceTable>raw_patients</fm:sourceTable>
+    <owl:equivalentClass rdf:nodeID="N049c07b389024e31910413f50d97bd6a"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://mesh.local/ontology/synthea#hasSuffix">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#DatatypeProperty"/>
+    <rdfs:comment xml:lang="en">The suffix of the patient's name.</rdfs:comment>
+    <rdfs:domain rdf:resource="http://mesh.local/ontology/synthea#Patient"/>
+    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+    <fm:sourceColumn>raw_patients.suffix</fm:sourceColumn>
+    <fm:sqlType>TEXT</fm:sqlType>
+    <fm:nullRate>0.98</fm:nullRate>
+    <skos:altLabel xml:lang="en">suffix</skos:altLabel>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://mesh.local/ontology/synthea#SnomedctConcept">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
+    <rdfs:label xml:lang="en">SNOMED CT concept</rdfs:label>
+    <skos:closeMatch rdf:resource="http://snomed.info/sct"/>
+    <rdfs:comment xml:lang="en">A concept from the SNOMED CT code system, referenced by coded source column(s) raw_conditions.code, raw_conditions.description, raw_encounters.code, raw_encounters.description, raw_encounters.reasoncode and 7 more.</rdfs:comment>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://mesh.local/ontology/synthea#N25013Fips">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+    <rdf:type rdf:resource="http://mesh.local/ontology/synthea#Fips"/>
+    <rdfs:label>25013</rdfs:label>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="N1ad7696798c94024856efa072dfc2657">
+    <rdf:first rdf:resource="http://mesh.local/ontology/synthea#Medication"/>
+    <rdf:rest rdf:nodeID="Nd96192fd645e4295966d0f8c861db030"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://mesh.local/ontology/synthea#SMarital">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+    <rdf:type rdf:resource="http://mesh.local/ontology/synthea#Marital"/>
+    <rdfs:label>S</rdfs:label>
+    <skos:exactMatch rdf:resource="http://terminology.hl7.org/CodeSystem/v3-MaritalStatus#S"/>
+    <fm:terminologySystem>HL7 v3 MaritalStatus</fm:terminologySystem>
+    <fm:terminologyBindingConfidence rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">1.0</fm:terminologyBindingConfidence>
+    <fm:terminologyBindingMethod>value-set-overlap</fm:terminologyBindingMethod>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://mesh.local/ontology/synthea#AmbulatoryEncounterclass">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+    <rdf:type rdf:resource="http://mesh.local/ontology/synthea#Encounterclass"/>
+    <rdfs:label>ambulatory</rdfs:label>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://mesh.local/ontology/synthea#hasProcedureCode">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#ObjectProperty"/>
+    <rdfs:comment xml:lang="en">The code of the procedure.</rdfs:comment>
+    <rdfs:domain rdf:resource="http://mesh.local/ontology/synthea#Procedure"/>
+    <rdfs:range rdf:resource="http://mesh.local/ontology/synthea#SnomedctConcept"/>
+    <fm:sourceColumn>raw_procedures.code</fm:sourceColumn>
+    <fm:sqlType>TEXT</fm:sqlType>
+    <fm:nullRate>0.00</fm:nullRate>
+    <skos:altLabel xml:lang="en">code</skos:altLabel>
+    <rdfs:subPropertyOf rdf:resource="http://mesh.local/ontology/synthea#hasCode"/>
+    <fm:terminologySystem>SNOMED CT</fm:terminologySystem>
+    <fm:terminologyBindingConfidence rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">1.0</fm:terminologyBindingConfidence>
+    <fm:terminologyBindingMethod>value-set-overlap</fm:terminologyBindingMethod>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://mesh.local/ontology/synthea#N25027Fips">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+    <rdf:type rdf:resource="http://mesh.local/ontology/synthea#Fips"/>
+    <rdfs:label>25027</rdfs:label>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://mesh.local/ontology/synthea#hasProcedureReasondescription">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#ObjectProperty"/>
+    <rdfs:domain rdf:resource="http://mesh.local/ontology/synthea#Procedure"/>
+    <rdfs:range rdf:resource="http://mesh.local/ontology/synthea#SnomedctConcept"/>
+    <rdfs:comment xml:lang="en">The reasondescription of the procedure.</rdfs:comment>
+    <skos:altLabel xml:lang="en">reasondescription</skos:altLabel>
+    <fm:sourceColumn>raw_procedures.reasondescription</fm:sourceColumn>
+    <fm:sqlType>TEXT</fm:sqlType>
+    <fm:nullRate>0.55</fm:nullRate>
+    <rdfs:subPropertyOf rdf:resource="http://mesh.local/ontology/synthea#hasReasondescription"/>
+    <fm:terminologySystem>SNOMED CT</fm:terminologySystem>
+    <fm:terminologyBindingConfidence rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">1.0</fm:terminologyBindingConfidence>
+    <fm:terminologyBindingMethod>value-set-overlap</fm:terminologyBindingMethod>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="Ne8f4ff741fbe488b90742e770a59a42e">
+    <rdf:first rdf:resource="http://mesh.local/ontology/synthea#N14258BaseEncounterCost"/>
+    <rdf:rest rdf:nodeID="Nae7f600cc0c64a1693aeef035fff960d"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://mesh.local/ontology/synthea#hasMedicationReasondescription">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#ObjectProperty"/>
+    <rdfs:domain rdf:resource="http://mesh.local/ontology/synthea#Medication"/>
+    <rdfs:range rdf:resource="http://mesh.local/ontology/synthea#SnomedctConcept"/>
+    <rdfs:label xml:lang="en">has reasondescription</rdfs:label>
+    <rdfs:comment xml:lang="en">The reasondescription of the medication.</rdfs:comment>
+    <skos:altLabel xml:lang="en">reasondescription</skos:altLabel>
+    <fm:sourceColumn>raw_medications.reasondescription</fm:sourceColumn>
+    <fm:sqlType>TEXT</fm:sqlType>
+    <fm:nullRate>0.15</fm:nullRate>
+    <rdfs:subPropertyOf rdf:resource="http://mesh.local/ontology/synthea#hasReasondescription"/>
+    <fm:terminologySystem>SNOMED CT</fm:terminologySystem>
+    <fm:terminologyBindingConfidence rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">1.0</fm:terminologyBindingConfidence>
+    <fm:terminologyBindingMethod>value-set-overlap</fm:terminologyBindingMethod>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://mesh.local/ontology/synthea#UrgentcareEncounterclass">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+    <rdf:type rdf:resource="http://mesh.local/ontology/synthea#Encounterclass"/>
+    <rdfs:label>urgentcare</rdfs:label>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://mesh.local/ontology/synthea#hasConditionCode">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#ObjectProperty"/>
+    <rdfs:comment xml:lang="en">The code of the condition.</rdfs:comment>
+    <rdfs:domain rdf:resource="http://mesh.local/ontology/synthea#Condition"/>
+    <rdfs:range rdf:resource="http://mesh.local/ontology/synthea#SnomedctConcept"/>
+    <fm:sourceColumn>raw_conditions.code</fm:sourceColumn>
+    <fm:sqlType>TEXT</fm:sqlType>
+    <fm:nullRate>0.00</fm:nullRate>
+    <skos:altLabel xml:lang="en">code</skos:altLabel>
+    <rdfs:subPropertyOf rdf:resource="http://mesh.local/ontology/synthea#hasCode"/>
+    <fm:terminologySystem>SNOMED CT</fm:terminologySystem>
+    <fm:terminologyBindingConfidence rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">1.0</fm:terminologyBindingConfidence>
+    <fm:terminologyBindingMethod>value-set-overlap</fm:terminologyBindingMethod>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="Nd7f17daf8d084e5fa0c9b30977dd76b1">
+    <rdf:first rdf:resource="http://mesh.local/ontology/synthea#N25013Fips"/>
+    <rdf:rest rdf:nodeID="N444820fe52324baa99f3789d86691587"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://mesh.local/ontology/synthea#hasMedicationBaseCost">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#DatatypeProperty"/>
+    <rdfs:domain rdf:resource="http://mesh.local/ontology/synthea#Medication"/>
+    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+    <rdfs:subPropertyOf rdf:resource="http://mesh.local/ontology/synthea#hasBaseCost"/>
+    <skos:altLabel xml:lang="en">base_cost</skos:altLabel>
+    <fm:sourceColumn>raw_medications.base_cost</fm:sourceColumn>
+    <fm:sqlType>TEXT</fm:sqlType>
+    <fm:nullRate>0.00</fm:nullRate>
+    <rdfs:comment xml:lang="en">The base cost of the medication.</rdfs:comment>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="N29e925b0aad24a8d95ee6b54106a3267">
+    <rdf:first rdf:resource="http://mesh.local/ontology/synthea#MMarital"/>
+    <rdf:rest rdf:nodeID="N9072d23947474c8d96a54794ab32eb57"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://mesh.local/ontology/synthea#hasProcedureReasonDescription">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#ObjectProperty"/>
+    <rdfs:comment xml:lang="en">A description of the reason for the procedure.</rdfs:comment>
+    <rdfs:domain rdf:resource="http://mesh.local/ontology/synthea#Procedure"/>
+    <rdfs:range rdf:resource="http://mesh.local/ontology/synthea#SnomedctConcept"/>
+    <fm:sourceColumn>raw_procedures.reasondescription</fm:sourceColumn>
+    <fm:sqlType>TEXT</fm:sqlType>
+    <fm:nullRate>0.55</fm:nullRate>
+    <fm:terminologySystem>SNOMED CT</fm:terminologySystem>
+    <fm:terminologyBindingConfidence rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">1.0</fm:terminologyBindingConfidence>
+    <fm:terminologyBindingMethod>value-set-overlap</fm:terminologyBindingMethod>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://mesh.local/ontology/synthea#MrsPrefix">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+    <rdf:type rdf:resource="http://mesh.local/ontology/synthea#Prefix"/>
+    <rdfs:label>Mrs.</rdfs:label>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="Na2c8ff882a274ede93dfa4d139d21301">
+    <rdf:first rdf:resource="http://mesh.local/ontology/synthea#E03e23c94df13eb6A62dF70f02301496Payer"/>
+    <rdf:rest rdf:nodeID="Nc32d1730cb5447c792d1e465ccae0572"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://mesh.local/ontology/synthea#hasMiddle">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#DatatypeProperty"/>
+    <rdfs:comment xml:lang="en">The middle name of the patient.</rdfs:comment>
+    <rdfs:domain rdf:resource="http://mesh.local/ontology/synthea#Patient"/>
+    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+    <fm:sourceColumn>raw_patients.middle</fm:sourceColumn>
+    <fm:sqlType>TEXT</fm:sqlType>
+    <fm:nullRate>0.18</fm:nullRate>
+    <skos:altLabel xml:lang="en">middle</skos:altLabel>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://mesh.local/ontology/synthea#WorcesterCountyCounty">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+    <rdf:type rdf:resource="http://mesh.local/ontology/synthea#County"/>
+    <rdfs:label>Worcester County</rdfs:label>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://mesh.local/ontology/synthea#hasConditionDescription">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#ObjectProperty"/>
+    <rdfs:comment xml:lang="en">The description of the condition.</rdfs:comment>
+    <rdfs:domain rdf:resource="http://mesh.local/ontology/synthea#Condition"/>
+    <rdfs:range rdf:resource="http://mesh.local/ontology/synthea#SnomedctConcept"/>
+    <fm:sourceColumn>raw_conditions.description</fm:sourceColumn>
+    <fm:sqlType>TEXT</fm:sqlType>
+    <fm:nullRate>0.00</fm:nullRate>
+    <skos:altLabel xml:lang="en">description</skos:altLabel>
+    <rdfs:subPropertyOf rdf:resource="http://mesh.local/ontology/synthea#hasDescription"/>
+    <fm:terminologySystem>SNOMED CT</fm:terminologySystem>
+    <fm:terminologyBindingConfidence rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">1.0</fm:terminologyBindingConfidence>
+    <fm:terminologyBindingMethod>value-set-overlap</fm:terminologyBindingMethod>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://mesh.local/ontology/synthea#Medication">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
+    <rdfs:label xml:lang="en">Medication</rdfs:label>
+    <rdfs:comment xml:lang="en">A record of medication prescribed to a patient.</rdfs:comment>
+    <fm:sourceTable>raw_medications</fm:sourceTable>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="Nb2164706396f4741b7d06a66ffc82363">
+    <rdf:first rdf:resource="http://mesh.local/ontology/synthea#WMarital"/>
+    <rdf:rest rdf:resource="http://www.w3.org/1999/02/22-rdf-syntax-ns#nil"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://mesh.local/ontology/synthea#N44007Fips">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+    <rdf:type rdf:resource="http://mesh.local/ontology/synthea#Fips"/>
+    <rdfs:label>44007</rdfs:label>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="N67b42710c1fd4b1ba6543b89f422aa8d">
+    <rdf:first rdf:resource="http://mesh.local/ontology/synthea#Encounter"/>
+    <rdf:rest rdf:nodeID="N0bf8123d72454788825357830f1591b9"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://mesh.local/ontology/synthea#hasZip">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#DatatypeProperty"/>
+    <rdfs:comment xml:lang="en">The ZIP code of the patient.</rdfs:comment>
+    <rdfs:domain rdf:resource="http://mesh.local/ontology/synthea#Patient"/>
+    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+    <fm:sourceColumn>raw_patients.zip</fm:sourceColumn>
+    <fm:sqlType>TEXT</fm:sqlType>
+    <fm:nullRate>0.00</fm:nullRate>
+    <skos:altLabel xml:lang="en">zip</skos:altLabel>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="N3df8dc42d82b458bbf167b9e19093637">
+    <rdf:first rdf:resource="http://mesh.local/ontology/synthea#Procedure"/>
+    <rdf:rest rdf:resource="http://www.w3.org/1999/02/22-rdf-syntax-ns#nil"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://mesh.local/ontology/synthea#hasEncounterStop">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#DatatypeProperty"/>
+    <rdfs:comment xml:lang="en">The stop of the encounter.</rdfs:comment>
+    <rdfs:domain rdf:resource="http://mesh.local/ontology/synthea#Encounter"/>
+    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#dateTime"/>
+    <fm:sourceColumn>raw_encounters.stop</fm:sourceColumn>
+    <fm:sqlType>TEXT</fm:sqlType>
+    <fm:nullRate>0.00</fm:nullRate>
+    <skos:altLabel xml:lang="en">stop</skos:altLabel>
+    <rdfs:subPropertyOf rdf:resource="http://mesh.local/ontology/synthea#hasStop"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://mesh.local/ontology/synthea#E03e23c94df13eb6A62dF70f02301496Payer">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+    <rdf:type rdf:resource="http://mesh.local/ontology/synthea#Payer"/>
+    <rdfs:label>e03e23c9-4df1-3eb6-a62d-f70f02301496</rdfs:label>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://mesh.local/ontology/synthea#hasState">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#ObjectProperty"/>
+    <rdfs:comment xml:lang="en">Links a patient to their state of residence.</rdfs:comment>
+    <rdfs:domain rdf:resource="http://mesh.local/ontology/synthea#Patient"/>
+    <rdfs:range rdf:resource="http://mesh.local/ontology/synthea#State"/>
+    <fm:sourceForeignKey>raw_patients.state -&gt; State</fm:sourceForeignKey>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://mesh.local/ontology/synthea#N14618BaseEncounterCost">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+    <rdf:type rdf:resource="http://mesh.local/ontology/synthea#BaseEncounterCost"/>
+    <rdfs:label>146.18</rdfs:label>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="N8cc976fa01fe414abb3a8aaf1b028f57">
+    <rdf:first rdf:resource="http://mesh.local/ontology/synthea#Condition"/>
+    <rdf:rest rdf:nodeID="N64310609fb7141ca8fb4bddc78be7aa8"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://mesh.local/ontology/synthea#hasCity">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#DatatypeProperty"/>
+    <rdfs:comment xml:lang="en">The city of the patient.</rdfs:comment>
+    <rdfs:domain rdf:resource="http://mesh.local/ontology/synthea#Patient"/>
+    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+    <fm:sourceColumn>raw_patients.city</fm:sourceColumn>
+    <fm:sqlType>TEXT</fm:sqlType>
+    <fm:nullRate>0.00</fm:nullRate>
+    <skos:altLabel xml:lang="en">city</skos:altLabel>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="Nbd7af9d910cd49e1a58c072d46f25a64">
+    <rdf:first rdf:resource="http://mesh.local/ontology/synthea#Medication"/>
+    <rdf:rest rdf:resource="http://www.w3.org/1999/02/22-rdf-syntax-ns#nil"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://mesh.local/ontology/synthea#hasMedicationStart">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#DatatypeProperty"/>
+    <rdfs:comment xml:lang="en">The start date of the medication.</rdfs:comment>
+    <rdfs:domain rdf:resource="http://mesh.local/ontology/synthea#Medication"/>
+    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#dateTime"/>
+    <fm:sourceColumn>raw_medications.start</fm:sourceColumn>
+    <fm:sqlType>TEXT</fm:sqlType>
+    <fm:nullRate>0.00</fm:nullRate>
+    <skos:altLabel xml:lang="en">start</skos:altLabel>
+    <rdfs:subPropertyOf rdf:resource="http://mesh.local/ontology/synthea#hasStart"/>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="N576a2250e91d4cd29955d6234ee33b24">
+    <rdf:first rdf:resource="http://mesh.local/ontology/synthea#D31fccc31767390d966a22a5156f4219Payer"/>
+    <rdf:rest rdf:nodeID="N96458b7b2dc2472f8a92ee05179793b3"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://mesh.local/ontology/synthea#hasMedicationStop">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#DatatypeProperty"/>
+    <rdfs:comment xml:lang="en">The stop date of the medication.</rdfs:comment>
+    <rdfs:domain rdf:resource="http://mesh.local/ontology/synthea#Medication"/>
+    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#dateTime"/>
+    <fm:sourceColumn>raw_medications.stop</fm:sourceColumn>
+    <fm:sqlType>TEXT</fm:sqlType>
+    <fm:nullRate>0.05</fm:nullRate>
+    <skos:altLabel xml:lang="en">stop</skos:altLabel>
+    <rdfs:subPropertyOf rdf:resource="http://mesh.local/ontology/synthea#hasStop"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://mesh.local/ontology/synthea#VirtualEncounterclass">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+    <rdf:type rdf:resource="http://mesh.local/ontology/synthea#Encounterclass"/>
+    <rdfs:label>virtual</rdfs:label>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://mesh.local/ontology/synthea#hasTotalCost">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#DatatypeProperty"/>
+    <rdfs:comment xml:lang="en">The total cost of the medication.</rdfs:comment>
+    <rdfs:domain rdf:resource="http://mesh.local/ontology/synthea#Medication"/>
+    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+    <fm:sourceColumn>raw_medications.totalcost</fm:sourceColumn>
+    <fm:sqlType>TEXT</fm:sqlType>
+    <fm:nullRate>0.00</fm:nullRate>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://mesh.local/ontology/synthea#N14258BaseEncounterCost">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+    <rdf:type rdf:resource="http://mesh.local/ontology/synthea#BaseEncounterCost"/>
+    <rdfs:label>142.58</rdfs:label>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="N97d861675e9940ccb32189a632e95240">
+    <rdf:first rdf:resource="http://mesh.local/ontology/synthea#MGender"/>
+    <rdf:rest rdf:resource="http://www.w3.org/1999/02/22-rdf-syntax-ns#nil"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://forgemesh.ai/ontology#projectName">
+    <rdfs:label xml:lang="en">project name</rdfs:label>
+    <rdfs:comment xml:lang="en">The ForgeMesh project name (e.g. "mimic", "openflights") under which this graph was materialised. Attached to the named graph node by the RDF writer. The verification suite uses this to assert that a graph was produced by the expected project.</rdfs:comment>
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#AnnotationProperty"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://mesh.local/ontology/synthea#hasPassport">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#DatatypeProperty"/>
+    <rdfs:comment xml:lang="en">The passport information of the patient.</rdfs:comment>
+    <rdfs:domain rdf:resource="http://mesh.local/ontology/synthea#Patient"/>
+    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+    <fm:sourceColumn>raw_patients.passport</fm:sourceColumn>
+    <fm:sqlType>TEXT</fm:sqlType>
+    <fm:nullRate>0.19</fm:nullRate>
+    <skos:altLabel xml:lang="en">passport</skos:altLabel>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="N32dff9dc568a4ff8adec4e35dc585707">
+    <rdf:first rdf:resource="http://mesh.local/ontology/synthea#SNOMEDCTSystem"/>
+    <rdf:rest rdf:resource="http://www.w3.org/1999/02/22-rdf-syntax-ns#nil"/>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="Naec3cf5cc0c1481885b4a45077cf26ba">
+    <rdf:first rdf:resource="http://mesh.local/ontology/synthea#SuffolkCountyCounty"/>
+    <rdf:rest rdf:nodeID="N029b682a9b484a939596ffae74eab294"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://mesh.local/ontology/synthea#OutpatientEncounterclass">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+    <rdf:type rdf:resource="http://mesh.local/ontology/synthea#Encounterclass"/>
+    <rdfs:label>outpatient</rdfs:label>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="N3f6215a2986f4abebb1319343f2793c8">
+    <owl:oneOf rdf:nodeID="Nad742009561f478c874e3e5757603db8"/>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="Nece1f606d96b4be38d1c5b735bad4479">
+    <rdf:first rdf:resource="http://mesh.local/ontology/synthea#Procedure"/>
+    <rdf:rest rdf:resource="http://www.w3.org/1999/02/22-rdf-syntax-ns#nil"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://mesh.local/ontology/synthea#Marital">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
+    <rdfs:label xml:lang="en">Marital</rdfs:label>
+    <skos:closeMatch rdf:resource="http://terminology.hl7.org/CodeSystem/v3-MaritalStatus"/>
+    <owl:equivalentClass rdf:nodeID="Nbc93991d14684dcdbaa00502a2947d3c"/>
+    <rdfs:comment xml:lang="en">Controlled vocabulary of the distinct values of source column(s) raw_patients.marital.</rdfs:comment>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://forgemesh.ai/ontology#terminologyBindingMethod">
+    <rdfs:comment xml:lang="en">How the binding was derived: "value-set-overlap" for an automatically proposed binding, or "human-confirmed" for one persisted and replayed from the binding store. Records the provenance of the external concept alignment.</rdfs:comment>
+    <rdfs:label xml:lang="en">terminology binding method</rdfs:label>
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#AnnotationProperty"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://mesh.local/ontology/synthea#MrPrefix">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+    <rdf:type rdf:resource="http://mesh.local/ontology/synthea#Prefix"/>
+    <rdfs:label>Mr.</rdfs:label>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://mesh.local/ontology/synthea#hasTotalcost">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#DatatypeProperty"/>
+    <rdfs:domain rdf:resource="http://mesh.local/ontology/synthea#Medication"/>
+    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+    <rdfs:label xml:lang="en">has totalcost</rdfs:label>
+    <rdfs:comment xml:lang="en">The totalcost of the medication.</rdfs:comment>
+    <skos:altLabel xml:lang="en">totalcost</skos:altLabel>
+    <fm:sourceColumn>raw_medications.totalcost</fm:sourceColumn>
+    <fm:sqlType>TEXT</fm:sqlType>
+    <fm:nullRate>0.00</fm:nullRate>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="N4c98a409312943af9295db77a8d5b7b3">
+    <rdf:first rdf:resource="http://mesh.local/ontology/synthea#VirtualEncounterclass"/>
+    <rdf:rest rdf:nodeID="N6f57831855cf406fb322fd7305fab6b3"/>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="N542cf91121864f54a1bb35ef049ef1ba">
+    <rdf:first rdf:resource="http://mesh.local/ontology/synthea#Condition"/>
+    <rdf:rest rdf:nodeID="N8543ba43be064e2da6fb7f89ad7c2eca"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://mesh.local/ontology/synthea#hasIncome">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#DatatypeProperty"/>
+    <rdfs:comment xml:lang="en">The income of the patient.</rdfs:comment>
+    <rdfs:domain rdf:resource="http://mesh.local/ontology/synthea#Patient"/>
+    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+    <fm:sourceColumn>raw_patients.income</fm:sourceColumn>
+    <fm:sqlType>TEXT</fm:sqlType>
+    <fm:nullRate>0.00</fm:nullRate>
+    <skos:altLabel xml:lang="en">income</skos:altLabel>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://mesh.local/ontology/synthea#MMarital">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+    <rdf:type rdf:resource="http://mesh.local/ontology/synthea#Marital"/>
+    <rdfs:label>M</rdfs:label>
+    <skos:exactMatch rdf:resource="http://terminology.hl7.org/CodeSystem/v3-MaritalStatus#M"/>
+    <fm:terminologySystem>HL7 v3 MaritalStatus</fm:terminologySystem>
+    <fm:terminologyBindingConfidence rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">1.0</fm:terminologyBindingConfidence>
+    <fm:terminologyBindingMethod>value-set-overlap</fm:terminologyBindingMethod>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://mesh.local/ontology/synthea#MiddlesexCountyCounty">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+    <rdf:type rdf:resource="http://mesh.local/ontology/synthea#County"/>
+    <rdfs:label>Middlesex County</rdfs:label>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://mesh.local/ontology/synthea#hasEncounterReasondescription">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#ObjectProperty"/>
+    <rdfs:domain rdf:resource="http://mesh.local/ontology/synthea#Encounter"/>
+    <rdfs:range rdf:resource="http://mesh.local/ontology/synthea#SnomedctConcept"/>
+    <rdfs:subPropertyOf rdf:resource="http://mesh.local/ontology/synthea#hasReasondescription"/>
+    <skos:altLabel xml:lang="en">reasondescription</skos:altLabel>
+    <fm:sourceColumn>raw_encounters.reasondescription</fm:sourceColumn>
+    <fm:sqlType>TEXT</fm:sqlType>
+    <fm:nullRate>0.37</fm:nullRate>
+    <fm:terminologySystem>SNOMED CT</fm:terminologySystem>
+    <fm:terminologyBindingConfidence rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">1.0</fm:terminologyBindingConfidence>
+    <fm:terminologyBindingMethod>value-set-overlap</fm:terminologyBindingMethod>
+    <rdfs:comment xml:lang="en">The reasondescription of the encounter.</rdfs:comment>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://mesh.local/ontology/synthea#hasConditionStop">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#DatatypeProperty"/>
+    <rdfs:comment xml:lang="en">The stop of the condition.</rdfs:comment>
+    <rdfs:domain rdf:resource="http://mesh.local/ontology/synthea#Condition"/>
+    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#dateTime"/>
+    <fm:sourceColumn>raw_conditions.stop</fm:sourceColumn>
+    <fm:sqlType>TEXT</fm:sqlType>
+    <fm:nullRate>0.26</fm:nullRate>
+    <skos:altLabel xml:lang="en">stop</skos:altLabel>
+    <rdfs:subPropertyOf rdf:resource="http://mesh.local/ontology/synthea#hasStop"/>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="Nbc93991d14684dcdbaa00502a2947d3c">
+    <owl:oneOf rdf:nodeID="Nbeda6448a0f940719e4d08ba3ee6cfa3"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://mesh.local/ontology/synthea#hasLast">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#DatatypeProperty"/>
+    <rdfs:comment xml:lang="en">The last name of the patient.</rdfs:comment>
+    <rdfs:domain rdf:resource="http://mesh.local/ontology/synthea#Patient"/>
+    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+    <fm:sourceColumn>raw_patients.last</fm:sourceColumn>
+    <fm:sqlType>TEXT</fm:sqlType>
+    <fm:nullRate>0.00</fm:nullRate>
+    <skos:altLabel xml:lang="en">last</skos:altLabel>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://mesh.local/ontology/synthea#hasHealthcareCoverage">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#DatatypeProperty"/>
+    <rdfs:comment xml:lang="en">The healthcare coverage of the patient.</rdfs:comment>
+    <rdfs:domain rdf:resource="http://mesh.local/ontology/synthea#Patient"/>
+    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+    <fm:sourceColumn>raw_patients.healthcare_coverage</fm:sourceColumn>
+    <fm:sqlType>TEXT</fm:sqlType>
+    <fm:nullRate>0.00</fm:nullRate>
+    <skos:altLabel xml:lang="en">healthcare_coverage</skos:altLabel>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://mesh.local/ontology/synthea#hasDeathdate">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#DatatypeProperty"/>
+    <rdfs:comment xml:lang="en">The deathdate of the patient.</rdfs:comment>
+    <rdfs:domain rdf:resource="http://mesh.local/ontology/synthea#Patient"/>
+    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#date"/>
+    <fm:sourceColumn>raw_patients.deathdate</fm:sourceColumn>
+    <fm:sqlType>TEXT</fm:sqlType>
+    <fm:nullRate>0.85</fm:nullRate>
+    <skos:altLabel xml:lang="en">deathdate</skos:altLabel>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://mesh.local/ontology/synthea#hasRace">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#ObjectProperty"/>
+    <rdfs:comment xml:lang="en">Links a patient to their race.</rdfs:comment>
+    <rdfs:domain rdf:resource="http://mesh.local/ontology/synthea#Patient"/>
+    <rdfs:range rdf:resource="http://mesh.local/ontology/synthea#Race"/>
+    <fm:sourceForeignKey>raw_patients.race -&gt; Race</fm:sourceForeignKey>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://mesh.local/ontology/synthea#hasGender">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#ObjectProperty"/>
+    <rdfs:comment xml:lang="en">Links a patient to their gender.</rdfs:comment>
+    <rdfs:domain rdf:resource="http://mesh.local/ontology/synthea#Patient"/>
+    <rdfs:range rdf:resource="http://mesh.local/ontology/synthea#Gender"/>
+    <fm:sourceForeignKey>raw_patients.gender -&gt; Gender</fm:sourceForeignKey>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://mesh.local/ontology/synthea#hasEncounterStart">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#DatatypeProperty"/>
+    <rdfs:comment xml:lang="en">The start of the encounter.</rdfs:comment>
+    <rdfs:domain rdf:resource="http://mesh.local/ontology/synthea#Encounter"/>
+    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#dateTime"/>
+    <fm:sourceColumn>raw_encounters.start</fm:sourceColumn>
+    <fm:sqlType>TEXT</fm:sqlType>
+    <fm:nullRate>0.00</fm:nullRate>
+    <skos:altLabel xml:lang="en">start</skos:altLabel>
+    <rdfs:subPropertyOf rdf:resource="http://mesh.local/ontology/synthea#hasStart"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://mesh.local/ontology/synthea#hasPatient">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#ObjectProperty"/>
+    <rdfs:comment xml:lang="en">Links an encounter to the patient involved.</rdfs:comment>
+    <rdfs:domain rdf:resource="http://mesh.local/ontology/synthea#Encounter"/>
+    <rdfs:range rdf:resource="http://mesh.local/ontology/synthea#Patient"/>
+    <fm:sourceForeignKey>raw_encounters.patient -&gt; raw_patients</fm:sourceForeignKey>
+    <skos:altLabel xml:lang="en">patient</skos:altLabel>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://mesh.local/ontology/synthea#hasStart">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#DatatypeProperty"/>
+    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#dateTime"/>
+    <skos:altLabel xml:lang="en">start</skos:altLabel>
+    <rdfs:domain rdf:nodeID="Nde0a100151cd4cfb9b26fcdd1fd637dd"/>
+    <rdfs:comment xml:lang="en">The start of the nea79e8b0d6b04cb5975c4c9d8b9b7c1d.</rdfs:comment>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="N64310609fb7141ca8fb4bddc78be7aa8">
+    <rdf:first rdf:resource="http://mesh.local/ontology/synthea#Encounter"/>
+    <rdf:rest rdf:nodeID="N52737db5347d47f3b18590a481050764"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://mesh.local/ontology/synthea#WMarital">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+    <rdf:type rdf:resource="http://mesh.local/ontology/synthea#Marital"/>
+    <rdfs:label>W</rdfs:label>
+    <skos:exactMatch rdf:resource="http://terminology.hl7.org/CodeSystem/v3-MaritalStatus#W"/>
+    <fm:terminologySystem>HL7 v3 MaritalStatus</fm:terminologySystem>
+    <fm:terminologyBindingConfidence rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">1.0</fm:terminologyBindingConfidence>
+    <fm:terminologyBindingMethod>value-set-overlap</fm:terminologyBindingMethod>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://mesh.local/ontology/synthea#hasTotalClaimCost">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#DatatypeProperty"/>
+    <rdfs:comment xml:lang="en">The total claim cost for the encounter.</rdfs:comment>
+    <rdfs:domain rdf:resource="http://mesh.local/ontology/synthea#Encounter"/>
+    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+    <fm:sourceColumn>raw_encounters.total_claim_cost</fm:sourceColumn>
+    <fm:sqlType>TEXT</fm:sqlType>
+    <fm:nullRate>0.00</fm:nullRate>
+    <skos:altLabel xml:lang="en">total_claim_cost</skos:altLabel>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://forgemesh.ai/ontology#incompleteReference">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#AnnotationProperty"/>
+    <rdfs:label xml:lang="en">incomplete reference</rdfs:label>
+    <rdfs:comment xml:lang="en">Records a null object-property FK on this individual. The value is the property URI that could not be resolved. Presence of this triple means the individual is structurally incomplete at source (the FK was NULL) — it was not a materialiser error. C5 incompleteness_reconciliation counts these against gold-table null FK values.</rdfs:comment>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="N9c7ee9db45c2426fa9918a5c1801c289">
+    <rdf:first rdf:resource="http://mesh.local/ontology/synthea#MsPrefix"/>
+    <rdf:rest rdf:resource="http://www.w3.org/1999/02/22-rdf-syntax-ns#nil"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://mesh.local/ontology/synthea#hasEncounterPayer">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#DatatypeProperty"/>
+    <rdfs:domain rdf:resource="http://mesh.local/ontology/synthea#Encounter"/>
+    <rdfs:range rdf:resource="http://mesh.local/ontology/synthea#Payer"/>
+    <rdfs:subPropertyOf rdf:resource="http://mesh.local/ontology/synthea#hasPayer"/>
+    <skos:altLabel xml:lang="en">payer</skos:altLabel>
+    <fm:sourceColumn>raw_encounters.payer</fm:sourceColumn>
+    <fm:sqlType>TEXT</fm:sqlType>
+    <fm:nullRate>0.00</fm:nullRate>
+    <rdfs:comment xml:lang="en">The payer of the encounter.</rdfs:comment>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="N3746e4c1dfae4a64a3574cfa8d3562de">
+    <rdf:first rdf:resource="http://mesh.local/ontology/synthea#N7500BaseEncounterCost"/>
+    <rdf:rest rdf:nodeID="Nfb792a003f2b4fda88e830d95cf17b18"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://mesh.local/ontology/synthea#hasBaseEncounterCost">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#ObjectProperty"/>
+    <rdfs:comment xml:lang="en">Links an encounter to its base cost.</rdfs:comment>
+    <rdfs:domain rdf:resource="http://mesh.local/ontology/synthea#Encounter"/>
+    <rdfs:range rdf:resource="http://mesh.local/ontology/synthea#BaseEncounterCost"/>
+    <fm:sourceForeignKey>raw_encounters.base_encounter_cost -&gt; BaseEncounterCost</fm:sourceForeignKey>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="Na50472f5cf774ba481b3e6756dca01cc">
+    <rdf:first rdf:resource="http://mesh.local/ontology/synthea#Procedure"/>
+    <rdf:rest rdf:resource="http://www.w3.org/1999/02/22-rdf-syntax-ns#nil"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://mesh.local/ontology/synthea#hasDescription">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#DatatypeProperty"/>
+    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+    <skos:altLabel xml:lang="en">description</skos:altLabel>
+    <rdfs:domain rdf:nodeID="N04fe46d3ce774382a3a56fb43a37adf2"/>
+    <rdfs:comment xml:lang="en">The description of the n560e72df378845a1803ba9c30c6c6099.</rdfs:comment>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://mesh.local/ontology/synthea#hasPrefix">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#ObjectProperty"/>
+    <rdfs:comment xml:lang="en">Links a patient to their name prefix.</rdfs:comment>
+    <rdfs:domain rdf:resource="http://mesh.local/ontology/synthea#Patient"/>
+    <rdfs:range rdf:resource="http://mesh.local/ontology/synthea#Prefix"/>
+    <fm:sourceForeignKey>raw_patients.prefix -&gt; Prefix</fm:sourceForeignKey>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://mesh.local/ontology/synthea#hasEncounterProvider">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#DatatypeProperty"/>
+    <rdfs:comment xml:lang="en">The provider associated with the encounter.</rdfs:comment>
+    <rdfs:domain rdf:resource="http://mesh.local/ontology/synthea#Encounter"/>
+    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+    <fm:sourceColumn>raw_encounters.provider</fm:sourceColumn>
+    <fm:sqlType>TEXT</fm:sqlType>
+    <fm:nullRate>0.00</fm:nullRate>
+    <skos:altLabel xml:lang="en">provider</skos:altLabel>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://mesh.local/ontology/synthea#Payer">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
+    <rdfs:label xml:lang="en">Payer</rdfs:label>
+    <rdfs:comment xml:lang="en">The entity responsible for paying for the healthcare services.</rdfs:comment>
+    <fm:sourceTable>raw_encounters</fm:sourceTable>
+    <owl:equivalentClass rdf:nodeID="N708793999bef4d8f8d61196adc91a887"/>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="N8a66b75b20fe4da88970007151ba20de">
+    <rdf:first rdf:resource="http://mesh.local/ontology/synthea#N13753BaseEncounterCost"/>
+    <rdf:rest rdf:nodeID="Ne8f4ff741fbe488b90742e770a59a42e"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://mesh.local/ontology/synthea#MassachusettsState">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+    <rdf:type rdf:resource="http://mesh.local/ontology/synthea#State"/>
+    <rdfs:label>Massachusetts</rdfs:label>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="Nef91722643de43b38b7a2af23d28749f">
+    <rdf:first rdf:resource="http://mesh.local/ontology/synthea#N12853BaseEncounterCost"/>
+    <rdf:rest rdf:nodeID="Nfee930356662402f80c0a7bc9baa371a"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://mesh.local/ontology/synthea#DMarital">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+    <rdf:type rdf:resource="http://mesh.local/ontology/synthea#Marital"/>
+    <rdfs:label>D</rdfs:label>
+    <skos:exactMatch rdf:resource="http://terminology.hl7.org/CodeSystem/v3-MaritalStatus#D"/>
+    <fm:terminologySystem>HL7 v3 MaritalStatus</fm:terminologySystem>
+    <fm:terminologyBindingConfidence rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">1.0</fm:terminologyBindingConfidence>
+    <fm:terminologyBindingMethod>value-set-overlap</fm:terminologyBindingMethod>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://mesh.local/ontology/synthea#hasEncounter">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#ObjectProperty"/>
+    <rdfs:comment xml:lang="en">Links a condition to the encounter.</rdfs:comment>
+    <rdfs:domain rdf:resource="http://mesh.local/ontology/synthea#Condition"/>
+    <rdfs:range rdf:resource="http://mesh.local/ontology/synthea#Encounter"/>
+    <fm:sourceForeignKey>raw_conditions.encounter -&gt; raw_encounters</fm:sourceForeignKey>
+    <skos:altLabel xml:lang="en">encounter</skos:altLabel>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://mesh.local/ontology/synthea#EmergencyEncounterclass">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+    <rdf:type rdf:resource="http://mesh.local/ontology/synthea#Encounterclass"/>
+    <rdfs:label>emergency</rdfs:label>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="N0ef06057829f4d85b3d2bce43393be35">
+    <rdf:first rdf:resource="http://mesh.local/ontology/synthea#HawaiianRace"/>
+    <rdf:rest rdf:nodeID="N0f7b29385b4c44e38a5df1e43ae11baa"/>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="N1527e6adcac14dc58027b67c57110abb">
+    <rdf:first rdf:resource="http://mesh.local/ontology/synthea#HispanicEthnicity"/>
+    <rdf:rest rdf:nodeID="Naef45973dd5f44f7abea674d14a49636"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://mesh.local/ontology/synthea#hasReasoncode">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#DatatypeProperty"/>
+    <rdfs:domain rdf:nodeID="N3191a080cfba4d8ea36465f9d5795008"/>
+    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+    <rdfs:comment xml:lang="en">The reasoncode of the n476f2c7f53a24662adc7be18c96739c7.</rdfs:comment>
+    <skos:altLabel xml:lang="en">reasoncode</skos:altLabel>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://mesh.local/ontology/synthea#hasMedicationPayerCoverage">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#DatatypeProperty"/>
+    <rdfs:domain rdf:resource="http://mesh.local/ontology/synthea#Medication"/>
+    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+    <rdfs:label xml:lang="en">has payer coverage</rdfs:label>
+    <rdfs:comment xml:lang="en">The payer coverage of the medication.</rdfs:comment>
+    <skos:altLabel xml:lang="en">payer_coverage</skos:altLabel>
+    <fm:sourceColumn>raw_medications.payer_coverage</fm:sourceColumn>
+    <fm:sqlType>TEXT</fm:sqlType>
+    <fm:nullRate>0.00</fm:nullRate>
+    <rdfs:subPropertyOf rdf:resource="http://mesh.local/ontology/synthea#hasPayerCoverage"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://mesh.local/ontology/synthea#hasReasonDescription">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#ObjectProperty"/>
+    <rdfs:comment xml:lang="en">A description of the reason for the encounter.</rdfs:comment>
+    <rdfs:domain rdf:resource="http://mesh.local/ontology/synthea#Encounter"/>
+    <rdfs:range rdf:resource="http://mesh.local/ontology/synthea#SnomedctConcept"/>
+    <fm:sourceColumn>raw_encounters.reasondescription</fm:sourceColumn>
+    <fm:sqlType>TEXT</fm:sqlType>
+    <fm:nullRate>0.37</fm:nullRate>
+    <fm:terminologySystem>SNOMED CT</fm:terminologySystem>
+    <fm:terminologyBindingConfidence rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">1.0</fm:terminologyBindingConfidence>
+    <fm:terminologyBindingMethod>value-set-overlap</fm:terminologyBindingMethod>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="N52854035f3c4474691f377ed733802ea">
+    <rdf:first rdf:resource="http://mesh.local/ontology/synthea#A735bf5583e9331a899dA82a60b9f60cPayer"/>
+    <rdf:rest rdf:nodeID="N3c850d2adebc4c63aa3a6f60bfdd9f95"/>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="N326341dfd67446b68c841b80f8f35de7">
+    <rdf:first rdf:resource="http://mesh.local/ontology/synthea#NorfolkCountyCounty"/>
+    <rdf:rest rdf:nodeID="N027fbc384e9d4a3ea519ed0d071917dd"/>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="N138ea2d4b6e8495e8944721df44f80a6">
+    <rdf:first rdf:resource="http://mesh.local/ontology/synthea#BarnstableCountyCounty"/>
+    <rdf:rest rdf:nodeID="N035c83ccf1374f339be142063460f76a"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://mesh.local/ontology/synthea#A735bf5583e9331a899dA82a60b9f60cPayer">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+    <rdf:type rdf:resource="http://mesh.local/ontology/synthea#Payer"/>
+    <rdfs:label>a735bf55-83e9-331a-899d-a82a60b9f60c</rdfs:label>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://mesh.local/ontology/synthea#N25005Fips">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+    <rdf:type rdf:resource="http://mesh.local/ontology/synthea#Fips"/>
+    <rdfs:label>25005</rdfs:label>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="N230b28019e8b46d48612b2336ee59961">
+    <rdf:first rdf:resource="http://mesh.local/ontology/synthea#N44007Fips"/>
+    <rdf:rest rdf:resource="http://www.w3.org/1999/02/22-rdf-syntax-ns#nil"/>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="Nefb4060616754c7aa37a94f915346a78">
+    <owl:oneOf rdf:nodeID="N097ec0e5f764488ebeaf871d26d3a1ab"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://mesh.local/ontology/synthea#HampdenCountyCounty">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+    <rdf:type rdf:resource="http://mesh.local/ontology/synthea#County"/>
+    <rdfs:label>Hampden County</rdfs:label>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://mesh.local/ontology/synthea#BerkshireCountyCounty">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+    <rdf:type rdf:resource="http://mesh.local/ontology/synthea#County"/>
+    <rdfs:label>Berkshire County</rdfs:label>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://mesh.local/ontology/synthea#Patient">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
+    <rdfs:label xml:lang="en">Patient</rdfs:label>
+    <rdfs:comment xml:lang="en">A record of a patient.</rdfs:comment>
+    <fm:sourceTable>raw_patients</fm:sourceTable>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="N5cc62d4c9f014d2cb03f4dc0755179ee">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
+    <owl:unionOf rdf:nodeID="Ncc4d06a431954f67a9aeb464dd373a70"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://mesh.local/ontology/synthea#N13680BaseEncounterCost">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+    <rdf:type rdf:resource="http://mesh.local/ontology/synthea#BaseEncounterCost"/>
+    <rdfs:label>136.80</rdfs:label>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="N049c07b389024e31910413f50d97bd6a">
+    <owl:oneOf rdf:nodeID="N1527e6adcac14dc58027b67c57110abb"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://mesh.local/ontology/synthea#hasProcedureStart">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#DatatypeProperty"/>
+    <rdfs:comment xml:lang="en">The start of the procedure.</rdfs:comment>
+    <rdfs:domain rdf:resource="http://mesh.local/ontology/synthea#Procedure"/>
+    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#dateTime"/>
+    <fm:sourceColumn>raw_procedures.start</fm:sourceColumn>
+    <fm:sqlType>TEXT</fm:sqlType>
+    <fm:nullRate>0.00</fm:nullRate>
+    <skos:altLabel xml:lang="en">start</skos:altLabel>
+    <rdfs:subPropertyOf rdf:resource="http://mesh.local/ontology/synthea#hasStart"/>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="N6a6a62a1e1b24419bfa4abfff8357a43">
+    <rdf:first rdf:resource="http://mesh.local/ontology/synthea#HospiceEncounterclass"/>
+    <rdf:rest rdf:nodeID="N4c8c6edc0d504e3da0b61df3628ba8cd"/>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="N52737db5347d47f3b18590a481050764">
+    <rdf:first rdf:resource="http://mesh.local/ontology/synthea#Medication"/>
+    <rdf:rest rdf:nodeID="Nece1f606d96b4be38d1c5b735bad4479"/>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="Nbe4bf4559c4a4868bf1159c2c344219f">
+    <rdf:first rdf:resource="http://mesh.local/ontology/synthea#FranklinCountyCounty"/>
+    <rdf:rest rdf:nodeID="N2e9d3bccf6684bd9872275c818c96789"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://mesh.local/ontology/synthea#hasFips">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#ObjectProperty"/>
+    <rdfs:comment xml:lang="en">Links a patient to their FIPS code.</rdfs:comment>
+    <rdfs:domain rdf:resource="http://mesh.local/ontology/synthea#Patient"/>
+    <rdfs:range rdf:resource="http://mesh.local/ontology/synthea#Fips"/>
+    <fm:sourceForeignKey>raw_patients.fips -&gt; Fips</fm:sourceForeignKey>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://forgemesh.ai/ontology#loadTimestamp">
+    <rdfs:comment xml:lang="en">The xsd:dateTime at which the RDF materialisation completed. Attached to the graph node itself. Use this to detect whether a re-run has reached the store.</rdfs:comment>
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#AnnotationProperty"/>
+    <rdfs:label xml:lang="en">load timestamp</rdfs:label>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="N4aec88ed5ddd490f98442aa4d07e14ed">
+    <rdf:first rdf:resource="http://mesh.local/ontology/synthea#NantucketCountyCounty"/>
+    <rdf:rest rdf:nodeID="N326341dfd67446b68c841b80f8f35de7"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://mesh.local/ontology/synthea#FranklinCountyCounty">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+    <rdf:type rdf:resource="http://mesh.local/ontology/synthea#County"/>
+    <rdfs:label>Franklin County</rdfs:label>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://mesh.local/ontology/synthea#hasBirthdate">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#DatatypeProperty"/>
+    <rdfs:comment xml:lang="en">The birthdate of the patient.</rdfs:comment>
+    <rdfs:domain rdf:resource="http://mesh.local/ontology/synthea#Patient"/>
+    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#date"/>
+    <fm:sourceColumn>raw_patients.birthdate</fm:sourceColumn>
+    <fm:sqlType>TEXT</fm:sqlType>
+    <fm:nullRate>0.00</fm:nullRate>
+    <skos:altLabel xml:lang="en">birthdate</skos:altLabel>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://mesh.local/ontology/synthea#SuffolkCountyCounty">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+    <rdf:type rdf:resource="http://mesh.local/ontology/synthea#County"/>
+    <rdfs:label>Suffolk County</rdfs:label>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://mesh.local/ontology/synthea#BaseEncounterCost">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
+    <rdfs:label xml:lang="en">Base Encounter Cost</rdfs:label>
+    <rdfs:comment xml:lang="en">The base cost associated with the encounter.</rdfs:comment>
+    <fm:sourceTable>raw_encounters</fm:sourceTable>
+    <owl:equivalentClass rdf:nodeID="N9defbbcadb594bd1982891cc281388a4"/>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="Neb99746da82a4afdac019f79dbb57317">
+    <rdf:first rdf:resource="http://mesh.local/ontology/synthea#MrsPrefix"/>
+    <rdf:rest rdf:nodeID="N9c7ee9db45c2426fa9918a5c1801c289"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://mesh.local/ontology/synthea#BristolCountyCounty">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+    <rdf:type rdf:resource="http://mesh.local/ontology/synthea#County"/>
+    <rdfs:label>Bristol County</rdfs:label>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://mesh.local/ontology/synthea#MGender">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+    <rdf:type rdf:resource="http://mesh.local/ontology/synthea#Gender"/>
+    <rdfs:label>M</rdfs:label>
+    <skos:exactMatch rdf:resource="http://terminology.hl7.org/CodeSystem/v2-0001#M"/>
+    <fm:terminologySystem>HL7 Administrative Sex</fm:terminologySystem>
+    <fm:terminologyBindingConfidence rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">1.0</fm:terminologyBindingConfidence>
+    <fm:terminologyBindingMethod>value-set-overlap</fm:terminologyBindingMethod>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="Nf555b14fefc04da5992cfba7ffc7186f">
+    <rdf:first rdf:resource="http://mesh.local/ontology/synthea#Medication"/>
+    <rdf:rest rdf:nodeID="N70f29b1e4f8b4c558c262eb25e68d795"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://forgemesh.ai/ontology#terminologySystem">
+    <rdfs:label xml:lang="en">terminology system</rdfs:label>
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#AnnotationProperty"/>
+    <rdfs:comment xml:lang="en">The external code system (e.g. "SNOMED CT", "ICD-9-CM", "LOINC") to which this individual is bound via skos:exactMatch. Present on every individual carrying an external concept binding — a skos:exactMatch to an external concept IRI must never be asserted without it.</rdfs:comment>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="N8c7ec673807c4b88a40b3447b0ce67d5">
+    <rdf:first rdf:resource="http://mesh.local/ontology/synthea#FGender"/>
+    <rdf:rest rdf:nodeID="N97d861675e9940ccb32189a632e95240"/>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="N50400cfbae17455e89cd758c6b47bd53">
+    <rdf:first rdf:resource="http://mesh.local/ontology/synthea#N25017Fips"/>
+    <rdf:rest rdf:nodeID="N2be95e20aaa94d91b1267b9f4ac4e355"/>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="Nb52eaa4403aa48b09607afbbebc25fc3">
+    <rdf:first rdf:resource="http://mesh.local/ontology/synthea#N25005Fips"/>
+    <rdf:rest rdf:nodeID="N1855716b01974012abad679e500a22ef"/>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="N6f57831855cf406fb322fd7305fab6b3">
+    <rdf:first rdf:resource="http://mesh.local/ontology/synthea#WellnessEncounterclass"/>
+    <rdf:rest rdf:resource="http://www.w3.org/1999/02/22-rdf-syntax-ns#nil"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://forgemesh.ai/ontology#sourceForeignKey">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#AnnotationProperty"/>
+    <rdfs:label xml:lang="en">source foreign key</rdfs:label>
+    <rdfs:comment xml:lang="en">The FK relationship (source.col to target.col) from which this object property was derived.</rdfs:comment>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://mesh.local/ontology/synthea#MsPrefix">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+    <rdf:type rdf:resource="http://mesh.local/ontology/synthea#Prefix"/>
+    <rdfs:label>Ms.</rdfs:label>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="N708793999bef4d8f8d61196adc91a887">
+    <owl:oneOf rdf:nodeID="N52854035f3c4474691f377ed733802ea"/>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="Ncc4d06a431954f67a9aeb464dd373a70">
+    <rdf:first rdf:resource="http://mesh.local/ontology/synthea#Condition"/>
+    <rdf:rest rdf:nodeID="Nb858195e312a4650ad840c1b0e8d48d1"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://mesh.local/ontology/synthea#hasReasondescription">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#DatatypeProperty"/>
+    <rdfs:domain rdf:nodeID="N3ceebe4d21af44c394e8c50a7c0786ea"/>
+    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+    <rdfs:comment xml:lang="en">The reasondescription of the n33884b0e03a942d1b1f909aae6321789.</rdfs:comment>
+    <skos:altLabel xml:lang="en">reasondescription</skos:altLabel>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://mesh.local/ontology/synthea#HawaiianRace">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+    <rdf:type rdf:resource="http://mesh.local/ontology/synthea#Race"/>
+    <rdfs:label>hawaiian</rdfs:label>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://mesh.local/ontology/synthea#Encounter">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
+    <rdfs:label xml:lang="en">Encounter</rdfs:label>
+    <rdfs:comment xml:lang="en">A record of an encounter between a patient and a healthcare provider.</rdfs:comment>
+    <fm:sourceTable>raw_encounters</fm:sourceTable>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://mesh.local/ontology/synthea#N8fa6c185E44e3e348bd839be8694f4cePayer">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+    <rdf:type rdf:resource="http://mesh.local/ontology/synthea#Payer"/>
+    <rdfs:label>8fa6c185-e44e-3e34-8bd8-39be8694f4ce</rdfs:label>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://mesh.local/ontology/synthea#OtherRace">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+    <rdf:type rdf:resource="http://mesh.local/ontology/synthea#Race"/>
+    <rdfs:label>other</rdfs:label>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://mesh.local/ontology/synthea#PlymouthCountyCounty">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+    <rdf:type rdf:resource="http://mesh.local/ontology/synthea#County"/>
+    <rdfs:label>Plymouth County</rdfs:label>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://mesh.local/ontology/synthea#Fips">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
+    <rdfs:label xml:lang="en">FIPS Code</rdfs:label>
+    <rdfs:comment xml:lang="en">The FIPS code of the patient's county.</rdfs:comment>
+    <fm:sourceTable>raw_patients</fm:sourceTable>
+    <owl:equivalentClass rdf:nodeID="Nefb4060616754c7aa37a94f915346a78"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://mesh.local/ontology/synthea#N0133f75192293cfd815fB6d4979bdd6aPayer">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+    <rdf:type rdf:resource="http://mesh.local/ontology/synthea#Payer"/>
+    <rdfs:label>0133f751-9229-3cfd-815f-b6d4979bdd6a</rdfs:label>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="Na3f90ae940444036a898112d56b9fb2d">
+    <rdf:first rdf:resource="http://mesh.local/ontology/synthea#Encounter"/>
+    <rdf:rest rdf:nodeID="N1ad7696798c94024856efa072dfc2657"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://mesh.local/ontology/synthea#N25009Fips">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+    <rdf:type rdf:resource="http://mesh.local/ontology/synthea#Fips"/>
+    <rdfs:label>25009</rdfs:label>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="N027fbc384e9d4a3ea519ed0d071917dd">
+    <rdf:first rdf:resource="http://mesh.local/ontology/synthea#PlymouthCountyCounty"/>
+    <rdf:rest rdf:nodeID="Naec3cf5cc0c1481885b4a45077cf26ba"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://mesh.local/ontology/synthea#N8555BaseEncounterCost">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+    <rdf:type rdf:resource="http://mesh.local/ontology/synthea#BaseEncounterCost"/>
+    <rdfs:label>85.55</rdfs:label>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="N70bc7c4a33a64a95b1b7edf3119c04e9">
+    <rdf:first rdf:resource="http://mesh.local/ontology/synthea#N25021Fips"/>
+    <rdf:rest rdf:nodeID="N9cd3e916158a478fa567fd7ffec1539e"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://mesh.local/ontology/synthea#NativeRace">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+    <rdf:type rdf:resource="http://mesh.local/ontology/synthea#Race"/>
+    <rdfs:label>native</rdfs:label>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="N444820fe52324baa99f3789d86691587">
+    <rdf:first rdf:resource="http://mesh.local/ontology/synthea#N25015Fips"/>
+    <rdf:rest rdf:nodeID="N50400cfbae17455e89cd758c6b47bd53"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://mesh.local/ontology/synthea#hasBirthplace">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#DatatypeProperty"/>
+    <rdfs:comment xml:lang="en">The birthplace of the patient.</rdfs:comment>
+    <rdfs:domain rdf:resource="http://mesh.local/ontology/synthea#Patient"/>
+    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+    <fm:sourceColumn>raw_patients.birthplace</fm:sourceColumn>
+    <fm:sqlType>TEXT</fm:sqlType>
+    <fm:nullRate>0.00</fm:nullRate>
+    <skos:altLabel xml:lang="en">birthplace</skos:altLabel>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://mesh.local/ontology/synthea#hasSsn">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#DatatypeProperty"/>
+    <rdfs:comment xml:lang="en">The social security number of the patient.</rdfs:comment>
+    <rdfs:domain rdf:resource="http://mesh.local/ontology/synthea#Patient"/>
+    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+    <fm:sourceColumn>raw_patients.ssn</fm:sourceColumn>
+    <fm:sqlType>TEXT</fm:sqlType>
+    <fm:nullRate>0.00</fm:nullRate>
+    <skos:altLabel xml:lang="en">ssn</skos:altLabel>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="N84240c52fbb14570bee2c38d8672069a">
+    <rdf:first rdf:resource="http://mesh.local/ontology/synthea#N25003Fips"/>
+    <rdf:rest rdf:nodeID="Nb52eaa4403aa48b09607afbbebc25fc3"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://forgemesh.ai/ontology#goldRunId">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#AnnotationProperty"/>
+    <rdfs:label xml:lang="en">gold run ID</rdfs:label>
+    <rdfs:comment xml:lang="en">The gold pipeline run ID under which this individual was materialised, enabling staleness detection between gold tables and the triple store.</rdfs:comment>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://mesh.local/ontology/synthea#hasHealthcareExpenses">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#DatatypeProperty"/>
+    <rdfs:comment xml:lang="en">The healthcare expenses of the patient.</rdfs:comment>
+    <rdfs:domain rdf:resource="http://mesh.local/ontology/synthea#Patient"/>
+    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+    <fm:sourceColumn>raw_patients.healthcare_expenses</fm:sourceColumn>
+    <fm:sqlType>TEXT</fm:sqlType>
+    <fm:nullRate>0.00</fm:nullRate>
+    <skos:altLabel xml:lang="en">healthcare_expenses</skos:altLabel>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="Nae7f600cc0c64a1693aeef035fff960d">
+    <rdf:first rdf:resource="http://mesh.local/ontology/synthea#N14618BaseEncounterCost"/>
+    <rdf:rest rdf:nodeID="N3746e4c1dfae4a64a3574cfa8d3562de"/>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="Ne9745b3c25b346358dc1f75a98b99c60">
+    <rdf:first rdf:resource="http://mesh.local/ontology/synthea#N8fa6c185E44e3e348bd839be8694f4cePayer"/>
+    <rdf:rest rdf:resource="http://www.w3.org/1999/02/22-rdf-syntax-ns#nil"/>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="N5a2ce4e13dd64c74a9084dbe4fccdb98">
+    <rdf:first rdf:resource="http://mesh.local/ontology/synthea#N12500BaseEncounterCost"/>
+    <rdf:rest rdf:nodeID="Nef91722643de43b38b7a2af23d28749f"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://mesh.local/ontology/synthea#hasBaseCost">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#DatatypeProperty"/>
+    <rdfs:comment xml:lang="en">The base cost of the n13d60ded1d3b48c2b8128fb7c2632912.</rdfs:comment>
+    <rdfs:domain rdf:nodeID="N1fde37e3c0ce42c7a5595012fc0958ed"/>
+    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+    <skos:altLabel xml:lang="en">base_cost</skos:altLabel>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="Neb6b9797e0154404aecc4a1d9e513651">
+    <rdf:first rdf:resource="http://mesh.local/ontology/synthea#SnfEncounterclass"/>
+    <rdf:rest rdf:nodeID="Nabd37cb74a794276b7b1afce195201b6"/>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="Nd96192fd645e4295966d0f8c861db030">
+    <rdf:first rdf:resource="http://mesh.local/ontology/synthea#Procedure"/>
+    <rdf:rest rdf:resource="http://www.w3.org/1999/02/22-rdf-syntax-ns#nil"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://mesh.local/ontology/synthea#SnfEncounterclass">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+    <rdf:type rdf:resource="http://mesh.local/ontology/synthea#Encounterclass"/>
+    <rdfs:label>snf</rdfs:label>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://mesh.local/ontology/synthea#hasLon">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#DatatypeProperty"/>
+    <rdfs:comment xml:lang="en">The longitude of the patient's location.</rdfs:comment>
+    <rdfs:domain rdf:resource="http://mesh.local/ontology/synthea#Patient"/>
+    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+    <fm:sourceColumn>raw_patients.lon</fm:sourceColumn>
+    <fm:sqlType>TEXT</fm:sqlType>
+    <fm:nullRate>0.00</fm:nullRate>
+    <skos:altLabel xml:lang="en">lon</skos:altLabel>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://forgemesh.ai/ontology#nullRate">
+    <rdfs:comment xml:lang="en">The proportion of NULL values in the source column at inspection time, 0.0 to 1.0.</rdfs:comment>
+    <rdfs:label xml:lang="en">null rate</rdfs:label>
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#AnnotationProperty"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://mesh.local/ontology/synthea#N8208BaseEncounterCost">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+    <rdf:type rdf:resource="http://mesh.local/ontology/synthea#BaseEncounterCost"/>
+    <rdfs:label>82.08</rdfs:label>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://mesh.local/ontology/synthea#hasMaiden">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#DatatypeProperty"/>
+    <rdfs:comment xml:lang="en">The maiden name of the patient.</rdfs:comment>
+    <rdfs:domain rdf:resource="http://mesh.local/ontology/synthea#Patient"/>
+    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+    <fm:sourceColumn>raw_patients.maiden</fm:sourceColumn>
+    <fm:sqlType>TEXT</fm:sqlType>
+    <fm:nullRate>0.74</fm:nullRate>
+    <skos:altLabel xml:lang="en">maiden</skos:altLabel>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://mesh.local/ontology/synthea#BlackRace">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+    <rdf:type rdf:resource="http://mesh.local/ontology/synthea#Race"/>
+    <rdfs:label>black</rdfs:label>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://mesh.local/ontology/synthea#hasProcedureReasonCode">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#ObjectProperty"/>
+    <rdfs:comment xml:lang="en">The reason code for the procedure.</rdfs:comment>
+    <rdfs:domain rdf:resource="http://mesh.local/ontology/synthea#Procedure"/>
+    <rdfs:range rdf:resource="http://mesh.local/ontology/synthea#SnomedctConcept"/>
+    <fm:sourceColumn>raw_procedures.reasoncode</fm:sourceColumn>
+    <fm:sqlType>TEXT</fm:sqlType>
+    <fm:nullRate>0.55</fm:nullRate>
+    <fm:terminologySystem>SNOMED CT</fm:terminologySystem>
+    <fm:terminologyBindingConfidence rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">1.0</fm:terminologyBindingConfidence>
+    <fm:terminologyBindingMethod>value-set-overlap</fm:terminologyBindingMethod>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://mesh.local/ontology/synthea#Condition">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
+    <rdfs:label xml:lang="en">Condition</rdfs:label>
+    <rdfs:comment xml:lang="en">A record of a medical condition associated with a patient.</rdfs:comment>
+    <fm:sourceTable>raw_conditions</fm:sourceTable>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="N3191a080cfba4d8ea36465f9d5795008">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
+    <owl:unionOf rdf:nodeID="Na3f90ae940444036a898112d56b9fb2d"/>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="N035c83ccf1374f339be142063460f76a">
+    <rdf:first rdf:resource="http://mesh.local/ontology/synthea#BerkshireCountyCounty"/>
+    <rdf:rest rdf:nodeID="Na68b1748665d44318700760ea14f29a2"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://mesh.local/ontology/synthea#HomeEncounterclass">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+    <rdf:type rdf:resource="http://mesh.local/ontology/synthea#Encounterclass"/>
+    <rdfs:label>home</rdfs:label>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="Nf90d787036fd421fa41de81c36974059">
+    <rdf:first rdf:resource="http://mesh.local/ontology/synthea#MassachusettsState"/>
+    <rdf:rest rdf:resource="http://www.w3.org/1999/02/22-rdf-syntax-ns#nil"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://mesh.local/ontology/synthea#N11092BaseEncounterCost">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+    <rdf:type rdf:resource="http://mesh.local/ontology/synthea#BaseEncounterCost"/>
+    <rdfs:label>110.92</rdfs:label>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="N62084b998f2b4f06b11f9cf46e4c4d78">
+    <rdf:first rdf:resource="http://mesh.local/ontology/synthea#N25011Fips"/>
+    <rdf:rest rdf:nodeID="Nd7f17daf8d084e5fa0c9b30977dd76b1"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://mesh.local/ontology/synthea#N25011Fips">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+    <rdf:type rdf:resource="http://mesh.local/ontology/synthea#Fips"/>
+    <rdfs:label>25011</rdfs:label>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://mesh.local/ontology/synthea#hasCode">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#DatatypeProperty"/>
+    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+    <skos:altLabel xml:lang="en">code</skos:altLabel>
+    <rdfs:domain rdf:nodeID="Nc582c6f31c6443b9902e0ac2e96ea2ea"/>
+    <rdfs:comment xml:lang="en">The code of the n76862b4e52ab4c03a5f19494b59ba176.</rdfs:comment>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://mesh.local/ontology/synthea#N25023Fips">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+    <rdf:type rdf:resource="http://mesh.local/ontology/synthea#Fips"/>
+    <rdfs:label>25023</rdfs:label>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://mesh.local/ontology/synthea#N25017Fips">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+    <rdf:type rdf:resource="http://mesh.local/ontology/synthea#Fips"/>
+    <rdfs:label>25017</rdfs:label>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="N1855716b01974012abad679e500a22ef">
+    <rdf:first rdf:resource="http://mesh.local/ontology/synthea#N25009Fips"/>
+    <rdf:rest rdf:nodeID="N62084b998f2b4f06b11f9cf46e4c4d78"/>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="Nad742009561f478c874e3e5757603db8">
+    <rdf:first rdf:resource="http://mesh.local/ontology/synthea#AsianRace"/>
+    <rdf:rest rdf:nodeID="N903599112e194dbf8818c9f584dcd04c"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://forgemesh.ai/ontology#interpretation">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#AnnotationProperty"/>
+    <rdfs:comment xml:lang="en">Natural-language description of the concept for NL-to-ontology mapping. Used by the proof narrator to achieve HIGH confidence interpretation. Should name the concept in plain terms a query author would use.</rdfs:comment>
+    <rdfs:label xml:lang="en">interpretation</rdfs:label>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://mesh.local/ontology/synthea#hasEncounterClass">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#ObjectProperty"/>
+    <rdfs:comment xml:lang="en">Links an encounter to its class type.</rdfs:comment>
+    <rdfs:domain rdf:resource="http://mesh.local/ontology/synthea#Encounter"/>
+    <rdfs:range rdf:resource="http://mesh.local/ontology/synthea#Encounterclass"/>
+    <fm:sourceForeignKey>raw_encounters.encounterclass -&gt; EncounterClass</fm:sourceForeignKey>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://mesh.local/ontology/synthea#State">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
+    <rdfs:label xml:lang="en">State</rdfs:label>
+    <rdfs:comment xml:lang="en">The state of residence of the patient.</rdfs:comment>
+    <fm:sourceTable>raw_patients</fm:sourceTable>
+    <owl:equivalentClass rdf:nodeID="Nc4f5831036c94b83a00d1038fbaef844"/>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="Nd424b7ee475d4ca680615e72b236fac0">
+    <owl:oneOf rdf:nodeID="Nf638d4010f8140b7b6d41cfa1d4aa95e"/>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="N38f137b8845649c3a4dfceb896adab8d">
+    <rdf:first rdf:resource="http://mesh.local/ontology/synthea#HomeEncounterclass"/>
+    <rdf:rest rdf:nodeID="N6a6a62a1e1b24419bfa4abfff8357a43"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://mesh.local/ontology/synthea#N13753BaseEncounterCost">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+    <rdf:type rdf:resource="http://mesh.local/ontology/synthea#BaseEncounterCost"/>
+    <rdfs:label>137.53</rdfs:label>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="N9072d23947474c8d96a54794ab32eb57">
+    <rdf:first rdf:resource="http://mesh.local/ontology/synthea#SMarital"/>
+    <rdf:rest rdf:nodeID="Nb2164706396f4741b7d06a66ffc82363"/>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="Ne2d1eda24b1c42e28df3e5dab1160309">
+    <rdf:first rdf:resource="http://mesh.local/ontology/synthea#Medication"/>
+    <rdf:rest rdf:resource="http://www.w3.org/1999/02/22-rdf-syntax-ns#nil"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://mesh.local/ontology/synthea#NantucketCountyCounty">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+    <rdf:type rdf:resource="http://mesh.local/ontology/synthea#County"/>
+    <rdfs:label>Nantucket County</rdfs:label>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://mesh.local/ontology/synthea#N7500BaseEncounterCost">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+    <rdf:type rdf:resource="http://mesh.local/ontology/synthea#BaseEncounterCost"/>
+    <rdfs:label>75.00</rdfs:label>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://forgemesh.ai/ontology#ontologySource">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#AnnotationProperty"/>
+    <rdfs:label xml:lang="en">ontology source</rdfs:label>
+    <rdfs:comment xml:lang="en">The filename (basename) of the OWL ontology file used to guide RDF materialisation, e.g. "mimic_bronze_rigor_260527_001.owl". Attached to the named graph node by the RDF writer. C6 compares this against the ontology currently loaded for the project to detect ontology drift between runs.</rdfs:comment>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://mesh.local/ontology/synthea#N25021Fips">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+    <rdf:type rdf:resource="http://mesh.local/ontology/synthea#Fips"/>
+    <rdfs:label>25021</rdfs:label>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="Nd24a244ff53f4a00a1c0ceadda8b7547">
+    <rdf:first rdf:resource="http://mesh.local/ontology/synthea#N26aab0cd6aba3e1bAc5b05c8867e762cPayer"/>
+    <rdf:rest rdf:nodeID="Ne1b1eb480c2a42239b3a902b2b5f268b"/>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="N70f29b1e4f8b4c558c262eb25e68d795">
+    <rdf:first rdf:resource="http://mesh.local/ontology/synthea#Procedure"/>
+    <rdf:rest rdf:resource="http://www.w3.org/1999/02/22-rdf-syntax-ns#nil"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://mesh.local/ontology/synthea#hasStop">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#DatatypeProperty"/>
+    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#dateTime"/>
+    <skos:altLabel xml:lang="en">stop</skos:altLabel>
+    <rdfs:domain rdf:nodeID="N5cc62d4c9f014d2cb03f4dc0755179ee"/>
+    <rdfs:comment xml:lang="en">The stop of the nd008f99cf132413396d12d12a9532cbb.</rdfs:comment>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://mesh.local/ontology/synthea#SNOMEDCTSystem">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+    <rdf:type rdf:resource="http://mesh.local/ontology/synthea#System"/>
+    <rdfs:label>SNOMED-CT</rdfs:label>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="N4c8c6edc0d504e3da0b61df3628ba8cd">
+    <rdf:first rdf:resource="http://mesh.local/ontology/synthea#InpatientEncounterclass"/>
+    <rdf:rest rdf:nodeID="N8b75df2ad71942919ca5a1a5147f44d9"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://mesh.local/ontology/synthea#hasCounty">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#ObjectProperty"/>
+    <rdfs:comment xml:lang="en">Links a patient to their county of residence.</rdfs:comment>
+    <rdfs:domain rdf:resource="http://mesh.local/ontology/synthea#Patient"/>
+    <rdfs:range rdf:resource="http://mesh.local/ontology/synthea#County"/>
+    <fm:sourceForeignKey>raw_patients.county -&gt; County</fm:sourceForeignKey>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="N65f3699e60504f00935be8b04e89fc26">
+    <rdf:first rdf:resource="http://mesh.local/ontology/synthea#Condition"/>
+    <rdf:rest rdf:nodeID="N67b42710c1fd4b1ba6543b89f422aa8d"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://mesh.local/ontology/synthea#hasConditionSystem">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#ObjectProperty"/>
+    <rdfs:comment xml:lang="en">Links a condition to its system.</rdfs:comment>
+    <rdfs:domain rdf:resource="http://mesh.local/ontology/synthea#Condition"/>
+    <rdfs:range rdf:resource="http://mesh.local/ontology/synthea#System"/>
+    <fm:sourceForeignKey>raw_conditions.system -&gt; ConditionSystem</fm:sourceForeignKey>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://mesh.local/ontology/synthea#HispanicEthnicity">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+    <rdf:type rdf:resource="http://mesh.local/ontology/synthea#Ethnicity"/>
+    <rdfs:label>hispanic</rdfs:label>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://mesh.local/ontology/synthea#N25019Fips">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+    <rdf:type rdf:resource="http://mesh.local/ontology/synthea#Fips"/>
+    <rdfs:label>25019</rdfs:label>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://forgemesh.ai/ontology#scope_default">
+    <rdfs:comment xml:lang="en">Describes the default inclusion scope for an unconstrained property. Used by the proof narrator to build scope assumption statements.</rdfs:comment>
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#AnnotationProperty"/>
+    <rdfs:label xml:lang="en">scope default</rdfs:label>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://forgemesh.ai/ontology#bronzeSourceRef">
+    <rdfs:label xml:lang="en">bronze source ref</rdfs:label>
+    <rdfs:comment xml:lang="en">The bronze-layer source reference key for this individual, linking the RDF triple back to its gold row and enabling prove_answer lineage traces.</rdfs:comment>
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#AnnotationProperty"/>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="N96458b7b2dc2472f8a92ee05179793b3">
+    <rdf:first rdf:resource="http://mesh.local/ontology/synthea#Df1663005a783502A46a832842197811Payer"/>
+    <rdf:rest rdf:nodeID="Na2c8ff882a274ede93dfa4d139d21301"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://mesh.local/ontology/synthea#NonhispanicEthnicity">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+    <rdf:type rdf:resource="http://mesh.local/ontology/synthea#Ethnicity"/>
+    <rdfs:label>nonhispanic</rdfs:label>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://mesh.local/ontology/synthea#hasMarital">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#ObjectProperty"/>
+    <rdfs:comment xml:lang="en">Links a patient to their marital status.</rdfs:comment>
+    <rdfs:domain rdf:resource="http://mesh.local/ontology/synthea#Patient"/>
+    <rdfs:range rdf:resource="http://mesh.local/ontology/synthea#Marital"/>
+    <fm:sourceForeignKey>raw_patients.marital -&gt; MaritalStatus</fm:sourceForeignKey>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://mesh.local/ontology/synthea#System">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
+    <rdfs:label xml:lang="en">System</rdfs:label>
+    <owl:equivalentClass rdf:nodeID="Ne818f8026a884ecdb4deeb168575d80d"/>
+    <rdfs:comment xml:lang="en">Controlled vocabulary of the distinct values of source column(s) raw_conditions.system, raw_procedures.system.</rdfs:comment>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://mesh.local/ontology/synthea#N26aab0cd6aba3e1bAc5b05c8867e762cPayer">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+    <rdf:type rdf:resource="http://mesh.local/ontology/synthea#Payer"/>
+    <rdfs:label>26aab0cd-6aba-3e1b-ac5b-05c8867e762c</rdfs:label>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="Nfdf1836c9f054b189e0ae1bae8238412">
+    <rdf:first rdf:resource="http://mesh.local/ontology/synthea#OtherRace"/>
+    <rdf:rest rdf:nodeID="Nedfec0c3d45f43ad8a3795e42b1a3dc3"/>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="Nfee930356662402f80c0a7bc9baa371a">
+    <rdf:first rdf:resource="http://mesh.local/ontology/synthea#N13680BaseEncounterCost"/>
+    <rdf:rest rdf:nodeID="N8a66b75b20fe4da88970007151ba20de"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://mesh.local/ontology/synthea#BarnstableCountyCounty">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+    <rdf:type rdf:resource="http://mesh.local/ontology/synthea#County"/>
+    <rdfs:label>Barnstable County</rdfs:label>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="N3c850d2adebc4c63aa3a6f60bfdd9f95">
+    <rdf:first rdf:resource="http://mesh.local/ontology/synthea#B046940f16643047Bca7Dfa76be352a4Payer"/>
+    <rdf:rest rdf:nodeID="Nac71a781c0e248568cea6e9b52f94789"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://mesh.local/ontology/synthea#N25001Fips">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+    <rdf:type rdf:resource="http://mesh.local/ontology/synthea#Fips"/>
+    <rdfs:label>25001</rdfs:label>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="Nc22daecaec934fa29f39a1d7668220ee">
+    <rdf:first rdf:resource="http://mesh.local/ontology/synthea#N25027Fips"/>
+    <rdf:rest rdf:nodeID="N230b28019e8b46d48612b2336ee59961"/>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="N0f7b29385b4c44e38a5df1e43ae11baa">
+    <rdf:first rdf:resource="http://mesh.local/ontology/synthea#NativeRace"/>
+    <rdf:rest rdf:nodeID="Nfdf1836c9f054b189e0ae1bae8238412"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://mesh.local/ontology/synthea#hasProcedureSystem">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#ObjectProperty"/>
+    <rdfs:comment xml:lang="en">Links a procedure to its classification system.</rdfs:comment>
+    <rdfs:domain rdf:resource="http://mesh.local/ontology/synthea#Procedure"/>
+    <rdfs:range rdf:resource="http://mesh.local/ontology/synthea#System"/>
+    <fm:sourceForeignKey>raw_procedures.system -&gt; ProcedureSystem</fm:sourceForeignKey>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://mesh.local/ontology/synthea#N25015Fips">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+    <rdf:type rdf:resource="http://mesh.local/ontology/synthea#Fips"/>
+    <rdfs:label>25015</rdfs:label>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://forgemesh.ai/ontology#sqlType">
+    <rdfs:comment xml:lang="en">The SQL column type of the source column.</rdfs:comment>
+    <rdfs:label xml:lang="en">SQL type</rdfs:label>
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#AnnotationProperty"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://mesh.local/ontology/synthea#N25003Fips">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+    <rdf:type rdf:resource="http://mesh.local/ontology/synthea#Fips"/>
+    <rdfs:label>25003</rdfs:label>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="N167b86d6b98b45bf9d689775d2b1c04e">
+    <rdf:first rdf:resource="http://mesh.local/ontology/synthea#DukesCountyCounty"/>
+    <rdf:rest rdf:nodeID="N7a916f9bd06a49dcadcccfff1625266a"/>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="N13f8973c51aa488299291d54a81003a9">
+    <rdf:first rdf:resource="http://mesh.local/ontology/synthea#MiddlesexCountyCounty"/>
+    <rdf:rest rdf:nodeID="N4aec88ed5ddd490f98442aa4d07e14ed"/>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="Nc582c6f31c6443b9902e0ac2e96ea2ea">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
+    <owl:unionOf rdf:nodeID="N542cf91121864f54a1bb35ef049ef1ba"/>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="N9defbbcadb594bd1982891cc281388a4">
+    <owl:oneOf rdf:nodeID="Ne2ee2545da2a41a3b33393a1d6a0982f"/>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="N145042512f714623a1534390d910f3b1">
+    <owl:oneOf rdf:nodeID="N138ea2d4b6e8495e8944721df44f80a6"/>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="Nfb792a003f2b4fda88e830d95cf17b18">
+    <rdf:first rdf:resource="http://mesh.local/ontology/synthea#N8208BaseEncounterCost"/>
+    <rdf:rest rdf:nodeID="N9fac69607253475b82a71b463b850d3d"/>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="Nf6e64d8c90b44611b4c7cb2731782777">
+    <rdf:first rdf:resource="http://mesh.local/ontology/synthea#MrPrefix"/>
+    <rdf:rest rdf:nodeID="Neb99746da82a4afdac019f79dbb57317"/>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="Na68b1748665d44318700760ea14f29a2">
+    <rdf:first rdf:resource="http://mesh.local/ontology/synthea#BristolCountyCounty"/>
+    <rdf:rest rdf:nodeID="N167b86d6b98b45bf9d689775d2b1c04e"/>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="Ne2ee2545da2a41a3b33393a1d6a0982f">
+    <rdf:first rdf:resource="http://mesh.local/ontology/synthea#N11092BaseEncounterCost"/>
+    <rdf:rest rdf:nodeID="N5a2ce4e13dd64c74a9084dbe4fccdb98"/>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="N029b682a9b484a939596ffae74eab294">
+    <rdf:first rdf:resource="http://mesh.local/ontology/synthea#WorcesterCountyCounty"/>
+    <rdf:rest rdf:resource="http://www.w3.org/1999/02/22-rdf-syntax-ns#nil"/>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="Nc4f5831036c94b83a00d1038fbaef844">
+    <owl:oneOf rdf:nodeID="Nf90d787036fd421fa41de81c36974059"/>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="Nf638d4010f8140b7b6d41cfa1d4aa95e">
+    <rdf:first rdf:resource="http://mesh.local/ontology/synthea#AmbulatoryEncounterclass"/>
+    <rdf:rest rdf:nodeID="N00406853e1df4069affb7ddc729d0609"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://mesh.local/ontology/synthea#DukesCountyCounty">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+    <rdf:type rdf:resource="http://mesh.local/ontology/synthea#County"/>
+    <rdfs:label>Dukes County</rdfs:label>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="Ne818f8026a884ecdb4deeb168575d80d">
+    <owl:oneOf rdf:nodeID="N32dff9dc568a4ff8adec4e35dc585707"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://mesh.local/ontology/synthea#B046940f16643047Bca7Dfa76be352a4Payer">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+    <rdf:type rdf:resource="http://mesh.local/ontology/synthea#Payer"/>
+    <rdfs:label>b046940f-1664-3047-bca7-dfa76be352a4</rdfs:label>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://mesh.local/ontology/synthea#WhiteRace">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+    <rdf:type rdf:resource="http://mesh.local/ontology/synthea#Race"/>
+    <rdfs:label>white</rdfs:label>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="N3a1b477d3d2d476ead8bcd7418c96666">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
+    <owl:unionOf rdf:nodeID="N8f5248b9151c49d69c564ebbec4b2d90"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://mesh.local/ontology/synthea#InpatientEncounterclass">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+    <rdf:type rdf:resource="http://mesh.local/ontology/synthea#Encounterclass"/>
+    <rdfs:label>inpatient</rdfs:label>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://mesh.local/ontology/synthea#N12853BaseEncounterCost">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+    <rdf:type rdf:resource="http://mesh.local/ontology/synthea#BaseEncounterCost"/>
+    <rdfs:label>128.53</rdfs:label>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://mesh.local/ontology/synthea#N25025Fips">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+    <rdf:type rdf:resource="http://mesh.local/ontology/synthea#Fips"/>
+    <rdfs:label>25025</rdfs:label>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://forgemesh.ai/ontology#extension">
+    <rdfs:label xml:lang="en">extension</rdfs:label>
+    <rdfs:comment xml:lang="en">Alternative natural-language phrases for this concept, beyond the primary fm:interpretation. Multiple values allowed. Used for EXTENSION-form concept mapping.</rdfs:comment>
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#AnnotationProperty"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://mesh.local/ontology/synthea#D31fccc31767390d966a22a5156f4219Payer">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+    <rdf:type rdf:resource="http://mesh.local/ontology/synthea#Payer"/>
+    <rdfs:label>d31fccc3-1767-390d-966a-22a5156f4219</rdfs:label>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://mesh.local/ontology/synthea#Df1663005a783502A46a832842197811Payer">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+    <rdf:type rdf:resource="http://mesh.local/ontology/synthea#Payer"/>
+    <rdfs:label>df166300-5a78-3502-a46a-832842197811</rdfs:label>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="N097ec0e5f764488ebeaf871d26d3a1ab">
+    <rdf:first rdf:resource="http://mesh.local/ontology/synthea#N25001Fips"/>
+    <rdf:rest rdf:nodeID="N84240c52fbb14570bee2c38d8672069a"/>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="Ne1b1eb480c2a42239b3a902b2b5f268b">
+    <rdf:first rdf:resource="http://mesh.local/ontology/synthea#N734afbd64794363b9bc06a3981533ed5Payer"/>
+    <rdf:rest rdf:nodeID="Ne9745b3c25b346358dc1f75a98b99c60"/>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="Nde5d18f9ca6945e4882133b652094806">
+    <rdf:first rdf:resource="http://mesh.local/ontology/synthea#Procedure"/>
+    <rdf:rest rdf:resource="http://www.w3.org/1999/02/22-rdf-syntax-ns#nil"/>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="Nedfec0c3d45f43ad8a3795e42b1a3dc3">
+    <rdf:first rdf:resource="http://mesh.local/ontology/synthea#WhiteRace"/>
+    <rdf:rest rdf:resource="http://www.w3.org/1999/02/22-rdf-syntax-ns#nil"/>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="Nabd37cb74a794276b7b1afce195201b6">
+    <rdf:first rdf:resource="http://mesh.local/ontology/synthea#UrgentcareEncounterclass"/>
+    <rdf:rest rdf:nodeID="N4c98a409312943af9295db77a8d5b7b3"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://forgemesh.ai/ontology#sourceTable">
+    <rdfs:label xml:lang="en">source table</rdfs:label>
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#AnnotationProperty"/>
+    <rdfs:comment xml:lang="en">The bronze database table from which this class was derived.</rdfs:comment>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="Nc1b48c489f1d42378bf21e308a04aa57">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
+    <owl:unionOf rdf:nodeID="Nd2d6c823459a4a7489712c68dbb1cae6"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://mesh.local/ontology/synthea#N734afbd64794363b9bc06a3981533ed5Payer">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+    <rdf:type rdf:resource="http://mesh.local/ontology/synthea#Payer"/>
+    <rdfs:label>734afbd6-4794-363b-9bc0-6a3981533ed5</rdfs:label>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="N419e673694014742a7df1fd7af9d52a2">
+    <rdf:first rdf:resource="http://mesh.local/ontology/synthea#N25025Fips"/>
+    <rdf:rest rdf:nodeID="Nc22daecaec934fa29f39a1d7668220ee"/>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="Nc32d1730cb5447c792d1e465ccae0572">
+    <rdf:first rdf:resource="http://mesh.local/ontology/synthea#N0133f75192293cfd815fB6d4979bdd6aPayer"/>
+    <rdf:rest rdf:nodeID="Nd24a244ff53f4a00a1c0ceadda8b7547"/>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="N8f5248b9151c49d69c564ebbec4b2d90">
+    <rdf:first rdf:resource="http://mesh.local/ontology/synthea#Encounter"/>
+    <rdf:rest rdf:nodeID="Nbd7af9d910cd49e1a58c072d46f25a64"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://mesh.local/ontology/synthea#N8771BaseEncounterCost">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+    <rdf:type rdf:resource="http://mesh.local/ontology/synthea#BaseEncounterCost"/>
+    <rdfs:label>87.71</rdfs:label>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="N903599112e194dbf8818c9f584dcd04c">
+    <rdf:first rdf:resource="http://mesh.local/ontology/synthea#BlackRace"/>
+    <rdf:rest rdf:nodeID="N0ef06057829f4d85b3d2bce43393be35"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://forgemesh.ai/ontology#invalidMapping">
+    <rdfs:label xml:lang="en">invalid mapping</rdfs:label>
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#AnnotationProperty"/>
+    <rdfs:comment xml:lang="en">Records a mapping configuration error on this individual: a value_map entry (or a pre-materialised URI in the gold column) resolved to the property's rdfs:range class URI instead of an individual of that class. The value is the property URI where the bad mapping was detected. This is distinct from fm:incompleteReference — the source value was present but the mapping was wrong. Fix by assigning correct individual URIs in the value_map.</rdfs:comment>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="N00406853e1df4069affb7ddc729d0609">
+    <rdf:first rdf:resource="http://mesh.local/ontology/synthea#EmergencyEncounterclass"/>
+    <rdf:rest rdf:nodeID="N38f137b8845649c3a4dfceb896adab8d"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://mesh.local/ontology/synthea#EssexCountyCounty">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+    <rdf:type rdf:resource="http://mesh.local/ontology/synthea#County"/>
+    <rdfs:label>Essex County</rdfs:label>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="N70871d7543b14effb59089ac5ec7466c">
+    <rdf:first rdf:resource="http://mesh.local/ontology/synthea#Medication"/>
+    <rdf:rest rdf:nodeID="N3df8dc42d82b458bbf167b9e19093637"/>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="Nac71a781c0e248568cea6e9b52f94789">
+    <rdf:first rdf:resource="http://mesh.local/ontology/synthea#D18ef2e6Ef40324cBe5434a5ee865625Payer"/>
+    <rdf:rest rdf:nodeID="N576a2250e91d4cd29955d6234ee33b24"/>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="Nf4ba127abe5645978920f5846ccf4f1f">
+    <rdf:first rdf:resource="http://mesh.local/ontology/synthea#HampshireCountyCounty"/>
+    <rdf:rest rdf:nodeID="N13f8973c51aa488299291d54a81003a9"/>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="N3ceebe4d21af44c394e8c50a7c0786ea">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
+    <owl:unionOf rdf:nodeID="Na3083eaef66a4c95b988ff61935d9aa0"/>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="N7a916f9bd06a49dcadcccfff1625266a">
+    <rdf:first rdf:resource="http://mesh.local/ontology/synthea#EssexCountyCounty"/>
+    <rdf:rest rdf:nodeID="Nbe4bf4559c4a4868bf1159c2c344219f"/>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="N8b75df2ad71942919ca5a1a5147f44d9">
+    <rdf:first rdf:resource="http://mesh.local/ontology/synthea#OutpatientEncounterclass"/>
+    <rdf:rest rdf:nodeID="Neb6b9797e0154404aecc4a1d9e513651"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://mesh.local/ontology/synthea#WellnessEncounterclass">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+    <rdf:type rdf:resource="http://mesh.local/ontology/synthea#Encounterclass"/>
+    <rdfs:label>wellness</rdfs:label>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="Naef45973dd5f44f7abea674d14a49636">
+    <rdf:first rdf:resource="http://mesh.local/ontology/synthea#NonhispanicEthnicity"/>
+    <rdf:rest rdf:resource="http://www.w3.org/1999/02/22-rdf-syntax-ns#nil"/>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="Ndf56e92c8374469da24d940038ce4384">
+    <rdf:first rdf:resource="http://mesh.local/ontology/synthea#N8771BaseEncounterCost"/>
+    <rdf:rest rdf:resource="http://www.w3.org/1999/02/22-rdf-syntax-ns#nil"/>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="N50a3ad67e1fb46ed8dac875e5b573f01">
+    <rdf:first rdf:resource="http://mesh.local/ontology/synthea#Medication"/>
+    <rdf:rest rdf:nodeID="Na50472f5cf774ba481b3e6756dca01cc"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://mesh.local/ontology/synthea#RxnormConcept">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
+    <rdfs:label xml:lang="en">RxNorm concept</rdfs:label>
+    <skos:closeMatch rdf:resource="http://purl.bioontology.org/ontology/RXNORM"/>
+    <rdfs:comment xml:lang="en">A concept from the RxNorm code system, referenced by coded source column(s) raw_medications.code, raw_medications.description.</rdfs:comment>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="Nbeda6448a0f940719e4d08ba3ee6cfa3">
+    <rdf:first rdf:resource="http://mesh.local/ontology/synthea#DMarital"/>
+    <rdf:rest rdf:nodeID="N29e925b0aad24a8d95ee6b54106a3267"/>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="Ncebd527e63024ce2aa8ff96f5343e3bb">
+    <rdf:first rdf:resource="http://mesh.local/ontology/synthea#Medication"/>
+    <rdf:rest rdf:nodeID="Nde5d18f9ca6945e4882133b652094806"/>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="N0bf8123d72454788825357830f1591b9">
+    <rdf:first rdf:resource="http://mesh.local/ontology/synthea#Medication"/>
+    <rdf:rest rdf:nodeID="N50bebba24df14d478f8fd802f57e3b06"/>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="Na3083eaef66a4c95b988ff61935d9aa0">
+    <rdf:first rdf:resource="http://mesh.local/ontology/synthea#Encounter"/>
+    <rdf:rest rdf:nodeID="Ncebd527e63024ce2aa8ff96f5343e3bb"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://mesh.local/ontology/synthea#HospiceEncounterclass">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+    <rdf:type rdf:resource="http://mesh.local/ontology/synthea#Encounterclass"/>
+    <rdfs:label>hospice</rdfs:label>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="Nb858195e312a4650ad840c1b0e8d48d1">
+    <rdf:first rdf:resource="http://mesh.local/ontology/synthea#Encounter"/>
+    <rdf:rest rdf:nodeID="Nf555b14fefc04da5992cfba7ffc7186f"/>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="Nde0a100151cd4cfb9b26fcdd1fd637dd">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
+    <owl:unionOf rdf:nodeID="N65f3699e60504f00935be8b04e89fc26"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://mesh.local/ontology/synthea">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Ontology"/>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="Nad2b876f495f4f058f1c7f5624ce3a9b">
+    <owl:oneOf rdf:nodeID="Nf6e64d8c90b44611b4c7cb2731782777"/>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="N2be95e20aaa94d91b1267b9f4ac4e355">
+    <rdf:first rdf:resource="http://mesh.local/ontology/synthea#N25019Fips"/>
+    <rdf:rest rdf:nodeID="N70bc7c4a33a64a95b1b7edf3119c04e9"/>
+  </rdf:Description>
+</rdf:RDF>

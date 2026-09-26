@@ -1,0 +1,79 @@
+# Benchmark query suite — issue #51 (Benchmark Query Set)
+#
+# HOW TO USE:
+#   1. Run the full pipeline (inspect → map → silver → gold → rdf) at least once.
+#   2. Derive expected_count values from the source data:
+#        SELECT COUNT(*) FROM raw_patients;   -- gives patient_count
+#   3. POST to /api/eval/benchmark/run with { "path": "eval/benchmarks/synthea_template.yaml" }
+#
+# FIELDS:
+#   id             — unique query identifier (no spaces)
+#   description    — human-readable question
+#   sparql         — valid SPARQL SELECT with a COUNT projection or returning rows
+#   expected_count — result count you expect from a correct pipeline run
+#   tolerance      — fractional tolerance (0.05 = ±5%); 0.0 = exact match
+
+version: "1.0"
+dataset: "synthea"
+description: "End-to-end correctness benchmarks for the Synthea synthetic dataset"
+
+queries:
+  - id: patient_count
+    description: "Total number of distinct patients in the triplestore"
+    sparql: |
+      PREFIX owl: <http://www.w3.org/2002/07/owl#>
+      PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+      SELECT (COUNT(DISTINCT ?p) AS ?n)
+      WHERE {
+        ?p rdf:type ?type .
+        FILTER(CONTAINS(STR(?type), "Patient"))
+      }
+    expected_count: 0
+    tolerance: 0.0
+
+  - id: encounter_count
+    description: "Total number of distinct encounters in the triplestore"
+    sparql: |
+      PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+      SELECT (COUNT(DISTINCT ?e) AS ?n)
+      WHERE {
+        ?e rdf:type ?type .
+        FILTER(CONTAINS(STR(?type), "Encounter"))
+      }
+    expected_count: 0
+    tolerance: 0.05
+
+  - id: condition_count
+    description: "Total number of condition records"
+    sparql: |
+      PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+      SELECT (COUNT(DISTINCT ?c) AS ?n)
+      WHERE {
+        ?c rdf:type ?type .
+        FILTER(CONTAINS(STR(?type), "Condition"))
+      }
+    expected_count: 0
+    tolerance: 0.05
+
+  - id: patients_with_encounters
+    description: "Number of patients who have at least one linked encounter"
+    sparql: |
+      SELECT (COUNT(DISTINCT ?p) AS ?n)
+      WHERE {
+        ?enc ?hasPatient ?p .
+        FILTER(CONTAINS(STR(?hasPatient), "hasPatient") || CONTAINS(STR(?hasPatient), "patient"))
+      }
+    expected_count: 0
+    tolerance: 0.05
+
+  - id: medication_count
+    description: "Total number of medication records"
+    sparql: |
+      PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+      SELECT (COUNT(DISTINCT ?m) AS ?n)
+      WHERE {
+        ?m rdf:type ?type .
+        FILTER(CONTAINS(STR(?type), "Medication") || CONTAINS(STR(?type), "medication"))
+      }
+    expected_count: 0
+    tolerance: 0.05

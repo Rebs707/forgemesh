@@ -1,0 +1,1624 @@
+<?xml version="1.0" encoding="utf-8"?>
+<rdf:RDF
+   xmlns:fm="http://forgemesh.ai/ontology#"
+   xmlns:owl="http://www.w3.org/2002/07/owl#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#"
+   xmlns:skos="http://www.w3.org/2004/02/skos/core#"
+>
+  <rdf:Description rdf:nodeID="Nd3c9a08539d64f7487b9390f6ba87a3a">
+    <rdf:first rdf:resource="http://mesh.local/ontology/winterolympics#FreestyleSkiingDiscipline"/>
+    <rdf:rest rdf:nodeID="Ndad38965f8f245059eb5222d6fd3d1a6"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://mesh.local/ontology/winterolympics#hasCoachNationality">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#ObjectProperty"/>
+    <rdfs:label xml:lang="en">has coach nationality</rdfs:label>
+    <rdfs:comment xml:lang="en">Links a coach to their nationality.</rdfs:comment>
+    <rdfs:domain rdf:resource="http://mesh.local/ontology/winterolympics#Coach"/>
+    <rdfs:range rdf:resource="http://mesh.local/ontology/winterolympics#Nationality"/>
+    <fm:sourceForeignKey>raw_coaches.nationality -&gt; Nationality</fm:sourceForeignKey>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="N47acd7a6614342f1a1eda6f1f8707b2d">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
+    <owl:unionOf rdf:nodeID="Nd13f321b183b4d4d8198a3686591f6e5"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://mesh.local/ontology/winterolympics#hasEvent">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#DatatypeProperty"/>
+    <rdfs:label xml:lang="en">has schedule event</rdfs:label>
+    <rdfs:comment xml:lang="en">The event associated with the schedule.</rdfs:comment>
+    <rdfs:domain rdf:resource="http://mesh.local/ontology/winterolympics#Schedule"/>
+    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+    <skos:altLabel xml:lang="en">event</skos:altLabel>
+    <fm:sourceColumn>raw_schedules.event</fm:sourceColumn>
+    <fm:sqlType>VARCHAR(160) COLLATE \</fm:sqlType>
+    <fm:sqlType>VARCHAR(160) COLLATE "utf8mb4_unicode_ci"</fm:sqlType>
+    <fm:nullRate>0.00</fm:nullRate>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://mesh.local/ontology/winterolympics#hasTeamType">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#ObjectProperty"/>
+    <rdfs:label xml:lang="en">has team type</rdfs:label>
+    <rdfs:comment xml:lang="en">Links a team to its type.</rdfs:comment>
+    <rdfs:domain rdf:resource="http://mesh.local/ontology/winterolympics#Team"/>
+    <rdfs:range rdf:resource="http://mesh.local/ontology/winterolympics#TeamType"/>
+    <fm:sourceForeignKey>raw_teams.team_type -&gt; TeamType</fm:sourceForeignKey>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://forgemesh.ai/ontology#multiValued">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#AnnotationProperty"/>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="N6b6cdef1a69f42439d2ea81e4279bb54">
+    <rdf:first rdf:resource="http://mesh.local/ontology/winterolympics#FRANationality"/>
+    <rdf:rest rdf:nodeID="N1c667e2c74044fb89678ba59655cabbe"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://mesh.local/ontology/winterolympics#TEAMEventType">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+    <rdf:type rdf:resource="http://mesh.local/ontology/winterolympics#EventType"/>
+    <rdfs:label>TEAM</rdfs:label>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://forgemesh.ai/ontology#limitation">
+    <rdfs:label xml:lang="en">limitation</rdfs:label>
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#AnnotationProperty"/>
+    <rdfs:comment xml:lang="en">A known limitation of this class or property that proof narrators should surface to query consumers. Multiple values allowed.</rdfs:comment>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://mesh.local/ontology/winterolympics#FINISHEDStatus">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+    <rdf:type rdf:resource="http://mesh.local/ontology/winterolympics#Status"/>
+    <rdfs:label>FINISHED</rdfs:label>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="Nd3ca4a84c1be40668b44ab3ef075d582">
+    <rdf:first rdf:resource="http://mesh.local/ontology/winterolympics#GERNationality"/>
+    <rdf:rest rdf:nodeID="Ne6437f96a5c64c8ab55adf37d440b8f8"/>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="N725ad5f7ac904385a2e429f6d0338fec">
+    <owl:oneOf rdf:nodeID="Nfcf55efdec8649bcbb2080574f0b93aa"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://mesh.local/ontology/winterolympics#hasAthleteEvents">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#ObjectProperty"/>
+    <rdfs:comment xml:lang="en">The events of the athlete.</rdfs:comment>
+    <rdfs:domain rdf:resource="http://mesh.local/ontology/winterolympics#Athlete"/>
+    <rdfs:range rdf:resource="http://mesh.local/ontology/winterolympics#Event"/>
+    <skos:altLabel xml:lang="en">events</skos:altLabel>
+    <rdfs:subPropertyOf rdf:resource="http://mesh.local/ontology/winterolympics#hasEvents"/>
+    <fm:sourceColumn>unknown.events</fm:sourceColumn>
+    <fm:sqlType>unknown</fm:sqlType>
+    <fm:nullRate>unknown</fm:nullRate>
+    <fm:multiValued rdf:datatype="http://www.w3.org/2001/XMLSchema#boolean">true</fm:multiValued>
+    <fm:sourceForeignKey>not recoverable</fm:sourceForeignKey>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://mesh.local/ontology/winterolympics#hasCoachEvents">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#ObjectProperty"/>
+    <rdfs:label xml:lang="en">has coach events</rdfs:label>
+    <rdfs:comment xml:lang="en">The events associated with the coach.</rdfs:comment>
+    <rdfs:domain rdf:resource="http://mesh.local/ontology/winterolympics#Coach"/>
+    <rdfs:range rdf:resource="http://mesh.local/ontology/winterolympics#Event"/>
+    <skos:altLabel xml:lang="en">events</skos:altLabel>
+    <fm:sourceColumn>raw_coaches.events</fm:sourceColumn>
+    <fm:sqlType>TEXT COLLATE \</fm:sqlType>
+    <fm:sqlType>TEXT COLLATE "utf8mb4_unicode_ci"</fm:sqlType>
+    <fm:nullRate>0.00</fm:nullRate>
+    <rdfs:subPropertyOf rdf:resource="http://mesh.local/ontology/winterolympics#hasEvents"/>
+    <fm:multiValued rdf:datatype="http://www.w3.org/2001/XMLSchema#boolean">true</fm:multiValued>
+    <fm:sourceForeignKey>not recoverable</fm:sourceForeignKey>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://mesh.local/ontology/winterolympics#Country">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
+    <rdfs:label xml:lang="en">Country</rdfs:label>
+    <rdfs:comment xml:lang="en">A country participating in the Winter Olympics.</rdfs:comment>
+    <fm:sourceTable>raw_medals</fm:sourceTable>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://mesh.local/ontology/winterolympics#hasRankTotal">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#DatatypeProperty"/>
+    <rdfs:label xml:lang="en">Rank Total</rdfs:label>
+    <rdfs:comment xml:lang="en">The total rank of the country.</rdfs:comment>
+    <rdfs:domain rdf:resource="http://mesh.local/ontology/winterolympics#Country"/>
+    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#integer"/>
+    <skos:altLabel xml:lang="en">rank_total</skos:altLabel>
+    <fm:sourceColumn>raw_medals.rank_total</fm:sourceColumn>
+    <fm:sqlType>INTEGER</fm:sqlType>
+    <fm:nullRate>0.00</fm:nullRate>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://mesh.local/ontology/winterolympics#hasEndDate">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#DatatypeProperty"/>
+    <rdfs:label xml:lang="en">has schedule end date</rdfs:label>
+    <rdfs:comment xml:lang="en">The end date and time of the schedule.</rdfs:comment>
+    <rdfs:domain rdf:resource="http://mesh.local/ontology/winterolympics#Schedule"/>
+    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#dateTime"/>
+    <skos:altLabel xml:lang="en">end_date</skos:altLabel>
+    <fm:sourceColumn>raw_schedules.end_date</fm:sourceColumn>
+    <fm:sqlType>VARCHAR(40) COLLATE \</fm:sqlType>
+    <fm:sqlType>VARCHAR(40) COLLATE "utf8mb4_unicode_ci"</fm:sqlType>
+    <fm:nullRate>0.00</fm:nullRate>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://mesh.local/ontology/winterolympics#ORGTeamType">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+    <rdf:type rdf:resource="http://mesh.local/ontology/winterolympics#TeamType"/>
+    <rdfs:label>ORG</rdfs:label>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://mesh.local/ontology/winterolympics#Schedule">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
+    <rdfs:label xml:lang="en">Schedule</rdfs:label>
+    <rdfs:comment xml:lang="en">A schedule of events for the Winter Olympics.</rdfs:comment>
+    <fm:sourceTable>raw_schedules</fm:sourceTable>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://mesh.local/ontology/winterolympics#hasUrlVenue">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#DatatypeProperty"/>
+    <rdfs:label xml:lang="en">Venue URL</rdfs:label>
+    <rdfs:comment xml:lang="en">The URL linking to more information about the venue.</rdfs:comment>
+    <rdfs:domain rdf:resource="http://mesh.local/ontology/winterolympics#Venue"/>
+    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+    <skos:altLabel xml:lang="en">url_venue</skos:altLabel>
+    <fm:sourceColumn>raw_venues.url_venue</fm:sourceColumn>
+    <fm:sqlType>VARCHAR(255) COLLATE \</fm:sqlType>
+    <fm:sqlType>VARCHAR(255) COLLATE "utf8mb4_unicode_ci"</fm:sqlType>
+    <fm:nullRate>0.00</fm:nullRate>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="Ndad38965f8f245059eb5222d6fd3d1a6">
+    <rdf:first rdf:resource="http://mesh.local/ontology/winterolympics#IceHockeyDiscipline"/>
+    <rdf:rest rdf:nodeID="Nf943bba68417401f89c2efbf7835edd8"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://mesh.local/ontology/winterolympics#hasCoachName">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#DatatypeProperty"/>
+    <rdfs:comment xml:lang="en">The name of the coach.</rdfs:comment>
+    <rdfs:domain rdf:resource="http://mesh.local/ontology/winterolympics#Coach"/>
+    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+    <skos:altLabel xml:lang="en">name</skos:altLabel>
+    <rdfs:subPropertyOf rdf:resource="http://mesh.local/ontology/winterolympics#hasName"/>
+    <fm:sourceColumn>unknown.name</fm:sourceColumn>
+    <fm:sqlType>unknown</fm:sqlType>
+    <fm:nullRate>unknown</fm:nullRate>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://mesh.local/ontology/winterolympics#hasTeamCountry">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#ObjectProperty"/>
+    <rdfs:label xml:lang="en">has team country</rdfs:label>
+    <rdfs:comment xml:lang="en">Links a team to its representing country.</rdfs:comment>
+    <rdfs:domain rdf:resource="http://mesh.local/ontology/winterolympics#Team"/>
+    <rdfs:range rdf:resource="http://mesh.local/ontology/winterolympics#Country"/>
+    <fm:sourceForeignKey>raw_teams.country_code -&gt; raw_medals</fm:sourceForeignKey>
+    <skos:altLabel xml:lang="en">country_code</skos:altLabel>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://mesh.local/ontology/winterolympics#Function">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
+    <rdfs:label xml:lang="en">Function</rdfs:label>
+    <rdfs:comment xml:lang="en">The role or position held by a coach.</rdfs:comment>
+    <fm:sourceTable>raw_coaches</fm:sourceTable>
+    <owl:equivalentClass rdf:nodeID="Na88c96a9ef4440eeb9e5c7859db70a2c"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://mesh.local/ontology/winterolympics#hasMedallistCountry">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#ObjectProperty"/>
+    <rdfs:label xml:lang="en">has medallist country</rdfs:label>
+    <rdfs:comment xml:lang="en">Links a medallist to their country.</rdfs:comment>
+    <rdfs:domain rdf:resource="http://mesh.local/ontology/winterolympics#Medallist"/>
+    <rdfs:range rdf:resource="http://mesh.local/ontology/winterolympics#Country"/>
+    <fm:sourceForeignKey>raw_medallists.country_code -&gt; raw_medals</fm:sourceForeignKey>
+    <skos:altLabel xml:lang="en">country_code</skos:altLabel>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://mesh.local/ontology/winterolympics#SMTDisciplineCode">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+    <rdf:type rdf:resource="http://mesh.local/ontology/winterolympics#DisciplineCode"/>
+    <rdfs:label>SMT</rdfs:label>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="N1de77dc53fed4a33a80d96b7b7d54d07">
+    <rdf:first rdf:resource="http://mesh.local/ontology/winterolympics#AlpineSkiingDiscipline"/>
+    <rdf:rest rdf:nodeID="N17cfff36bee24d6e9e0ddf4ba7b278fd"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://mesh.local/ontology/winterolympics#hasMedallistGender">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#ObjectProperty"/>
+    <rdfs:label xml:lang="en">has medallist gender</rdfs:label>
+    <rdfs:comment xml:lang="en">Links a medallist to their gender.</rdfs:comment>
+    <rdfs:domain rdf:resource="http://mesh.local/ontology/winterolympics#Medallist"/>
+    <rdfs:range rdf:resource="http://mesh.local/ontology/winterolympics#Gender"/>
+    <fm:sourceForeignKey>raw_medallists.gender -&gt; MedallistGender</fm:sourceForeignKey>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://mesh.local/ontology/winterolympics#hasAthleteCountry">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#ObjectProperty"/>
+    <rdfs:label xml:lang="en">has athlete country</rdfs:label>
+    <rdfs:comment xml:lang="en">Links an athlete to their country.</rdfs:comment>
+    <rdfs:domain rdf:resource="http://mesh.local/ontology/winterolympics#Athlete"/>
+    <rdfs:range rdf:resource="http://mesh.local/ontology/winterolympics#Country"/>
+    <fm:sourceForeignKey>raw_athletes.country_code -&gt; raw_medals</fm:sourceForeignKey>
+    <skos:altLabel xml:lang="en">country_code</skos:altLabel>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://mesh.local/ontology/winterolympics#SKNDisciplineCode">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+    <rdf:type rdf:resource="http://mesh.local/ontology/winterolympics#DisciplineCode"/>
+    <rdfs:label>SKN</rdfs:label>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://mesh.local/ontology/winterolympics#BRONZEMedal">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+    <rdf:type rdf:resource="http://mesh.local/ontology/winterolympics#Medal"/>
+    <rdfs:label>BRONZE</rdfs:label>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="Nccf3638cb78a46808c7e66c49d6f6dc8">
+    <rdf:first rdf:resource="http://mesh.local/ontology/winterolympics#Athlete"/>
+    <rdf:rest rdf:nodeID="Na04940573b3144ec8d04ad47521f99a7"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://mesh.local/ontology/winterolympics#hasStartDate">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#DatatypeProperty"/>
+    <rdfs:label xml:lang="en">has schedule start date</rdfs:label>
+    <rdfs:comment xml:lang="en">The start date and time of the schedule.</rdfs:comment>
+    <rdfs:domain rdf:resource="http://mesh.local/ontology/winterolympics#Schedule"/>
+    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#dateTime"/>
+    <skos:altLabel xml:lang="en">start_date</skos:altLabel>
+    <fm:sourceColumn>raw_schedules.start_date</fm:sourceColumn>
+    <fm:sqlType>VARCHAR(40) COLLATE \</fm:sqlType>
+    <fm:sqlType>VARCHAR(40) COLLATE "utf8mb4_unicode_ci"</fm:sqlType>
+    <fm:nullRate>0.00</fm:nullRate>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://forgemesh.ai/ontology#sqlType">
+    <rdfs:label xml:lang="en">SQL type</rdfs:label>
+    <rdfs:comment xml:lang="en">The SQL column type of the source column.</rdfs:comment>
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#AnnotationProperty"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://mesh.local/ontology/winterolympics#hasScheduleVenueName">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#DatatypeProperty"/>
+    <rdfs:label xml:lang="en">has schedule venue name</rdfs:label>
+    <rdfs:comment xml:lang="en">The name of the venue for the schedule.</rdfs:comment>
+    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+    <skos:altLabel xml:lang="en">venue</skos:altLabel>
+    <fm:sourceColumn>raw_schedules.venue</fm:sourceColumn>
+    <fm:sqlType>VARCHAR(160) COLLATE \</fm:sqlType>
+    <fm:sqlType>VARCHAR(160) COLLATE "utf8mb4_unicode_ci"</fm:sqlType>
+    <fm:nullRate>0.00</fm:nullRate>
+    <rdfs:subPropertyOf rdf:resource="http://mesh.local/ontology/winterolympics#hasVenue"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://mesh.local/ontology/winterolympics#hasMedallistName">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#DatatypeProperty"/>
+    <rdfs:label xml:lang="en">has medallist name</rdfs:label>
+    <rdfs:comment xml:lang="en">The name of the medallist.</rdfs:comment>
+    <rdfs:domain rdf:resource="http://mesh.local/ontology/winterolympics#Medallist"/>
+    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+    <skos:altLabel xml:lang="en">name</skos:altLabel>
+    <rdfs:subPropertyOf rdf:resource="http://mesh.local/ontology/winterolympics#hasName"/>
+    <fm:sourceColumn>raw_medallists.name</fm:sourceColumn>
+    <fm:sqlType>VARCHAR(255) COLLATE \</fm:sqlType>
+    <fm:sqlType>VARCHAR(255) COLLATE "utf8mb4_unicode_ci"</fm:sqlType>
+    <fm:nullRate>0.00</fm:nullRate>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://mesh.local/ontology/winterolympics#hasTeamEvents">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#ObjectProperty"/>
+    <rdfs:comment xml:lang="en">The events of the team.</rdfs:comment>
+    <rdfs:domain rdf:resource="http://mesh.local/ontology/winterolympics#Team"/>
+    <rdfs:range rdf:resource="http://mesh.local/ontology/winterolympics#Event"/>
+    <skos:altLabel xml:lang="en">events</skos:altLabel>
+    <rdfs:subPropertyOf rdf:resource="http://mesh.local/ontology/winterolympics#hasEvents"/>
+    <fm:sourceColumn>unknown.events</fm:sourceColumn>
+    <fm:sqlType>unknown</fm:sqlType>
+    <fm:nullRate>unknown</fm:nullRate>
+    <fm:multiValued rdf:datatype="http://www.w3.org/2001/XMLSchema#boolean">true</fm:multiValued>
+    <fm:sourceForeignKey>not recoverable</fm:sourceForeignKey>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://mesh.local/ontology/winterolympics#XGender">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+    <rdf:type rdf:resource="http://mesh.local/ontology/winterolympics#Gender"/>
+    <rdfs:label>X</rdfs:label>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="Ne026ac3b2b8547bfa11958e7bd067b8b">
+    <rdf:first rdf:resource="http://mesh.local/ontology/winterolympics#Schedule"/>
+    <rdf:rest rdf:resource="http://www.w3.org/1999/02/22-rdf-syntax-ns#nil"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://mesh.local/ontology/winterolympics#hasPhase">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#DatatypeProperty"/>
+    <rdfs:label xml:lang="en">has schedule phase</rdfs:label>
+    <rdfs:comment xml:lang="en">The phase of the event in the schedule.</rdfs:comment>
+    <rdfs:domain rdf:resource="http://mesh.local/ontology/winterolympics#Schedule"/>
+    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+    <skos:altLabel xml:lang="en">phase</skos:altLabel>
+    <fm:sourceColumn>raw_schedules.phase</fm:sourceColumn>
+    <fm:sqlType>VARCHAR(192) COLLATE \</fm:sqlType>
+    <fm:sqlType>VARCHAR(192) COLLATE "utf8mb4_unicode_ci"</fm:sqlType>
+    <fm:nullRate>0.00</fm:nullRate>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://mesh.local/ontology/winterolympics#hasDay">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#DatatypeProperty"/>
+    <rdfs:label xml:lang="en">has schedule day</rdfs:label>
+    <rdfs:comment xml:lang="en">The day of the schedule.</rdfs:comment>
+    <rdfs:domain rdf:resource="http://mesh.local/ontology/winterolympics#Schedule"/>
+    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#date"/>
+    <skos:altLabel xml:lang="en">day</skos:altLabel>
+    <fm:sourceColumn>raw_schedules.day</fm:sourceColumn>
+    <fm:sqlType>DATE</fm:sqlType>
+    <fm:nullRate>0.00</fm:nullRate>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://mesh.local/ontology/winterolympics#hasEventMedal">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#DatatypeProperty"/>
+    <rdfs:label xml:lang="en">has schedule event medal</rdfs:label>
+    <rdfs:comment xml:lang="en">The medal count for the event in the schedule.</rdfs:comment>
+    <rdfs:domain rdf:resource="http://mesh.local/ontology/winterolympics#Schedule"/>
+    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#integer"/>
+    <skos:altLabel xml:lang="en">event_medal</skos:altLabel>
+    <fm:sourceColumn>raw_schedules.event_medal</fm:sourceColumn>
+    <fm:sqlType>TINYINT</fm:sqlType>
+    <fm:nullRate>0.00</fm:nullRate>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://mesh.local/ontology/winterolympics#hasDisciplinesCode">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#DatatypeProperty"/>
+    <rdfs:label xml:lang="en">Disciplines Code</rdfs:label>
+    <rdfs:comment xml:lang="en">The code representing the disciplines at the venue.</rdfs:comment>
+    <rdfs:domain rdf:resource="http://mesh.local/ontology/winterolympics#Venue"/>
+    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+    <skos:altLabel xml:lang="en">disciplines_code</skos:altLabel>
+    <fm:sourceColumn>raw_venues.disciplines_code</fm:sourceColumn>
+    <fm:sqlType>VARCHAR(64) COLLATE \</fm:sqlType>
+    <fm:sqlType>VARCHAR(64) COLLATE "utf8mb4_unicode_ci"</fm:sqlType>
+    <fm:nullRate>0.13</fm:nullRate>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="N62b389d48bd845c3a2f041f49b0e72f0">
+    <rdf:first rdf:resource="http://mesh.local/ontology/winterolympics#CPLWTeamType"/>
+    <rdf:rest rdf:nodeID="N9f8f4ccbe5be4554a54d33863712d06b"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://mesh.local/ontology/winterolympics#hasDisciplines">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#DatatypeProperty"/>
+    <rdfs:label xml:lang="en">Disciplines</rdfs:label>
+    <rdfs:comment xml:lang="en">The disciplines associated with the venue.</rdfs:comment>
+    <rdfs:domain rdf:resource="http://mesh.local/ontology/winterolympics#Venue"/>
+    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+    <skos:altLabel xml:lang="en">disciplines</skos:altLabel>
+    <fm:sourceColumn>raw_venues.disciplines</fm:sourceColumn>
+    <fm:sqlType>VARCHAR(160) COLLATE \</fm:sqlType>
+    <fm:sqlType>VARCHAR(160) COLLATE "utf8mb4_unicode_ci"</fm:sqlType>
+    <fm:nullRate>0.13</fm:nullRate>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://mesh.local/ontology/winterolympics#hasCoachFunction">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#ObjectProperty"/>
+    <rdfs:label xml:lang="en">has coach function</rdfs:label>
+    <rdfs:comment xml:lang="en">Links a coach to their function or role.</rdfs:comment>
+    <rdfs:domain rdf:resource="http://mesh.local/ontology/winterolympics#Coach"/>
+    <rdfs:range rdf:resource="http://mesh.local/ontology/winterolympics#Function"/>
+    <fm:sourceForeignKey>raw_coaches.function -&gt; Function</fm:sourceForeignKey>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://mesh.local/ontology/winterolympics#hasCoachGender">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#ObjectProperty"/>
+    <rdfs:label xml:lang="en">has coach gender</rdfs:label>
+    <rdfs:comment xml:lang="en">Links a coach to their gender.</rdfs:comment>
+    <rdfs:domain rdf:resource="http://mesh.local/ontology/winterolympics#Coach"/>
+    <rdfs:range rdf:resource="http://mesh.local/ontology/winterolympics#Gender"/>
+    <fm:sourceForeignKey>raw_coaches.gender -&gt; Gender</fm:sourceForeignKey>
+    <rdfs:subPropertyOf rdf:resource="http://mesh.local/ontology/winterolympics#hasGender"/>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="Nb3de6cf7b894408eb06b24d02b98954e">
+    <rdf:first rdf:resource="http://mesh.local/ontology/winterolympics#TEAMEventType"/>
+    <rdf:rest rdf:resource="http://www.w3.org/1999/02/22-rdf-syntax-ns#nil"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://mesh.local/ontology/winterolympics#hasId">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#DatatypeProperty"/>
+    <rdfs:label xml:lang="en">has schedule id</rdfs:label>
+    <rdfs:comment xml:lang="en">The identifier for the schedule.</rdfs:comment>
+    <rdfs:domain rdf:resource="http://mesh.local/ontology/winterolympics#Schedule"/>
+    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+    <skos:altLabel xml:lang="en">id</skos:altLabel>
+    <fm:sourceColumn>raw_schedules.id</fm:sourceColumn>
+    <fm:sqlType>VARCHAR(64) COLLATE \</fm:sqlType>
+    <fm:sqlType>VARCHAR(64) COLLATE "utf8mb4_unicode_ci"</fm:sqlType>
+    <fm:nullRate>0.00</fm:nullRate>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://mesh.local/ontology/winterolympics#DisciplineCode">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
+    <rdfs:label xml:lang="en">Discipline Code</rdfs:label>
+    <rdfs:comment xml:lang="en">The code representing a discipline.</rdfs:comment>
+    <fm:sourceTable>raw_schedules</fm:sourceTable>
+    <owl:equivalentClass rdf:nodeID="N725ad5f7ac904385a2e429f6d0338fec"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://mesh.local/ontology/winterolympics#IGRPEventType">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+    <rdf:type rdf:resource="http://mesh.local/ontology/winterolympics#EventType"/>
+    <rdfs:label>IGRP</rdfs:label>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="N7b1576551d334ea4935ce83d80a7f4b3">
+    <rdf:first rdf:resource="http://mesh.local/ontology/winterolympics#Medallist"/>
+    <rdf:rest rdf:nodeID="N9c20e5a7ef9f45e2a58df27aeab6a175"/>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="Nc63b98f451af47ed84b3feee29151bc0">
+    <rdf:first rdf:resource="http://mesh.local/ontology/winterolympics#SUINationality"/>
+    <rdf:rest rdf:nodeID="Ne0890dfe10d0432ba96d0ae191978acf"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://mesh.local/ontology/winterolympics#hasTeamName">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#DatatypeProperty"/>
+    <rdfs:comment xml:lang="en">The name of the team.</rdfs:comment>
+    <rdfs:domain rdf:resource="http://mesh.local/ontology/winterolympics#Team"/>
+    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+    <skos:altLabel xml:lang="en">name</skos:altLabel>
+    <rdfs:subPropertyOf rdf:resource="http://mesh.local/ontology/winterolympics#hasName"/>
+    <fm:sourceColumn>unknown.name</fm:sourceColumn>
+    <fm:sqlType>unknown</fm:sqlType>
+    <fm:nullRate>unknown</fm:nullRate>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://mesh.local/ontology/winterolympics#hasUrlSport">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#DatatypeProperty"/>
+    <rdfs:label xml:lang="en">Sport URL</rdfs:label>
+    <rdfs:comment xml:lang="en">The URL linking to the sport associated with the venue.</rdfs:comment>
+    <rdfs:domain rdf:resource="http://mesh.local/ontology/winterolympics#Venue"/>
+    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+    <skos:altLabel xml:lang="en">url_sport</skos:altLabel>
+    <fm:sourceColumn>raw_venues.url_sport</fm:sourceColumn>
+    <fm:sqlType>VARCHAR(255) COLLATE \</fm:sqlType>
+    <fm:sqlType>VARCHAR(255) COLLATE "utf8mb4_unicode_ci"</fm:sqlType>
+    <fm:nullRate>0.53</fm:nullRate>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://mesh.local/ontology/winterolympics#Discipline">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
+    <rdfs:label xml:lang="en">Discipline</rdfs:label>
+    <rdfs:comment xml:lang="en">The discipline of a scheduled event.</rdfs:comment>
+    <fm:sourceTable>raw_schedules</fm:sourceTable>
+    <owl:equivalentClass rdf:nodeID="N1b26047edf404370a580b7e02637c8f7"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://mesh.local/ontology/winterolympics#hasVenue">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#DatatypeProperty"/>
+    <rdfs:comment xml:lang="en">The venue of the ncba02eb55f404b81be6ec1b024569524.</rdfs:comment>
+    <rdfs:domain rdf:nodeID="N134d1da8fcbe440b9158df0eb300e30c"/>
+    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+    <skos:altLabel xml:lang="en">venue</skos:altLabel>
+    <fm:sourceColumn>unknown.venue</fm:sourceColumn>
+    <fm:sqlType>unknown</fm:sqlType>
+    <fm:nullRate>unknown</fm:nullRate>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://mesh.local/ontology/winterolympics#NordicCombinedDiscipline">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+    <rdf:type rdf:resource="http://mesh.local/ontology/winterolympics#Discipline"/>
+    <rdfs:label>Nordic Combined</rdfs:label>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="Naf0cda1f4f3c4b9aa90fa4a0561b615f">
+    <rdf:first rdf:resource="http://mesh.local/ontology/winterolympics#FGender"/>
+    <rdf:rest rdf:nodeID="Nab869ca7b7a14e72a3b3b045f90b901b"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://mesh.local/ontology/winterolympics#Team">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
+    <rdfs:label xml:lang="en">Team</rdfs:label>
+    <rdfs:comment xml:lang="en">A group of athletes representing a country in the Winter Olympics.</rdfs:comment>
+    <fm:sourceTable>raw_teams</fm:sourceTable>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://mesh.local/ontology/winterolympics#hasScheduleDiscipline">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#ObjectProperty"/>
+    <rdfs:label xml:lang="en">has schedule discipline</rdfs:label>
+    <rdfs:comment xml:lang="en">Links a schedule to its discipline.</rdfs:comment>
+    <rdfs:domain rdf:resource="http://mesh.local/ontology/winterolympics#Schedule"/>
+    <rdfs:range rdf:resource="http://mesh.local/ontology/winterolympics#Discipline"/>
+    <fm:sourceForeignKey>raw_schedules.discipline -&gt; Discipline</fm:sourceForeignKey>
+    <rdfs:subPropertyOf rdf:resource="http://mesh.local/ontology/winterolympics#hasDiscipline"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://forgemesh.ai/ontology#sourceColumn">
+    <rdfs:label xml:lang="en">source column</rdfs:label>
+    <rdfs:comment xml:lang="en">The bronze column (table.column) from which this property was derived.</rdfs:comment>
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#AnnotationProperty"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://mesh.local/ontology/winterolympics#hasGold">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#DatatypeProperty"/>
+    <rdfs:label xml:lang="en">Gold Medals</rdfs:label>
+    <rdfs:comment xml:lang="en">The number of gold medals won by the country.</rdfs:comment>
+    <rdfs:domain rdf:resource="http://mesh.local/ontology/winterolympics#Country"/>
+    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#integer"/>
+    <skos:altLabel xml:lang="en">gold</skos:altLabel>
+    <fm:sourceColumn>raw_medals.gold</fm:sourceColumn>
+    <fm:sqlType>INTEGER</fm:sqlType>
+    <fm:nullRate>0.00</fm:nullRate>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://mesh.local/ontology/winterolympics#USANationality">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+    <rdf:type rdf:resource="http://mesh.local/ontology/winterolympics#Nationality"/>
+    <rdfs:label>USA</rdfs:label>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="N5b5d223e5ada4b0484c4e2b4a4be5cd4">
+    <rdf:first rdf:resource="http://mesh.local/ontology/winterolympics#DGRPEventType"/>
+    <rdf:rest rdf:nodeID="N573b6699d8c24aadaa4cda6a9c4c2076"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://mesh.local/ontology/winterolympics#hasVenueVenue">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#DatatypeProperty"/>
+    <rdfs:comment xml:lang="en">The venue of the venue.</rdfs:comment>
+    <rdfs:domain rdf:resource="http://mesh.local/ontology/winterolympics#Venue"/>
+    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+    <skos:altLabel xml:lang="en">venue</skos:altLabel>
+    <rdfs:subPropertyOf rdf:resource="http://mesh.local/ontology/winterolympics#hasVenue"/>
+    <fm:sourceColumn>unknown.venue</fm:sourceColumn>
+    <fm:sqlType>unknown</fm:sqlType>
+    <fm:nullRate>unknown</fm:nullRate>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://mesh.local/ontology/winterolympics#hasBronze">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#DatatypeProperty"/>
+    <rdfs:label xml:lang="en">Bronze Medals</rdfs:label>
+    <rdfs:comment xml:lang="en">The number of bronze medals won by the country.</rdfs:comment>
+    <rdfs:domain rdf:resource="http://mesh.local/ontology/winterolympics#Country"/>
+    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#integer"/>
+    <skos:altLabel xml:lang="en">bronze</skos:altLabel>
+    <fm:sourceColumn>raw_medals.bronze</fm:sourceColumn>
+    <fm:sqlType>INTEGER</fm:sqlType>
+    <fm:nullRate>0.00</fm:nullRate>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://mesh.local/ontology/winterolympics#AlpineSkiingDiscipline">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+    <rdf:type rdf:resource="http://mesh.local/ontology/winterolympics#Discipline"/>
+    <rdfs:label>Alpine Skiing</rdfs:label>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://mesh.local/ontology/winterolympics#hasRank">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#DatatypeProperty"/>
+    <rdfs:label xml:lang="en">Rank</rdfs:label>
+    <rdfs:comment xml:lang="en">The rank of the country based on medals won.</rdfs:comment>
+    <rdfs:domain rdf:resource="http://mesh.local/ontology/winterolympics#Country"/>
+    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#integer"/>
+    <skos:altLabel xml:lang="en">rank</skos:altLabel>
+    <fm:sourceColumn>raw_medals.rank</fm:sourceColumn>
+    <fm:sqlType>INTEGER</fm:sqlType>
+    <fm:nullRate>0.00</fm:nullRate>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://mesh.local/ontology/winterolympics#SBDDisciplineCode">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+    <rdf:type rdf:resource="http://mesh.local/ontology/winterolympics#DisciplineCode"/>
+    <rdfs:label>SBD</rdfs:label>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://mesh.local/ontology/winterolympics#hasMedallistAthlete">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#ObjectProperty"/>
+    <rdfs:label xml:lang="en">has medallist athlete</rdfs:label>
+    <rdfs:comment xml:lang="en">Links a medallist to the athlete entity.</rdfs:comment>
+    <rdfs:domain rdf:resource="http://mesh.local/ontology/winterolympics#Medallist"/>
+    <rdfs:range rdf:resource="http://mesh.local/ontology/winterolympics#Athlete"/>
+    <fm:sourceForeignKey>raw_medallists.code -&gt; raw_athletes</fm:sourceForeignKey>
+    <skos:altLabel xml:lang="en">code</skos:altLabel>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://mesh.local/ontology/winterolympics#hasGender">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#ObjectProperty"/>
+    <rdfs:label xml:lang="en">has Gender</rdfs:label>
+    <rdfs:range rdf:resource="http://mesh.local/ontology/winterolympics#Gender"/>
+    <rdfs:comment xml:lang="en">Abstract object property for Gender relationships</rdfs:comment>
+    <rdfs:domain rdf:nodeID="Nb4a6b333d14c4498922e07b099a486d0"/>
+    <fm:sourceForeignKey>not recoverable</fm:sourceForeignKey>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://mesh.local/ontology/winterolympics#Gender">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
+    <rdfs:label xml:lang="en">Gender</rdfs:label>
+    <rdfs:comment xml:lang="en">The gender of an athlete.</rdfs:comment>
+    <fm:sourceTable>raw_athletes</fm:sourceTable>
+    <owl:equivalentClass rdf:nodeID="N02aa3dc4edaa4655870d04893f617aa2"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://mesh.local/ontology/winterolympics#Medallist">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
+    <rdfs:label xml:lang="en">Medallist</rdfs:label>
+    <rdfs:comment xml:lang="en">An athlete who has won a medal in the Winter Olympics.</rdfs:comment>
+    <fm:sourceTable>raw_medallists</fm:sourceTable>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="N9d4fcd635b164d8c94d1fe3084c2e3f8">
+    <rdf:first rdf:resource="http://mesh.local/ontology/winterolympics#SpeedSkatingDiscipline"/>
+    <rdf:rest rdf:resource="http://www.w3.org/1999/02/22-rdf-syntax-ns#nil"/>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="Nc22f99371a254008a8fa78b72b5cf2d2">
+    <rdf:first rdf:resource="http://mesh.local/ontology/winterolympics#Coach"/>
+    <rdf:rest rdf:nodeID="Nabf84583f6744b9bb49978452c3c804e"/>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="N55db5566fd864248949b14d4e07daf12">
+    <rdf:first rdf:resource="http://mesh.local/ontology/winterolympics#Schedule"/>
+    <rdf:rest rdf:resource="http://www.w3.org/1999/02/22-rdf-syntax-ns#nil"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://mesh.local/ontology/winterolympics#CURDisciplineCode">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+    <rdf:type rdf:resource="http://mesh.local/ontology/winterolympics#DisciplineCode"/>
+    <rdfs:label>CUR</rdfs:label>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://forgemesh.ai/ontology#invalidMapping">
+    <rdfs:comment xml:lang="en">Records a mapping configuration error on this individual: a value_map entry (or a pre-materialised URI in the gold column) resolved to the property's rdfs:range class URI instead of an individual of that class. The value is the property URI where the bad mapping was detected. This is distinct from fm:incompleteReference — the source value was present but the mapping was wrong. Fix by assigning correct individual URIs in the value_map.</rdfs:comment>
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#AnnotationProperty"/>
+    <rdfs:label xml:lang="en">invalid mapping</rdfs:label>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://mesh.local/ontology/winterolympics#hasTeamGender">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#ObjectProperty"/>
+    <rdfs:label xml:lang="en">has team gender</rdfs:label>
+    <rdfs:comment xml:lang="en">Links a team to its gender category.</rdfs:comment>
+    <rdfs:domain rdf:resource="http://mesh.local/ontology/winterolympics#Team"/>
+    <rdfs:range rdf:resource="http://mesh.local/ontology/winterolympics#Gender"/>
+    <fm:sourceForeignKey>raw_teams.gender -&gt; TeamGender</fm:sourceForeignKey>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="N9e0f7570635f4b6ca17b3f6dc588bd5d">
+    <rdf:first rdf:resource="http://mesh.local/ontology/winterolympics#NordicCombinedDiscipline"/>
+    <rdf:rest rdf:nodeID="N96598d60cd6f4066b6688249ffa7746e"/>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="Nfedd675d0a294495b796a34b0c50b418">
+    <rdf:first rdf:resource="http://mesh.local/ontology/winterolympics#Athlete"/>
+    <rdf:rest rdf:nodeID="Na409c3240f834b5e883039a8eb98d9ed"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://mesh.local/ontology/winterolympics#hasLocation">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#DatatypeProperty"/>
+    <rdfs:label xml:lang="en">has schedule location</rdfs:label>
+    <rdfs:comment xml:lang="en">The location of the schedule.</rdfs:comment>
+    <rdfs:domain rdf:resource="http://mesh.local/ontology/winterolympics#Schedule"/>
+    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+    <skos:altLabel xml:lang="en">location</skos:altLabel>
+    <fm:sourceColumn>raw_schedules.location</fm:sourceColumn>
+    <fm:sqlType>VARCHAR(192) COLLATE \</fm:sqlType>
+    <fm:sqlType>VARCHAR(192) COLLATE "utf8mb4_unicode_ci"</fm:sqlType>
+    <fm:nullRate>0.00</fm:nullRate>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://mesh.local/ontology/winterolympics#hasEventName">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#DatatypeProperty"/>
+    <rdfs:label xml:lang="en">has medallist event name</rdfs:label>
+    <rdfs:comment xml:lang="en">The name of the event in which the medallist competed.</rdfs:comment>
+    <rdfs:domain rdf:resource="http://mesh.local/ontology/winterolympics#Medallist"/>
+    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+    <skos:altLabel xml:lang="en">event_name</skos:altLabel>
+    <fm:sourceColumn>raw_medallists.event_name</fm:sourceColumn>
+    <fm:sqlType>VARCHAR(160) COLLATE \</fm:sqlType>
+    <fm:sqlType>VARCHAR(160) COLLATE "utf8mb4_unicode_ci"</fm:sqlType>
+    <fm:nullRate>0.00</fm:nullRate>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://mesh.local/ontology/winterolympics#Event">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
+    <rdfs:label>Event</rdfs:label>
+    <fm:sourceTable>Event</fm:sourceTable>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="N81db632addfd4918a9346c7936bc203f">
+    <rdf:first rdf:resource="http://mesh.local/ontology/winterolympics#Athlete"/>
+    <rdf:rest rdf:nodeID="Nc22f99371a254008a8fa78b72b5cf2d2"/>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="Nee26c090720541beab785d1c2d8d1a88">
+    <rdf:first rdf:resource="http://mesh.local/ontology/winterolympics#STKDisciplineCode"/>
+    <rdf:rest rdf:resource="http://www.w3.org/1999/02/22-rdf-syntax-ns#nil"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://mesh.local/ontology/winterolympics#CrossCountrySkiingDiscipline">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+    <rdf:type rdf:resource="http://mesh.local/ontology/winterolympics#Discipline"/>
+    <rdfs:label>Cross-Country Skiing</rdfs:label>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://mesh.local/ontology/winterolympics#hasName">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#DatatypeProperty"/>
+    <rdfs:label xml:lang="en">has name</rdfs:label>
+    <rdfs:comment xml:lang="en">An abstract property for names.</rdfs:comment>
+    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+    <fm:sourceColumn>raw_athletes.hasName</fm:sourceColumn>
+    <fm:sqlType>unknown</fm:sqlType>
+    <fm:nullRate>unknown</fm:nullRate>
+    <rdfs:domain rdf:nodeID="N9ad0ed7d0f404bf5a5fb473f82608cd7"/>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="N9c20e5a7ef9f45e2a58df27aeab6a175">
+    <rdf:first rdf:resource="http://mesh.local/ontology/winterolympics#Team"/>
+    <rdf:rest rdf:resource="http://www.w3.org/1999/02/22-rdf-syntax-ns#nil"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://mesh.local/ontology/winterolympics#hasCountry">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#DatatypeProperty"/>
+    <rdfs:comment xml:lang="en">The country of the medallist.</rdfs:comment>
+    <rdfs:domain rdf:resource="http://mesh.local/ontology/winterolympics#Medallist"/>
+    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+    <skos:altLabel xml:lang="en">country</skos:altLabel>
+    <fm:sourceColumn>unknown.country</fm:sourceColumn>
+    <fm:sqlType>unknown</fm:sqlType>
+    <fm:nullRate>unknown</fm:nullRate>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="N9db67393afd942a28704e336a4772875">
+    <rdf:first rdf:resource="http://mesh.local/ontology/winterolympics#SWENationality"/>
+    <rdf:rest rdf:nodeID="N7ff2395fd79a43228a0ea52474829b5c"/>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="Nd2935194467c4a989912a45fb1289bb8">
+    <rdf:first rdf:resource="http://mesh.local/ontology/winterolympics#CoachFunction"/>
+    <rdf:rest rdf:nodeID="N0c8dbf5c492c4d64a2cd32f891c70066"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://mesh.local/ontology/winterolympics#hasMedallistDiscipline">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#ObjectProperty"/>
+    <rdfs:label xml:lang="en">has medallist discipline</rdfs:label>
+    <rdfs:comment xml:lang="en">Links a medallist to the discipline they competed in.</rdfs:comment>
+    <rdfs:domain rdf:resource="http://mesh.local/ontology/winterolympics#Medallist"/>
+    <rdfs:range rdf:resource="http://mesh.local/ontology/winterolympics#Discipline"/>
+    <fm:sourceForeignKey>raw_medallists.discipline -&gt; Discipline</fm:sourceForeignKey>
+    <rdfs:subPropertyOf rdf:resource="http://mesh.local/ontology/winterolympics#hasDiscipline"/>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="N0fb8872dc8ec4b46b2ace9db3e80cfcc">
+    <rdf:first rdf:resource="http://mesh.local/ontology/winterolympics#Team"/>
+    <rdf:rest rdf:resource="http://www.w3.org/1999/02/22-rdf-syntax-ns#nil"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://mesh.local/ontology/winterolympics#hasAthleteName">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#DatatypeProperty"/>
+    <rdfs:comment xml:lang="en">The name of the athlete.</rdfs:comment>
+    <rdfs:domain rdf:resource="http://mesh.local/ontology/winterolympics#Athlete"/>
+    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+    <skos:altLabel xml:lang="en">name</skos:altLabel>
+    <rdfs:subPropertyOf rdf:resource="http://mesh.local/ontology/winterolympics#hasName"/>
+    <fm:sourceColumn>unknown.name</fm:sourceColumn>
+    <fm:sqlType>unknown</fm:sqlType>
+    <fm:nullRate>unknown</fm:nullRate>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://forgemesh.ai/ontology#incompleteReference">
+    <rdfs:comment xml:lang="en">Records a null object-property FK on this individual. The value is the property URI that could not be resolved. Presence of this triple means the individual is structurally incomplete at source (the FK was NULL) — it was not a materialiser error. C5 incompleteness_reconciliation counts these against gold-table null FK values.</rdfs:comment>
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#AnnotationProperty"/>
+    <rdfs:label xml:lang="en">incomplete reference</rdfs:label>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://mesh.local/ontology/winterolympics#FRSDisciplineCode">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+    <rdf:type rdf:resource="http://mesh.local/ontology/winterolympics#DisciplineCode"/>
+    <rdfs:label>FRS</rdfs:label>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://mesh.local/ontology/winterolympics#CANCELLEDStatus">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+    <rdf:type rdf:resource="http://mesh.local/ontology/winterolympics#Status"/>
+    <rdfs:label>CANCELLED</rdfs:label>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://mesh.local/ontology/winterolympics#CPLWTeamType">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+    <rdf:type rdf:resource="http://mesh.local/ontology/winterolympics#TeamType"/>
+    <rdfs:label>CPLW</rdfs:label>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://mesh.local/ontology/winterolympics#hasScheduleVenue">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#ObjectProperty"/>
+    <rdfs:label xml:lang="en">has schedule venue</rdfs:label>
+    <rdfs:comment xml:lang="en">Links a schedule to its venue.</rdfs:comment>
+    <rdfs:domain rdf:resource="http://mesh.local/ontology/winterolympics#Schedule"/>
+    <rdfs:range rdf:resource="http://mesh.local/ontology/winterolympics#Venue"/>
+    <fm:sourceForeignKey>raw_schedules.venue_code -&gt; raw_venues</fm:sourceForeignKey>
+    <skos:altLabel xml:lang="en">venue_code</skos:altLabel>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://mesh.local/ontology/winterolympics#GOLDMedal">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+    <rdf:type rdf:resource="http://mesh.local/ontology/winterolympics#Medal"/>
+    <rdfs:label>GOLD</rdfs:label>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://mesh.local/ontology/winterolympics#hasCoachCountry">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#ObjectProperty"/>
+    <rdfs:label xml:lang="en">has coach country</rdfs:label>
+    <rdfs:comment xml:lang="en">Links a coach to their country.</rdfs:comment>
+    <rdfs:domain rdf:resource="http://mesh.local/ontology/winterolympics#Coach"/>
+    <rdfs:range rdf:resource="http://mesh.local/ontology/winterolympics#Country"/>
+    <fm:sourceForeignKey>raw_coaches.country_code -&gt; raw_medals</fm:sourceForeignKey>
+    <skos:altLabel xml:lang="en">country_code</skos:altLabel>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://mesh.local/ontology/winterolympics#BobsleighDiscipline">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+    <rdf:type rdf:resource="http://mesh.local/ontology/winterolympics#Discipline"/>
+    <rdfs:label>Bobsleigh</rdfs:label>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://mesh.local/ontology/winterolympics#hasDiscipline">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#ObjectProperty"/>
+    <rdfs:label xml:lang="en">has Discipline</rdfs:label>
+    <rdfs:range rdf:resource="http://mesh.local/ontology/winterolympics#Discipline"/>
+    <rdfs:comment xml:lang="en">Abstract object property for Discipline relationships</rdfs:comment>
+    <rdfs:domain rdf:nodeID="N47acd7a6614342f1a1eda6f1f8707b2d"/>
+    <fm:sourceForeignKey>not recoverable</fm:sourceForeignKey>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="N6eff36639c6d47f388f5a303ad4e029f">
+    <rdf:first rdf:resource="http://mesh.local/ontology/winterolympics#NCBDisciplineCode"/>
+    <rdf:rest rdf:nodeID="Nffda115d67434d6faceffad72da48baf"/>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="Nf5c439c927214cb597cf986627faf957">
+    <rdf:first rdf:resource="http://mesh.local/ontology/winterolympics#SkeletonDiscipline"/>
+    <rdf:rest rdf:nodeID="Nd024529e453241e98bbd419621159047"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://forgemesh.ai/ontology#bronzeSourceRef">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#AnnotationProperty"/>
+    <rdfs:label xml:lang="en">bronze source ref</rdfs:label>
+    <rdfs:comment xml:lang="en">The bronze-layer source reference key for this individual, linking the RDF triple back to its gold row and enabling prove_answer lineage traces.</rdfs:comment>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="Ne9f10312bea942d4bcc98a83027cba59">
+    <rdf:first rdf:resource="http://mesh.local/ontology/winterolympics#CANNationality"/>
+    <rdf:rest rdf:nodeID="Nb920772c203b47539785ee0e890f9f42"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://mesh.local/ontology/winterolympics#eventName">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#DatatypeProperty"/>
+    <rdfs:domain rdf:resource="http://mesh.local/ontology/winterolympics#Event"/>
+    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+    <fm:sourceColumn>unknown.eventName</fm:sourceColumn>
+    <fm:sqlType>unknown</fm:sqlType>
+    <fm:nullRate>unknown</fm:nullRate>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://mesh.local/ontology/winterolympics#hasMedallistDate">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#DatatypeProperty"/>
+    <rdfs:label xml:lang="en">has medallist date</rdfs:label>
+    <rdfs:comment xml:lang="en">The date when the medal was awarded to the medallist.</rdfs:comment>
+    <rdfs:domain rdf:resource="http://mesh.local/ontology/winterolympics#Medallist"/>
+    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#date"/>
+    <fm:sourceColumn>raw_medallists.date</fm:sourceColumn>
+    <fm:sqlType>DATE</fm:sqlType>
+    <fm:nullRate>0.00</fm:nullRate>
+    <skos:altLabel xml:lang="en">date</skos:altLabel>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://mesh.local/ontology/winterolympics#MGender">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+    <rdf:type rdf:resource="http://mesh.local/ontology/winterolympics#Gender"/>
+    <rdfs:label>M</rdfs:label>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://mesh.local/ontology/winterolympics#STKDisciplineCode">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+    <rdf:type rdf:resource="http://mesh.local/ontology/winterolympics#DisciplineCode"/>
+    <rdfs:label>STK</rdfs:label>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://mesh.local/ontology/winterolympics#hasMedallistMedalCode">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#DatatypeProperty"/>
+    <rdfs:label xml:lang="en">has medallist medal code</rdfs:label>
+    <rdfs:comment xml:lang="en">The code representing the type of medal awarded.</rdfs:comment>
+    <rdfs:domain rdf:resource="http://mesh.local/ontology/winterolympics#Medallist"/>
+    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#integer"/>
+    <fm:sourceColumn>raw_medallists.medal_code</fm:sourceColumn>
+    <fm:sqlType>TINYINT</fm:sqlType>
+    <fm:nullRate>0.00</fm:nullRate>
+    <skos:altLabel xml:lang="en">medal_code</skos:altLabel>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://mesh.local/ontology/winterolympics#hasMedallistCountryName">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#DatatypeProperty"/>
+    <rdfs:label xml:lang="en">has medallist country name</rdfs:label>
+    <rdfs:comment xml:lang="en">The name of the country the medallist represents.</rdfs:comment>
+    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+    <skos:altLabel xml:lang="en">country</skos:altLabel>
+    <fm:sourceColumn>raw_medallists.country</fm:sourceColumn>
+    <fm:sqlType>VARCHAR(96) COLLATE \</fm:sqlType>
+    <fm:sqlType>VARCHAR(96) COLLATE "utf8mb4_unicode_ci"</fm:sqlType>
+    <fm:nullRate>0.00</fm:nullRate>
+    <rdfs:subPropertyOf rdf:resource="http://mesh.local/ontology/winterolympics#hasCountry"/>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="Nc7a030c072cb40e7ab06c5f67de2411c">
+    <rdf:first rdf:resource="http://mesh.local/ontology/winterolympics#FigureSkatingDiscipline"/>
+    <rdf:rest rdf:nodeID="Nd3c9a08539d64f7487b9390f6ba87a3a"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://mesh.local/ontology/winterolympics#CHNNationality">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+    <rdf:type rdf:resource="http://mesh.local/ontology/winterolympics#Nationality"/>
+    <rdfs:label>CHN</rdfs:label>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="Ne80d4e85305b4d2bba2d827524223587">
+    <rdf:first rdf:resource="http://mesh.local/ontology/winterolympics#IHODisciplineCode"/>
+    <rdf:rest rdf:nodeID="N2a5db0cde6d04ce298ba2d1acc234132"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://mesh.local/ontology/winterolympics#ALPDisciplineCode">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+    <rdf:type rdf:resource="http://mesh.local/ontology/winterolympics#DisciplineCode"/>
+    <rdfs:label>ALP</rdfs:label>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://mesh.local/ontology/winterolympics#CUSTOMTeamType">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+    <rdf:type rdf:resource="http://mesh.local/ontology/winterolympics#TeamType"/>
+    <rdfs:label>CUSTOM</rdfs:label>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://mesh.local/ontology/winterolympics#CZENationality">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+    <rdf:type rdf:resource="http://mesh.local/ontology/winterolympics#Nationality"/>
+    <rdfs:label>CZE</rdfs:label>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="N98c884a467d1411887126db90f5cb798">
+    <rdf:first rdf:resource="http://mesh.local/ontology/winterolympics#BOBDisciplineCode"/>
+    <rdf:rest rdf:nodeID="N2c7da8b5a51247d2a2f43f900f94d96e"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://mesh.local/ontology/winterolympics#Medal">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
+    <rdfs:label xml:lang="en">Medal</rdfs:label>
+    <rdfs:comment xml:lang="en">A type of medal awarded to athletes.</rdfs:comment>
+    <fm:sourceTable>raw_medallists</fm:sourceTable>
+    <owl:equivalentClass rdf:nodeID="Nb57f31d46aec411cb810c88c8f65ca63"/>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="Nfcf55efdec8649bcbb2080574f0b93aa">
+    <rdf:first rdf:resource="http://mesh.local/ontology/winterolympics#ALPDisciplineCode"/>
+    <rdf:rest rdf:nodeID="N98c884a467d1411887126db90f5cb798"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://mesh.local/ontology/winterolympics#LugeDiscipline">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+    <rdf:type rdf:resource="http://mesh.local/ontology/winterolympics#Discipline"/>
+    <rdfs:label>Luge</rdfs:label>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://mesh.local/ontology/winterolympics#hasLocationCode">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#DatatypeProperty"/>
+    <rdfs:label xml:lang="en">has schedule location code</rdfs:label>
+    <rdfs:comment xml:lang="en">The code for the location of the schedule.</rdfs:comment>
+    <rdfs:domain rdf:resource="http://mesh.local/ontology/winterolympics#Schedule"/>
+    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+    <skos:altLabel xml:lang="en">location_code</skos:altLabel>
+    <fm:sourceColumn>raw_schedules.location_code</fm:sourceColumn>
+    <fm:sqlType>VARCHAR(16) COLLATE \</fm:sqlType>
+    <fm:sqlType>VARCHAR(16) COLLATE "utf8mb4_unicode_ci"</fm:sqlType>
+    <fm:nullRate>0.00</fm:nullRate>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://mesh.local/ontology/winterolympics#Coach">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
+    <rdfs:label xml:lang="en">Coach</rdfs:label>
+    <rdfs:comment xml:lang="en">A person responsible for training athletes in the Winter Olympics.</rdfs:comment>
+    <fm:sourceTable>raw_coaches</fm:sourceTable>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://mesh.local/ontology/winterolympics#JPNNationality">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+    <rdf:type rdf:resource="http://mesh.local/ontology/winterolympics#Nationality"/>
+    <rdfs:label>JPN</rdfs:label>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="Na8dd123d6f39447c92a9ab707e7d030f">
+    <rdf:first rdf:resource="http://mesh.local/ontology/winterolympics#CERDisciplineCode"/>
+    <rdf:rest rdf:nodeID="N7cc392c82d5140b593e367f1e9669cdf"/>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="Nd13f321b183b4d4d8198a3686591f6e5">
+    <rdf:first rdf:resource="http://mesh.local/ontology/winterolympics#Medallist"/>
+    <rdf:rest rdf:nodeID="Ne026ac3b2b8547bfa11958e7bd067b8b"/>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="N2a5db0cde6d04ce298ba2d1acc234132">
+    <rdf:first rdf:resource="http://mesh.local/ontology/winterolympics#LUGDisciplineCode"/>
+    <rdf:rest rdf:nodeID="N6eff36639c6d47f388f5a303ad4e029f"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://forgemesh.ai/ontology#interpretation">
+    <rdfs:label xml:lang="en">interpretation</rdfs:label>
+    <rdfs:comment xml:lang="en">Natural-language description of the concept for NL-to-ontology mapping. Used by the proof narrator to achieve HIGH confidence interpretation. Should name the concept in plain terms a query author would use.</rdfs:comment>
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#AnnotationProperty"/>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="N28f50f44f24e4e3a85708a29ffbf92a3">
+    <rdf:first rdf:resource="http://mesh.local/ontology/winterolympics#SILVERMedal"/>
+    <rdf:rest rdf:resource="http://www.w3.org/1999/02/22-rdf-syntax-ns#nil"/>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="Nb4a6b333d14c4498922e07b099a486d0">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
+    <owl:unionOf rdf:nodeID="Nccf3638cb78a46808c7e66c49d6f6dc8"/>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="N8085a20745b74802babd9b74f68b2257">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
+    <owl:unionOf rdf:nodeID="Nfedd675d0a294495b796a34b0c50b418"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://mesh.local/ontology/winterolympics">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Ontology"/>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="N535c65b3f39f4da089d8da8ff669cf67">
+    <rdf:first rdf:resource="http://mesh.local/ontology/winterolympics#Medallist"/>
+    <rdf:rest rdf:nodeID="N55db5566fd864248949b14d4e07daf12"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://mesh.local/ontology/winterolympics#hasScheduleEventType">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#ObjectProperty"/>
+    <rdfs:label xml:lang="en">has schedule event type</rdfs:label>
+    <rdfs:comment xml:lang="en">Links a schedule to its event type.</rdfs:comment>
+    <rdfs:domain rdf:resource="http://mesh.local/ontology/winterolympics#Schedule"/>
+    <rdfs:range rdf:resource="http://mesh.local/ontology/winterolympics#EventType"/>
+    <fm:sourceForeignKey>raw_schedules.event_type -&gt; EventType</fm:sourceForeignKey>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="Nffda115d67434d6faceffad72da48baf">
+    <rdf:first rdf:resource="http://mesh.local/ontology/winterolympics#SBDDisciplineCode"/>
+    <rdf:rest rdf:nodeID="N94ee85f0d27e40b2b09e41d8e4240555"/>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="Ne6437f96a5c64c8ab55adf37d440b8f8">
+    <rdf:first rdf:resource="http://mesh.local/ontology/winterolympics#JPNNationality"/>
+    <rdf:rest rdf:nodeID="N17c0117cf8fe4869a28377cc02b11fa0"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://mesh.local/ontology/winterolympics#DENNationality">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+    <rdf:type rdf:resource="http://mesh.local/ontology/winterolympics#Nationality"/>
+    <rdfs:label>DEN</rdfs:label>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://mesh.local/ontology/winterolympics#HeadCoachFunction">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+    <rdf:type rdf:resource="http://mesh.local/ontology/winterolympics#Function"/>
+    <rdfs:label>Head Coach</rdfs:label>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="N2c7da8b5a51247d2a2f43f900f94d96e">
+    <rdf:first rdf:resource="http://mesh.local/ontology/winterolympics#BTHDisciplineCode"/>
+    <rdf:rest rdf:nodeID="Ne02ecdd8a74540deafab47643fd8cc4e"/>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="Nab869ca7b7a14e72a3b3b045f90b901b">
+    <rdf:first rdf:resource="http://mesh.local/ontology/winterolympics#GGender"/>
+    <rdf:rest rdf:nodeID="N8e04e0c51c0849f8b0dac28467b5a7d5"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://mesh.local/ontology/winterolympics#hasScheduleStatus">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#ObjectProperty"/>
+    <rdfs:label xml:lang="en">has schedule status</rdfs:label>
+    <rdfs:comment xml:lang="en">Links a schedule to its status.</rdfs:comment>
+    <rdfs:domain rdf:resource="http://mesh.local/ontology/winterolympics#Schedule"/>
+    <rdfs:range rdf:resource="http://mesh.local/ontology/winterolympics#Status"/>
+    <fm:sourceForeignKey>raw_schedules.status -&gt; Status</fm:sourceForeignKey>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://mesh.local/ontology/winterolympics#hasMedallistDisciplineCode">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#ObjectProperty"/>
+    <rdfs:label xml:lang="en">has medallist discipline code</rdfs:label>
+    <rdfs:comment xml:lang="en">Links a medallist to the code of the discipline they competed in.</rdfs:comment>
+    <rdfs:domain rdf:resource="http://mesh.local/ontology/winterolympics#Medallist"/>
+    <rdfs:range rdf:resource="http://mesh.local/ontology/winterolympics#DisciplineCode"/>
+    <fm:sourceForeignKey>raw_medallists.discipline_code -&gt; DisciplineCode</fm:sourceForeignKey>
+    <rdfs:subPropertyOf rdf:resource="http://mesh.local/ontology/winterolympics#hasDisciplineCode"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://mesh.local/ontology/winterolympics#SkeletonDiscipline">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+    <rdf:type rdf:resource="http://mesh.local/ontology/winterolympics#Discipline"/>
+    <rdfs:label>Skeleton</rdfs:label>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="Nb920772c203b47539785ee0e890f9f42">
+    <rdf:first rdf:resource="http://mesh.local/ontology/winterolympics#CHNNationality"/>
+    <rdf:rest rdf:nodeID="Nb8fe13aee2394dc0985143478665c3c6"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://mesh.local/ontology/winterolympics#hasSilver">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#DatatypeProperty"/>
+    <rdfs:label xml:lang="en">Silver Medals</rdfs:label>
+    <rdfs:comment xml:lang="en">The number of silver medals won by the country.</rdfs:comment>
+    <rdfs:domain rdf:resource="http://mesh.local/ontology/winterolympics#Country"/>
+    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#integer"/>
+    <skos:altLabel xml:lang="en">silver</skos:altLabel>
+    <fm:sourceColumn>raw_medals.silver</fm:sourceColumn>
+    <fm:sqlType>INTEGER</fm:sqlType>
+    <fm:nullRate>0.00</fm:nullRate>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://forgemesh.ai/ontology#scope_default">
+    <rdfs:label xml:lang="en">scope default</rdfs:label>
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#AnnotationProperty"/>
+    <rdfs:comment xml:lang="en">Describes the default inclusion scope for an unconstrained property. Used by the proof narrator to build scope assumption statements.</rdfs:comment>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://mesh.local/ontology/winterolympics#GBRNationality">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+    <rdf:type rdf:resource="http://mesh.local/ontology/winterolympics#Nationality"/>
+    <rdfs:label>GBR</rdfs:label>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="Nae8714d222de4a3fb839f2d00b6a2df1">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
+    <owl:unionOf rdf:nodeID="N81db632addfd4918a9346c7936bc203f"/>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="Nb57f31d46aec411cb810c88c8f65ca63">
+    <owl:oneOf rdf:nodeID="N73b00923345040879e710c01c01b5fb5"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://mesh.local/ontology/winterolympics#hasTotal">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#DatatypeProperty"/>
+    <rdfs:label xml:lang="en">Total Medals</rdfs:label>
+    <rdfs:comment xml:lang="en">The total number of medals won by the country.</rdfs:comment>
+    <rdfs:domain rdf:resource="http://mesh.local/ontology/winterolympics#Country"/>
+    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#integer"/>
+    <skos:altLabel xml:lang="en">total</skos:altLabel>
+    <fm:sourceColumn>raw_medals.total</fm:sourceColumn>
+    <fm:sqlType>INTEGER</fm:sqlType>
+    <fm:nullRate>0.00</fm:nullRate>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://mesh.local/ontology/winterolympics#hasAthleteGender">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#ObjectProperty"/>
+    <rdfs:label xml:lang="en">has athlete gender</rdfs:label>
+    <rdfs:comment xml:lang="en">Links an athlete to their gender.</rdfs:comment>
+    <rdfs:domain rdf:resource="http://mesh.local/ontology/winterolympics#Athlete"/>
+    <rdfs:range rdf:resource="http://mesh.local/ontology/winterolympics#Gender"/>
+    <fm:sourceForeignKey>raw_athletes.gender -&gt; Gender</fm:sourceForeignKey>
+    <rdfs:subPropertyOf rdf:resource="http://mesh.local/ontology/winterolympics#hasGender"/>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="N9ad0ed7d0f404bf5a5fb473f82608cd7">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
+    <owl:unionOf rdf:nodeID="N3d3583b5a76748168bcf1f078ac2f97d"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://mesh.local/ontology/winterolympics#hasEvents">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#DatatypeProperty"/>
+    <rdfs:comment xml:lang="en">The events of the nff12595b0f544d9d838488317a014de1.</rdfs:comment>
+    <rdfs:domain rdf:nodeID="N8085a20745b74802babd9b74f68b2257"/>
+    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+    <skos:altLabel xml:lang="en">events</skos:altLabel>
+    <fm:sourceColumn>unknown.events</fm:sourceColumn>
+    <fm:sqlType>unknown</fm:sqlType>
+    <fm:nullRate>unknown</fm:nullRate>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="N486199c6e084442c8e4e7f5928e444f3">
+    <rdf:first rdf:resource="http://mesh.local/ontology/winterolympics#SSKDisciplineCode"/>
+    <rdf:rest rdf:nodeID="Nee26c090720541beab785d1c2d8d1a88"/>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="N8e04e0c51c0849f8b0dac28467b5a7d5">
+    <rdf:first rdf:resource="http://mesh.local/ontology/winterolympics#MGender"/>
+    <rdf:rest rdf:nodeID="N0a2fd2165bf342c8a4d0766d70c89650"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://mesh.local/ontology/winterolympics#Venue">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
+    <rdfs:label xml:lang="en">Venue</rdfs:label>
+    <rdfs:comment xml:lang="en">A location where Winter Olympics events are held.</rdfs:comment>
+    <fm:sourceTable>raw_venues</fm:sourceTable>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://mesh.local/ontology/winterolympics#hasFlagBearer">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#DatatypeProperty"/>
+    <rdfs:label xml:lang="en">has athlete flag bearer</rdfs:label>
+    <rdfs:comment xml:lang="en">Indicates if the athlete was a flag bearer.</rdfs:comment>
+    <rdfs:domain rdf:resource="http://mesh.local/ontology/winterolympics#Athlete"/>
+    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#integer"/>
+    <skos:altLabel xml:lang="en">flag_bearer</skos:altLabel>
+    <fm:sourceColumn>raw_athletes.flag_bearer</fm:sourceColumn>
+    <fm:sqlType>TINYINT</fm:sqlType>
+    <fm:nullRate>0.00</fm:nullRate>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://mesh.local/ontology/winterolympics#hasScheduleDisciplineCode">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#ObjectProperty"/>
+    <rdfs:label xml:lang="en">has schedule discipline code</rdfs:label>
+    <rdfs:comment xml:lang="en">Links a schedule to its discipline code.</rdfs:comment>
+    <rdfs:domain rdf:resource="http://mesh.local/ontology/winterolympics#Schedule"/>
+    <rdfs:range rdf:resource="http://mesh.local/ontology/winterolympics#DisciplineCode"/>
+    <fm:sourceForeignKey>raw_schedules.discipline_code -&gt; DisciplineCode</fm:sourceForeignKey>
+    <rdfs:subPropertyOf rdf:resource="http://mesh.local/ontology/winterolympics#hasDisciplineCode"/>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="N1a9083866e0f4be88f2e3fe6bd173e94">
+    <rdf:first rdf:resource="http://mesh.local/ontology/winterolympics#SMTDisciplineCode"/>
+    <rdf:rest rdf:nodeID="N486199c6e084442c8e4e7f5928e444f3"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://mesh.local/ontology/winterolympics#FigureSkatingDiscipline">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+    <rdf:type rdf:resource="http://mesh.local/ontology/winterolympics#Discipline"/>
+    <rdfs:label>Figure Skating</rdfs:label>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="Nd9ec9452756047c1af842090b4842055">
+    <rdf:first rdf:resource="http://mesh.local/ontology/winterolympics#CeremoniesDiscipline"/>
+    <rdf:rest rdf:nodeID="N6483fd1f90504aaa81124148a6119452"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://mesh.local/ontology/winterolympics#CCSDisciplineCode">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+    <rdf:type rdf:resource="http://mesh.local/ontology/winterolympics#DisciplineCode"/>
+    <rdfs:label>CCS</rdfs:label>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://mesh.local/ontology/winterolympics#WGender">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+    <rdf:type rdf:resource="http://mesh.local/ontology/winterolympics#Gender"/>
+    <rdfs:label>W</rdfs:label>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="Nca4bb78b84b648eaa92cf471bcdfc3e5">
+    <rdf:first rdf:resource="http://mesh.local/ontology/winterolympics#ORGNTeamType"/>
+    <rdf:rest rdf:nodeID="Nfa4a28aa0a164caca6bfe0bd7c5d9e48"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://mesh.local/ontology/winterolympics#FINNationality">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+    <rdf:type rdf:resource="http://mesh.local/ontology/winterolympics#Nationality"/>
+    <rdfs:label>FIN</rdfs:label>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://mesh.local/ontology/winterolympics#Status">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
+    <rdfs:label xml:lang="en">Status</rdfs:label>
+    <rdfs:comment xml:lang="en">The status of a scheduled event.</rdfs:comment>
+    <fm:sourceTable>raw_schedules</fm:sourceTable>
+    <owl:equivalentClass rdf:nodeID="N63bf3d1a8f1a4f738cfe1ee57d72487d"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://mesh.local/ontology/winterolympics#FGender">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+    <rdf:type rdf:resource="http://mesh.local/ontology/winterolympics#Gender"/>
+    <rdfs:label>F</rdfs:label>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="N00f8a19ee3e84516a22bac0fb052c9e4">
+    <rdf:first rdf:resource="http://mesh.local/ontology/winterolympics#Coach"/>
+    <rdf:rest rdf:nodeID="N7b1576551d334ea4935ce83d80a7f4b3"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://mesh.local/ontology/winterolympics#TeamType">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
+    <rdfs:label xml:lang="en">Team Type</rdfs:label>
+    <rdfs:comment xml:lang="en">The type of team participating in the Winter Olympics.</rdfs:comment>
+    <fm:sourceTable>raw_teams</fm:sourceTable>
+    <owl:equivalentClass rdf:nodeID="N8255031c8c834ceaa4a212e24176d082"/>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="Nbf031691a91c41218ffea87fa4a4d0ac">
+    <rdf:first rdf:resource="http://mesh.local/ontology/winterolympics#INDVEventType"/>
+    <rdf:rest rdf:nodeID="Nb3de6cf7b894408eb06b24d02b98954e"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://mesh.local/ontology/winterolympics#SVKNationality">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+    <rdf:type rdf:resource="http://mesh.local/ontology/winterolympics#Nationality"/>
+    <rdfs:label>SVK</rdfs:label>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://mesh.local/ontology/winterolympics#NORNationality">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+    <rdf:type rdf:resource="http://mesh.local/ontology/winterolympics#Nationality"/>
+    <rdfs:label>NOR</rdfs:label>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://mesh.local/ontology/winterolympics#hasScheduleGender">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#ObjectProperty"/>
+    <rdfs:label xml:lang="en">has schedule gender</rdfs:label>
+    <rdfs:comment xml:lang="en">Links a schedule to its gender category.</rdfs:comment>
+    <rdfs:domain rdf:resource="http://mesh.local/ontology/winterolympics#Schedule"/>
+    <rdfs:range rdf:resource="http://mesh.local/ontology/winterolympics#Gender"/>
+    <fm:sourceForeignKey>raw_schedules.gender -&gt; Gender</fm:sourceForeignKey>
+    <rdfs:subPropertyOf rdf:resource="http://mesh.local/ontology/winterolympics#hasGender"/>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="N3d3583b5a76748168bcf1f078ac2f97d">
+    <rdf:first rdf:resource="http://mesh.local/ontology/winterolympics#Athlete"/>
+    <rdf:rest rdf:nodeID="N00f8a19ee3e84516a22bac0fb052c9e4"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://mesh.local/ontology/winterolympics#LUGDisciplineCode">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+    <rdf:type rdf:resource="http://mesh.local/ontology/winterolympics#DisciplineCode"/>
+    <rdfs:label>LUG</rdfs:label>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://mesh.local/ontology/winterolympics#SWENationality">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+    <rdf:type rdf:resource="http://mesh.local/ontology/winterolympics#Nationality"/>
+    <rdfs:label>SWE</rdfs:label>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://mesh.local/ontology/winterolympics#IceHockeyDiscipline">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+    <rdf:type rdf:resource="http://mesh.local/ontology/winterolympics#Discipline"/>
+    <rdfs:label>Ice Hockey</rdfs:label>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="Ncaccb857d9c240068494a1806cb2fca9">
+    <rdf:first rdf:resource="http://mesh.local/ontology/winterolympics#Schedule"/>
+    <rdf:rest rdf:nodeID="N41f3c76af7a14042ba29c60289045019"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://mesh.local/ontology/winterolympics#SkiJumpingDiscipline">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+    <rdf:type rdf:resource="http://mesh.local/ontology/winterolympics#Discipline"/>
+    <rdfs:label>Ski Jumping</rdfs:label>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://mesh.local/ontology/winterolympics#SpeedSkatingDiscipline">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+    <rdf:type rdf:resource="http://mesh.local/ontology/winterolympics#Discipline"/>
+    <rdfs:label>Speed Skating</rdfs:label>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://mesh.local/ontology/winterolympics#GGender">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+    <rdf:type rdf:resource="http://mesh.local/ontology/winterolympics#Gender"/>
+    <rdfs:label>G</rdfs:label>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://mesh.local/ontology/winterolympics#NCBDisciplineCode">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+    <rdf:type rdf:resource="http://mesh.local/ontology/winterolympics#DisciplineCode"/>
+    <rdfs:label>NCB</rdfs:label>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://mesh.local/ontology/winterolympics#hasDisciplineCode">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#ObjectProperty"/>
+    <rdfs:label xml:lang="en">has DisciplineCode</rdfs:label>
+    <rdfs:range rdf:resource="http://mesh.local/ontology/winterolympics#DisciplineCode"/>
+    <rdfs:comment xml:lang="en">Abstract object property for DisciplineCode relationships</rdfs:comment>
+    <rdfs:domain rdf:nodeID="Ne2513673c2ae49868792a1024b69ee52"/>
+    <fm:sourceForeignKey>not recoverable</fm:sourceForeignKey>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://mesh.local/ontology/winterolympics#LATNationality">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+    <rdf:type rdf:resource="http://mesh.local/ontology/winterolympics#Nationality"/>
+    <rdfs:label>LAT</rdfs:label>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://mesh.local/ontology/winterolympics#BOBDisciplineCode">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+    <rdf:type rdf:resource="http://mesh.local/ontology/winterolympics#DisciplineCode"/>
+    <rdfs:label>BOB</rdfs:label>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="N74ab80a8bf49436eaa64537282862697">
+    <rdf:first rdf:resource="http://mesh.local/ontology/winterolympics#SKNDisciplineCode"/>
+    <rdf:rest rdf:nodeID="N1a9083866e0f4be88f2e3fe6bd173e94"/>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="N8255031c8c834ceaa4a212e24176d082">
+    <owl:oneOf rdf:nodeID="Ne6ff39ac604d4c02aec390d4db45e898"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://forgemesh.ai/ontology#ontologySource">
+    <rdfs:comment xml:lang="en">The filename (basename) of the OWL ontology file used to guide RDF materialisation, e.g. "mimic_bronze_rigor_260527_001.owl". Attached to the named graph node by the RDF writer. C6 compares this against the ontology currently loaded for the project to detect ontology drift between runs.</rdfs:comment>
+    <rdfs:label xml:lang="en">ontology source</rdfs:label>
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#AnnotationProperty"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://mesh.local/ontology/winterolympics#CPLPTeamType">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+    <rdf:type rdf:resource="http://mesh.local/ontology/winterolympics#TeamType"/>
+    <rdfs:label>CPLP</rdfs:label>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="Nd024529e453241e98bbd419621159047">
+    <rdf:first rdf:resource="http://mesh.local/ontology/winterolympics#SkiJumpingDiscipline"/>
+    <rdf:rest rdf:nodeID="Na65c9a450bd74cdc969c62d10941f9b3"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://mesh.local/ontology/winterolympics#SSKDisciplineCode">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+    <rdf:type rdf:resource="http://mesh.local/ontology/winterolympics#DisciplineCode"/>
+    <rdfs:label>SSK</rdfs:label>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="N7ff2395fd79a43228a0ea52474829b5c">
+    <rdf:first rdf:resource="http://mesh.local/ontology/winterolympics#USANationality"/>
+    <rdf:rest rdf:resource="http://www.w3.org/1999/02/22-rdf-syntax-ns#nil"/>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="N34e44e81f3db4a40b00a66b9c0336f84">
+    <rdf:first rdf:resource="http://mesh.local/ontology/winterolympics#FSKDisciplineCode"/>
+    <rdf:rest rdf:nodeID="Ne80d4e85305b4d2bba2d827524223587"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://forgemesh.ai/ontology#nullRate">
+    <rdfs:comment xml:lang="en">The proportion of NULL values in the source column at inspection time, 0.0 to 1.0.</rdfs:comment>
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#AnnotationProperty"/>
+    <rdfs:label xml:lang="en">null rate</rdfs:label>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://mesh.local/ontology/winterolympics#SCHEDULEDStatus">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+    <rdf:type rdf:resource="http://mesh.local/ontology/winterolympics#Status"/>
+    <rdfs:label>SCHEDULED</rdfs:label>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://mesh.local/ontology/winterolympics#hasMedallistMedal">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#ObjectProperty"/>
+    <rdfs:label xml:lang="en">has medallist medal</rdfs:label>
+    <rdfs:comment xml:lang="en">Links a medallist to the medal they have won.</rdfs:comment>
+    <rdfs:domain rdf:resource="http://mesh.local/ontology/winterolympics#Medallist"/>
+    <rdfs:range rdf:resource="http://mesh.local/ontology/winterolympics#Medal"/>
+    <fm:sourceForeignKey>raw_medallists.medal -&gt; Medal</fm:sourceForeignKey>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://mesh.local/ontology/winterolympics#FRANationality">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+    <rdf:type rdf:resource="http://mesh.local/ontology/winterolympics#Nationality"/>
+    <rdfs:label>FRA</rdfs:label>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://mesh.local/ontology/winterolympics#CANNationality">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+    <rdf:type rdf:resource="http://mesh.local/ontology/winterolympics#Nationality"/>
+    <rdfs:label>CAN</rdfs:label>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="Ne0890dfe10d0432ba96d0ae191978acf">
+    <rdf:first rdf:resource="http://mesh.local/ontology/winterolympics#SVKNationality"/>
+    <rdf:rest rdf:nodeID="N9db67393afd942a28704e336a4772875"/>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="Na65c9a450bd74cdc969c62d10941f9b3">
+    <rdf:first rdf:resource="http://mesh.local/ontology/winterolympics#SkiMountaineeringDiscipline"/>
+    <rdf:rest rdf:nodeID="N304f356fd214465e846fcd9bf9706d86"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://mesh.local/ontology/winterolympics#GERNationality">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+    <rdf:type rdf:resource="http://mesh.local/ontology/winterolympics#Nationality"/>
+    <rdfs:label>GER</rdfs:label>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://mesh.local/ontology/winterolympics#SJPDisciplineCode">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+    <rdf:type rdf:resource="http://mesh.local/ontology/winterolympics#DisciplineCode"/>
+    <rdfs:label>SJP</rdfs:label>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://mesh.local/ontology/winterolympics#SnowboardDiscipline">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+    <rdf:type rdf:resource="http://mesh.local/ontology/winterolympics#Discipline"/>
+    <rdfs:label>Snowboard</rdfs:label>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://mesh.local/ontology/winterolympics#BiathlonDiscipline">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+    <rdf:type rdf:resource="http://mesh.local/ontology/winterolympics#Discipline"/>
+    <rdfs:label>Biathlon</rdfs:label>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://forgemesh.ai/ontology#extension">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#AnnotationProperty"/>
+    <rdfs:comment xml:lang="en">Alternative natural-language phrases for this concept, beyond the primary fm:interpretation. Multiple values allowed. Used for EXTENSION-form concept mapping.</rdfs:comment>
+    <rdfs:label xml:lang="en">extension</rdfs:label>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="N4c4cc52da4f440d188a08a0e60a08f15">
+    <rdf:first rdf:resource="http://mesh.local/ontology/winterolympics#BobsleighDiscipline"/>
+    <rdf:rest rdf:nodeID="Nd9ec9452756047c1af842090b4842055"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://mesh.local/ontology/winterolympics#BTHDisciplineCode">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+    <rdf:type rdf:resource="http://mesh.local/ontology/winterolympics#DisciplineCode"/>
+    <rdfs:label>BTH</rdfs:label>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="N9f8f4ccbe5be4554a54d33863712d06b">
+    <rdf:first rdf:resource="http://mesh.local/ontology/winterolympics#CUSTOMTeamType"/>
+    <rdf:rest rdf:nodeID="Nca4bb78b84b648eaa92cf471bcdfc3e5"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://mesh.local/ontology/winterolympics#INDVEventType">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+    <rdf:type rdf:resource="http://mesh.local/ontology/winterolympics#EventType"/>
+    <rdfs:label>INDV</rdfs:label>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://mesh.local/ontology/winterolympics#EventType">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
+    <rdfs:label xml:lang="en">Event Type</rdfs:label>
+    <rdfs:comment xml:lang="en">The type of event, such as individual or team.</rdfs:comment>
+    <fm:sourceTable>raw_schedules</fm:sourceTable>
+    <owl:equivalentClass rdf:nodeID="Nee42d59adc4b4bcfa3d921669084f256"/>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="N93c84ded64654d6398800bf1bad8c54b">
+    <rdf:first rdf:resource="http://mesh.local/ontology/winterolympics#XGender"/>
+    <rdf:rest rdf:resource="http://www.w3.org/1999/02/22-rdf-syntax-ns#nil"/>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="Nb8fe13aee2394dc0985143478665c3c6">
+    <rdf:first rdf:resource="http://mesh.local/ontology/winterolympics#CZENationality"/>
+    <rdf:rest rdf:nodeID="Nb82cc1cf54e848a4bce179809751ec4d"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://forgemesh.ai/ontology#goldRunId">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#AnnotationProperty"/>
+    <rdfs:label xml:lang="en">gold run ID</rdfs:label>
+    <rdfs:comment xml:lang="en">The gold pipeline run ID under which this individual was materialised, enabling staleness detection between gold tables and the triple store.</rdfs:comment>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="N1cc909ad37ee4e2aafc0f6912a182289">
+    <rdf:first rdf:resource="http://mesh.local/ontology/winterolympics#FRSDisciplineCode"/>
+    <rdf:rest rdf:nodeID="N34e44e81f3db4a40b00a66b9c0336f84"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://mesh.local/ontology/winterolympics#Nationality">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
+    <rdfs:label xml:lang="en">Nationality</rdfs:label>
+    <rdfs:comment xml:lang="en">The nationality of a coach.</rdfs:comment>
+    <fm:sourceTable>raw_coaches</fm:sourceTable>
+    <owl:equivalentClass rdf:nodeID="N84b367c676e446f18e96696c156e1c1f"/>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="N1c667e2c74044fb89678ba59655cabbe">
+    <rdf:first rdf:resource="http://mesh.local/ontology/winterolympics#GBRNationality"/>
+    <rdf:rest rdf:nodeID="Nd3ca4a84c1be40668b44ab3ef075d582"/>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="Ne6ff39ac604d4c02aec390d4db45e898">
+    <rdf:first rdf:resource="http://mesh.local/ontology/winterolympics#CPLPTeamType"/>
+    <rdf:rest rdf:nodeID="N62b389d48bd845c3a2f041f49b0e72f0"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://mesh.local/ontology/winterolympics#SILVERMedal">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+    <rdf:type rdf:resource="http://mesh.local/ontology/winterolympics#Medal"/>
+    <rdfs:label>SILVER</rdfs:label>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="N6483fd1f90504aaa81124148a6119452">
+    <rdf:first rdf:resource="http://mesh.local/ontology/winterolympics#CrossCountrySkiingDiscipline"/>
+    <rdf:rest rdf:nodeID="N1dc21b7f1f214b6c90afd52cb65003e6"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://mesh.local/ontology/winterolympics#SUINationality">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+    <rdf:type rdf:resource="http://mesh.local/ontology/winterolympics#Nationality"/>
+    <rdfs:label>SUI</rdfs:label>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://mesh.local/ontology/winterolympics#CoachFunction">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+    <rdf:type rdf:resource="http://mesh.local/ontology/winterolympics#Function"/>
+    <rdfs:label>Coach</rdfs:label>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://mesh.local/ontology/winterolympics#CERDisciplineCode">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+    <rdf:type rdf:resource="http://mesh.local/ontology/winterolympics#DisciplineCode"/>
+    <rdfs:label>CER</rdfs:label>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://mesh.local/ontology/winterolympics#SkiMountaineeringDiscipline">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+    <rdf:type rdf:resource="http://mesh.local/ontology/winterolympics#Discipline"/>
+    <rdfs:label>Ski Mountaineering</rdfs:label>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://forgemesh.ai/ontology#projectName">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#AnnotationProperty"/>
+    <rdfs:comment xml:lang="en">The ForgeMesh project name (e.g. "mimic", "openflights") under which this graph was materialised. Attached to the named graph node by the RDF writer. The verification suite uses this to assert that a graph was produced by the expected project.</rdfs:comment>
+    <rdfs:label xml:lang="en">project name</rdfs:label>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="N73b00923345040879e710c01c01b5fb5">
+    <rdf:first rdf:resource="http://mesh.local/ontology/winterolympics#BRONZEMedal"/>
+    <rdf:rest rdf:nodeID="N571c88fb9a214d6ab02c73b93ccab4a7"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://forgemesh.ai/ontology#loadTimestamp">
+    <rdfs:comment xml:lang="en">The xsd:dateTime at which the RDF materialisation completed. Attached to the graph node itself. Use this to detect whether a re-run has reached the store.</rdfs:comment>
+    <rdfs:label xml:lang="en">load timestamp</rdfs:label>
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#AnnotationProperty"/>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="Nee42d59adc4b4bcfa3d921669084f256">
+    <owl:oneOf rdf:nodeID="N5b5d223e5ada4b0484c4e2b4a4be5cd4"/>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="N94ee85f0d27e40b2b09e41d8e4240555">
+    <rdf:first rdf:resource="http://mesh.local/ontology/winterolympics#SJPDisciplineCode"/>
+    <rdf:rest rdf:nodeID="N74ab80a8bf49436eaa64537282862697"/>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="Nae4e484297f94074b33a3b9993e7bcca">
+    <rdf:first rdf:resource="http://mesh.local/ontology/winterolympics#NORNationality"/>
+    <rdf:rest rdf:nodeID="Nc63b98f451af47ed84b3feee29151bc0"/>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="N63bf3d1a8f1a4f738cfe1ee57d72487d">
+    <owl:oneOf rdf:nodeID="N7d5455a16c554160bbb1d4ffb49b363a"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://mesh.local/ontology/winterolympics#Athlete">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
+    <rdfs:label xml:lang="en">Athlete</rdfs:label>
+    <rdfs:comment xml:lang="en">An individual who competes in the Winter Olympics.</rdfs:comment>
+    <fm:sourceTable>raw_athletes</fm:sourceTable>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="N17c0117cf8fe4869a28377cc02b11fa0">
+    <rdf:first rdf:resource="http://mesh.local/ontology/winterolympics#LATNationality"/>
+    <rdf:rest rdf:nodeID="Nae4e484297f94074b33a3b9993e7bcca"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://forgemesh.ai/ontology#loadRunId">
+    <rdfs:comment xml:lang="en">The RDF pipeline run ID for the materialisation that wrote this named graph. Attached to the graph node itself as a load stamp.</rdfs:comment>
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#AnnotationProperty"/>
+    <rdfs:label xml:lang="en">load run ID</rdfs:label>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://mesh.local/ontology/winterolympics#CurlingDiscipline">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+    <rdf:type rdf:resource="http://mesh.local/ontology/winterolympics#Discipline"/>
+    <rdfs:label>Curling</rdfs:label>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://forgemesh.ai/ontology#sourceTable">
+    <rdfs:label xml:lang="en">source table</rdfs:label>
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#AnnotationProperty"/>
+    <rdfs:comment xml:lang="en">The bronze database table from which this class was derived.</rdfs:comment>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="Nb82cc1cf54e848a4bce179809751ec4d">
+    <rdf:first rdf:resource="http://mesh.local/ontology/winterolympics#DENNationality"/>
+    <rdf:rest rdf:nodeID="Nf800d4b5ebe747418c0f270ba57a4f39"/>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="N17cfff36bee24d6e9e0ddf4ba7b278fd">
+    <rdf:first rdf:resource="http://mesh.local/ontology/winterolympics#BiathlonDiscipline"/>
+    <rdf:rest rdf:nodeID="N4c4cc52da4f440d188a08a0e60a08f15"/>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="N7cc392c82d5140b593e367f1e9669cdf">
+    <rdf:first rdf:resource="http://mesh.local/ontology/winterolympics#CURDisciplineCode"/>
+    <rdf:rest rdf:nodeID="N1cc909ad37ee4e2aafc0f6912a182289"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://mesh.local/ontology/winterolympics#IHODisciplineCode">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+    <rdf:type rdf:resource="http://mesh.local/ontology/winterolympics#DisciplineCode"/>
+    <rdfs:label>IHO</rdfs:label>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="N0c8dbf5c492c4d64a2cd32f891c70066">
+    <rdf:first rdf:resource="http://mesh.local/ontology/winterolympics#HeadCoachFunction"/>
+    <rdf:rest rdf:resource="http://www.w3.org/1999/02/22-rdf-syntax-ns#nil"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://mesh.local/ontology/winterolympics#DGRPEventType">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+    <rdf:type rdf:resource="http://mesh.local/ontology/winterolympics#EventType"/>
+    <rdfs:label>DGRP</rdfs:label>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://mesh.local/ontology/winterolympics#FSKDisciplineCode">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+    <rdf:type rdf:resource="http://mesh.local/ontology/winterolympics#DisciplineCode"/>
+    <rdfs:label>FSK</rdfs:label>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="N1dc21b7f1f214b6c90afd52cb65003e6">
+    <rdf:first rdf:resource="http://mesh.local/ontology/winterolympics#CurlingDiscipline"/>
+    <rdf:rest rdf:nodeID="Nc7a030c072cb40e7ab06c5f67de2411c"/>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="N41f3c76af7a14042ba29c60289045019">
+    <rdf:first rdf:resource="http://mesh.local/ontology/winterolympics#Venue"/>
+    <rdf:rest rdf:resource="http://www.w3.org/1999/02/22-rdf-syntax-ns#nil"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://mesh.local/ontology/winterolympics#ORGNTeamType">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+    <rdf:type rdf:resource="http://mesh.local/ontology/winterolympics#TeamType"/>
+    <rdfs:label>ORGN</rdfs:label>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="Nf800d4b5ebe747418c0f270ba57a4f39">
+    <rdf:first rdf:resource="http://mesh.local/ontology/winterolympics#FINNationality"/>
+    <rdf:rest rdf:nodeID="N6b6cdef1a69f42439d2ea81e4279bb54"/>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="Na409c3240f834b5e883039a8eb98d9ed">
+    <rdf:first rdf:resource="http://mesh.local/ontology/winterolympics#Coach"/>
+    <rdf:rest rdf:nodeID="N443d72b3742448ac8f5a6cce53b871db"/>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="Nfa4a28aa0a164caca6bfe0bd7c5d9e48">
+    <rdf:first rdf:resource="http://mesh.local/ontology/winterolympics#ORGTeamType"/>
+    <rdf:rest rdf:resource="http://www.w3.org/1999/02/22-rdf-syntax-ns#nil"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://mesh.local/ontology/winterolympics#CeremoniesDiscipline">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+    <rdf:type rdf:resource="http://mesh.local/ontology/winterolympics#Discipline"/>
+    <rdfs:label>Ceremonies</rdfs:label>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="Nabf84583f6744b9bb49978452c3c804e">
+    <rdf:first rdf:resource="http://mesh.local/ontology/winterolympics#Medallist"/>
+    <rdf:rest rdf:nodeID="N0fb8872dc8ec4b46b2ace9db3e80cfcc"/>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="Ne5a7b3dea7b340f89c3ec6852bc2fc4f">
+    <rdf:first rdf:resource="http://mesh.local/ontology/winterolympics#Schedule"/>
+    <rdf:rest rdf:resource="http://www.w3.org/1999/02/22-rdf-syntax-ns#nil"/>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="N0a2fd2165bf342c8a4d0766d70c89650">
+    <rdf:first rdf:resource="http://mesh.local/ontology/winterolympics#WGender"/>
+    <rdf:rest rdf:nodeID="N93c84ded64654d6398800bf1bad8c54b"/>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="N84b367c676e446f18e96696c156e1c1f">
+    <owl:oneOf rdf:nodeID="Ne9f10312bea942d4bcc98a83027cba59"/>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="N134d1da8fcbe440b9158df0eb300e30c">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
+    <owl:unionOf rdf:nodeID="Ncaccb857d9c240068494a1806cb2fca9"/>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="Nc995ba4c3a924695beacbb9b4d11f8c6">
+    <rdf:first rdf:resource="http://mesh.local/ontology/winterolympics#FINISHEDStatus"/>
+    <rdf:rest rdf:nodeID="N02e925083cd2405582c6b1e74099e04c"/>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="N7d5455a16c554160bbb1d4ffb49b363a">
+    <rdf:first rdf:resource="http://mesh.local/ontology/winterolympics#CANCELLEDStatus"/>
+    <rdf:rest rdf:nodeID="Nc995ba4c3a924695beacbb9b4d11f8c6"/>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="N571c88fb9a214d6ab02c73b93ccab4a7">
+    <rdf:first rdf:resource="http://mesh.local/ontology/winterolympics#GOLDMedal"/>
+    <rdf:rest rdf:nodeID="N28f50f44f24e4e3a85708a29ffbf92a3"/>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="Ne02ecdd8a74540deafab47643fd8cc4e">
+    <rdf:first rdf:resource="http://mesh.local/ontology/winterolympics#CCSDisciplineCode"/>
+    <rdf:rest rdf:nodeID="Na8dd123d6f39447c92a9ab707e7d030f"/>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="N573b6699d8c24aadaa4cda6a9c4c2076">
+    <rdf:first rdf:resource="http://mesh.local/ontology/winterolympics#IGRPEventType"/>
+    <rdf:rest rdf:nodeID="Nbf031691a91c41218ffea87fa4a4d0ac"/>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="N443d72b3742448ac8f5a6cce53b871db">
+    <rdf:first rdf:resource="http://mesh.local/ontology/winterolympics#Team"/>
+    <rdf:rest rdf:resource="http://www.w3.org/1999/02/22-rdf-syntax-ns#nil"/>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="N02e925083cd2405582c6b1e74099e04c">
+    <rdf:first rdf:resource="http://mesh.local/ontology/winterolympics#SCHEDULEDStatus"/>
+    <rdf:rest rdf:resource="http://www.w3.org/1999/02/22-rdf-syntax-ns#nil"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://mesh.local/ontology/winterolympics#FreestyleSkiingDiscipline">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+    <rdf:type rdf:resource="http://mesh.local/ontology/winterolympics#Discipline"/>
+    <rdfs:label>Freestyle Skiing</rdfs:label>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://forgemesh.ai/ontology#sourceForeignKey">
+    <rdfs:label xml:lang="en">source foreign key</rdfs:label>
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#AnnotationProperty"/>
+    <rdfs:comment xml:lang="en">The FK relationship (source.col to target.col) from which this object property was derived.</rdfs:comment>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="Ne2513673c2ae49868792a1024b69ee52">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
+    <owl:unionOf rdf:nodeID="N535c65b3f39f4da089d8da8ff669cf67"/>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="Na04940573b3144ec8d04ad47521f99a7">
+    <rdf:first rdf:resource="http://mesh.local/ontology/winterolympics#Coach"/>
+    <rdf:rest rdf:nodeID="Ne5a7b3dea7b340f89c3ec6852bc2fc4f"/>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="N304f356fd214465e846fcd9bf9706d86">
+    <rdf:first rdf:resource="http://mesh.local/ontology/winterolympics#SnowboardDiscipline"/>
+    <rdf:rest rdf:nodeID="N9d4fcd635b164d8c94d1fe3084c2e3f8"/>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="Nf943bba68417401f89c2efbf7835edd8">
+    <rdf:first rdf:resource="http://mesh.local/ontology/winterolympics#LugeDiscipline"/>
+    <rdf:rest rdf:nodeID="N9e0f7570635f4b6ca17b3f6dc588bd5d"/>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="N02aa3dc4edaa4655870d04893f617aa2">
+    <owl:oneOf rdf:nodeID="Naf0cda1f4f3c4b9aa90fa4a0561b615f"/>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="Na88c96a9ef4440eeb9e5c7859db70a2c">
+    <owl:oneOf rdf:nodeID="Nd2935194467c4a989912a45fb1289bb8"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://mesh.local/ontology/winterolympics#ShortTrackSpeedSkatingDiscipline">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+    <rdf:type rdf:resource="http://mesh.local/ontology/winterolympics#Discipline"/>
+    <rdfs:label>Short Track Speed Skating</rdfs:label>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="N96598d60cd6f4066b6688249ffa7746e">
+    <rdf:first rdf:resource="http://mesh.local/ontology/winterolympics#ShortTrackSpeedSkatingDiscipline"/>
+    <rdf:rest rdf:nodeID="Nf5c439c927214cb597cf986627faf957"/>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="N1b26047edf404370a580b7e02637c8f7">
+    <owl:oneOf rdf:nodeID="N1de77dc53fed4a33a80d96b7b7d54d07"/>
+  </rdf:Description>
+</rdf:RDF>

@@ -1,0 +1,207 @@
+# MIMIC-III ground truth: what each column MEANS, scored against the generated ontology.
+#
+# Each entry states the column's meaning, independently of how any ontology names it:
+#   refers_to:  <table>   the column references rows of that table, so it must be an
+#                         ObjectProperty whose range is that table's class
+#   value_type: <kind>    temporal | numeric | boolean | text | categorical | identifier
+#                         (or a list of acceptable kinds); categorical accepts either a
+#                         link to a value class or a coded string
+# The mapped property must also have the column's table class as its domain.
+# Used by semantic_mapper.eval.evaluator.MappingEvaluator.
+#
+# Meanings follow the MIMIC-III v1.4 schema and the MIMIC→OMOP ETL:
+#   - MIMIC-III v1.4 documentation: https://mimic.mit.edu/docs/iii/
+#   - OMOP CDM v5.4: https://ohdsi.github.io/CommonDataModel/
+#   - PhysioNet MIMIC-OMOP ETL: https://github.com/MIT-LCP/mimic-omop
+# note: the corresponding OMOP CDM concept [OMOP table.column]
+
+version: '2.0'
+dataset: mimic-iii-demo
+description: MIMIC-III column meanings (v1.4), aligned to OMOP CDM v5.4
+mappings:
+- table: raw_patients
+  column: subject_id
+  value_type: identifier
+  note: OMOP Person.person_id
+- table: raw_patients
+  column: gender
+  value_type: categorical
+  note: OMOP Person.gender_source_value (M/F)
+- table: raw_patients
+  column: dob
+  value_type: temporal
+  note: OMOP Person.birth_datetime
+- table: raw_patients
+  column: dod
+  value_type: temporal
+  note: OMOP Death.death_date (when known)
+- table: raw_patients
+  column: expire_flag
+  value_type: boolean
+  note: OMOP Death indicator (1=died in hospital)
+- table: raw_admissions
+  column: hadm_id
+  value_type: identifier
+  note: OMOP Visit_occurrence.visit_occurrence_id
+- table: raw_admissions
+  column: subject_id
+  refers_to: raw_patients
+  note: OMOP Visit_occurrence.person_id (FK)
+- table: raw_admissions
+  column: admittime
+  value_type: temporal
+  note: OMOP Visit_occurrence.visit_start_datetime
+- table: raw_admissions
+  column: dischtime
+  value_type: temporal
+  note: OMOP Visit_occurrence.visit_end_datetime
+- table: raw_admissions
+  column: admission_type
+  value_type: categorical
+  note: OMOP Visit_occurrence.visit_concept_id (EMERGENCY/ELECTIVE/URGENT/NEWBORN)
+- table: raw_admissions
+  column: discharge_location
+  value_type: categorical
+  note: OMOP Visit_occurrence.discharge_to_concept_id
+- table: raw_admissions
+  column: insurance
+  value_type: categorical
+  note: OMOP Visit_occurrence.admitting_source_value (proxy)
+- table: raw_admissions
+  column: ethnicity
+  value_type: categorical
+  note: OMOP Person.ethnicity_source_value (denormalised on visit)
+- table: raw_admissions
+  column: diagnosis
+  value_type: text
+  note: OMOP Visit_occurrence.discharge_diagnosis (free-text admission diagnosis)
+- table: raw_admissions
+  column: hospital_expire_flag
+  value_type: boolean
+  note: OMOP Death during visit indicator
+- table: raw_icustays
+  column: icustay_id
+  value_type: identifier
+  note: OMOP Visit_detail.visit_detail_id
+- table: raw_icustays
+  column: subject_id
+  refers_to: raw_patients
+  note: OMOP Visit_detail.person_id (FK)
+- table: raw_icustays
+  column: hadm_id
+  refers_to: raw_admissions
+  note: OMOP Visit_detail.visit_occurrence_id (FK)
+- table: raw_icustays
+  column: dbsource
+  value_type: categorical
+  note: OMOP (no direct CDM equivalent) — discriminates CareVue vs MetaVision
+- table: raw_icustays
+  column: first_careunit
+  value_type: categorical
+  note: OMOP Visit_detail.care_site_id (mapped from unit name)
+- table: raw_icustays
+  column: intime
+  value_type: temporal
+  note: OMOP Visit_detail.visit_detail_start_datetime
+- table: raw_icustays
+  column: outtime
+  value_type: temporal
+  note: OMOP Visit_detail.visit_detail_end_datetime
+- table: raw_icustays
+  column: los
+  value_type: numeric
+  note: OMOP (derived) length-of-stay in days
+- table: raw_diagnoses_icd
+  column: icd9_code
+  refers_to: raw_d_icd_diagnoses
+  note: OMOP Condition_occurrence.condition_source_value
+- table: raw_diagnoses_icd
+  column: subject_id
+  refers_to: raw_patients
+  note: OMOP Condition_occurrence.person_id
+- table: raw_diagnoses_icd
+  column: hadm_id
+  refers_to: raw_admissions
+  note: OMOP Condition_occurrence.visit_occurrence_id
+- table: raw_diagnoses_icd
+  column: seq_num
+  value_type: numeric
+  note: OMOP Condition_occurrence.condition_status (primary/secondary rank)
+- table: raw_d_icd_diagnoses
+  column: icd9_code
+  value_type: identifier
+  note: OMOP Concept.concept_code (ICD9CM vocabulary)
+- table: raw_d_icd_diagnoses
+  column: short_title
+  value_type: text
+  note: OMOP Concept.concept_name (short)
+- table: raw_d_icd_diagnoses
+  column: long_title
+  value_type: text
+  note: OMOP Concept.concept_name (long)
+- table: raw_labevents
+  column: itemid
+  refers_to: raw_d_labitems
+  note: OMOP Measurement.measurement_concept_id (via D_LABITEMS)
+- table: raw_labevents
+  column: subject_id
+  refers_to: raw_patients
+  note: OMOP Measurement.person_id
+- table: raw_labevents
+  column: charttime
+  value_type: temporal
+  note: OMOP Measurement.measurement_datetime
+- table: raw_labevents
+  column: value
+  value_type:
+  - text
+  - numeric
+  note: OMOP Measurement.value_source_value
+- table: raw_labevents
+  column: valuenum
+  value_type: numeric
+  note: OMOP Measurement.value_as_number
+- table: raw_labevents
+  column: valueuom
+  value_type: categorical
+  note: OMOP Measurement.unit_source_value
+- table: raw_labevents
+  column: flag
+  value_type: categorical
+  note: OMOP Measurement.operator_concept_id (abnormal flag)
+- table: raw_prescriptions
+  column: subject_id
+  refers_to: raw_patients
+  note: OMOP Drug_exposure.person_id
+- table: raw_prescriptions
+  column: hadm_id
+  refers_to: raw_admissions
+  note: OMOP Drug_exposure.visit_occurrence_id
+- table: raw_prescriptions
+  column: drug
+  value_type:
+  - text
+  - categorical
+  note: OMOP Drug_exposure.drug_source_value
+- table: raw_prescriptions
+  column: route
+  value_type: categorical
+  note: OMOP Drug_exposure.route_source_value
+- table: raw_prescriptions
+  column: dose_val_rx
+  value_type:
+  - numeric
+  - text
+  note: OMOP Drug_exposure.quantity
+- table: raw_prescriptions
+  column: dose_unit_rx
+  value_type: categorical
+  note: OMOP Drug_exposure.dose_unit_source_value
+- table: raw_prescriptions
+  column: startdate
+  value_type: temporal
+  note: OMOP Drug_exposure.drug_exposure_start_datetime
+- table: raw_prescriptions
+  column: enddate
+  value_type: temporal
+  note: OMOP Drug_exposure.drug_exposure_end_datetime

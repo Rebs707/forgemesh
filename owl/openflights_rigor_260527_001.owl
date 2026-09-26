@@ -1,0 +1,1025 @@
+<?xml version="1.0" encoding="utf-8"?>
+<rdf:RDF
+   xmlns:fm="http://forgemesh.ai/ontology#"
+   xmlns:owl="http://www.w3.org/2002/07/owl#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#"
+   xmlns:skos="http://www.w3.org/2004/02/skos/core#"
+>
+  <rdf:Description rdf:about="http://forgemesh.ai/ontology#incompleteReference">
+    <rdfs:label xml:lang="en">incomplete reference</rdfs:label>
+    <rdfs:comment xml:lang="en">Records a null or unresolvable object-property FK on this individual. The value is the property URI that could not be resolved. Presence of this triple means the individual is structurally incomplete at source — it was not a materialiser error.</rdfs:comment>
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#AnnotationProperty"/>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="Neea059f1ff944a44987c119d4b6e1301">
+    <rdf:first rdf:resource="http://mesh.local/ontology/openflights#LegacySourceType"/>
+    <rdf:rest rdf:nodeID="N9fd8346aed604a04831527328f41ae64"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://mesh.local/ontology/openflights#YActiveStatus">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+    <rdf:type rdf:resource="http://mesh.local/ontology/openflights#ActiveStatus"/>
+    <rdfs:label xml:lang="en">Active</rdfs:label>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://mesh.local/ontology/openflights#hasAirportId">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#DatatypeProperty"/>
+    <rdfs:label xml:lang="en">has Airport ID</rdfs:label>
+    <rdfs:comment xml:lang="en">The unique identifier for an airport.</rdfs:comment>
+    <rdfs:domain rdf:resource="http://mesh.local/ontology/openflights#Airport"/>
+    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+    <skos:altLabel xml:lang="en">airport_id</skos:altLabel>
+    <fm:sourceColumn>raw_airports.airport_id</fm:sourceColumn>
+    <fm:sqlType>TEXT</fm:sqlType>
+    <fm:nullRate>0.00</fm:nullRate>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://mesh.local/ontology/openflights#SDst">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+    <rdf:type rdf:resource="http://mesh.local/ontology/openflights#Dst"/>
+    <rdfs:label xml:lang="en">S</rdfs:label>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://mesh.local/ontology/openflights#NDst">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+    <rdf:type rdf:resource="http://mesh.local/ontology/openflights#Dst"/>
+    <rdfs:label xml:lang="en">N</rdfs:label>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://mesh.local/ontology/openflights#hasRouteAirlineId">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#ObjectProperty"/>
+    <rdfs:comment xml:lang="en">Links a route to the airline by its ID.</rdfs:comment>
+    <rdfs:domain rdf:resource="http://mesh.local/ontology/openflights#Route"/>
+    <rdfs:range rdf:resource="http://mesh.local/ontology/openflights#Airline"/>
+    <fm:sourceForeignKey>raw_routes.airline_id -&gt; raw_airlines</fm:sourceForeignKey>
+    <skos:altLabel xml:lang="en">airline_id</skos:altLabel>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://mesh.local/ontology/openflights#hasAirportExtendedCountry">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#DatatypeProperty"/>
+    <rdfs:comment xml:lang="en">The country where the extended airport is located.</rdfs:comment>
+    <rdfs:domain rdf:resource="http://mesh.local/ontology/openflights#AirportExtended"/>
+    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+    <skos:altLabel xml:lang="en">country</skos:altLabel>
+    <fm:sourceColumn>raw_airports_extended.country</fm:sourceColumn>
+    <fm:sqlType>TEXT</fm:sqlType>
+    <fm:nullRate>0.00</fm:nullRate>
+    <rdfs:subPropertyOf rdf:resource="http://mesh.local/ontology/openflights#hasCountry"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://mesh.local/ontology/openflights#Type">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
+    <rdfs:label xml:lang="en">Type</rdfs:label>
+    <rdfs:comment xml:lang="en">Type of the airport.</rdfs:comment>
+    <fm:sourceTable>raw_airports</fm:sourceTable>
+    <owl:equivalentClass rdf:nodeID="N4240eebdd37c4b00b53831c2f2195568"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://mesh.local/ontology/openflights#hasAirportCity">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#DatatypeProperty"/>
+    <rdfs:comment xml:lang="en">The city of the airport.</rdfs:comment>
+    <rdfs:domain rdf:resource="http://mesh.local/ontology/openflights#Airport"/>
+    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+    <skos:altLabel xml:lang="en">city</skos:altLabel>
+    <rdfs:subPropertyOf rdf:resource="http://mesh.local/ontology/openflights#hasCity"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://mesh.local/ontology/openflights#hasAirportExtendedTimezone">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#DatatypeProperty"/>
+    <rdfs:comment xml:lang="en">The timezone of the extended airport.</rdfs:comment>
+    <rdfs:domain rdf:resource="http://mesh.local/ontology/openflights#AirportExtended"/>
+    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+    <skos:altLabel xml:lang="en">timezone</skos:altLabel>
+    <fm:sourceColumn>raw_airports_extended.timezone</fm:sourceColumn>
+    <fm:sqlType>TEXT</fm:sqlType>
+    <fm:nullRate>0.03</fm:nullRate>
+    <rdfs:subPropertyOf rdf:resource="http://mesh.local/ontology/openflights#hasTimezone"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://mesh.local/ontology/openflights#Airport">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
+    <rdfs:label xml:lang="en">Airport</rdfs:label>
+    <rdfs:comment xml:lang="en">An airport entity representing a location where aircraft can take off and land.</rdfs:comment>
+    <fm:sourceTable>raw_airports</fm:sourceTable>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://mesh.local/ontology/openflights#hasAirportExtendedIata">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#DatatypeProperty"/>
+    <rdfs:comment xml:lang="en">The IATA code of the extended airport.</rdfs:comment>
+    <rdfs:domain rdf:resource="http://mesh.local/ontology/openflights#AirportExtended"/>
+    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+    <skos:altLabel xml:lang="en">iata</skos:altLabel>
+    <fm:sourceColumn>raw_airports_extended.iata</fm:sourceColumn>
+    <fm:sqlType>TEXT</fm:sqlType>
+    <fm:nullRate>0.45</fm:nullRate>
+    <rdfs:subPropertyOf rdf:resource="http://mesh.local/ontology/openflights#hasIata"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://mesh.local/ontology/openflights#hasAirportCountry">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#DatatypeProperty"/>
+    <rdfs:comment xml:lang="en">The country of the airport.</rdfs:comment>
+    <rdfs:domain rdf:resource="http://mesh.local/ontology/openflights#Airport"/>
+    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+    <skos:altLabel xml:lang="en">country</skos:altLabel>
+    <rdfs:subPropertyOf rdf:resource="http://mesh.local/ontology/openflights#hasCountry"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://mesh.local/ontology/openflights#ActiveStatus">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
+    <rdfs:label xml:lang="en">Active Status</rdfs:label>
+    <rdfs:comment xml:lang="en">The operational status of an airline.</rdfs:comment>
+    <fm:sourceTable>raw_airlines</fm:sourceTable>
+    <owl:equivalentClass rdf:nodeID="Nd3e48b4484ae4aa89b46443fa07c7da5"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://mesh.local/ontology/openflights#hasAirlineId">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#DatatypeProperty"/>
+    <rdfs:domain rdf:resource="http://mesh.local/ontology/openflights#Airline"/>
+    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+    <rdfs:label xml:lang="en">has airline id</rdfs:label>
+    <rdfs:comment xml:lang="en">The airline id of the airline.</rdfs:comment>
+    <skos:altLabel xml:lang="en">airline_id</skos:altLabel>
+    <fm:sourceColumn>raw_airlines.airline_id</fm:sourceColumn>
+    <fm:sqlType>TEXT</fm:sqlType>
+    <fm:nullRate>0.00</fm:nullRate>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://forgemesh.ai/ontology#scope_default">
+    <rdfs:comment xml:lang="en">Describes the default inclusion scope for an unconstrained property. Used by the proof narrator to build scope assumption statements.</rdfs:comment>
+    <rdfs:label xml:lang="en">scope default</rdfs:label>
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#AnnotationProperty"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://mesh.local/ontology/openflights#hasAirportSource">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#ObjectProperty"/>
+    <rdfs:label xml:lang="en">has Source</rdfs:label>
+    <rdfs:comment xml:lang="en">Links an airport to its data source.</rdfs:comment>
+    <rdfs:domain rdf:resource="http://mesh.local/ontology/openflights#Airport"/>
+    <rdfs:range rdf:resource="http://mesh.local/ontology/openflights#Source"/>
+    <fm:sourceForeignKey>raw_airports.source -&gt; Source</fm:sourceForeignKey>
+    <skos:altLabel xml:lang="en">source</skos:altLabel>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://mesh.local/ontology/openflights#hasActiveStatus">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#ObjectProperty"/>
+    <rdfs:label xml:lang="en">has active status</rdfs:label>
+    <rdfs:label xml:lang="en">has airline ID</rdfs:label>
+    <rdfs:label xml:lang="en">has airline name</rdfs:label>
+    <rdfs:label xml:lang="en">has airline alias</rdfs:label>
+    <rdfs:label xml:lang="en">has airline IATA code</rdfs:label>
+    <rdfs:label xml:lang="en">has airline ICAO code</rdfs:label>
+    <rdfs:label xml:lang="en">has airline callsign</rdfs:label>
+    <rdfs:label xml:lang="en">has airline country</rdfs:label>
+    <rdfs:comment xml:lang="en">Links an airline to its operational status.</rdfs:comment>
+    <rdfs:comment xml:lang="en">The unique identifier for an airline.</rdfs:comment>
+    <rdfs:comment xml:lang="en">The name of the airline.</rdfs:comment>
+    <rdfs:comment xml:lang="en">An alternative name for the airline.</rdfs:comment>
+    <rdfs:comment xml:lang="en">The IATA code for the airline.</rdfs:comment>
+    <rdfs:comment xml:lang="en">The ICAO code for the airline.</rdfs:comment>
+    <rdfs:comment xml:lang="en">The callsign used by the airline.</rdfs:comment>
+    <rdfs:comment xml:lang="en">The country where the airline is based.</rdfs:comment>
+    <rdfs:domain rdf:resource="http://mesh.local/ontology/openflights#Airline"/>
+    <rdfs:range rdf:resource="http://mesh.local/ontology/openflights#ActiveStatus"/>
+    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+    <rdfs:subPropertyOf rdf:resource="http://mesh.local/ontology/openflights#hasAirlineIdentifier"/>
+    <rdfs:subPropertyOf rdf:resource="http://mesh.local/ontology/openflights#hasAirlineLabel"/>
+    <fm:sourceForeignKey>raw_airlines.active -&gt; ActiveStatus</fm:sourceForeignKey>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://mesh.local/ontology/openflights#hasName">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#DatatypeProperty"/>
+    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+    <fm:sourceColumn>raw_countries.hasName</fm:sourceColumn>
+    <fm:sqlType>unknown</fm:sqlType>
+    <fm:nullRate>unknown</fm:nullRate>
+    <rdfs:comment xml:lang="en">The name.</rdfs:comment>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://mesh.local/ontology/openflights#hasPlaneName">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#DatatypeProperty"/>
+    <rdfs:comment xml:lang="en">The name of the plane.</rdfs:comment>
+    <rdfs:domain rdf:resource="http://mesh.local/ontology/openflights#Plane"/>
+    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+    <skos:altLabel xml:lang="en">name</skos:altLabel>
+    <rdfs:subPropertyOf rdf:resource="http://mesh.local/ontology/openflights#hasName"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://mesh.local/ontology/openflights#hasAirlineName">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#DatatypeProperty"/>
+    <rdfs:domain rdf:resource="http://mesh.local/ontology/openflights#Airline"/>
+    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+    <rdfs:comment xml:lang="en">The name of the airline.</rdfs:comment>
+    <skos:altLabel xml:lang="en">name</skos:altLabel>
+    <rdfs:subPropertyOf rdf:resource="http://mesh.local/ontology/openflights#hasName"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://mesh.local/ontology/openflights#DstType">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
+    <rdfs:label xml:lang="en">DST Type</rdfs:label>
+    <rdfs:comment xml:lang="en">A type representing the daylight saving time status of an airport.</rdfs:comment>
+    <fm:sourceTable>raw_airports_extended</fm:sourceTable>
+    <owl:equivalentClass rdf:nodeID="N608db0f7f0724de5ac3f70e7f3bbfb98"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://mesh.local/ontology/openflights#hasTimezone">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#DatatypeProperty"/>
+    <rdfs:comment xml:lang="en">The timezone.</rdfs:comment>
+    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+    <skos:altLabel xml:lang="en">timezone</skos:altLabel>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://mesh.local/ontology/openflights#Source">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
+    <rdfs:label xml:lang="en">Source</rdfs:label>
+    <rdfs:comment xml:lang="en">Source of the airport data.</rdfs:comment>
+    <fm:sourceTable>raw_airports</fm:sourceTable>
+    <owl:equivalentClass rdf:nodeID="N6e68e4aa85aa4a8bbb8dd8f1cdb9cecd"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://mesh.local/ontology/openflights#hasAirlineIcao">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#DatatypeProperty"/>
+    <rdfs:domain rdf:resource="http://mesh.local/ontology/openflights#Airline"/>
+    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+    <rdfs:label xml:lang="en">has icao</rdfs:label>
+    <rdfs:comment xml:lang="en">The icao of the airline.</rdfs:comment>
+    <skos:altLabel xml:lang="en">icao</skos:altLabel>
+    <fm:sourceColumn>raw_airlines.icao</fm:sourceColumn>
+    <fm:sqlType>TEXT</fm:sqlType>
+    <fm:nullRate>0.04</fm:nullRate>
+    <rdfs:subPropertyOf rdf:resource="http://mesh.local/ontology/openflights#hasIcao"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://forgemesh.ai/ontology#interpretation">
+    <rdfs:comment xml:lang="en">Natural-language description of the concept for NL-to-ontology mapping. Used by the proof narrator to achieve HIGH confidence interpretation. Should name the concept in plain terms a query author would use.</rdfs:comment>
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#AnnotationProperty"/>
+    <rdfs:label xml:lang="en">interpretation</rdfs:label>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://mesh.local/ontology/openflights#hasAirportExtendedLongitude">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#DatatypeProperty"/>
+    <rdfs:comment xml:lang="en">The longitude of the extended airport.</rdfs:comment>
+    <rdfs:domain rdf:resource="http://mesh.local/ontology/openflights#AirportExtended"/>
+    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+    <skos:altLabel xml:lang="en">longitude</skos:altLabel>
+    <fm:sourceColumn>raw_airports_extended.longitude</fm:sourceColumn>
+    <fm:sqlType>TEXT</fm:sqlType>
+    <fm:nullRate>0.00</fm:nullRate>
+    <rdfs:subPropertyOf rdf:resource="http://mesh.local/ontology/openflights#hasLongitude"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://mesh.local/ontology/openflights#hasAirportExtendedAirportId">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#ObjectProperty"/>
+    <rdfs:comment xml:lang="en">Links an extended airport to its base airport entity.</rdfs:comment>
+    <rdfs:domain rdf:resource="http://mesh.local/ontology/openflights#AirportExtended"/>
+    <rdfs:range rdf:resource="http://mesh.local/ontology/openflights#Airport"/>
+    <fm:sourceForeignKey>raw_airports_extended.airport_id -&gt; raw_airports</fm:sourceForeignKey>
+    <rdfs:subPropertyOf rdf:resource="http://mesh.local/ontology/openflights#hasAirport"/>
+    <skos:altLabel xml:lang="en">airport_id</skos:altLabel>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://mesh.local/ontology/openflights#hasAirportLatitude">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#DatatypeProperty"/>
+    <rdfs:comment xml:lang="en">The latitude of the airport.</rdfs:comment>
+    <rdfs:domain rdf:resource="http://mesh.local/ontology/openflights#Airport"/>
+    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+    <skos:altLabel xml:lang="en">latitude</skos:altLabel>
+    <rdfs:subPropertyOf rdf:resource="http://mesh.local/ontology/openflights#hasLatitude"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://mesh.local/ontology/openflights#hasLatitude">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#DatatypeProperty"/>
+    <rdfs:comment xml:lang="en">The latitude.</rdfs:comment>
+    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+    <skos:altLabel xml:lang="en">latitude</skos:altLabel>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://mesh.local/ontology/openflights#AirportAirportType">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+    <rdf:type rdf:resource="http://mesh.local/ontology/openflights#AirportType"/>
+    <rdfs:label xml:lang="en">airport</rdfs:label>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://mesh.local/ontology/openflights#SourceType">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
+    <rdfs:label xml:lang="en">Source Type</rdfs:label>
+    <rdfs:comment xml:lang="en">A type representing the source of airport data.</rdfs:comment>
+    <fm:sourceTable>raw_airports_extended</fm:sourceTable>
+    <owl:equivalentClass rdf:nodeID="Nffb3cf6799bd4fd9a86a266a21680af7"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://forgemesh.ai/ontology#extension">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#AnnotationProperty"/>
+    <rdfs:comment xml:lang="en">Alternative natural-language phrases for this concept, beyond the primary fm:interpretation. Multiple values allowed. Used for EXTENSION-form concept mapping.</rdfs:comment>
+    <rdfs:label xml:lang="en">extension</rdfs:label>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://mesh.local/ontology/openflights#hasCity">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#DatatypeProperty"/>
+    <rdfs:comment xml:lang="en">The city.</rdfs:comment>
+    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+    <skos:altLabel xml:lang="en">city</skos:altLabel>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://mesh.local/ontology/openflights#hasActive">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#DatatypeProperty"/>
+    <rdfs:domain rdf:resource="http://mesh.local/ontology/openflights#Airline"/>
+    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+    <rdfs:label xml:lang="en">has active</rdfs:label>
+    <rdfs:comment xml:lang="en">The active of the airline.</rdfs:comment>
+    <skos:altLabel xml:lang="en">active</skos:altLabel>
+    <fm:sourceColumn>raw_airlines.active</fm:sourceColumn>
+    <fm:sqlType>TEXT</fm:sqlType>
+    <fm:nullRate>0.00</fm:nullRate>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://mesh.local/ontology/openflights#hasAirportType">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#ObjectProperty"/>
+    <rdfs:label xml:lang="en">has Type</rdfs:label>
+    <rdfs:comment xml:lang="en">Links an airport to its type.</rdfs:comment>
+    <rdfs:domain rdf:resource="http://mesh.local/ontology/openflights#Airport"/>
+    <rdfs:range rdf:resource="http://mesh.local/ontology/openflights#Type"/>
+    <fm:sourceForeignKey>raw_airports.type -&gt; Type</fm:sourceForeignKey>
+    <skos:altLabel xml:lang="en">type</skos:altLabel>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://mesh.local/ontology/openflights#AirportType">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+    <rdf:type rdf:resource="http://mesh.local/ontology/openflights#Type"/>
+    <rdfs:label xml:lang="en">airport</rdfs:label>
+    <rdfs:label xml:lang="en">Airport Type</rdfs:label>
+    <rdfs:comment xml:lang="en">A type representing the classification of an airport.</rdfs:comment>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://forgemesh.ai/ontology#sqlType">
+    <rdfs:label xml:lang="en">SQL type</rdfs:label>
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#AnnotationProperty"/>
+    <rdfs:comment xml:lang="en">The SQL column type of the source column.</rdfs:comment>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://mesh.local/ontology/openflights#hasSourceAirport">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#DatatypeProperty"/>
+    <rdfs:comment xml:lang="en">The source airport code for the route.</rdfs:comment>
+    <rdfs:domain rdf:resource="http://mesh.local/ontology/openflights#Route"/>
+    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+    <skos:altLabel xml:lang="en">source_airport</skos:altLabel>
+    <fm:sourceColumn>raw_routes.source_airport</fm:sourceColumn>
+    <fm:sqlType>TEXT</fm:sqlType>
+    <fm:nullRate>0.00</fm:nullRate>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://mesh.local/ontology/openflights#hasCountry">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#DatatypeProperty"/>
+    <rdfs:comment xml:lang="en">The country.</rdfs:comment>
+    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+    <skos:altLabel xml:lang="en">country</skos:altLabel>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://forgemesh.ai/ontology#nullRate">
+    <rdfs:comment xml:lang="en">The proportion of NULL values in the source column at inspection time, 0.0 to 1.0.</rdfs:comment>
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#AnnotationProperty"/>
+    <rdfs:label xml:lang="en">null rate</rdfs:label>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://mesh.local/ontology/openflights#hasIcaoCode">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#DatatypeProperty"/>
+    <rdfs:label xml:lang="en">Plane ICAO Code</rdfs:label>
+    <rdfs:comment xml:lang="en">The ICAO code of the plane.</rdfs:comment>
+    <rdfs:domain rdf:resource="http://mesh.local/ontology/openflights#Plane"/>
+    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+    <skos:altLabel xml:lang="en">icao_code</skos:altLabel>
+    <rdfs:subPropertyOf rdf:resource="http://mesh.local/ontology/openflights#hasCode"/>
+    <fm:sourceColumn>raw_planes.icao_code</fm:sourceColumn>
+    <fm:sqlType>TEXT</fm:sqlType>
+    <fm:nullRate>0.06</fm:nullRate>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://forgemesh.ai/ontology#loadTimestamp">
+    <rdfs:comment xml:lang="en">The xsd:dateTime at which the RDF materialisation completed. Attached to the graph node itself. Use this to detect whether a re-run has reached the store.</rdfs:comment>
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#AnnotationProperty"/>
+    <rdfs:label xml:lang="en">load timestamp</rdfs:label>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://mesh.local/ontology/openflights#hasDafifCode">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#DatatypeProperty"/>
+    <rdfs:label xml:lang="en">has country DAFIF code</rdfs:label>
+    <rdfs:comment xml:lang="en">The DAFIF code of the country.</rdfs:comment>
+    <rdfs:domain rdf:resource="http://mesh.local/ontology/openflights#Country"/>
+    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+    <skos:altLabel xml:lang="en">dafif_code</skos:altLabel>
+    <rdfs:subPropertyOf rdf:resource="http://mesh.local/ontology/openflights#hasCode"/>
+    <fm:sourceColumn>raw_countries.dafif_code</fm:sourceColumn>
+    <fm:sqlType>TEXT</fm:sqlType>
+    <fm:nullRate>0.00</fm:nullRate>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://mesh.local/ontology/openflights#UDstType">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+    <rdf:type rdf:resource="http://mesh.local/ontology/openflights#DstType"/>
+    <rdfs:label xml:lang="en">U</rdfs:label>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://mesh.local/ontology/openflights#hasRouteAirline">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#ObjectProperty"/>
+    <rdfs:comment xml:lang="en">Links a route to the airline operating it.</rdfs:comment>
+    <rdfs:domain rdf:resource="http://mesh.local/ontology/openflights#Route"/>
+    <rdfs:range rdf:resource="http://mesh.local/ontology/openflights#Airline"/>
+    <fm:sourceForeignKey>raw_routes.airline -&gt; raw_airlines</fm:sourceForeignKey>
+    <skos:altLabel xml:lang="en">airline</skos:altLabel>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://mesh.local/ontology/openflights#hasAirportIata">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#DatatypeProperty"/>
+    <rdfs:comment xml:lang="en">The iata of the airport.</rdfs:comment>
+    <rdfs:domain rdf:resource="http://mesh.local/ontology/openflights#Airport"/>
+    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+    <skos:altLabel xml:lang="en">iata</skos:altLabel>
+    <rdfs:subPropertyOf rdf:resource="http://mesh.local/ontology/openflights#hasIata"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://mesh.local/ontology/openflights#hasAirportExtendedName">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#DatatypeProperty"/>
+    <rdfs:comment xml:lang="en">The name of the extended airport.</rdfs:comment>
+    <rdfs:domain rdf:resource="http://mesh.local/ontology/openflights#AirportExtended"/>
+    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+    <skos:altLabel xml:lang="en">name</skos:altLabel>
+    <rdfs:subPropertyOf rdf:resource="http://mesh.local/ontology/openflights#hasName"/>
+    <fm:sourceColumn>raw_airports_extended.name</fm:sourceColumn>
+    <fm:sqlType>TEXT</fm:sqlType>
+    <fm:nullRate>0.00</fm:nullRate>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://mesh.local/ontology/openflights#UnknownAirportType">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+    <rdf:type rdf:resource="http://mesh.local/ontology/openflights#AirportType"/>
+    <rdfs:label xml:lang="en">unknown</rdfs:label>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="Ndf191b4864284e96952687874458b4f6">
+    <rdf:first rdf:resource="http://mesh.local/ontology/openflights#ZDst"/>
+    <rdf:rest rdf:resource="http://www.w3.org/1999/02/22-rdf-syntax-ns#nil"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://mesh.local/ontology/openflights#hasAirportTzDatabase">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#DatatypeProperty"/>
+    <rdfs:comment xml:lang="en">The tz database of the airport.</rdfs:comment>
+    <rdfs:domain rdf:resource="http://mesh.local/ontology/openflights#Airport"/>
+    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+    <skos:altLabel xml:lang="en">tz_database</skos:altLabel>
+    <rdfs:subPropertyOf rdf:resource="http://mesh.local/ontology/openflights#hasTzDatabase"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://mesh.local/ontology/openflights#YCodeshare">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+    <rdf:type rdf:resource="http://mesh.local/ontology/openflights#Codeshare"/>
+    <rdfs:label xml:lang="en">Y</rdfs:label>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://mesh.local/ontology/openflights#hasAirportLongitude">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#DatatypeProperty"/>
+    <rdfs:comment xml:lang="en">The longitude of the airport.</rdfs:comment>
+    <rdfs:domain rdf:resource="http://mesh.local/ontology/openflights#Airport"/>
+    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+    <skos:altLabel xml:lang="en">longitude</skos:altLabel>
+    <rdfs:subPropertyOf rdf:resource="http://mesh.local/ontology/openflights#hasLongitude"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://mesh.local/ontology/openflights#ODst">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+    <rdf:type rdf:resource="http://mesh.local/ontology/openflights#Dst"/>
+    <rdfs:label xml:lang="en">O</rdfs:label>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://forgemesh.ai/ontology#sourceTable">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#AnnotationProperty"/>
+    <rdfs:label xml:lang="en">source table</rdfs:label>
+    <rdfs:comment xml:lang="en">The bronze database table from which this class was derived.</rdfs:comment>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://mesh.local/ontology/openflights#hasIata">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#DatatypeProperty"/>
+    <rdfs:comment xml:lang="en">The iata.</rdfs:comment>
+    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+    <skos:altLabel xml:lang="en">iata</skos:altLabel>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://mesh.local/ontology/openflights#hasCountryName">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#DatatypeProperty"/>
+    <rdfs:comment xml:lang="en">The name of the country.</rdfs:comment>
+    <rdfs:domain rdf:resource="http://mesh.local/ontology/openflights#Country"/>
+    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+    <skos:altLabel xml:lang="en">name</skos:altLabel>
+    <rdfs:subPropertyOf rdf:resource="http://mesh.local/ontology/openflights#hasName"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://mesh.local/ontology/openflights#hasAirportExtendedLatitude">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#DatatypeProperty"/>
+    <rdfs:comment xml:lang="en">The latitude of the extended airport.</rdfs:comment>
+    <rdfs:domain rdf:resource="http://mesh.local/ontology/openflights#AirportExtended"/>
+    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+    <skos:altLabel xml:lang="en">latitude</skos:altLabel>
+    <fm:sourceColumn>raw_airports_extended.latitude</fm:sourceColumn>
+    <fm:sqlType>TEXT</fm:sqlType>
+    <fm:nullRate>0.00</fm:nullRate>
+    <rdfs:subPropertyOf rdf:resource="http://mesh.local/ontology/openflights#hasLatitude"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://forgemesh.ai/ontology#sourceForeignKey">
+    <rdfs:comment xml:lang="en">The FK relationship (source.col to target.col) from which this object property was derived.</rdfs:comment>
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#AnnotationProperty"/>
+    <rdfs:label xml:lang="en">source foreign key</rdfs:label>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://mesh.local/ontology/openflights#hasRouteStops">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#ObjectProperty"/>
+    <rdfs:comment xml:lang="en">Indicates the number of stops on the route.</rdfs:comment>
+    <rdfs:domain rdf:resource="http://mesh.local/ontology/openflights#Route"/>
+    <rdfs:range rdf:resource="http://mesh.local/ontology/openflights#Stops"/>
+    <fm:sourceForeignKey>raw_routes.stops -&gt; Stops</fm:sourceForeignKey>
+    <skos:altLabel xml:lang="en">stops</skos:altLabel>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://mesh.local/ontology/openflights#hasIcao">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#DatatypeProperty"/>
+    <rdfs:comment xml:lang="en">The icao.</rdfs:comment>
+    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+    <skos:altLabel xml:lang="en">icao</skos:altLabel>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://mesh.local/ontology/openflights#hasRouteCodeshare">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#ObjectProperty"/>
+    <rdfs:comment xml:lang="en">Indicates if the route is a codeshare.</rdfs:comment>
+    <rdfs:domain rdf:resource="http://mesh.local/ontology/openflights#Route"/>
+    <rdfs:range rdf:resource="http://mesh.local/ontology/openflights#Codeshare"/>
+    <fm:sourceForeignKey>raw_routes.codeshare -&gt; Codeshare</fm:sourceForeignKey>
+    <skos:altLabel xml:lang="en">codeshare</skos:altLabel>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="N32d6aa3bdbe64c2897c826fc1d57761a">
+    <rdf:first rdf:resource="http://mesh.local/ontology/openflights#EDst"/>
+    <rdf:rest rdf:nodeID="N30250f6a8b9448749b93953d01203576"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://forgemesh.ai/ontology#loadRunId">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#AnnotationProperty"/>
+    <rdfs:comment xml:lang="en">The RDF pipeline run ID for the materialisation that wrote this named graph. Attached to the graph node itself as a load stamp.</rdfs:comment>
+    <rdfs:label xml:lang="en">load run ID</rdfs:label>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://mesh.local/ontology/openflights#Plane">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
+    <rdfs:label xml:lang="en">Plane</rdfs:label>
+    <rdfs:comment xml:lang="en">A class representing an aircraft or plane.</rdfs:comment>
+    <fm:sourceTable>raw_planes</fm:sourceTable>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://mesh.local/ontology/openflights#NActiveStatus">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+    <rdf:type rdf:resource="http://mesh.local/ontology/openflights#ActiveStatus"/>
+    <rdfs:label xml:lang="en">Inactive</rdfs:label>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://mesh.local/ontology/openflights#hasIataCode">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#DatatypeProperty"/>
+    <rdfs:label xml:lang="en">Plane IATA Code</rdfs:label>
+    <rdfs:comment xml:lang="en">The IATA code of the plane.</rdfs:comment>
+    <rdfs:domain rdf:resource="http://mesh.local/ontology/openflights#Plane"/>
+    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+    <skos:altLabel xml:lang="en">iata_code</skos:altLabel>
+    <rdfs:subPropertyOf rdf:resource="http://mesh.local/ontology/openflights#hasCode"/>
+    <fm:sourceColumn>raw_planes.iata_code</fm:sourceColumn>
+    <fm:sqlType>TEXT</fm:sqlType>
+    <fm:nullRate>0.05</fm:nullRate>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://mesh.local/ontology/openflights#Airline">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
+    <rdfs:label xml:lang="en">Airline</rdfs:label>
+    <rdfs:comment xml:lang="en">An entity representing an airline.</rdfs:comment>
+    <fm:sourceTable>raw_airlines</fm:sourceTable>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://mesh.local/ontology/openflights#hasAirlineIata">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#DatatypeProperty"/>
+    <rdfs:domain rdf:resource="http://mesh.local/ontology/openflights#Airline"/>
+    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+    <rdfs:comment xml:lang="en">The iata of the airline.</rdfs:comment>
+    <skos:altLabel xml:lang="en">iata</skos:altLabel>
+    <rdfs:subPropertyOf rdf:resource="http://mesh.local/ontology/openflights#hasIata"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://mesh.local/ontology/openflights#Dst">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
+    <rdfs:label xml:lang="en">DST</rdfs:label>
+    <rdfs:comment xml:lang="en">Daylight Saving Time status for an airport.</rdfs:comment>
+    <fm:sourceTable>raw_airports</fm:sourceTable>
+    <owl:equivalentClass rdf:nodeID="N491ee90e99cd4a6786141697f1a79bcc"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://mesh.local/ontology/openflights#hasCode">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#DatatypeProperty"/>
+    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+    <fm:sourceColumn>raw_countries.hasCode</fm:sourceColumn>
+    <fm:sqlType>unknown</fm:sqlType>
+    <fm:nullRate>unknown</fm:nullRate>
+    <rdfs:comment xml:lang="en">The code.</rdfs:comment>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://mesh.local/ontology/openflights#hasAirportAltitude">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#DatatypeProperty"/>
+    <rdfs:comment xml:lang="en">The altitude of the airport.</rdfs:comment>
+    <rdfs:domain rdf:resource="http://mesh.local/ontology/openflights#Airport"/>
+    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+    <skos:altLabel xml:lang="en">altitude</skos:altLabel>
+    <rdfs:subPropertyOf rdf:resource="http://mesh.local/ontology/openflights#hasAltitude"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://mesh.local/ontology/openflights#hasRouteDestAirportId">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#ObjectProperty"/>
+    <rdfs:comment xml:lang="en">Links a route to its destination airport by ID.</rdfs:comment>
+    <rdfs:domain rdf:resource="http://mesh.local/ontology/openflights#Route"/>
+    <rdfs:range rdf:resource="http://mesh.local/ontology/openflights#Airport"/>
+    <fm:sourceForeignKey>raw_routes.dest_airport_id -&gt; raw_airports</fm:sourceForeignKey>
+    <rdfs:subPropertyOf rdf:resource="http://mesh.local/ontology/openflights#hasAirport"/>
+    <skos:altLabel xml:lang="en">dest_airport_id</skos:altLabel>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://mesh.local/ontology/openflights#Codeshare">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
+    <rdfs:label xml:lang="en">Codeshare</rdfs:label>
+    <rdfs:comment xml:lang="en">Indicates whether a route is operated under a codeshare agreement.</rdfs:comment>
+    <fm:sourceTable>raw_routes</fm:sourceTable>
+    <owl:equivalentClass rdf:nodeID="Nd33fd8700c344ef487a5f04ea3cfa41f"/>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="Na2d6f7d543264304b96b0110c11ef6ef">
+    <rdf:first rdf:resource="http://mesh.local/ontology/openflights#0Stops"/>
+    <rdf:rest rdf:nodeID="N657ab06783bd4ddf86a9840db3b8c4f9"/>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="N30250f6a8b9448749b93953d01203576">
+    <rdf:first rdf:resource="http://mesh.local/ontology/openflights#NDst"/>
+    <rdf:rest rdf:nodeID="N2247f04255404fc7a439d46679f78eb6"/>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="Nffc01f9ff6be4233b5b37ee18778097f">
+    <rdf:first rdf:resource="http://mesh.local/ontology/openflights#ODstType"/>
+    <rdf:rest rdf:nodeID="Nf7c4d161ec4a4ca789ac296e47210e93"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://forgemesh.ai/ontology#limitation">
+    <rdfs:comment xml:lang="en">A known limitation of this class or property that proof narrators should surface to query consumers. Multiple values allowed.</rdfs:comment>
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#AnnotationProperty"/>
+    <rdfs:label xml:lang="en">limitation</rdfs:label>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://forgemesh.ai/ontology#goldRunId">
+    <rdfs:comment xml:lang="en">The gold pipeline run ID under which this individual was materialised, enabling staleness detection between gold tables and the triple store.</rdfs:comment>
+    <rdfs:label xml:lang="en">gold run ID</rdfs:label>
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#AnnotationProperty"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://forgemesh.ai/ontology#projectName">
+    <rdfs:label xml:lang="en">project name</rdfs:label>
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#AnnotationProperty"/>
+    <rdfs:comment xml:lang="en">The ForgeMesh project name (e.g. "mimic", "openflights") under which this graph was materialised. Attached to the named graph node by the RDF writer. The verification suite uses this to assert that a graph was produced by the expected project.</rdfs:comment>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://mesh.local/ontology/openflights#PortAirportType">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+    <rdf:type rdf:resource="http://mesh.local/ontology/openflights#AirportType"/>
+    <rdfs:label xml:lang="en">port</rdfs:label>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://mesh.local/ontology/openflights#AirportExtended">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
+    <rdfs:label xml:lang="en">Airport Extended</rdfs:label>
+    <rdfs:comment xml:lang="en">An extended representation of an airport with additional attributes.</rdfs:comment>
+    <fm:sourceTable>raw_airports_extended</fm:sourceTable>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://mesh.local/ontology/openflights#LegacySourceType">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+    <rdf:type rdf:resource="http://mesh.local/ontology/openflights#SourceType"/>
+    <rdfs:label xml:lang="en">Legacy</rdfs:label>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://mesh.local/ontology/openflights#hasDestAirport">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#DatatypeProperty"/>
+    <rdfs:comment xml:lang="en">The destination airport code for the route.</rdfs:comment>
+    <rdfs:domain rdf:resource="http://mesh.local/ontology/openflights#Route"/>
+    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+    <skos:altLabel xml:lang="en">dest_airport</skos:altLabel>
+    <fm:sourceColumn>raw_routes.dest_airport</fm:sourceColumn>
+    <fm:sqlType>TEXT</fm:sqlType>
+    <fm:nullRate>0.00</fm:nullRate>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://mesh.local/ontology/openflights#hasAirportTimezone">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#DatatypeProperty"/>
+    <rdfs:comment xml:lang="en">The timezone of the airport.</rdfs:comment>
+    <rdfs:domain rdf:resource="http://mesh.local/ontology/openflights#Airport"/>
+    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+    <skos:altLabel xml:lang="en">timezone</skos:altLabel>
+    <rdfs:subPropertyOf rdf:resource="http://mesh.local/ontology/openflights#hasTimezone"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://mesh.local/ontology/openflights#UserSourceType">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+    <rdf:type rdf:resource="http://mesh.local/ontology/openflights#SourceType"/>
+    <rdfs:label xml:lang="en">User</rdfs:label>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://mesh.local/ontology/openflights#hasAirportDst">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#ObjectProperty"/>
+    <rdfs:label xml:lang="en">has DST</rdfs:label>
+    <rdfs:comment xml:lang="en">Links an airport to its DST status.</rdfs:comment>
+    <rdfs:domain rdf:resource="http://mesh.local/ontology/openflights#Airport"/>
+    <rdfs:range rdf:resource="http://mesh.local/ontology/openflights#Dst"/>
+    <fm:sourceForeignKey>raw_airports.dst -&gt; Dst</fm:sourceForeignKey>
+    <skos:altLabel xml:lang="en">dst</skos:altLabel>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://mesh.local/ontology/openflights#OurAirportsSourceType">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+    <rdf:type rdf:resource="http://mesh.local/ontology/openflights#SourceType"/>
+    <rdfs:label xml:lang="en">OurAirports</rdfs:label>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://mesh.local/ontology/openflights#hasAirportExtendedSource">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#ObjectProperty"/>
+    <rdfs:comment xml:lang="en">Links an extended airport to its source type.</rdfs:comment>
+    <rdfs:domain rdf:resource="http://mesh.local/ontology/openflights#AirportExtended"/>
+    <rdfs:range rdf:resource="http://mesh.local/ontology/openflights#SourceType"/>
+    <fm:sourceForeignKey>raw_airports_extended.source -&gt; SourceType</fm:sourceForeignKey>
+    <skos:altLabel xml:lang="en">source</skos:altLabel>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="Ne515d8d62a9a4e13bd32d6ac7d72d435">
+    <rdf:first rdf:resource="http://mesh.local/ontology/openflights#SDst"/>
+    <rdf:rest rdf:nodeID="Nf7e7f0b5c9d442b88788767d3b488eb7"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://mesh.local/ontology/openflights#Country">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
+    <rdfs:label xml:lang="en">Country</rdfs:label>
+    <rdfs:comment xml:lang="en">A country entity representing a nation.</rdfs:comment>
+    <fm:sourceTable>raw_countries</fm:sourceTable>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="N657ab06783bd4ddf86a9840db3b8c4f9">
+    <rdf:first rdf:resource="http://mesh.local/ontology/openflights#1Stops"/>
+    <rdf:rest rdf:resource="http://www.w3.org/1999/02/22-rdf-syntax-ns#nil"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://mesh.local/ontology/openflights">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Ontology"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://mesh.local/ontology/openflights#hasAirportName">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#DatatypeProperty"/>
+    <rdfs:comment xml:lang="en">The name of the airport.</rdfs:comment>
+    <rdfs:domain rdf:resource="http://mesh.local/ontology/openflights#Airport"/>
+    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+    <skos:altLabel xml:lang="en">name</skos:altLabel>
+    <rdfs:subPropertyOf rdf:resource="http://mesh.local/ontology/openflights#hasName"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://mesh.local/ontology/openflights#hasAirlineCountry">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#DatatypeProperty"/>
+    <rdfs:domain rdf:resource="http://mesh.local/ontology/openflights#Airline"/>
+    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+    <rdfs:comment xml:lang="en">The country of the airline.</rdfs:comment>
+    <skos:altLabel xml:lang="en">country</skos:altLabel>
+    <rdfs:subPropertyOf rdf:resource="http://mesh.local/ontology/openflights#hasCountry"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://mesh.local/ontology/openflights#0Stops">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+    <rdf:type rdf:resource="http://mesh.local/ontology/openflights#Stops"/>
+    <rdfs:label xml:lang="en">0</rdfs:label>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://mesh.local/ontology/openflights#Route">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
+    <rdfs:label xml:lang="en">Route</rdfs:label>
+    <rdfs:comment xml:lang="en">A flight route between two airports operated by an airline.</rdfs:comment>
+    <fm:sourceTable>raw_routes</fm:sourceTable>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://mesh.local/ontology/openflights#hasCallsign">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#DatatypeProperty"/>
+    <rdfs:domain rdf:resource="http://mesh.local/ontology/openflights#Airline"/>
+    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+    <rdfs:label xml:lang="en">has callsign</rdfs:label>
+    <rdfs:comment xml:lang="en">The callsign of the airline.</rdfs:comment>
+    <skos:altLabel xml:lang="en">callsign</skos:altLabel>
+    <fm:sourceColumn>raw_airlines.callsign</fm:sourceColumn>
+    <fm:sqlType>TEXT</fm:sqlType>
+    <fm:nullRate>0.13</fm:nullRate>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://mesh.local/ontology/openflights#Stops">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
+    <rdfs:label xml:lang="en">Stops</rdfs:label>
+    <rdfs:comment xml:lang="en">The number of stops on a flight route.</rdfs:comment>
+    <fm:sourceTable>raw_routes</fm:sourceTable>
+    <owl:equivalentClass rdf:nodeID="N25aff37073a742fa94baa1f96320ee03"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://mesh.local/ontology/openflights#hasAirportExtendedCity">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#DatatypeProperty"/>
+    <rdfs:comment xml:lang="en">The city where the extended airport is located.</rdfs:comment>
+    <rdfs:domain rdf:resource="http://mesh.local/ontology/openflights#AirportExtended"/>
+    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+    <skos:altLabel xml:lang="en">city</skos:altLabel>
+    <fm:sourceColumn>raw_airports_extended.city</fm:sourceColumn>
+    <fm:sqlType>TEXT</fm:sqlType>
+    <fm:nullRate>0.00</fm:nullRate>
+    <rdfs:subPropertyOf rdf:resource="http://mesh.local/ontology/openflights#hasCity"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://mesh.local/ontology/openflights#NDstType">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+    <rdf:type rdf:resource="http://mesh.local/ontology/openflights#DstType"/>
+    <rdfs:label xml:lang="en">N</rdfs:label>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://mesh.local/ontology/openflights#hasAlias">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#DatatypeProperty"/>
+    <rdfs:domain rdf:resource="http://mesh.local/ontology/openflights#Airline"/>
+    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+    <rdfs:label xml:lang="en">has alias</rdfs:label>
+    <rdfs:comment xml:lang="en">The alias of the airline.</rdfs:comment>
+    <skos:altLabel xml:lang="en">alias</skos:altLabel>
+    <fm:sourceColumn>raw_airlines.alias</fm:sourceColumn>
+    <fm:sqlType>TEXT</fm:sqlType>
+    <fm:nullRate>0.97</fm:nullRate>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://forgemesh.ai/ontology#sourceColumn">
+    <rdfs:label xml:lang="en">source column</rdfs:label>
+    <rdfs:comment xml:lang="en">The bronze column (table.column) from which this property was derived.</rdfs:comment>
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#AnnotationProperty"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://mesh.local/ontology/openflights#hasAirportExtendedType">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#ObjectProperty"/>
+    <rdfs:comment xml:lang="en">Links an extended airport to its type.</rdfs:comment>
+    <rdfs:domain rdf:resource="http://mesh.local/ontology/openflights#AirportExtended"/>
+    <rdfs:range rdf:resource="http://mesh.local/ontology/openflights#AirportType"/>
+    <fm:sourceForeignKey>raw_airports_extended.type -&gt; AirportType</fm:sourceForeignKey>
+    <skos:altLabel xml:lang="en">type</skos:altLabel>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="Nf7e7f0b5c9d442b88788767d3b488eb7">
+    <rdf:first rdf:resource="http://mesh.local/ontology/openflights#UDst"/>
+    <rdf:rest rdf:nodeID="Ndf191b4864284e96952687874458b4f6"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://mesh.local/ontology/openflights#EDstType">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+    <rdf:type rdf:resource="http://mesh.local/ontology/openflights#DstType"/>
+    <rdfs:label xml:lang="en">E</rdfs:label>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://mesh.local/ontology/openflights#hasAirportExtendedAltitude">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#DatatypeProperty"/>
+    <rdfs:comment xml:lang="en">The altitude of the extended airport.</rdfs:comment>
+    <rdfs:domain rdf:resource="http://mesh.local/ontology/openflights#AirportExtended"/>
+    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+    <skos:altLabel xml:lang="en">altitude</skos:altLabel>
+    <fm:sourceColumn>raw_airports_extended.altitude</fm:sourceColumn>
+    <fm:sqlType>TEXT</fm:sqlType>
+    <fm:nullRate>0.00</fm:nullRate>
+    <rdfs:subPropertyOf rdf:resource="http://mesh.local/ontology/openflights#hasAltitude"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://mesh.local/ontology/openflights#hasAirportExtendedTzDatabase">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#DatatypeProperty"/>
+    <rdfs:comment xml:lang="en">The timezone database entry for the extended airport.</rdfs:comment>
+    <rdfs:domain rdf:resource="http://mesh.local/ontology/openflights#AirportExtended"/>
+    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+    <skos:altLabel xml:lang="en">tz_database</skos:altLabel>
+    <fm:sourceColumn>raw_airports_extended.tz_database</fm:sourceColumn>
+    <fm:sqlType>TEXT</fm:sqlType>
+    <fm:nullRate>0.34</fm:nullRate>
+    <rdfs:subPropertyOf rdf:resource="http://mesh.local/ontology/openflights#hasTzDatabase"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://mesh.local/ontology/openflights#StationAirportType">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+    <rdf:type rdf:resource="http://mesh.local/ontology/openflights#AirportType"/>
+    <rdfs:label xml:lang="en">station</rdfs:label>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://mesh.local/ontology/openflights#hasIsoCode">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#DatatypeProperty"/>
+    <rdfs:label xml:lang="en">has country ISO code</rdfs:label>
+    <rdfs:comment xml:lang="en">The ISO code of the country.</rdfs:comment>
+    <rdfs:domain rdf:resource="http://mesh.local/ontology/openflights#Country"/>
+    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+    <skos:altLabel xml:lang="en">iso_code</skos:altLabel>
+    <rdfs:subPropertyOf rdf:resource="http://mesh.local/ontology/openflights#hasCode"/>
+    <fm:sourceColumn>raw_countries.iso_code</fm:sourceColumn>
+    <fm:sqlType>TEXT</fm:sqlType>
+    <fm:nullRate>0.07</fm:nullRate>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://mesh.local/ontology/openflights#1Stops">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+    <rdf:type rdf:resource="http://mesh.local/ontology/openflights#Stops"/>
+    <rdfs:label xml:lang="en">1</rdfs:label>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://mesh.local/ontology/openflights#OurAirportsSource">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+    <rdf:type rdf:resource="http://mesh.local/ontology/openflights#Source"/>
+    <rdfs:label xml:lang="en">OurAirports</rdfs:label>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="Nf7c4d161ec4a4ca789ac296e47210e93">
+    <rdf:first rdf:resource="http://mesh.local/ontology/openflights#SDstType"/>
+    <rdf:rest rdf:nodeID="Ne022c9f36cc945a589c78ff3c31aaba0"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://mesh.local/ontology/openflights#hasLongitude">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#DatatypeProperty"/>
+    <rdfs:comment xml:lang="en">The longitude.</rdfs:comment>
+    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+    <skos:altLabel xml:lang="en">longitude</skos:altLabel>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="N0b0ea6f6225e4a6ebf1cd32f676820db">
+    <rdf:first rdf:resource="http://mesh.local/ontology/openflights#OurAirportsSource"/>
+    <rdf:rest rdf:resource="http://www.w3.org/1999/02/22-rdf-syntax-ns#nil"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://mesh.local/ontology/openflights#SDstType">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+    <rdf:type rdf:resource="http://mesh.local/ontology/openflights#DstType"/>
+    <rdfs:label xml:lang="en">S</rdfs:label>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://mesh.local/ontology/openflights#hasAirportIcao">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#DatatypeProperty"/>
+    <rdfs:comment xml:lang="en">The icao of the airport.</rdfs:comment>
+    <rdfs:domain rdf:resource="http://mesh.local/ontology/openflights#Airport"/>
+    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+    <skos:altLabel xml:lang="en">icao</skos:altLabel>
+    <rdfs:subPropertyOf rdf:resource="http://mesh.local/ontology/openflights#hasIcao"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://mesh.local/ontology/openflights#EDst">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+    <rdf:type rdf:resource="http://mesh.local/ontology/openflights#Dst"/>
+    <rdfs:label xml:lang="en">E</rdfs:label>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://mesh.local/ontology/openflights#hasRouteSourceAirportId">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#ObjectProperty"/>
+    <rdfs:comment xml:lang="en">Links a route to its source airport by ID.</rdfs:comment>
+    <rdfs:domain rdf:resource="http://mesh.local/ontology/openflights#Route"/>
+    <rdfs:range rdf:resource="http://mesh.local/ontology/openflights#Airport"/>
+    <fm:sourceForeignKey>raw_routes.source_airport_id -&gt; raw_airports</fm:sourceForeignKey>
+    <rdfs:subPropertyOf rdf:resource="http://mesh.local/ontology/openflights#hasAirport"/>
+    <skos:altLabel xml:lang="en">source_airport_id</skos:altLabel>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="N3231b3d5a6b24e8896f2eafcfc850272">
+    <rdf:first rdf:resource="http://mesh.local/ontology/openflights#NActiveStatus"/>
+    <rdf:rest rdf:nodeID="N206119c0d4134fa5b36e942fa097d7c2"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://mesh.local/ontology/openflights#UDst">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+    <rdf:type rdf:resource="http://mesh.local/ontology/openflights#Dst"/>
+    <rdfs:label xml:lang="en">U</rdfs:label>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="N11a056c85f3146a4bf672179c25b914f">
+    <rdf:first rdf:resource="http://mesh.local/ontology/openflights#NDstType"/>
+    <rdf:rest rdf:nodeID="Nffc01f9ff6be4233b5b37ee18778097f"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://mesh.local/ontology/openflights#hasAirportExtendedIcao">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#ObjectProperty"/>
+    <rdfs:comment xml:lang="en">Links an extended airport to its ICAO code.</rdfs:comment>
+    <rdfs:domain rdf:resource="http://mesh.local/ontology/openflights#AirportExtended"/>
+    <rdfs:range rdf:resource="http://mesh.local/ontology/openflights#Airport"/>
+    <fm:sourceForeignKey>raw_airports_extended.icao -&gt; raw_airports</fm:sourceForeignKey>
+    <rdfs:subPropertyOf rdf:resource="http://mesh.local/ontology/openflights#hasAirport"/>
+    <skos:altLabel xml:lang="en">icao</skos:altLabel>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="Nd3e48b4484ae4aa89b46443fa07c7da5">
+    <owl:oneOf rdf:nodeID="N3231b3d5a6b24e8896f2eafcfc850272"/>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="Ne7acb8f8ef944ec495004d510349fc2b">
+    <rdf:first rdf:resource="http://mesh.local/ontology/openflights#AirportType"/>
+    <rdf:rest rdf:resource="http://www.w3.org/1999/02/22-rdf-syntax-ns#nil"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://mesh.local/ontology/openflights#hasEquipment">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#DatatypeProperty"/>
+    <rdfs:comment xml:lang="en">The equipment used for the route.</rdfs:comment>
+    <rdfs:domain rdf:resource="http://mesh.local/ontology/openflights#Route"/>
+    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+    <skos:altLabel xml:lang="en">equipment</skos:altLabel>
+    <fm:sourceColumn>raw_routes.equipment</fm:sourceColumn>
+    <fm:sqlType>TEXT</fm:sqlType>
+    <fm:nullRate>0.00</fm:nullRate>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="N09e5ca7e82ba43ab8622507a91fa4dea">
+    <rdf:first rdf:resource="http://mesh.local/ontology/openflights#YCodeshare"/>
+    <rdf:rest rdf:resource="http://www.w3.org/1999/02/22-rdf-syntax-ns#nil"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://mesh.local/ontology/openflights#hasAirportExtendedDst">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#ObjectProperty"/>
+    <rdfs:comment xml:lang="en">Links an extended airport to its DST type.</rdfs:comment>
+    <rdfs:domain rdf:resource="http://mesh.local/ontology/openflights#AirportExtended"/>
+    <rdfs:range rdf:resource="http://mesh.local/ontology/openflights#DstType"/>
+    <fm:sourceForeignKey>raw_airports_extended.dst -&gt; DstType</fm:sourceForeignKey>
+    <skos:altLabel xml:lang="en">dst</skos:altLabel>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="Ne022c9f36cc945a589c78ff3c31aaba0">
+    <rdf:first rdf:resource="http://mesh.local/ontology/openflights#UDstType"/>
+    <rdf:rest rdf:nodeID="Nb6d92983a96348fd8a53c85e637ddd6c"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://mesh.local/ontology/openflights#hasTzDatabase">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#DatatypeProperty"/>
+    <rdfs:comment xml:lang="en">The tz database.</rdfs:comment>
+    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+    <skos:altLabel xml:lang="en">tz_database</skos:altLabel>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://mesh.local/ontology/openflights#hasAirport">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#ObjectProperty"/>
+    <rdfs:label xml:lang="en">has Airport</rdfs:label>
+    <rdfs:range rdf:resource="http://mesh.local/ontology/openflights#Airport"/>
+    <rdfs:comment xml:lang="en">Abstract object property for Airport relationships</rdfs:comment>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="N4e8931ea0f3a44778b78cac860719b84">
+    <rdf:first rdf:resource="http://mesh.local/ontology/openflights#ADst"/>
+    <rdf:rest rdf:nodeID="N32d6aa3bdbe64c2897c826fc1d57761a"/>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="N7e6b8e38d4704a15a6bf7eaf06b36626">
+    <rdf:first rdf:resource="http://mesh.local/ontology/openflights#UserSourceType"/>
+    <rdf:rest rdf:resource="http://www.w3.org/1999/02/22-rdf-syntax-ns#nil"/>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="N4240eebdd37c4b00b53831c2f2195568">
+    <owl:oneOf rdf:nodeID="Ne7acb8f8ef944ec495004d510349fc2b"/>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="Nc47c3f9aba5d405ca3440ea48c4eb355">
+    <rdf:first rdf:resource="http://mesh.local/ontology/openflights#ADstType"/>
+    <rdf:rest rdf:nodeID="N1ba766bde464435499a8ab425580d9c3"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://mesh.local/ontology/openflights#ADstType">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+    <rdf:type rdf:resource="http://mesh.local/ontology/openflights#DstType"/>
+    <rdfs:label xml:lang="en">A</rdfs:label>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://mesh.local/ontology/openflights#hasAltitude">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#DatatypeProperty"/>
+    <rdfs:comment xml:lang="en">The altitude.</rdfs:comment>
+    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+    <skos:altLabel xml:lang="en">altitude</skos:altLabel>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="N206119c0d4134fa5b36e942fa097d7c2">
+    <rdf:first rdf:resource="http://mesh.local/ontology/openflights#YActiveStatus"/>
+    <rdf:rest rdf:resource="http://www.w3.org/1999/02/22-rdf-syntax-ns#nil"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://forgemesh.ai/ontology#bronzeSourceRef">
+    <rdfs:label xml:lang="en">bronze source ref</rdfs:label>
+    <rdfs:comment xml:lang="en">The bronze-layer source reference key for this individual, linking the RDF triple back to its gold row and enabling prove_answer lineage traces.</rdfs:comment>
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#AnnotationProperty"/>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="N2247f04255404fc7a439d46679f78eb6">
+    <rdf:first rdf:resource="http://mesh.local/ontology/openflights#ODst"/>
+    <rdf:rest rdf:nodeID="Ne515d8d62a9a4e13bd32d6ac7d72d435"/>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="N491ee90e99cd4a6786141697f1a79bcc">
+    <owl:oneOf rdf:nodeID="N4e8931ea0f3a44778b78cac860719b84"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://mesh.local/ontology/openflights#ZDst">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+    <rdf:type rdf:resource="http://mesh.local/ontology/openflights#Dst"/>
+    <rdfs:label xml:lang="en">Z</rdfs:label>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://mesh.local/ontology/openflights#ODstType">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+    <rdf:type rdf:resource="http://mesh.local/ontology/openflights#DstType"/>
+    <rdfs:label xml:lang="en">O</rdfs:label>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="Nb6d92983a96348fd8a53c85e637ddd6c">
+    <rdf:first rdf:resource="http://mesh.local/ontology/openflights#ZDstType"/>
+    <rdf:rest rdf:resource="http://www.w3.org/1999/02/22-rdf-syntax-ns#nil"/>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="N9fd8346aed604a04831527328f41ae64">
+    <rdf:first rdf:resource="http://mesh.local/ontology/openflights#OurAirportsSourceType"/>
+    <rdf:rest rdf:nodeID="N7e6b8e38d4704a15a6bf7eaf06b36626"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://mesh.local/ontology/openflights#ZDstType">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+    <rdf:type rdf:resource="http://mesh.local/ontology/openflights#DstType"/>
+    <rdfs:label xml:lang="en">Z</rdfs:label>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="N6e68e4aa85aa4a8bbb8dd8f1cdb9cecd">
+    <owl:oneOf rdf:nodeID="N0b0ea6f6225e4a6ebf1cd32f676820db"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://mesh.local/ontology/openflights#ADst">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+    <rdf:type rdf:resource="http://mesh.local/ontology/openflights#Dst"/>
+    <rdfs:label xml:lang="en">A</rdfs:label>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="Nd33fd8700c344ef487a5f04ea3cfa41f">
+    <owl:oneOf rdf:nodeID="N09e5ca7e82ba43ab8622507a91fa4dea"/>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="Nffb3cf6799bd4fd9a86a266a21680af7">
+    <owl:oneOf rdf:nodeID="Neea059f1ff944a44987c119d4b6e1301"/>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="N1ba766bde464435499a8ab425580d9c3">
+    <rdf:first rdf:resource="http://mesh.local/ontology/openflights#EDstType"/>
+    <rdf:rest rdf:nodeID="N11a056c85f3146a4bf672179c25b914f"/>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="N25aff37073a742fa94baa1f96320ee03">
+    <owl:oneOf rdf:nodeID="Na2d6f7d543264304b96b0110c11ef6ef"/>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="N608db0f7f0724de5ac3f70e7f3bbfb98">
+    <owl:oneOf rdf:nodeID="Nc47c3f9aba5d405ca3440ea48c4eb355"/>
+  </rdf:Description>
+</rdf:RDF>

@@ -1,0 +1,38 @@
+bronze_database_url: mysql+pymysql://root:password@localhost:3307/bronze_synthea
+description: Synthea synthetic patient records dataset
+gold_database_url: mysql+pymysql://root:password@localhost:3307/gold_synthea
+name: synthea
+named_graph_uri: http://mesh.local/graph/synthea
+ontology_named_graph_uri: http://mesh.local/graph/synthea/ontology
+ontology_path: owl/synthea_rigor_gpt-4o-mini_20JUN26.owl
+rdf_dataset_name: synthea-mesh
+rdf_source_name: synthea
+silver_database_url: mysql+pymysql://root:password@localhost:3307/silver_synthea
+
+# External terminology binding — which code systems apply to this dataset.
+# Offline code/label sets under ref/ stand in for live terminology services.
+terminology_sources:
+  snomedct:
+    adapter: offline_codeset
+    system_label: SNOMED CT
+    path: ref/snomedct.tsv
+    iri_template: "http://snomed.info/id/{code}"
+    system_iri: "http://snomed.info/sct"
+  rxnorm:
+    adapter: offline_codeset
+    system_label: RxNorm
+    path: ref/rxnorm.tsv
+    iri_template: "http://purl.bioontology.org/ontology/RXNORM/{code}"
+    system_iri: "http://purl.bioontology.org/ontology/RXNORM"
+  hl7_marital:
+    adapter: offline_codeset
+    system_label: HL7 v3 MaritalStatus
+    path: ref/hl7_marital_status.tsv
+    iri_template: "http://terminology.hl7.org/CodeSystem/v3-MaritalStatus#{code}"
+    system_iri: "http://terminology.hl7.org/CodeSystem/v3-MaritalStatus"
+  hl7_gender:
+    adapter: offline_codeset
+    system_label: HL7 Administrative Sex
+    path: ref/hl7_administrative_gender.tsv
+    iri_template: "http://terminology.hl7.org/CodeSystem/v2-0001#{code}"
+    system_iri: "http://terminology.hl7.org/CodeSystem/v2-0001"

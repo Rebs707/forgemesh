@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>ForgeMesh · Answer receipt</title>
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 200 200'%3E%3Crect width='200' height='200' rx='36' fill='%233A9474'/%3E%3Ccircle cx='36' cy='100' r='22' fill='%23091A12'/%3E%3Ccircle cx='164' cy='100' r='22' fill='%23091A12'/%3E%3Ccircle cx='100' cy='100' r='22' fill='%23091A12'/%3E%3Cline x1='58' y1='100' x2='78' y2='100' stroke='%23091A12' stroke-width='16' stroke-linecap='round'/%3E%3Cline x1='122' y1='100' x2='142' y2='100' stroke='%23091A12' stroke-width='16' stroke-linecap='round'/%3E%3Cline x1='100' y1='36' x2='100' y2='78' stroke='%23091A12' stroke-width='16' stroke-linecap='round'/%3E%3Cline x1='100' y1='122' x2='100' y2='164' stroke='%23091A12' stroke-width='16' stroke-linecap='round'/%3E%3Ccircle cx='100' cy='36' r='16' fill='%23091A12'/%3E%3Ccircle cx='100' cy='164' r='16' fill='%23091A12'/%3E%3C/svg%3E" />
+  <style>
+    html, body { margin: 0; }
+    body {
+      background:
+        radial-gradient(1200px 700px at 50% -10%, #121614 0%, #0C0E0D 60%) fixed,
+        #0C0E0D;
+      min-height: 100vh;
+      padding: 44px 20px 72px;
+    }
+    #receipt { max-width: 760px; margin: 0 auto; }
+  </style>
+</head>
+<body>
+  <div id="receipt"></div>
+  <script src="/js/receipt_view.js"></script>
+  <script>
+    (function () {
+      var m = location.pathname.match(/\/runs\/([^/]+)/);
+      var runId = m ? decodeURIComponent(m[1]) : "";
+      var el = document.getElementById("receipt");
+      ForgeReceipt.load(runId, el);
+    })();
+  </script>
+</body>
+</html>

@@ -1,0 +1,9 @@
+# HL7 v2 Administrative Sex (table 0001) — a general code system (NOT dataset-derived).
+# https://terminology.hl7.org/CodeSystem/v2-0001
+# Format: code<TAB>label
+A	Ambiguous
+F	Female
+M	Male
+N	Not applicable
+O	Other
+U	Unknown

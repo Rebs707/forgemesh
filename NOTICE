@@ -1,0 +1,21 @@
+ForgeMesh
+Copyright (c) 2026 Ben Tagger
+
+Licensed under the Apache License, Version 2.0 (see LICENSE).
+
+This distribution also contains third-party material under its own licenses:
+
+- Inter and JetBrains Mono fonts (web_static/fonts/*.woff2)
+  SIL Open Font License 1.1, see web_static/fonts/OFL.txt.
+
+- Synthea sample data (datasets/synthea/sample/)
+  Synthetic patient records generated with Synthea
+  (https://github.com/synthetichealth/synthea), Apache License 2.0.
+  No real patient data. Clinical codes in the sample (SNOMED CT, RxNorm) appear
+  as Synthea emits them; see ref/README.md for the offline code lists.
+
+- English Wikipedia snapshots (datasets/worldcup2026/raw_snapshots/)
+  Revision-pinned article text, CC BY-SA 4.0. See the LICENSE.md in that directory.
+
+- Offline terminology code lists (ref/)
+  See ref/README.md for the source and terms of each list.

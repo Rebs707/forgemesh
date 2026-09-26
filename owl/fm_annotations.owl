@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="utf-8"?>
+<rdf:RDF
+   xmlns:fm="http://forgemesh.ai/ontology#"
+   xmlns:owl="http://www.w3.org/2002/07/owl#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#"
+   xmlns:skos="http://www.w3.org/2004/02/skos/core#"
+>
+  <rdf:Description rdf:about="http://forgemesh.ai/ontology#sourceTable">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#AnnotationProperty"/>
+    <rdfs:label xml:lang="en">source table</rdfs:label>
+    <rdfs:comment xml:lang="en">The bronze database table from which this class was derived.</rdfs:comment>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://forgemesh.ai/ontology#sourceColumn">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#AnnotationProperty"/>
+    <rdfs:label xml:lang="en">source column</rdfs:label>
+    <rdfs:comment xml:lang="en">The bronze column (table.column) from which this property was derived.</rdfs:comment>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://forgemesh.ai/ontology#sourceForeignKey">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#AnnotationProperty"/>
+    <rdfs:label xml:lang="en">source foreign key</rdfs:label>
+    <rdfs:comment xml:lang="en">The FK relationship (source.col to target.col) from which this object property was derived.</rdfs:comment>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://forgemesh.ai/ontology#sqlType">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#AnnotationProperty"/>
+    <rdfs:label xml:lang="en">SQL type</rdfs:label>
+    <rdfs:comment xml:lang="en">The SQL column type of the source column.</rdfs:comment>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://forgemesh.ai/ontology#nullRate">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#AnnotationProperty"/>
+    <rdfs:label xml:lang="en">null rate</rdfs:label>
+    <rdfs:comment xml:lang="en">The proportion of NULL values in the source column at inspection time, 0.0 to 1.0.</rdfs:comment>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://forgemesh.ai/ontology#interpretation">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#AnnotationProperty"/>
+    <rdfs:label xml:lang="en">interpretation</rdfs:label>
+    <rdfs:comment xml:lang="en">Natural-language description of the concept for NL-to-ontology mapping. Used by the proof narrator to achieve HIGH confidence interpretation. Should name the concept in plain terms a query author would use.</rdfs:comment>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://forgemesh.ai/ontology#extension">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#AnnotationProperty"/>
+    <rdfs:label xml:lang="en">extension</rdfs:label>
+    <rdfs:comment xml:lang="en">Alternative natural-language phrases for this concept, beyond the primary fm:interpretation. Multiple values allowed. Used for EXTENSION-form concept mapping.</rdfs:comment>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://forgemesh.ai/ontology#limitation">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#AnnotationProperty"/>
+    <rdfs:label xml:lang="en">limitation</rdfs:label>
+    <rdfs:comment xml:lang="en">A known limitation of this class or property that proof narrators should surface to query consumers. Multiple values allowed.</rdfs:comment>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://forgemesh.ai/ontology#scope_default">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#AnnotationProperty"/>
+    <rdfs:label xml:lang="en">scope default</rdfs:label>
+    <rdfs:comment xml:lang="en">Describes the default inclusion scope for an unconstrained property. Used by the proof narrator to build scope assumption statements.</rdfs:comment>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://forgemesh.ai/ontology#bronzeSourceRef">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#AnnotationProperty"/>
+    <rdfs:label xml:lang="en">bronze source ref</rdfs:label>
+    <rdfs:comment xml:lang="en">The bronze-layer source reference key for this individual, linking the RDF triple back to its gold row and enabling prove_answer lineage traces.</rdfs:comment>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://forgemesh.ai/ontology#goldRunId">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#AnnotationProperty"/>
+    <rdfs:label xml:lang="en">gold run ID</rdfs:label>
+    <rdfs:comment xml:lang="en">The gold pipeline run ID under which this individual was materialised, enabling staleness detection between gold tables and the triple store.</rdfs:comment>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://forgemesh.ai/ontology#loadRunId">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#AnnotationProperty"/>
+    <rdfs:label xml:lang="en">load run ID</rdfs:label>
+    <rdfs:comment xml:lang="en">The RDF pipeline run ID for the materialisation that wrote this named graph. Attached to the graph node itself as a load stamp.</rdfs:comment>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://forgemesh.ai/ontology#incompleteReference">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#AnnotationProperty"/>
+    <rdfs:label xml:lang="en">incomplete reference</rdfs:label>
+    <rdfs:comment xml:lang="en">Records a null object-property FK on this individual. The value is the property URI that could not be resolved. Presence of this triple means the individual is structurally incomplete at source (the FK was NULL) — it was not a materialiser error. C5 incompleteness_reconciliation counts these against gold-table null FK values.</rdfs:comment>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://forgemesh.ai/ontology#invalidMapping">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#AnnotationProperty"/>
+    <rdfs:label xml:lang="en">invalid mapping</rdfs:label>
+    <rdfs:comment xml:lang="en">Records a mapping configuration error on this individual: a value_map entry (or a pre-materialised URI in the gold column) resolved to the property's rdfs:range class URI instead of an individual of that class. The value is the property URI where the bad mapping was detected. This is distinct from fm:incompleteReference — the source value was present but the mapping was wrong. Fix by assigning correct individual URIs in the value_map.</rdfs:comment>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://forgemesh.ai/ontology#loadTimestamp">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#AnnotationProperty"/>
+    <rdfs:label xml:lang="en">load timestamp</rdfs:label>
+    <rdfs:comment xml:lang="en">The xsd:dateTime at which the RDF materialisation completed. Attached to the graph node itself. Use this to detect whether a re-run has reached the store.</rdfs:comment>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://forgemesh.ai/ontology#projectName">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#AnnotationProperty"/>
+    <rdfs:label xml:lang="en">project name</rdfs:label>
+    <rdfs:comment xml:lang="en">The ForgeMesh project name (e.g. "mimic", "openflights") under which this graph was materialised. Attached to the named graph node by the RDF writer. The verification suite uses this to assert that a graph was produced by the expected project.</rdfs:comment>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://forgemesh.ai/ontology#ontologySource">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#AnnotationProperty"/>
+    <rdfs:label xml:lang="en">ontology source</rdfs:label>
+    <rdfs:comment xml:lang="en">The filename (basename) of the OWL ontology file used to guide RDF materialisation, e.g. "mimic_bronze_rigor_260527_001.owl". Attached to the named graph node by the RDF writer. C6 compares this against the ontology currently loaded for the project to detect ontology drift between runs.</rdfs:comment>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://forgemesh.ai/ontology#terminologySystem">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#AnnotationProperty"/>
+    <rdfs:label xml:lang="en">terminology system</rdfs:label>
+    <rdfs:comment xml:lang="en">The external code system (e.g. "SNOMED CT", "ICD-9-CM", "LOINC") to which this individual is bound via skos:exactMatch. Present on every individual carrying an external concept binding — a skos:exactMatch to an external concept IRI must never be asserted without it.</rdfs:comment>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://forgemesh.ai/ontology#terminologyBindingConfidence">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#AnnotationProperty"/>
+    <rdfs:label xml:lang="en">terminology binding confidence</rdfs:label>
+    <rdfs:comment xml:lang="en">Confidence (0.0 to 1.0) that this external concept binding is correct, derived from value-set overlap and structural signals. Bindings below TERM_BIND_CONFIDENCE_FLOOR are surfaced for review in the binding sidecar, never asserted as skos:exactMatch. Present on every individual carrying an external concept binding.</rdfs:comment>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://forgemesh.ai/ontology#terminologyBindingMethod">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#AnnotationProperty"/>
+    <rdfs:label xml:lang="en">terminology binding method</rdfs:label>
+    <rdfs:comment xml:lang="en">How the binding was derived: "value-set-overlap" for an automatically proposed binding, or "human-confirmed" for one persisted and replayed from the binding store. Records the provenance of the external concept alignment.</rdfs:comment>
+  </rdf:Description>
+</rdf:RDF>

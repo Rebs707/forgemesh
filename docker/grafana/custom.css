@@ -1,0 +1,11 @@
+/* Reduce Grafana logs panel font size below the xs built-in minimum */
+[class*="logRow"],
+[class*="logsRow"],
+[class*="logLine"],
+[class*="logs-row"],
+[class*="LogRow"],
+[data-testid="data-testid log-row-message"],
+[data-testid="log-row-message"] {
+  font-size: 10px !important;
+  line-height: 1.4 !important;
+}

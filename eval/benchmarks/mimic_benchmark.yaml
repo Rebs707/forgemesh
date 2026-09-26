@@ -1,0 +1,105 @@
+# MIMIC-III Benchmark Query Suite — issue #51 / #55
+#
+# Queries with known-correct expected counts derived from the bronze tables.
+# Run after a full pipeline (inspect → map → silver → gold → rdf) against
+# the MIMIC-III demo (100 patients).
+#
+# HOW TO SET expected_count:
+#   Connect to mimic_bronze and run the SQL equivalent, e.g.:
+#     SELECT COUNT(*) FROM raw_patients;  -- → 100
+#   Then set expected_count to that value.
+#
+# TOLERANCE: 0.0 = exact; 0.05 = ±5% (use for counts sensitive to mapping)
+
+version: "1.0"
+dataset: "mimic-iii-demo"
+description: "End-to-end correctness benchmarks for MIMIC-III demo (100 patients)"
+named_graph: "http://mesh.local/graph/mimic"
+
+queries:
+  - id: patient_count
+    description: "Total number of distinct patients"
+    sparql: |
+      PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+      SELECT (COUNT(DISTINCT ?p) AS ?n)
+      WHERE {
+        ?p rdf:type ?t .
+        FILTER(CONTAINS(LCASE(STR(?t)), "patient"))
+      }
+    expected_count: 100
+    tolerance: 0.0
+
+  - id: admission_count
+    description: "Total number of hospital admissions"
+    sparql: |
+      PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+      SELECT (COUNT(DISTINCT ?a) AS ?n)
+      WHERE {
+        ?a rdf:type ?t .
+        FILTER(CONTAINS(LCASE(STR(?t)), "admission"))
+      }
+    expected_count: 129
+    tolerance: 0.0
+
+  - id: icustay_count
+    description: "Total number of ICU stays"
+    sparql: |
+      PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+      SELECT (COUNT(DISTINCT ?i) AS ?n)
+      WHERE {
+        ?i rdf:type ?t .
+        FILTER(CONTAINS(LCASE(STR(?t)), "icustay") || CONTAINS(LCASE(STR(?t)), "icu"))
+      }
+    expected_count: 139
+    tolerance: 0.0
+
+  - id: diagnosis_count
+    description: "Total number of ICD-9 diagnosis records"
+    sparql: |
+      PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+      SELECT (COUNT(DISTINCT ?d) AS ?n)
+      WHERE {
+        ?d rdf:type ?t .
+        FILTER(CONTAINS(LCASE(STR(?t)), "diagnos"))
+      }
+    expected_count: 0
+    tolerance: 0.05
+
+  - id: patients_with_admissions
+    description: "Patients who have at least one linked admission"
+    sparql: |
+      PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+      SELECT (COUNT(DISTINCT ?p) AS ?n)
+      WHERE {
+        ?adm ?pred ?p .
+        FILTER(CONTAINS(LCASE(STR(?pred)), "subject") || CONTAINS(LCASE(STR(?pred)), "patient"))
+        ?p rdf:type ?pt .
+        FILTER(CONTAINS(LCASE(STR(?pt)), "patient"))
+      }
+    expected_count: 100
+    tolerance: 0.0
+
+  - id: cardiac_admissions
+    description: "Admissions with at least one cardiac ICD-9 code (4xx range)"
+    sparql: |
+      SELECT (COUNT(DISTINCT ?adm) AS ?n)
+      WHERE {
+        ?diag ?hascode ?code .
+        FILTER(CONTAINS(LCASE(STR(?hascode)), "icd9") || CONTAINS(LCASE(STR(?hascode)), "code"))
+        FILTER(STRSTARTS(STR(?code), "4"))
+        ?diag ?hadm ?adm .
+        FILTER(CONTAINS(LCASE(STR(?hadm)), "hadm") || CONTAINS(LCASE(STR(?hadm)), "admission"))
+      }
+    expected_count: 0
+    tolerance: 0.10
+
+  - id: carevue_vs_metavision
+    description: "ICU stays sourced from CareVue system"
+    sparql: |
+      SELECT (COUNT(DISTINCT ?i) AS ?n)
+      WHERE {
+        ?i ?dbsource "carevue" .
+        FILTER(CONTAINS(LCASE(STR(?dbsource)), "dbsource") || CONTAINS(LCASE(STR(?dbsource)), "source"))
+      }
+    expected_count: 0
+    tolerance: 0.05

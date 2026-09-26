@@ -1,0 +1,75 @@
+server:
+  http_listen_port: 9080
+  grpc_listen_port: 0
+
+positions:
+  filename: /tmp/positions.yaml
+
+clients:
+  - url: http://loki:3100/loki/api/v1/push
+    backoff_config:
+      min_period: 500ms
+      max_period: 5m
+      max_retries: 20
+
+scrape_configs:
+  # ── webapp structured JSON logs (file-based, rich fields) ──────────────────
+  - job_name: forgemesh
+    static_configs:
+      - targets:
+          - localhost
+        labels:
+          job: forgemesh
+          host: webapp
+          __path__: /var/log/forgemesh/webapp.log
+    pipeline_stages:
+      - json:
+          expressions:
+            level:       level
+            logger:      logger
+            event:       event
+            mode:        mode
+      - labels:
+          level:
+          logger:
+          event:
+          mode:
+
+  # ── all Docker container stdout/stderr (via Docker socket) ─────────────────
+  - job_name: docker
+    docker_sd_configs:
+      - host: unix:///var/run/docker.sock
+        refresh_interval: 10s
+    relabel_configs:
+      # Use the container name as the service label (strip leading /)
+      - source_labels: [__meta_docker_container_name]
+        regex: /(.*)
+        target_label: service
+      # Also expose the image name
+      - source_labels: [__meta_docker_container_image]
+        target_label: image
+      # Set a common job label
+      - target_label: job
+        replacement: docker
+      # Drop promtail's own logs to avoid recursion
+      - source_labels: [service]
+        regex: .*promtail.*
+        action: drop
+    pipeline_stages:
+      # Try to parse JSON lines from containers that emit JSON
+      - json:
+          expressions:
+            level:   level
+            msg:     message
+            logger:  logger
+      # If msg is populated (JSON log), use it as the output line
+      - template:
+          source: display
+          template: |
+            {{- if .msg -}}{{ .msg }}{{- else -}}{{ .Entry }}{{- end -}}
+      - output:
+          source: display
+      # Promote level as a label when present
+      - labels:
+          level:
+          logger:

@@ -1,0 +1,74 @@
+# Personal Claude Code instructions (machine-specific)
+CLAUDE.local.md
+
+# Environment & secrets — never track .env files (they carry live API keys).
+# .env.example is the only committed template (un-ignored below).
+.env
+.env.*
+
+# Python
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+.Python
+
+# Virtual environments
+.venv/
+venv/
+env/
+ENV/
+
+# Build & distribution
+dist/
+build/
+*.egg-info/
+*.egg
+
+# Testing & coverage
+.pytest_cache/
+.coverage
+htmlcov/
+coverage.xml
+
+# Output artefacts (generated mapping reports — do not version)
+output/*
+*.json
+!.env.example
+!docker/grafana/provisioning/**/*.json
+
+# Runtime files (rebuilt on each run — do not version)
+runtime/*
+!runtime/.gitkeep
+
+# IDEs
+.idea/
+.vscode/
+*.swp
+*.swo
+
+# Datasets — generated/downloaded data (large, not tracked)
+datasets/synthea-output/
+
+# Snapshots — local OWL history (not tracked)
+snapshots/*
+!snapshots/.gitkeep
+
+# macOS
+.DS_Store
+
+# Ontology — auto-generated Protégé docs (regenerate from OWL files)
+owl/docs/
+corrections.db
+# Terminology binding store (runtime, per-project) — analogue of corrections.db
+bindings*.db
+.claude/
+
+# olympics2026 onboarding (runtime + raw data)
+pipeline_runs.db
+datasets/*/data/
+
+# worldcup2026: the revision-pinned Wikipedia snapshots are the provenance asset of the
+# blind test, so track them despite the global *.json ignore above. data/ stays ignored —
+# the CSVs are a deterministic rebuild from these snapshots via setup/build_csvs.py.
+!datasets/worldcup2026/raw_snapshots/*.json

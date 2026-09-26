@@ -1,0 +1,14 @@
+# HL7 v3 MaritalStatus value set — a general code system (NOT dataset-derived).
+# https://terminology.hl7.org/CodeSystem/v3-MaritalStatus
+# Format: code<TAB>label
+A	Annulled
+D	Divorced
+I	Interlocutory
+L	Legally Separated
+M	Married
+P	Polygamous
+S	Never Married
+T	Domestic partner
+U	Unmarried
+W	Widowed
+UNK	unknown

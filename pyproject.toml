@@ -1,0 +1,53 @@
+[build-system]
+requires = ["setuptools>=77"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "forgemesh"
+version = "0.1.0"
+description = "Turn a relational database into an ontology-backed knowledge graph you can query in plain English, with provenance for every answer."
+readme = "README.md"
+license = "Apache-2.0"
+license-files = ["LICENSE", "NOTICE"]
+authors = [{ name = "Ben Tagger" }]
+requires-python = ">=3.11"
+classifiers = [
+    "Programming Language :: Python :: 3",
+    "Operating System :: OS Independent",
+    "Topic :: Database",
+    "Topic :: Scientific/Engineering :: Information Analysis",
+]
+dependencies = [
+    "sqlalchemy==2.0.34",
+    "pymysql==1.1.2",
+    "cryptography==43.0.0",
+    "rdflib==7.6.0",
+    "pydantic==2.12.5",
+    "pydantic-settings==2.6.1",
+    "rapidfuzz==3.14.3",
+    "python-dotenv==1.0.0",
+    "sentence-transformers>=2.3.0",
+    "openai==2.9.0",
+    "inflect>=7.0.0",
+    "requests==2.32.3",
+    "fastapi==0.135.2",
+    "uvicorn==0.42.0",
+    "mcp==1.27.0",
+]
+
+[project.urls]
+Repository = "https://github.com/tagben/forgemesh"
+
+[project.optional-dependencies]
+dev = ["pytest==7.4.4"]
+
+[tool.setuptools.packages.find]
+where = ["."]
+include = ["semantic_mapper*"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+filterwarnings = [
+    # rdflib 7.x internally uses its own deprecated Dataset.default_context API
+    "ignore:Dataset.default_context is deprecated:DeprecationWarning:rdflib",
+]

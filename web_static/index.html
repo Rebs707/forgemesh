@@ -1,0 +1,2528 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>ForgeMesh</title>
+
+  <!-- AG Grid Community — no npm, no build step -->
+  <script src="https://cdn.jsdelivr.net/npm/ag-grid-community@31.3.2/dist/ag-grid-community.min.js"></script>
+  <!-- marked.js — markdown → HTML for proof cards -->
+  <script src="https://cdn.jsdelivr.net/npm/marked@12/marked.min.js"></script>
+
+  <style>
+    /* ── Self-hosted fonts ─────────────────────────────────────────────────
+       Bundled so the UI renders identically on every OS instead of falling
+       back to locally-installed fonts (Inter/JetBrains Mono on macOS,
+       Segoe UI / Courier New on Windows). Served from /fonts. */
+    @font-face { font-family: 'Inter'; font-style: normal; font-weight: 400; font-display: swap; src: url('/fonts/inter-400.woff2') format('woff2'); }
+    @font-face { font-family: 'Inter'; font-style: normal; font-weight: 500; font-display: swap; src: url('/fonts/inter-500.woff2') format('woff2'); }
+    @font-face { font-family: 'Inter'; font-style: normal; font-weight: 600; font-display: swap; src: url('/fonts/inter-600.woff2') format('woff2'); }
+    @font-face { font-family: 'Inter'; font-style: normal; font-weight: 700; font-display: swap; src: url('/fonts/inter-700.woff2') format('woff2'); }
+    @font-face { font-family: 'JetBrains Mono'; font-style: normal; font-weight: 400; font-display: swap; src: url('/fonts/jetbrains-mono-400.woff2') format('woff2'); }
+    @font-face { font-family: 'JetBrains Mono'; font-style: normal; font-weight: 600; font-display: swap; src: url('/fonts/jetbrains-mono-600.woff2') format('woff2'); }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      /* ForgeMesh design system, mint palette */
+      --bg:           #161616;
+      --bg-deep:      #0F0F0F;
+      --surface:      #1E1E1E;
+      --bg-card:      #1E1E1E;
+      --border:       #2E2E2E;
+      --accent:       #1F6B53;   /* primary fill: Run/Ask buttons, active rails */
+      --accent-bright:#3A9474;   /* small accents: chevrons, dots, focus rings, hover */
+      --accent2:      #4FA383;   /* success state */
+      --text:         #F0EFEC;
+      --muted:        #A19E97;
+      --error:        #F87171;
+      --warn:         #FBBF24;
+      --success:      #4FA383;
+      --radius:       8px;
+      --font:         'Inter', system-ui, sans-serif;
+      --mono:         'JetBrains Mono', 'Fira Code', monospace;
+    }
+
+    html, body { height: 100%; background: var(--bg); color: var(--text); font-family: var(--font); font-size: 14px; -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale; text-rendering: optimizeLegibility; }
+
+    /* Native <select> popups are OS-drawn (white on Windows). We can't fully
+       restyle the dropdown, but Chromium honours background/color on options —
+       so the popup list matches the dark theme instead of flashing white.
+       accent-color tints the focused-row highlight where supported. */
+    select { accent-color: var(--accent); color-scheme: dark; }
+    select option, select optgroup { background-color: var(--surface); color: var(--text); }
+    select option:checked { background-color: var(--accent); color: var(--text); }
+
+    /* ── Layout ─────────────────────────────────────────────────────────── */
+    #app {
+      display: grid;
+      grid-template-rows: 56px 40px 1fr;
+      height: 100vh;
+    }
+
+    /* ── Top nav tabs ────────────────────────────────────────────────────── */
+    #tab-bar {
+      display: flex;
+      align-items: center;
+      gap: 2px;
+      padding: 0 20px;
+      border-bottom: 1px solid var(--border);
+      background: var(--surface);
+    }
+    .tab-btn {
+      font-size: 12px;
+      font-weight: 600;
+      padding: 0 16px;
+      height: 40px;
+      background: none;
+      border: none;
+      border-bottom: 2px solid transparent;
+      color: var(--muted);
+      cursor: pointer;
+      letter-spacing: 0.04em;
+      transition: color 0.15s, border-color 0.15s;
+    }
+    .tab-btn:hover { color: var(--text); }
+    .tab-btn.active { color: var(--accent-bright); border-bottom-color: var(--accent-bright); }
+    .tab-arrow {
+      color: rgba(148, 163, 184, 0.7);
+      font-size: 13px;
+      font-weight: 600;
+      letter-spacing: -1px;
+      line-height: 1;
+      align-self: center;
+      pointer-events: none;
+      padding: 0 2px;
+    }
+
+    /* ── Header ─────────────────────────────────────────────────────────── */
+    header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 20px;
+      border-bottom: 1px solid var(--border);
+      background: var(--surface);
+    }
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-weight: 700;
+      font-size: 15px;
+      letter-spacing: 0.02em;
+    }
+    .logo-dot {
+      width: 10px; height: 10px;
+      border-radius: 50%;
+      background: var(--accent-bright);
+      box-shadow: 0 0 8px var(--accent-bright);
+    }
+    #status-bar {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      font-size: 12px;
+      color: var(--muted);
+    }
+    #status-bar span { display: flex; align-items: center; gap: 4px; }
+    .dot-live { width: 7px; height: 7px; border-radius: 50%; background: var(--success); }
+
+    /* ── Main ───────────────────────────────────────────────────────────── */
+    main {
+      display: grid;
+      grid-template-columns: 340px 1fr;
+      overflow: hidden;
+      position: relative;
+    }
+    #rawschema-panel, #mappings-panel, #corrections-panel, #ontology-panel, #quality-panel, #proof-panel {
+      position: absolute;
+      inset: 0 0 36px 0;   /* leave room for the collapsed pipeline drawer */
+      z-index: 10;
+      background: var(--bg);
+    }
+    #quality-panel { display: none; overflow-y: auto; background: var(--bg-deep); }
+    #quality-panel.visible { display: block; }
+
+    /* ── Receipt pane ───────────────────────────────────────────────────── */
+    #proof-panel { display: none; background: var(--bg-deep); }
+    #proof-panel.visible { display: flex; flex-direction: column; overflow: hidden; }
+    /* When the receipt renderer owns the pane (adds .rcpt-root to it), let it
+       scroll and centre the card. */
+    #proof-panel.visible.rcpt-root { display: block; overflow-y: auto; padding: 0 24px; }
+    #proof-panel.rcpt-root .rcpt-card { max-width: 820px; margin: 30px auto 56px; }
+
+    .pt-empty { flex: 1; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 8px; color: var(--muted); }
+    .pt-empty .icon { font-size: 32px; opacity: 0.4; }
+    .pt-empty p { font-size: 13px; margin: 0; }
+    .pt-empty .sub { font-size: 11px; }
+    /* ── Conversation panel ─────────────────────────────────────────────── */
+    #conversation-panel {
+      border-right: 1px solid var(--border);
+      display: flex;
+      flex-direction: column;
+      background: var(--surface);
+      overflow: hidden;
+      min-height: 0;
+    }
+    #conversation-panel h2 {
+      padding: 14px 16px;
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--muted);
+      border-bottom: 1px solid var(--border);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    #history {
+      flex: 1;
+      overflow-y: auto;
+      padding: 12px 0;
+    }
+    .turn {
+      padding: 7px 16px;
+      cursor: pointer;
+      border-left: 3px solid transparent;
+      transition: background 0.1s, border-color 0.1s;
+    }
+    .turn:hover { background: rgba(136,192,208,0.06); }
+    .turn.active { border-left-color: var(--accent); background: rgba(136,192,208,0.1); }
+    .turn-q {
+      font-size: 11px;
+      color: var(--text);
+      line-height: 1.4;
+      margin-bottom: 3px;
+    }
+    .turn-meta {
+      font-size: 9.5px;
+      color: var(--muted);
+      display: flex;
+      gap: 8px;
+    }
+    .turn-meta .badge {
+      padding: 1px 6px;
+      border-radius: 3px;
+      font-size: 8.5px;
+      font-weight: 600;
+    }
+    .badge-ok   { background: rgba(79, 163, 131,0.15); color: var(--success); }
+    .badge-err  { background: rgba(248,113,113,0.15); color: var(--error); }
+    .badge-zero { background: rgba(251,191,36,0.15);  color: var(--warn); }
+
+    #input-area {
+      padding: 14px 16px;
+      border-top: 1px solid var(--border);
+    }
+    #input-area textarea {
+      width: 100%;
+      background: var(--bg);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      color: var(--text);
+      font-family: var(--font);
+      font-size: 13px;
+      padding: 10px 12px;
+      resize: none;
+      line-height: 1.5;
+      transition: border-color 0.15s;
+      outline: none;
+    }
+    #input-area textarea:focus { border-color: var(--accent-bright); }
+    #input-area textarea::placeholder { color: var(--muted); }
+
+    .input-actions {
+      display: flex;
+      gap: 8px;
+      margin-top: 8px;
+      align-items: center;
+    }
+    #ask-btn {
+      flex: 1;
+      background: var(--accent);
+      color: var(--bg-deep);
+      border: none;
+      border-radius: var(--radius);
+      padding: 8px 16px;
+      font-size: 13px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: background 0.15s, opacity 0.15s;
+    }
+    #ask-btn:hover:not(:disabled) { background: var(--accent-bright); }
+    #ask-btn:disabled { opacity: 0.5; cursor: not-allowed; }
+
+    #limit-select {
+      background: var(--bg);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      color: var(--muted);
+      font-size: 12px;
+      padding: 6px 8px;
+      cursor: pointer;
+      outline: none;
+      transition: border-color 0.15s;
+    }
+    #limit-select:focus, #limit-select:hover { border-color: var(--accent-bright); color: var(--text); }
+
+    .hint {
+      font-size: 11px;
+      color: var(--muted);
+    }
+
+    /* ── Results panel ──────────────────────────────────────────────────── */
+    #results-panel {
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+      background: var(--bg-deep);
+    }
+
+    #results-header {
+      padding: 0 20px;
+      border-bottom: 1px solid var(--border);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      height: 40px;
+      flex-shrink: 0;
+      overflow: hidden;
+    }
+    #results-title {
+      font-size: 13px;
+      color: var(--text);
+      font-weight: 500;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      min-width: 0;
+    }
+    #results-meta {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      font-size: 12px;
+      color: var(--muted);
+    }
+    #row-count-badge {
+      padding: 2px 10px;
+      border-radius: 20px;
+      background: var(--border);
+      font-size: 12px;
+      font-weight: 600;
+    }
+    #reset-ctx-btn {
+      font-size: 11px;
+      font-weight: 600;
+      padding: 4px 12px;
+      border-radius: 6px;
+      border: 1px solid var(--border);
+      background: none;
+      color: var(--muted);
+      cursor: pointer;
+      transition: all 0.15s;
+    }
+    #reset-ctx-btn:hover { border-color: var(--accent-bright); color: var(--accent-bright); }
+
+    /* explanation strip */
+    #explanation-bar {
+      padding: 8px 20px;
+      background: rgba(136,192,208,0.07);
+      border-bottom: 1px solid var(--border);
+      font-size: 12px;
+      color: var(--accent-bright);
+      display: none;
+    }
+
+    /* SPARQL toggle */
+    #sparql-section {
+      border-bottom: 1px solid var(--border);
+      flex-shrink: 0;
+    }
+    #sparql-toggle {
+      width: 100%;
+      background: none;
+      border: none;
+      cursor: pointer;
+      padding: 8px 20px;
+      text-align: left;
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--muted);
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      transition: color 0.15s;
+    }
+    #sparql-toggle:hover { color: var(--text); }
+    #sparql-toggle .chevron { transition: transform 0.2s; }
+    #sparql-toggle.open .chevron { transform: rotate(90deg); }
+
+    #sparql-code {
+      display: none;
+      padding: 0 20px 12px;
+      overflow-x: auto;
+    }
+    #sparql-code pre {
+      background: var(--bg-deep);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 12px 14px;
+      font-family: var(--mono);
+      font-size: 12px;
+      line-height: 1.6;
+      color: #81A1C1;
+      white-space: pre-wrap;
+      word-break: break-word;
+    }
+
+    #prove-btn {
+      font-size: 11.5px; padding: 4px 14px;
+      border-radius: 6px; border: 1px solid var(--accent);
+      background: rgba(31, 107, 83,0.08); color: var(--accent);
+      cursor: pointer; font-weight: 600; transition: background 0.15s;
+      display: flex; align-items: center; gap: 5px;
+    }
+    #prove-btn:hover { background: rgba(31, 107, 83,0.18); color: var(--accent-bright); }
+    #prove-btn:disabled { opacity: 0.4; cursor: default; }
+
+    /* AG Grid area */
+    #grid-container {
+      flex: 1;
+      overflow: hidden;
+      position: relative;
+    }
+    #grid {
+      width: 100%;
+      height: 100%;
+    }
+
+    /* empty state */
+    #empty-state {
+      position: absolute;
+      inset: 0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 12px;
+      color: var(--muted);
+    }
+    #empty-state .icon { font-size: 40px; opacity: 0.4; }
+    #empty-state p { font-size: 14px; }
+    #empty-state .sub { font-size: 12px; opacity: 0.7; }
+
+    /* error state */
+    #error-state {
+      display: none;
+      padding: 20px;
+      color: var(--error);
+      font-size: 13px;
+      line-height: 1.6;
+    }
+
+    /* ── Footer ─────────────────────────────────────────────────────────── */
+    footer {
+      border-top: 1px solid var(--border);
+      padding: 6px 20px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      font-size: 11px;
+      color: var(--muted);
+      background: var(--surface);
+    }
+    #token-counter { display: flex; gap: 16px; }
+
+    /* ── Loading spinner ─────────────────────────────────────────────────── */
+    #spinner {
+      display: none;
+      width: 16px; height: 16px;
+      border: 2px solid var(--border);
+      border-top-color: var(--accent-bright);
+      border-radius: 50%;
+      animation: spin 0.7s linear infinite;
+    }
+    @keyframes spin { to { transform: rotate(360deg); } }
+
+    /* ── Mappings panel ─────────────────────────────────────────────────── */
+    #mappings-panel.visible { display: flex; }
+    #mappings-panel { display: none; flex-direction: column; overflow: hidden; }
+    #mappings-toolbar {
+      padding: 10px 20px;
+      border-bottom: 1px solid var(--border);
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      flex-shrink: 0;
+    }
+    #mappings-toolbar span { font-size: 12px; color: var(--muted); }
+    #mappings-content {
+      flex: 1;
+      overflow-y: auto;
+      padding: 16px 20px;
+      background: var(--bg-deep);
+    }
+    .mapping-table-group {
+      margin-bottom: 24px;
+    }
+    .mapping-table-group h3 {
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-bottom: 10px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      cursor: pointer;
+      user-select: none;
+      padding: 4px 0;
+    }
+    .mapping-table-group h3:hover { color: var(--text); }
+    .mapping-group-chevron { font-size: 10px; transition: transform 0.15s; display: inline-block; }
+    .mapping-table-group.collapsed .mapping-group-chevron { transform: rotate(-90deg); }
+    .mapping-table-group.collapsed .mapping-group-rows { display: none; }
+    .mapping-group-count { font-size: 10px; font-weight: 400; padding: 1px 6px; border-radius: 8px; background: rgba(255,255,255,0.06); color: var(--muted); letter-spacing: 0; text-transform: none; }
+    .mapping-row {
+      display: grid;
+      grid-template-columns: 180px 1fr auto;
+      gap: 12px;
+      align-items: start;
+      padding: 10px 14px;
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      margin-bottom: 8px;
+      background: var(--surface);
+      transition: border-color 0.15s;
+    }
+    .mapping-row:hover { border-color: var(--accent-bright); }
+    .mapping-row.confirmed { border-color: rgba(79, 163, 131,0.4); opacity: 0.6; }
+    .mapping-row.rejected  { border-color: rgba(248,113,113,0.3); opacity: 0.5; }
+    .mapping-col-info { }
+    .mapping-col-name {
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--text);
+      font-family: var(--mono);
+    }
+    .mapping-col-type {
+      font-size: 11px;
+      color: var(--muted);
+      margin-top: 2px;
+    }
+    .mapping-details { }
+    .mapping-uri {
+      font-size: 12px;
+      font-family: var(--mono);
+      color: var(--accent-bright);
+      word-break: break-all;
+      margin-bottom: 4px;
+    }
+    .mapping-uri-edit {
+      display: flex;
+      gap: 6px;
+      align-items: center;
+      margin-top: 6px;
+    }
+    .mapping-uri-edit input {
+      flex: 1;
+      background: var(--bg);
+      border: 1px solid var(--border);
+      border-radius: 4px;
+      color: var(--text);
+      font-family: var(--mono);
+      font-size: 11px;
+      padding: 4px 8px;
+      outline: none;
+      transition: border-color 0.15s;
+    }
+    .mapping-uri-edit input:focus { border-color: var(--accent-bright); }
+    .mapping-confidence {
+      font-size: 11px;
+      color: var(--muted);
+      margin-top: 2px;
+    }
+    .mapping-rationale {
+      font-size: 11px;
+      color: var(--muted);
+      margin-top: 4px;
+      line-height: 1.4;
+    }
+    /* ── Candidate chips ───────────────────────────────────────────────── */
+    .candidates {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+      margin-top: 8px;
+    }
+    .candidates-label {
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 0.07em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-bottom: 2px;
+    }
+    .candidate-chip {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      padding: 5px 9px;
+      border-radius: 5px;
+      border: 1px solid var(--border);
+      background: var(--bg);
+      cursor: pointer;
+      transition: border-color 0.12s, background 0.12s;
+    }
+    .candidate-chip:hover { border-color: var(--accent-bright); background: rgba(136,192,208,0.06); }
+    .candidate-chip.selected { border-color: var(--accent-bright); background: rgba(136,192,208,0.12); }
+    .candidate-rank {
+      font-size: 10px;
+      font-weight: 700;
+      width: 16px;
+      color: var(--muted);
+      flex-shrink: 0;
+    }
+    .candidate-uri {
+      flex: 1;
+      font-family: var(--mono);
+      font-size: 11px;
+      color: var(--accent-bright);
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+    .candidate-uri .ns { color: var(--muted); }
+    .candidate-score {
+      font-size: 10px;
+      font-weight: 700;
+      color: var(--muted);
+      flex-shrink: 0;
+    }
+    .candidate-score.high { color: var(--success); }
+    .candidate-score.mid  { color: var(--warn); }
+    .candidate-score.low  { color: var(--error); }
+    /* ── Evidence trail ─────────────────────────────────────────────────── */
+    .evidence-toggle {
+      font-size: 10px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      color: var(--muted);
+      cursor: pointer;
+      user-select: none;
+      margin-top: 8px;
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+    }
+    .evidence-toggle:hover { color: var(--text); }
+    .evidence-drawer {
+      display: none;
+      margin-top: 6px;
+      border: 1px solid var(--border);
+      border-radius: 5px;
+      overflow: hidden;
+    }
+    .evidence-drawer.open { display: block; }
+    .evidence-row {
+      display: grid;
+      grid-template-columns: 140px 44px 1fr;
+      gap: 8px;
+      align-items: start;
+      padding: 5px 8px;
+      font-size: 11px;
+      border-bottom: 1px solid var(--border);
+    }
+    .evidence-row:last-child { border-bottom: none; }
+    .evidence-row.deciding { background: rgba(136,192,208,0.07); }
+    .evidence-strategy { font-weight: 600; color: var(--accent-bright); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+    .evidence-strategy .deciding-star { color: var(--accent-bright); margin-right: 3px; }
+    .evidence-score { font-weight: 700; text-align: right; }
+    .evidence-rationale { color: var(--muted); line-height: 1.4; }
+    /* ── Gap stub ───────────────────────────────────────────────────────── */
+    .gap-stub {
+      margin-top: 10px;
+      padding: 8px 10px;
+      border: 1px dashed rgba(251,191,36,0.5);
+      border-radius: 5px;
+      background: rgba(251,191,36,0.05);
+    }
+    .gap-stub-label {
+      font-size: 10px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      color: var(--warn);
+      margin-bottom: 6px;
+    }
+    .gap-stub-code {
+      font-family: var(--mono);
+      font-size: 10px;
+      color: var(--text);
+      white-space: pre;
+      line-height: 1.6;
+      overflow-x: auto;
+    }
+    .gap-stub-copy {
+      margin-top: 6px;
+      font-size: 10px;
+      font-weight: 600;
+      padding: 2px 8px;
+      border-radius: 4px;
+      border: 1px solid var(--border);
+      background: none;
+      color: var(--muted);
+      cursor: pointer;
+    }
+    .gap-stub-copy:hover { color: var(--text); border-color: var(--text); }
+    .mapping-actions {
+      display: flex;
+      gap: 6px;
+      flex-direction: column;
+    }
+    .btn-confirm {
+      font-size: 11px;
+      font-weight: 600;
+      padding: 4px 12px;
+      border-radius: 5px;
+      border: 1px solid rgba(79, 163, 131,0.4);
+      background: rgba(79, 163, 131,0.08);
+      color: var(--success);
+      cursor: pointer;
+      transition: all 0.15s;
+      white-space: nowrap;
+    }
+    .btn-confirm:hover { background: rgba(79, 163, 131,0.18); }
+    .btn-reject {
+      font-size: 11px;
+      font-weight: 600;
+      padding: 4px 12px;
+      border-radius: 5px;
+      border: 1px solid rgba(248,113,113,0.3);
+      background: rgba(248,113,113,0.06);
+      color: var(--error);
+      cursor: pointer;
+      transition: all 0.15s;
+      white-space: nowrap;
+    }
+    .btn-reject:hover { background: rgba(248,113,113,0.14); }
+    #mappings-empty {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      padding: 60px 0;
+      color: var(--muted);
+    }
+    #mappings-empty .icon { font-size: 36px; opacity: 0.4; }
+
+    /* ── Corrections panel ──────────────────────────────────────────────── */
+    #corrections-panel {
+      display: none;
+      flex-direction: column;
+      overflow: hidden;
+    }
+    #corrections-panel.visible { display: flex; }
+    #corrections-toolbar {
+      padding: 10px 20px;
+      border-bottom: 1px solid var(--border);
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      flex-shrink: 0;
+    }
+    #corrections-content {
+      flex: 1;
+      overflow-y: auto;
+      padding: 16px 20px;
+      background: var(--bg-deep);
+    }
+    .correction-group { margin-bottom: 20px; }
+    .correction-group-header {
+      font-size: 11px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--muted);
+      padding: 6px 0 4px;
+      border-bottom: 1px solid var(--border);
+      margin-bottom: 6px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .correction-row {
+      display: grid;
+      grid-template-columns: 22px 2fr 48px 72px 90px 28px;
+      align-items: center;
+      gap: 10px;
+      padding: 7px 10px;
+      border-radius: 5px 5px 0 0;
+      border: 1px solid var(--border);
+      border-bottom: none;
+      margin-bottom: 0;
+      font-size: 11px;
+      background: var(--surface);
+      transition: border-color 0.12s;
+    }
+    .correction-row.no-evidence {
+      border-radius: 5px;
+      border-bottom: 1px solid var(--border);
+      margin-bottom: 4px;
+    }
+    .correction-row:hover { border-color: var(--accent-bright); }
+    .correction-row.winning { border-color: rgba(79, 163, 131,0.4); background: rgba(79, 163, 131,0.04); }
+    .correction-row.winning + .correction-evidence { border-color: rgba(79, 163, 131,0.4); }
+    .correction-uri { font-family: var(--mono); color: var(--accent-bright); overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+    .correction-type-chip {
+      font-size: 9px;
+      font-weight: 700;
+      padding: 2px 6px;
+      border-radius: 3px;
+      text-align: center;
+    }
+    .correction-type-chip.human { background: rgba(136,192,208,0.15); color: var(--accent-bright); }
+    .correction-type-chip.auto  { background: rgba(100,116,139,0.12); color: var(--muted); }
+    .correction-delete-btn {
+      background: none;
+      border: 1px solid transparent;
+      border-radius: 4px;
+      color: var(--muted);
+      cursor: pointer;
+      font-size: 13px;
+      line-height: 1;
+      padding: 2px 5px;
+    }
+    .correction-delete-btn:hover { border-color: var(--error); color: var(--error); }
+    .correction-expand-btn {
+      background: none;
+      border: none;
+      color: var(--muted);
+      cursor: pointer;
+      font-size: 10px;
+      padding: 2px;
+      line-height: 1;
+      transition: color 0.12s, transform 0.15s;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .correction-expand-btn:hover { color: var(--accent-bright); }
+    .correction-expand-btn.open { transform: rotate(90deg); color: var(--accent-bright); }
+    .correction-evidence {
+      display: none;
+      border: 1px solid var(--border);
+      border-top: none;
+      border-radius: 0 0 5px 5px;
+      margin-bottom: 4px;
+      background: rgba(0,0,0,0.15);
+      overflow: hidden;
+    }
+    .correction-evidence.open { display: block; }
+    .correction-evidence-header {
+      display: grid;
+      grid-template-columns: 140px 52px 1fr 140px;
+      gap: 10px;
+      padding: 5px 12px;
+      font-size: 9px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.07em;
+      color: var(--muted);
+      border-bottom: 1px solid var(--border);
+    }
+    .correction-evidence-row {
+      display: grid;
+      grid-template-columns: 140px 52px 1fr 140px;
+      gap: 10px;
+      padding: 5px 12px;
+      font-size: 11px;
+      border-bottom: 1px solid rgba(255,255,255,0.04);
+      align-items: start;
+    }
+    .correction-evidence-row:last-child { border-bottom: none; }
+    .correction-evidence-row.top-score { background: rgba(136,192,208,0.07); }
+    .correction-evidence-score {
+      font-weight: 700;
+      font-family: var(--mono);
+    }
+    .correction-evidence-score.high  { color: var(--success); }
+    .correction-evidence-score.mid   { color: var(--warning, #f59e0b); }
+    .correction-evidence-score.low   { color: var(--muted); }
+    .correction-evidence-uri  { font-family: var(--mono); color: var(--accent-bright); font-size: 10px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+    .correction-evidence-rationale { font-size: 10px; color: var(--muted); line-height: 1.4; }
+
+    /* ── Pipeline panel ─────────────────────────────────────────────────── */
+    #pipeline-toolbar {
+      padding: 10px 20px;
+      border-bottom: 1px solid var(--border);
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      flex-shrink: 0;
+      flex-wrap: wrap;
+    }
+    /* ── Pipeline phase track selector ──────────────────────────────────── */
+    #phase-track-wrap {
+      display: flex;
+      align-items: center;
+      gap: 0;
+      padding: 6px 4px;
+      user-select: none;
+    }
+    .phase-track-line {
+      position: relative;
+      display: flex;
+      align-items: center;
+      height: 36px;
+    }
+    .pt-segment {
+      position: relative;
+      display: flex;
+      align-items: center;
+    }
+    .pt-segment .pt-rail {
+      height: 4px;
+      background: var(--border);
+      transition: background 0.15s;
+      flex-shrink: 0;
+    }
+    .pt-segment.sel .pt-rail { background: var(--accent); }
+    .pt-node-wrap {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      position: relative;
+      flex-shrink: 0;
+      cursor: pointer;
+    }
+    .pt-node {
+      width: 14px;
+      height: 14px;
+      border-radius: 50%;
+      background: var(--border);
+      border: 2px solid var(--surface);
+      transition: background 0.15s, transform 0.1s;
+      position: relative;
+      z-index: 1;
+    }
+    .pt-node-wrap.sel .pt-node,
+    .pt-node-wrap.anchor .pt-node { background: var(--accent); }
+    .pt-node-wrap:hover .pt-node { background: var(--muted); }
+    .pt-label {
+      position: absolute;
+      top: 18px;
+      font-size: 10px;
+      color: var(--muted);
+      white-space: nowrap;
+      text-align: center;
+      transform: translateX(-50%);
+      left: 50%;
+      pointer-events: none;
+      transition: color 0.15s;
+    }
+    .pt-node-wrap.sel .pt-label,
+    .pt-node-wrap.anchor .pt-label { color: var(--text); }
+    #phase-track-hint {
+      font-size: 10px;
+      color: var(--muted);
+      white-space: nowrap;
+      margin-left: 12px;
+    }
+    .pt-cost-badge {
+      position: absolute;
+      top: -14px;
+      left: 50%;
+      transform: translateX(-50%);
+      font-size: 8px;
+      font-weight: 700;
+      color: #fff;
+      background: #22c55e;
+      border-radius: 50%;
+      width: 12px;
+      height: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      pointer-events: none;
+      line-height: 1;
+    }
+    #pipeline-run-btn {
+      font-size: 12px;
+      font-weight: 700;
+      padding: 6px 18px;
+      border-radius: var(--radius);
+      border: none;
+      background: var(--accent);
+      color: var(--bg-deep);
+      cursor: pointer;
+      transition: background 0.15s, opacity 0.15s;
+    }
+    #pipeline-run-btn:hover:not(:disabled) { background: var(--accent-bright); }
+    #pipeline-run-btn:disabled { opacity: 0.45; cursor: not-allowed; }
+    #pipeline-status-chip {
+      font-size: 11px;
+      font-weight: 700;
+      padding: 3px 10px;
+      border-radius: 20px;
+      display: none;
+    }
+    .chip-idle    { background: rgba(100,116,139,0.15); color: var(--muted); }
+    .chip-running { background: rgba(136,192,208,0.15);  color: var(--accent-bright); }
+    .chip-done    { background: rgba(79, 163, 131,0.15);  color: var(--success); }
+    .chip-failed  { background: rgba(248,113,113,0.15); color: var(--error); }
+    /* Pipeline lifecycle state badge (issue #47) */
+    #pd-state-chip {
+      font-size: 10px;
+      font-weight: 700;
+      padding: 2px 8px;
+      border-radius: 20px;
+      margin-left: 6px;
+      display: none;
+    }
+    .pd-state-ok   { background: rgba(79, 163, 131,0.15);  color: var(--success); }
+    .pd-state-warn { background: rgba(251,191,36,0.18);  color: var(--warn); }
+    .pd-state-info { background: rgba(100,116,139,0.15); color: var(--muted); }
+    #pipeline-log {
+      flex: 1;
+      overflow-y: auto;
+      padding: 14px 20px;
+      font-family: var(--mono);
+      font-size: 12px;
+      line-height: 1.65;
+      background: var(--bg-deep);
+      white-space: pre-wrap;
+      word-break: break-word;
+    }
+    #pipeline-log .log-line { color: #cbd5e1; }
+    #pipeline-log .log-line.separator { color: var(--accent-bright); font-weight: 700; }
+    #pipeline-log .log-line.error-line { color: var(--error); }
+    #pipeline-log .log-line.success-line { color: var(--success); }
+    #pipeline-empty {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 12px;
+      color: var(--muted);
+      padding: 60px 0;
+    }
+    #pipeline-empty .icon { font-size: 36px; opacity: 0.4; }
+
+    /* ── Relational Schema panel ────────────────────────────────────────── */
+    #rawschema-panel {
+      display: none;
+      flex-direction: column;
+      overflow: hidden;
+    }
+    #rawschema-panel.visible { display: flex; }
+    #rawschema-toolbar {
+      padding: 10px 20px;
+      border-bottom: 1px solid var(--border);
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      flex-shrink: 0;
+    }
+    #rawschema-browser {
+      display: flex;
+      flex: 1;
+      overflow: hidden;
+      min-height: 0;
+    }
+    #rawschema-tables-panel {
+      width: 220px;
+      flex-shrink: 0;
+      border-right: 1px solid var(--border);
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+      background: var(--surface);
+    }
+    #rawschema-tables-header {
+      padding: 7px 12px;
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--muted);
+      border-bottom: 1px solid var(--border);
+      flex-shrink: 0;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    #rawschema-tables-list { flex: 1; overflow-y: auto; }
+    .rawschema-table-item {
+      padding: 8px 12px;
+      cursor: pointer;
+      border-left: 3px solid transparent;
+      border-bottom: 1px solid var(--border);
+      transition: background 0.1s, border-color 0.1s;
+    }
+    .rawschema-table-item:hover { background: rgba(136,192,208,0.06); }
+    .rawschema-table-item.active { border-left-color: var(--accent); background: rgba(136,192,208,0.1); }
+    .rawschema-table-name {
+      font-family: var(--mono);
+      font-size: 12px;
+      font-weight: 600;
+      color: var(--text);
+      margin-bottom: 3px;
+    }
+    .rawschema-table-meta {
+      font-size: 10px;
+      color: var(--muted);
+      display: flex;
+      gap: 6px;
+      align-items: center;
+    }
+    .rawschema-flag-dot {
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      flex-shrink: 0;
+    }
+    .rawschema-flag-dot.critical { background: var(--error, #f87171); }
+    .rawschema-flag-dot.warning  { background: var(--warn, #fbbf24); }
+    #rawschema-detail-panel {
+      flex: 1;
+      overflow-y: auto;
+      padding: 20px 24px;
+      background: var(--bg-deep);
+    }
+    #rawschema-detail-empty {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      padding: 60px 0;
+      color: var(--muted);
+      font-size: 14px;
+    }
+    .rawschema-table-title {
+      font-size: 16px;
+      font-weight: 700;
+      color: var(--text);
+      font-family: var(--mono);
+      margin-bottom: 2px;
+    }
+    .rawschema-table-subtitle {
+      font-size: 11px;
+      color: var(--muted);
+      margin-bottom: 16px;
+    }
+    .rawschema-warnings-box {
+      border: 1px solid rgba(251,191,36,0.3);
+      background: rgba(251,191,36,0.05);
+      border-radius: var(--radius);
+      padding: 8px 12px;
+      margin-bottom: 14px;
+      font-size: 11px;
+      color: var(--warn);
+      line-height: 1.7;
+    }
+    .rawschema-warnings-box .warn-critical { color: var(--error, #f87171); font-weight: 700; }
+    .rawschema-col-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 11px;
+    }
+    .rawschema-col-table th {
+      text-align: left;
+      font-size: 10px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      color: var(--muted);
+      padding: 4px 8px;
+      border-bottom: 1px solid var(--border);
+    }
+    .rawschema-col-table td {
+      padding: 6px 8px;
+      border-bottom: 1px solid rgba(255,255,255,0.04);
+      vertical-align: top;
+      color: var(--text);
+    }
+    .rawschema-col-table tr:hover td { background: rgba(255,255,255,0.02); }
+    .rawschema-col-table tr.has-warning td { background: rgba(251,191,36,0.04); }
+    .rawschema-col-table tr.has-critical td { background: rgba(248,113,113,0.06); }
+    .col-name-cell { font-family: var(--mono); font-weight: 600; color: var(--text); }
+    .col-pk-badge  { font-size: 9px; font-weight: 700; padding: 1px 4px; border-radius: 3px; background: rgba(136,192,208,0.2); color: var(--accent-bright); margin-left: 4px; }
+    .col-fk-badge  { font-size: 9px; font-weight: 700; padding: 1px 4px; border-radius: 3px; background: rgba(79, 163, 131,0.15); color: var(--success); margin-left: 4px; }
+    .col-fk-badge.inferred { background: rgba(79, 163, 131,0.07); color: var(--success); border: 1px dashed rgba(79, 163, 131,0.4); }
+    .col-type-chip { font-family: var(--mono); font-size: 10px; color: var(--muted); }
+    .col-null-bar  { display: inline-block; height: 4px; border-radius: 2px; background: var(--warn); vertical-align: middle; margin-right: 4px; }
+    .col-warn-icon { font-size: 11px; }
+    .col-warn-icon.critical { color: var(--error, #f87171); }
+    .col-warn-icon.warning  { color: var(--warn); }
+
+    /* ── Quality tab — issues #48 #49 #50 #51 #52 ─────────────────────────── */
+    .quality-section { border: 1px solid var(--border); border-radius: 8px; padding: 16px 18px; margin-bottom: 20px; background: var(--surface); }
+    .quality-section-header { display: flex; align-items: center; gap: 10px; margin-bottom: 12px; flex-wrap: wrap; }
+    .quality-section-title  { font-size: 13px; font-weight: 700; color: var(--text); }
+    .quality-section-hint   { font-size: 11px; color: var(--muted); }
+    .quality-loading { padding: 16px; font-size: 11px; color: var(--muted); text-align: center; }
+    .quality-empty   { padding: 16px; font-size: 11px; color: var(--muted); text-align: center; font-style: italic; }
+    .quality-error   { padding: 10px 14px; font-size: 11px; color: var(--error, #f87171); background: rgba(248,113,113,0.07); border-radius: 5px; }
+    .quality-action-btn { font-size: 11px; padding: 4px 10px; border-radius: 5px; border: 1px solid var(--border); background: none; color: var(--muted); cursor: pointer; white-space: nowrap; }
+    .quality-action-btn:hover { border-color: var(--accent-bright); color: var(--accent-bright); }
+    .quality-summary-row { display: flex; gap: 12px; flex-wrap: wrap; margin-bottom: 12px; }
+    .quality-stat  { display: flex; flex-direction: column; align-items: center; padding: 10px 16px; border-radius: 6px; background: var(--surface-2, rgba(255,255,255,0.04)); min-width: 80px; }
+    .quality-stat.confirmed { background: rgba(79, 163, 131,0.08); }
+    .quality-stat.pending   { background: rgba(251,191,36,0.08); }
+    .quality-stat.unmapped  { background: rgba(248,113,113,0.08); }
+    .qs-value { font-size: 22px; font-weight: 700; color: var(--text); line-height: 1; }
+    .qs-label { font-size: 10px; color: var(--muted); margin-top: 4px; }
+    .quality-stat.confirmed .qs-value { color: var(--success, #4FA383); }
+    .quality-stat.pending   .qs-value { color: var(--warn); }
+    .quality-stat.unmapped  .qs-value { color: var(--error, #f87171); }
+    .quality-bar-wrap { height: 14px; border-radius: 7px; overflow: hidden; display: flex; margin-bottom: 10px; background: var(--border); }
+    .quality-bar-seg { height: 100%; transition: width 0.3s; }
+    .bar-confirmed { background: var(--success, #4FA383); }
+    .bar-pending   { background: var(--warn, #fbbf24); }
+    .bar-unmapped  { background: var(--error, #f87171); }
+    .quality-table { width: 100%; border-collapse: collapse; font-size: 11px; }
+    .quality-table th { text-align: left; padding: 5px 8px; color: var(--muted); font-weight: 600; border-bottom: 1px solid var(--border); font-size: 10px; text-transform: uppercase; letter-spacing: 0.04em; }
+    .quality-table td { padding: 5px 8px; border-bottom: 1px solid rgba(255,255,255,0.04); vertical-align: top; }
+    .quality-table tr:last-child td { border-bottom: none; }
+    .qt-table-name { font-family: var(--mono); font-weight: 600; }
+    .cov-confirmed { color: var(--success, #4FA383); }
+    .cov-pending   { color: var(--warn, #fbbf24); }
+    .cov-unmapped  { color: var(--error, #f87171); }
+    .mini-bar-wrap { display: inline-block; width: 60px; height: 6px; background: var(--border); border-radius: 3px; vertical-align: middle; overflow: hidden; margin-right: 4px; }
+    .mini-bar { height: 100%; }
+    .mini-bar-label { font-size: 10px; color: var(--muted); }
+    .completeness-metrics { display: flex; gap: 16px; flex-wrap: wrap; font-size: 11px; padding: 8px 0; }
+    .cm-item { color: var(--muted); }
+    .cm-item.warn { color: var(--warn); }
+    .quarantine-table-list { display: flex; flex-direction: column; gap: 4px; margin-bottom: 10px; }
+    .quarantine-table-item { display: flex; justify-content: space-between; align-items: center; padding: 6px 10px; border-radius: 5px; border: 1px solid var(--border); cursor: pointer; font-size: 11px; font-family: var(--mono); }
+    .quarantine-table-item:hover, .quarantine-table-item.active { background: rgba(136,192,208,0.08); border-color: var(--accent-bright); }
+    .quarantine-count { color: var(--muted); font-size: 10px; }
+    .quarantine-rows-table { font-size: 10px; }
+    .eval-wrong td { background: rgba(248,113,113,0.04); }
+    .bench-fail td  { background: rgba(248,113,113,0.04); }
+    .bench-error td { background: rgba(251,191,36,0.04); }
+    /* ── Coherence panel — issue #52 ─────────────────────────────────────────── */
+    .coherence-header { display: flex; align-items: center; gap: 12px; margin-bottom: 10px; flex-wrap: wrap; }
+    .coherence-status { font-weight: 700; font-size: 13px; }
+    .coherence-ok   { color: var(--success, #4FA383); }
+    .coherence-warn { color: var(--error, #f87171); }
+    .coherence-issues { display: flex; flex-direction: column; gap: 4px; max-height: 320px; overflow-y: auto; }
+    .coherence-issue { display: grid; grid-template-columns: 16px 140px 1fr auto; gap: 6px; align-items: baseline; font-size: 11px; padding: 4px 6px; border-radius: 4px; }
+    .coherence-issue.issue-error   { background: rgba(248,113,113,0.06); }
+    .coherence-issue.issue-warning { background: rgba(251,191,36,0.04); }
+    .issue-severity  { font-weight: 700; }
+    .issue-category  { font-family: var(--mono); font-size: 10px; color: var(--muted); }
+    .issue-message   { color: var(--text); }
+    .issue-uri       { font-family: var(--mono); font-size: 10px; color: var(--muted); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; max-width: 200px; }
+    .col-samples   { font-family: var(--mono); font-size: 10px; color: var(--muted); max-width: 220px; }
+
+    /* ── Ontology panel ─────────────────────────────────────────────────── */
+    #ontology-panel {
+      display: none;
+      flex-direction: column;
+      overflow: hidden;
+    }
+    #ontology-panel.visible { display: flex; }
+    #ontology-toolbar {
+      padding: 10px 20px;
+      border-bottom: 1px solid var(--border);
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      flex-shrink: 0;
+      flex-wrap: wrap;
+    }
+    #ontology-search {
+      flex: 1;
+      min-width: 180px;
+      background: var(--bg);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      color: var(--text);
+      font-size: 12px;
+      padding: 5px 10px;
+      outline: none;
+      transition: border-color 0.15s;
+    }
+    #ontology-search:focus { border-color: var(--accent-bright); }
+    /* ── Working Ontology selector ──────────────────────────────────────── */
+    #ontology-working-section {
+      flex-shrink: 0;
+      border-bottom: 1px solid var(--border);
+      background: rgba(255,255,255,0.02);
+      padding: 8px 20px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+    #ontology-working-label {
+      font-size: 10px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--muted);
+      white-space: nowrap;
+      flex-shrink: 0;
+    }
+    #ontology-file-select {
+      flex: 1;
+      min-width: 160px;
+      max-width: 320px;
+      font-size: 11px;
+      padding: 4px 8px;
+      border-radius: var(--radius);
+      border: 1px solid var(--border);
+      background: var(--bg);
+      color: var(--text);
+      outline: none;
+      cursor: pointer;
+    }
+    #ontology-file-select:focus { border-color: var(--accent-bright); }
+    .ont-working-btn {
+      font-size: 11px;
+      padding: 4px 10px;
+      border-radius: var(--radius);
+      border: 1px solid var(--border);
+      background: none;
+      color: var(--muted);
+      cursor: pointer;
+      transition: all 0.12s;
+      white-space: nowrap;
+    }
+    .ont-working-btn:hover:not([disabled]) { color: var(--text); border-color: var(--text); }
+    .ont-working-btn[disabled] { opacity: 0.4; cursor: default; }
+    #ont-write-target-badge {
+      font-size: 10px;
+      padding: 2px 8px;
+      border-radius: 10px;
+      border: 1px solid rgba(51,204,51,0.4);
+      background: rgba(51,204,51,0.08);
+      color: var(--success);
+      white-space: nowrap;
+      flex-shrink: 0;
+      display: none;
+    }
+    #ont-write-target-badge.active { display: inline-block; }
+    #ont-write-target-badge .badge-label {
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      margin-right: 4px;
+      opacity: 0.7;
+    }
+    /* ── Right-side suggestions panel ───────────────────────────────────── */
+    #ontology-suggestions-panel {
+      display: flex;
+      flex-direction: column;
+      width: 400px;
+      flex-shrink: 0;
+      border-left: 1px solid rgba(251,191,36,0.3);
+      background: rgba(251,191,36,0.03);
+      overflow: hidden;
+      transition: width 0.2s ease;
+    }
+    #ontology-suggestions-panel.visible { display: flex; } /* kept for legacy refs */
+    #ontology-suggestions-panel.sp-collapsed {
+      width: 32px;
+      min-width: 32px;
+    }
+    #ontology-suggestions-panel.sp-collapsed > *:not(#ontology-suggestions-panel-header) { display: none; }
+    #ontology-suggestions-panel.sp-collapsed #ontology-suggestions-panel-header { padding: 8px 6px; justify-content: center; overflow: hidden; }
+    #ontology-suggestions-panel.sp-collapsed #ontology-suggestions-panel-header > *:not(#sp-toggle-btn) { display: none; }
+    #sp-toggle-btn { cursor: pointer; font-size: 12px; flex-shrink: 0; background: none; border: none; color: var(--muted); padding: 0 2px; }
+    #sp-toggle-btn:hover { color: var(--text); }
+    #suggestions-toggle-label { display: flex; }
+    #ontology-suggestions-panel-header {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      padding: 8px 14px;
+      border-bottom: 1px solid rgba(251,191,36,0.2);
+      flex-shrink: 0;
+    }
+    #ontology-suggestions-panel-title {
+      font-size: 10px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.07em;
+      color: var(--warn);
+    }
+    #ontology-suggestions-count {
+      font-size: 11px;
+      font-weight: 700;
+      padding: 1px 8px;
+      border-radius: 10px;
+      background: rgba(251,191,36,0.2);
+      color: var(--warn);
+    }
+    #ontology-suggestions-hint {
+      font-size: 10px;
+      color: var(--muted);
+      flex: 1;
+    }
+    #ontology-suggestions-list {
+      flex: 1;
+      overflow-y: auto;
+      padding: 10px;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+    .suggestion-group { margin-bottom: 14px; }
+    .suggestion-group-header {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      padding: 4px 0 6px;
+      font-size: 10px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.07em;
+      color: var(--muted);
+      border-bottom: 1px solid rgba(255,255,255,0.06);
+      margin-bottom: 8px;
+      cursor: pointer;
+      user-select: none;
+    }
+    .suggestion-group-header:hover { color: var(--text); }
+    .suggestion-group-chevron { font-size: 9px; transition: transform 0.15s; }
+    .suggestion-group.sg-collapsed .suggestion-group-cards { display: none; }
+    .suggestion-group.sg-collapsed .suggestion-group-header { border-bottom-color: transparent; margin-bottom: 0; }
+    .suggestion-group-header .group-table-name {
+      font-family: var(--mono);
+      color: var(--text);
+      font-size: 11px;
+    }
+    .suggestion-group-header .group-count {
+      font-size: 10px;
+      padding: 1px 6px;
+      border-radius: 8px;
+      background: rgba(255,255,255,0.06);
+    }
+    .suggestion-group-cards {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+    .suggestion-card {
+      background: var(--surface);
+      border: 1px solid rgba(251,191,36,0.3);
+      border-radius: var(--radius);
+      padding: 10px 12px;
+    }
+    .suggestion-card-header {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      margin-bottom: 5px;
+    }
+    .suggestion-type-chip {
+      font-size: 9px;
+      font-weight: 700;
+      padding: 2px 6px;
+      border-radius: 3px;
+      text-transform: uppercase;
+    }
+    .suggestion-type-chip.class           { background: rgba(136,192,208,0.15); color: var(--accent-bright); }
+    .suggestion-type-chip.property        { background: rgba(79, 163, 131,0.12); color: var(--success); }
+    .suggestion-type-chip.object_property { background: rgba(251,191,36,0.15); color: var(--warn); }
+    .suggestion-name {
+      font-family: var(--mono);
+      font-size: 12px;
+      font-weight: 700;
+      color: var(--text);
+      flex: 1;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+    .suggestion-rationale {
+      font-size: 11px;
+      color: var(--muted);
+      margin-bottom: 8px;
+      line-height: 1.4;
+    }
+    .suggestion-stub {
+      display: none;
+      background: var(--bg);
+      border: 1px solid var(--border);
+      border-radius: 4px;
+      padding: 8px;
+      font-family: var(--mono);
+      font-size: 10px;
+      color: #81A1C1;
+      white-space: pre;
+      overflow-x: auto;
+      margin-bottom: 6px;
+      line-height: 1.5;
+    }
+    .suggestion-stub.open { display: block; }
+    .suggestion-actions { display: flex; gap: 6px; }
+    .suggestion-actions button {
+      font-size: 10px;
+      font-weight: 600;
+      padding: 3px 8px;
+      border-radius: 4px;
+      border: 1px solid var(--border);
+      background: none;
+      color: var(--muted);
+      cursor: pointer;
+      transition: all 0.12s;
+    }
+    .suggestion-actions button:hover { color: var(--text); border-color: var(--text); }
+    .suggestion-actions .btn-dismiss:hover { border-color: var(--error); color: var(--error); }
+    .suggestion-name-input {
+      font-family: var(--mono);
+      font-size: 12px;
+      font-weight: 700;
+      color: var(--text);
+      background: var(--bg);
+      border: 1px solid var(--border);
+      border-radius: 4px;
+      padding: 2px 6px;
+      flex: 1;
+      min-width: 0;
+      outline: none;
+    }
+    .suggestion-name-input:focus { border-color: var(--accent-bright); }
+    .suggestion-domain-row {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      margin: 5px 0 6px;
+    }
+    .suggestion-domain-label {
+      font-size: 10px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      color: var(--muted);
+      white-space: nowrap;
+      flex-shrink: 0;
+    }
+    .suggestion-domain-input {
+      font-family: var(--mono);
+      font-size: 11px;
+      color: var(--text);
+      background: var(--bg);
+      border: 1px solid var(--border);
+      border-radius: 4px;
+      padding: 2px 6px;
+      flex: 1;
+      min-width: 0;
+      outline: none;
+    }
+    .suggestion-domain-input:focus { border-color: var(--accent-bright); }
+    .suggestion-domain-input.inferred { border-color: rgba(79, 163, 131,0.4); }
+    .suggestion-candidates { margin: 6px 0 4px; }
+    .suggestion-candidates-label {
+      font-size: 10px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      color: var(--muted);
+      margin-bottom: 4px;
+    }
+    .suggestion-candidate {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      padding: 5px 8px;
+      border-radius: 4px;
+      border: 1px solid var(--border);
+      background: rgba(255,255,255,0.02);
+      cursor: pointer;
+      margin-bottom: 3px;
+      transition: all 0.12s;
+    }
+    .suggestion-candidate:hover { border-color: var(--accent-bright); background: rgba(136,192,208,0.06); }
+    .suggestion-candidate.selected { border-color: var(--accent-bright); background: rgba(136,192,208,0.12); }
+    .candidate-label { font-family: var(--mono); font-size: 11px; color: var(--text); flex: 1; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+    .candidate-uri { font-size: 10px; color: var(--muted); overflow: hidden; text-overflow: ellipsis; white-space: nowrap; max-width: 120px; }
+    .candidate-score { font-size: 10px; font-weight: 700; padding: 1px 5px; border-radius: 3px; background: rgba(79, 163, 131,0.1); color: var(--success); flex-shrink: 0; }
+    .candidate-strategy { font-size: 9px; color: var(--muted); flex-shrink: 0; }
+    /* ── Ontology browser ────────────────────────────────────────────────── */
+    #ontology-browser {
+      display: flex;
+      flex: 1;
+      overflow: hidden;
+      min-height: 0;
+    }
+    #ontology-classes-panel {
+      width: 260px;
+      flex-shrink: 0;
+      border-right: 1px solid var(--border);
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+      background: var(--surface);
+    }
+    #ontology-classes-header {
+      padding: 7px 12px;
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--muted);
+      border-bottom: 1px solid var(--border);
+      flex-shrink: 0;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    #ontology-classes-list { flex: 1; overflow-y: auto; }
+    .ontology-class-item {
+      padding: 8px 12px;
+      cursor: pointer;
+      border-left: 3px solid transparent;
+      border-bottom: 1px solid var(--border);
+      transition: background 0.1s, border-color 0.1s;
+    }
+    .ontology-class-item:hover { background: rgba(136,192,208,0.06); }
+    .ontology-class-item.active { border-left-color: var(--accent); background: rgba(136,192,208,0.1); }
+    .ontology-class-item.hidden { display: none; }
+    .ontology-class-label {
+      font-size: 12px;
+      font-weight: 600;
+      color: var(--text);
+      margin-bottom: 2px;
+    }
+    .ontology-class-meta {
+      font-size: 10px;
+      color: var(--muted);
+      display: flex;
+      gap: 6px;
+    }
+    .ont-prop-count {
+      background: var(--border);
+      border-radius: 3px;
+      padding: 0px 5px;
+      font-weight: 700;
+    }
+    .ont-tree-toggle {
+      flex-shrink: 0;
+      width: 14px;
+      font-size: 9px;
+      color: var(--muted);
+      cursor: pointer;
+      user-select: none;
+      line-height: 1;
+      margin-right: 2px;
+    }
+    .ont-class-section-header {
+      padding: 6px 12px 4px;
+      font-size: 9px;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      color: var(--muted);
+      border-bottom: 1px solid var(--border);
+      background: rgba(0,0,0,0.15);
+      text-transform: uppercase;
+    }
+    /* ── Ontology detail panel ───────────────────────────────────────────── */
+    #ontology-detail-panel {
+      flex: 1;
+      overflow-y: auto;
+      padding: 20px 24px;
+      background: var(--bg-deep);
+    }
+    #ontology-detail-empty {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      padding: 60px 0;
+      color: var(--muted);
+      font-size: 14px;
+    }
+    .ont-class-title {
+      font-size: 18px;
+      font-weight: 700;
+      color: var(--text);
+      margin-bottom: 4px;
+    }
+    .ont-class-uri {
+      font-family: var(--mono);
+      font-size: 11px;
+      color: var(--muted);
+      word-break: break-all;
+      margin-bottom: 6px;
+    }
+    .ont-class-comment {
+      font-size: 13px;
+      color: var(--muted);
+      line-height: 1.5;
+      margin-bottom: 12px;
+    }
+    .ont-parents {
+      font-size: 11px;
+      color: var(--muted);
+      margin-bottom: 16px;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      flex-wrap: wrap;
+    }
+    .ont-parent-link {
+      color: var(--accent-bright);
+      cursor: pointer;
+      text-decoration: underline;
+      font-family: var(--mono);
+    }
+    .ont-parent-link:hover { color: var(--text); }
+    .ont-section-label {
+      font-size: 10px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--muted);
+      margin-bottom: 8px;
+      margin-top: 16px;
+      padding-bottom: 4px;
+      border-bottom: 1px solid var(--border);
+    }
+    .ont-prop-table { width: 100%; border-collapse: collapse; }
+    .ont-prop-table th {
+      font-size: 10px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      color: var(--muted);
+      text-align: left;
+      padding: 4px 8px;
+      border-bottom: 1px solid var(--border);
+    }
+    .ont-prop-table td {
+      padding: 6px 8px;
+      font-size: 12px;
+      vertical-align: top;
+      border-bottom: 1px solid rgba(42,45,62,0.5);
+    }
+    .ont-prop-table tr:last-child td { border-bottom: none; }
+    .ont-prop-table tr.hidden { display: none; }
+    .ont-prop-name { font-family: var(--mono); color: var(--accent-bright); font-weight: 600; }
+    .ont-prop-type-chip {
+      font-size: 9px;
+      font-weight: 700;
+      padding: 1px 5px;
+      border-radius: 3px;
+    }
+    .ont-prop-type-chip.datatype { background: rgba(79, 163, 131,0.1); color: var(--success); }
+    .ont-prop-type-chip.object   { background: rgba(136,192,208,0.12); color: var(--accent-bright); }
+    .ont-range-link { color: var(--accent-bright); cursor: pointer; text-decoration: underline; font-family: var(--mono); }
+    .ont-range-link:hover { color: var(--text); }
+    .ont-prop-comment { color: var(--muted); font-size: 11px; }
+
+    /* ── Pipeline body (log + history split) ─────────────────────────────── */
+    #pipeline-body {
+      display: flex;
+      flex: 1;
+      overflow: hidden;
+      min-height: 0;
+    }
+    #pipeline-history-sidebar {
+      width: 210px;
+      flex-shrink: 0;
+      border-right: 1px solid var(--border);
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+      background: var(--surface);
+    }
+    #pipeline-history-header {
+      padding: 7px 12px;
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--muted);
+      border-bottom: 1px solid var(--border);
+      flex-shrink: 0;
+    }
+    #pipeline-history-list { flex: 1; overflow-y: auto; }
+
+    /* ── Pipeline bottom drawer ──────────────────────────────────────── */
+    #pipeline-drawer {
+      position: fixed;
+      bottom: 0; left: 0; right: 0;
+      z-index: 300;
+      background: var(--surface);
+      border-top: 2px solid rgba(136,192,208,0.3);
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+      transition: height 0.22s cubic-bezier(0.4,0,0.2,1);
+      box-shadow: 0 -3px 18px rgba(0,0,0,0.28);
+    }
+    #pipeline-drawer.pd-collapsed { height: 36px; }
+    #pipeline-drawer.pd-partial   { height: 40vh; min-height: 200px; }
+    #pipeline-drawer.pd-full      { height: calc(100vh - 96px); }
+    #pd-header {
+      height: 36px;
+      flex-shrink: 0;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      padding: 0 14px;
+      cursor: pointer;
+      user-select: none;
+      border-bottom: 1px solid var(--border);
+    }
+    #pd-header:hover { background: rgba(136,192,208,0.04); }
+    #pd-label {
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--accent-bright);
+      flex-shrink: 0;
+    }
+    #pd-status-chip {
+      font-size: 10px;
+      font-weight: 700;
+      padding: 1px 7px;
+      border-radius: 10px;
+      display: none;
+      flex-shrink: 0;
+    }
+    #pd-status-text {
+      font-size: 11px;
+      color: var(--muted);
+      font-family: var(--mono);
+      flex: 1;
+      min-width: 0;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+    #pd-footer-info {
+      font-size: 10px;
+      color: var(--muted);
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      flex-shrink: 0;
+    }
+    .pd-ctrl-btn {
+      width: 24px; height: 22px;
+      border: 1px solid var(--border);
+      background: none;
+      color: var(--muted);
+      border-radius: 3px;
+      cursor: pointer;
+      font-size: 13px;
+      line-height: 1;
+      padding: 0;
+      display: inline-flex; align-items: center; justify-content: center;
+      flex-shrink: 0;
+      transition: background 0.12s, color 0.12s, border-color 0.12s;
+    }
+    .pd-ctrl-btn:hover { background: rgba(136,192,208,0.12); color: var(--accent-bright); border-color: rgba(136,192,208,0.4); }
+    .pd-ctrl-btn.pd-active { background: rgba(136,192,208,0.2); color: var(--accent-bright); border-color: var(--accent-bright); }
+    #pd-body {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+      min-height: 0;
+    }
+    /* Shrink main bottom so fixed drawer doesn't cover content in query tab */
+    main { padding-bottom: 36px; }
+    #conversation-panel { padding-bottom: 0; } /* overrides main padding for absolute children */
+    .pipeline-run-item {
+      padding: 8px 10px;
+      cursor: pointer;
+      border-left: 3px solid transparent;
+      border-bottom: 1px solid var(--border);
+      transition: background 0.1s, border-color 0.1s;
+    }
+    .pipeline-run-item:hover { background: rgba(136,192,208,0.06); }
+    .pipeline-run-item.active { border-left-color: var(--accent); background: rgba(136,192,208,0.1); }
+    .pipeline-run-phases {
+      font-size: 11px;
+      font-weight: 600;
+      color: var(--text);
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+      margin-bottom: 3px;
+    }
+    .pipeline-run-meta {
+      font-size: 10px;
+      color: var(--muted);
+      display: flex;
+      gap: 5px;
+      align-items: center;
+    }
+    .run-status-dot {
+      width: 6px; height: 6px;
+      border-radius: 50%;
+      flex-shrink: 0;
+    }
+    .run-status-dot.done    { background: var(--success); }
+    .run-status-dot.failed  { background: var(--error); }
+    .run-status-dot.running { background: var(--accent-bright); animation: run-pulse 1.5s ease-in-out infinite; }
+    @keyframes run-pulse { 0%,100% { opacity:1; } 50% { opacity:0.35; } }
+
+    /* ── URI autocomplete ────────────────────────────────────────────────── */
+    .uri-input-wrapper { position: relative; flex: 1; display: flex; flex-direction: column; }
+    .uri-autocomplete-dropdown {
+      display: none;
+      position: absolute;
+      top: 100%;
+      left: 0; right: 0;
+      z-index: 200;
+      background: var(--surface);
+      border: 1px solid var(--accent-bright);
+      border-top: none;
+      border-radius: 0 0 var(--radius) var(--radius);
+      max-height: 200px;
+      overflow-y: auto;
+      box-shadow: 0 4px 16px rgba(0,0,0,0.4);
+    }
+    .uri-autocomplete-item {
+      padding: 5px 8px;
+      cursor: pointer;
+      display: flex;
+      align-items: baseline;
+      gap: 8px;
+      border-bottom: 1px solid var(--border);
+      transition: background 0.1s;
+    }
+    .uri-autocomplete-item:last-child { border-bottom: none; }
+    .uri-autocomplete-item:hover { background: rgba(136,192,208,0.14); }
+    .uri-ac-local { font-family: var(--mono); font-size: 11px; color: var(--accent-bright); flex-shrink: 0; }
+    .uri-ac-label { font-size: 10px; color: var(--muted); overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+
+    /* ── CSV download button ─────────────────────────────────────────────── */
+    #csv-btn {
+      font-size: 11px;
+      font-weight: 600;
+      padding: 4px 12px;
+      border-radius: 6px;
+      border: 1px solid var(--border);
+      background: none;
+      color: var(--muted);
+      cursor: pointer;
+      transition: all 0.15s;
+      display: none;
+    }
+    #csv-btn:hover { border-color: var(--accent-bright); color: var(--accent-bright); }
+    #fragment-btn {
+      font-size: 11px;
+      font-weight: 600;
+      padding: 4px 12px;
+      border-radius: 6px;
+      border: 1px solid var(--border);
+      background: none;
+      color: var(--muted);
+      cursor: pointer;
+      transition: all 0.15s;
+      display: none;
+    }
+    #fragment-btn:hover { border-color: var(--accent-bright); color: var(--accent-bright); }
+    #fragment-btn.active { border-color: var(--accent-bright); color: var(--accent-bright); background: rgba(136,192,208,0.1); }
+
+    /* ── AG Grid theme overrides ─────────────────────────────────────────── */
+    .ag-theme-alpine-dark {
+      --ag-background-color: var(--bg);
+      --ag-odd-row-background-color: #12151f;
+      --ag-header-background-color: #1a1d27;
+      --ag-border-color: var(--border);
+      --ag-header-column-separator-color: var(--border);
+      --ag-row-hover-color: rgba(136,192,208,0.08);
+      --ag-selected-row-background-color: rgba(136,192,208,0.15);
+      --ag-font-family: var(--font);
+      --ag-font-size: 11px;
+      --ag-cell-horizontal-padding: 10px;
+      --ag-row-height: 28px;
+      --ag-header-height: 30px;
+    }
+    .ag-theme-alpine-dark .ag-header-cell-label { font-weight: 600; font-size: 10px; letter-spacing: 0.04em; text-transform: uppercase; color: var(--muted); }
+    .ag-theme-alpine-dark .ag-cell { color: var(--text); }
+
+    /* Turn layer badge */
+    .layer-badge {
+      font-size: 9px;
+      padding: 1px 5px;
+      border-radius: 3px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      flex-shrink: 0;
+    }
+    .layer-bronze { background: rgba(251,146,60,0.15);  color: #fb923c; }
+    .layer-silver { background: rgba(148,163,184,0.15); color: #94a3b8; }
+    .layer-gold   { background: rgba(251,191,36,0.15);  color: var(--warn); }
+    .layer-graph  { background: rgba(136,192,208,0.15); color: var(--accent-bright); }
+
+    /* Query layer track */
+    #query-layer-bar {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 0 0 10px 0;
+    }
+    .qt-label {
+      font-size: 10px;
+      color: var(--muted);
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      white-space: nowrap;
+    }
+    #query-layer-track {
+      display: flex;
+      align-items: center;
+    }
+    .qt-node {
+      font-size: 10px;
+      padding: 2px 10px;
+      border-radius: 12px;
+      border: 1px solid var(--border);
+      color: var(--muted);
+      cursor: pointer;
+      background: none;
+      transition: border-color 0.15s, color 0.15s, background 0.15s;
+      white-space: nowrap;
+      font-family: inherit;
+      appearance: none;
+      -webkit-appearance: none;
+    }
+    .qt-node:hover { border-color: var(--accent-bright); color: var(--text); }
+    .qt-node.sel { border-color: var(--accent-bright); color: var(--accent-bright); background: rgba(136,192,208,0.1); }
+    .qt-rail { width: 18px; height: 1px; background: var(--border); }
+
+    /* Suggested queries chips */
+    #suggestions {
+      padding: 10px 16px;
+      border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+      flex-shrink: 0;
+    }
+    #suggestions p { font-size: 10px; color: var(--muted); text-transform: uppercase; letter-spacing: 0.08em; }
+    #suggestion-select {
+      width: 100%;
+      font-size: 11px;
+      padding: 6px 28px 6px 10px;
+      border-radius: 6px;
+      border: 1px solid var(--border);
+      background-color: var(--bg);
+      color: var(--muted);
+      cursor: pointer;
+      font-family: inherit;
+      appearance: none;
+      -webkit-appearance: none;
+      transition: border-color 0.15s, color 0.15s;
+      background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='10' height='6' viewBox='0 0 10 6'><path d='M1 1l4 4 4-4' stroke='%23A19E97' stroke-width='1.5' fill='none' stroke-linecap='round'/></svg>");
+      background-repeat: no-repeat;
+      background-position: right 10px center;
+    }
+    #suggestion-select:hover, #suggestion-select:focus { border-color: var(--accent-bright); color: var(--text); outline: none; }
+  </style>
+</head>
+<body>
+<div id="app">
+
+  <!-- Header -->
+  <header>
+    <div class="logo">
+      <svg width="32" height="32" viewBox="0 0 200 200" fill="none" xmlns="http://www.w3.org/2000/svg" style="flex-shrink:0">
+        <rect width="200" height="200" rx="36" fill="#3A9474"/>
+        <circle cx="36" cy="100" r="22" fill="#091A12"/>
+        <circle cx="164" cy="100" r="22" fill="#091A12"/>
+        <circle cx="100" cy="100" r="22" fill="#091A12"/>
+        <line x1="58" y1="100" x2="78" y2="100" stroke="#091A12" stroke-width="16" stroke-linecap="round"/>
+        <line x1="122" y1="100" x2="142" y2="100" stroke="#091A12" stroke-width="16" stroke-linecap="round"/>
+        <line x1="100" y1="36" x2="100" y2="78" stroke="#091A12" stroke-width="16" stroke-linecap="round"/>
+        <line x1="100" y1="122" x2="100" y2="164" stroke="#091A12" stroke-width="16" stroke-linecap="round"/>
+        <circle cx="100" cy="36" r="16" fill="#091A12"/>
+        <circle cx="100" cy="164" r="16" fill="#091A12"/>
+      </svg>
+      <span>Forge<span style="color:#3A9474">Mesh</span></span>
+      <!-- Project selector — authoritative dataset switch -->
+      <span style="display:flex;align-items:center;gap:6px;font-size:11px;">
+        <span style="opacity:0.5">project</span>
+        <select id="project-select"
+          title="Active project — sets all dataset-specific configuration"
+          onchange="selectProject(this.value)"
+          style="background:var(--surface);border:1px solid var(--border);border-radius:5px;color:var(--text);font-size:11px;padding:2px 6px;cursor:pointer;outline:none;min-width:110px;">
+          <option value="">— none —</option>
+        </select>
+      </span>
+      <span id="header-datasource-chip" style="display:none;align-items:center;gap:6px;font-size:11px;padding:3px 10px;border-radius:12px;background:rgba(136,192,208,0.12);border:1px solid rgba(136,192,208,0.25);color:var(--accent-bright);">
+        <span style="opacity:0.6">db</span> <span id="header-datasource-name">—</span>
+      </span>
+      <span id="header-ontology-chip" style="display:none;align-items:center;gap:6px;font-size:11px;padding:3px 10px;border-radius:12px;background:rgba(79, 163, 131,0.1);border:1px solid rgba(79, 163, 131,0.2);color:#4FA383;">
+        <span style="opacity:0.6">ont</span> <span id="header-ontology-name">—</span>
+      </span>
+    </div>
+    <div id="status-bar">
+      <span><div class="dot-live"></div>
+        <select id="model-select" title="Query model" style="background:transparent;border:none;color:inherit;font-size:inherit;font-family:inherit;cursor:pointer;outline:none;padding:0 2px;">
+          <option value="gpt-4o">gpt-4o</option>
+          <option value="gpt-4o-mini">gpt-4o-mini</option>
+        </select>
+      </span>
+    </div>
+  </header>
+
+  <!-- Tab bar -->
+  <div id="tab-bar">
+    <button class="tab-btn" data-tab="rawschema">Relational Schema</button>
+    <span class="tab-arrow">→</span>
+    <button class="tab-btn" data-tab="ontology">Ontology <span id="suggestions-tab-badge" style="display:none; margin-left:4px; font-size:10px; padding:1px 6px; border-radius:10px; background:rgba(251,191,36,0.2); color:var(--warn);"></span></button>
+    <span class="tab-arrow">→</span>
+    <button class="tab-btn" data-tab="corrections">Corrections</button>
+    <span class="tab-arrow">→</span>
+    <button class="tab-btn" data-tab="mappings">Mappings <span id="pending-badge" style="display:none; margin-left:4px; font-size:10px; padding:1px 6px; border-radius:10px; background:rgba(251,191,36,0.2); color:var(--warn);"></span></button>
+    <span class="tab-arrow">→</span>
+    <button class="tab-btn active" data-tab="query">Query</button>
+    <span class="tab-arrow">→</span>
+    <button class="tab-btn" data-tab="proof">Receipt</button>
+    <span class="tab-arrow">→</span>
+    <button class="tab-btn" data-tab="quality">Quality</button>
+  </div>
+
+  <!-- Main -->
+  <main>
+
+    <!-- Left: conversation + input -->
+    <div id="conversation-panel">
+      <h2>
+        Conversation
+        <div style="display:flex;gap:6px;align-items:center;">
+          <button id="reset-ctx-btn" title="Clear LLM conversation memory so the next question starts fresh" style="display:none">Reset context</button>
+        </div>
+      </h2>
+
+      <div id="suggestions">
+        <select id="suggestion-select" title="Try asking a suggested question">
+          <option value="" disabled selected>Try asking…</option>
+        </select>
+        <p id="schema-status" style="font-size:10px;color:var(--muted);margin:6px 0 0 0;display:none"></p>
+      </div>
+
+      <div id="history"></div>
+
+      <div id="input-area">
+        <div id="query-layer-bar">
+          <span class="qt-label">Layer</span>
+          <div id="query-layer-track"></div>
+        </div>
+        <textarea id="question" rows="3" placeholder="Ask a question about your data…"></textarea>
+        <div class="input-actions">
+          <button id="ask-btn">Ask</button>
+          <div id="spinner"></div>
+          <select id="limit-select" title="Row limit">
+            <option value="25">25 rows</option>
+            <option value="100" selected>100 rows</option>
+            <option value="250">250 rows</option>
+            <option value="500">500 rows</option>
+            <option value="1000">1000 rows</option>
+          </select>
+          <span class="hint">⌘↵ to submit</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Corrections panel -->
+    <div id="corrections-panel">
+      <div id="corrections-toolbar">
+        <span style="font-size:13px;font-weight:600">Corrections Store</span>
+        <select id="corrections-type-filter" style="font-size:11px;padding:4px 8px;background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);color:var(--text);cursor:pointer;">
+          <option value="">All types</option>
+          <option value="HUMAN">Human only</option>
+          <option value="AUTO">Auto only</option>
+        </select>
+        <select id="corrections-dataset-filter" style="font-size:11px;padding:4px 8px;background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);color:var(--text);cursor:pointer;max-width:220px;">
+          <option value="">All datasets</option>
+        </select>
+        <input id="corrections-search" type="text" placeholder="Filter by column or URI…"
+          style="font-size:11px;padding:5px 8px;background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);color:var(--text);outline:none;width:220px;" />
+        <span id="corrections-count" style="font-size:11px;color:var(--muted);margin-left:4px;"></span>
+        <span style="flex:1"></span>
+        <button id="corrections-prune-btn" style="font-size:11px;font-weight:600;padding:4px 12px;border-radius:5px;border:1px solid var(--border);background:none;color:var(--muted);cursor:pointer;" title="Keep only the winning entry per column — removes redundant AUTO votes">Prune to winning</button>
+        <button id="corrections-clear-dataset-btn" style="display:none;font-size:11px;font-weight:600;padding:4px 12px;border-radius:5px;border:1px solid rgba(239,68,68,0.4);background:none;color:var(--error);cursor:pointer;" title="Delete corrections for selected dataset">Clear dataset</button>
+        <button id="corrections-clear-btn" style="font-size:11px;font-weight:600;padding:4px 12px;border-radius:5px;border:1px solid rgba(239,68,68,0.4);background:none;color:var(--error);cursor:pointer;" title="Delete all corrections">Delete all</button>
+      </div>
+      <div id="corrections-content">
+        <div style="display:flex;flex-direction:column;align-items:center;justify-content:center;gap:10px;padding:60px 0;color:var(--muted);">
+          <div style="font-size:36px;opacity:0.4">⟳</div>
+          <p style="font-size:14px">Loading corrections…</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Ontology panel (full-width overlay) -->
+    <div id="ontology-panel">
+      <!-- Single consolidated toolbar -->
+      <div id="ontology-toolbar">
+        <select id="ontology-file-select" onchange="selectOntologyFromDropdown(this.value)" style="min-width:160px;max-width:280px;">
+          <option value="">— select a file —</option>
+        </select>
+        <button id="ontology-reload-btn" style="font-size:13px;padding:4px 8px;border-radius:5px;border:1px solid var(--border);background:none;color:var(--muted);cursor:pointer;line-height:1;" title="Reload ontology">↻</button>
+        <input id="ontology-search" type="text" placeholder="Search classes and properties…" />
+        <button class="ont-working-btn" onclick="document.getElementById('ontology-file-input').click()">Load file…</button>
+        <input type="file" id="ontology-file-input" accept=".owl,.rdf,.ttl,.xml" style="display:none" onchange="uploadOntologyFile(this)" />
+        <button class="ont-working-btn" id="coherence-run-btn" onclick="runCoherenceCheck()" title="Run structural coherence checks on the loaded ontology (issue #52)"><span id="coherence-btn-icon">⬡</span> Coherence Check</button>
+        <span id="ont-write-target-badge" title="Suggestions and edits are written to this file"><span class="badge-label">Editing</span><span id="ont-write-target-name">—</span></span>
+        <span id="ontology-class-count" style="font-size:11px;color:var(--muted);margin-left:4px;"></span>
+      </div>
+
+      <!-- Re-run banner (shown after applying a suggestion) -->
+      <div id="ontology-rerun-banner" style="display:none; padding:8px 20px; background:rgba(251,191,36,0.1); border-bottom:1px solid rgba(251,191,36,0.3); font-size:12px; color:var(--warn); align-items:center; gap:10px;">
+        <span>⚠</span>
+        <span>Ontology updated. Re-run the pipeline so mappings reflect the new properties.</span>
+        <button onclick="_setPdState('partial')" style="font-size:11px;font-weight:700;padding:3px 12px;border-radius:5px;border:1px solid rgba(251,191,36,0.5);background:rgba(251,191,36,0.1);color:var(--warn);cursor:pointer;">Open Pipeline ↓</button>
+        <button onclick="document.getElementById('ontology-rerun-banner').style.display='none'" style="margin-left:auto;font-size:11px;padding:3px 10px;border-radius:5px;border:1px solid rgba(251,191,36,0.3);background:none;color:var(--warn);cursor:pointer;opacity:0.7;">✕</button>
+      </div>
+
+      <!-- Coherence panel (issue #52) — hidden until button clicked -->
+      <div id="coherence-panel" style="display:none; padding:12px 20px; border-bottom:1px solid var(--border); background:var(--surface-2); font-size:12px;"></div>
+
+      <!-- Class browser (classes | detail | suggestions side panel) -->
+      <div id="ontology-browser">
+        <div id="ontology-classes-panel">
+          <div id="ontology-classes-header">
+            <span>Classes</span>
+            <span id="ontology-orphan-btn" style="font-size:10px;color:var(--muted);cursor:pointer;text-decoration:underline;display:none" title="Abstract properties — no rdfs:domain, used as superproperties">Abstract props</span>
+          </div>
+          <div id="ontology-classes-list">
+            <div style="padding:20px 12px;text-align:center;font-size:11px;color:var(--muted)">Loading…</div>
+          </div>
+        </div>
+        <div id="ontology-detail-panel">
+          <div id="ontology-detail-empty">
+            <div style="font-size:32px;opacity:0.3">⬡</div>
+            <span>Select a class to view its properties</span>
+          </div>
+        </div>
+        <!-- Suggestions side panel (visible when there are gap suggestions) -->
+        <div id="ontology-suggestions-panel">
+          <div id="ontology-suggestions-panel-header">
+            <button id="sp-toggle-btn" title="Collapse/expand suggestions pane">▶</button>
+            <span id="ontology-suggestions-panel-title">Suggestions</span>
+            <span id="ontology-suggestions-count"></span>
+            <span id="ontology-suggestions-hint">unresolved columns</span>
+            <label id="suggestions-toggle-label" title="Enable automatic gap analysis (uses LLM)" style="margin-left:auto;align-items:center;gap:5px;font-size:10px;color:var(--muted);cursor:pointer;white-space:nowrap">
+              <input type="checkbox" id="suggestions-enabled-toggle" style="cursor:pointer;accent-color:var(--primary)"> Auto-suggest
+            </label>
+            <button id="suggestions-rebuild-btn" onclick="rebuildSuggestions()" title="Re-analyse gaps and rebuild suggestions" style="font-size:10px;padding:2px 8px;border-radius:4px;border:1px solid var(--border);background:none;color:var(--muted);cursor:pointer;white-space:nowrap">↻ Rebuild</button>
+          </div>
+          <div id="ontology-suggestions-list"></div>
+          <div id="suggestions-clear-dismissed-footer" style="display:none;padding:8px 12px;border-top:1px solid rgba(251,191,36,0.15);flex-shrink:0;">
+            <button onclick="_clearDismissed();renderSuggestions();" style="width:100%;font-size:11px;padding:5px 0;border-radius:5px;border:1px solid var(--border);background:none;color:var(--muted);cursor:pointer;">Clear dismissed</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Relational Schema panel -->
+    <div id="rawschema-panel">
+      <div id="rawschema-toolbar">
+        <span style="font-size:11px;color:var(--muted);white-space:nowrap">Data source</span>
+        <select id="rawschema-db-select" onchange="selectDataSource(this.value)" style="font-size:11px;padding:3px 8px;border-radius:5px;border:1px solid var(--border);background:var(--surface);color:var(--text);outline:none;cursor:pointer;max-width:200px;">
+          <option value="">Loading…</option>
+        </select>
+        <span id="rawschema-db-url" style="font-size:11px;color:var(--muted);font-family:var(--mono);opacity:0.7;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:360px;"></span>
+        <span style="flex:1"></span>
+        <span id="rawschema-stale-chip" style="display:none;font-size:11px;color:var(--warn);padding:2px 8px;border-radius:10px;background:rgba(251,191,36,0.1);">⟳ Stale</span>
+        <button id="rawschema-reinspect-btn" style="font-size:11px;padding:4px 10px;border-radius:5px;border:1px solid var(--border);background:none;color:var(--muted);cursor:pointer;" title="Re-run inspect phase against the live database">↻ Re-inspect</button>
+      </div>
+      <div id="rawschema-browser">
+        <div id="rawschema-tables-panel">
+          <div id="rawschema-tables-header">
+            <span>Tables</span>
+            <span id="rawschema-table-count" style="font-size:10px;color:var(--muted)"></span>
+          </div>
+          <div id="rawschema-tables-list">
+            <div style="padding:20px 12px;text-align:center;font-size:11px;color:var(--muted)">Loading…</div>
+          </div>
+        </div>
+        <div id="rawschema-detail-panel">
+          <div id="rawschema-detail-empty">
+            <div style="font-size:32px;opacity:0.3">⊞</div>
+            <span>Select a table to view its columns</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Mappings panel (full-width, replaces both columns when active) -->
+    <div id="mappings-panel">
+      <div id="mappings-stale-banner" style="display:none; padding:8px 20px; background:rgba(251,191,36,0.1); border-bottom:1px solid rgba(251,191,36,0.3); font-size:12px; color:var(--warn); align-items:center; gap:10px;">
+        <span>⚠</span>
+        <span>Mapping changes won't appear in query results until you re-run the pipeline.</span>
+        <button id="banner-rerun-btn" onclick="runMaterialiseFromBanner()" style="font-size:11px;font-weight:700;padding:3px 12px;border-radius:5px;border:1px solid rgba(251,191,36,0.5);background:rgba(251,191,36,0.1);color:var(--warn);cursor:pointer;">Re-run Materialise</button>
+        <span id="banner-run-status" style="font-size:11px;"></span>
+        <button onclick="document.querySelectorAll('.tab-btn[data-tab=pipeline]')[0].click()" style="margin-left:auto;font-size:11px;padding:3px 12px;border-radius:5px;border:1px solid rgba(251,191,36,0.5);background:none;color:var(--warn);cursor:pointer;opacity:0.7;">Go to Pipeline →</button>
+      </div>
+      <div id="mappings-toolbar">
+        <span id="mappings-count-label">Loading…</span>
+        <input id="mappings-search" type="text" placeholder="Search tables or columns…"
+          style="flex:1;min-width:140px;max-width:280px;background:var(--bg);border:1px solid var(--border);border-radius:var(--radius);color:var(--text);font-size:12px;padding:5px 10px;outline:none;transition:border-color 0.15s;"
+          oninput="if(_mappingsData) renderMappings(_mappingsData)" />
+        <span style="flex:1"></span>
+        <select id="mappings-filter" style="background:var(--bg);border:1px solid var(--border);border-radius:var(--radius);color:var(--muted);font-size:12px;padding:5px 8px;cursor:pointer;outline:none;">
+          <option value="all">All statuses</option>
+          <option value="pending">Pending review</option>
+          <option value="confirmed">Confirmed</option>
+          <option value="unmapped">Unmapped</option>
+          <option value="rejected">Rejected</option>
+        </select>
+        <button id="mappings-reload-btn" style="font-size:11px;padding:4px 10px;border-radius:5px;border:1px solid var(--border);background:none;color:var(--muted);cursor:pointer;" title="Reload from disk">↻ Reload</button>
+      </div>
+      <div id="mappings-content">
+        <div id="mappings-empty" style="display:none">
+          <div class="icon">✓</div>
+          <p>No pending review mappings</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Results panel (query tab) -->
+    <div id="results-panel">
+      <div id="results-header">
+        <div id="results-title" style="color: var(--muted)">Ask a question to see results</div>
+        <div id="results-meta">
+          <span id="row-count-badge" style="display:none"></span>
+          <button id="prove-btn" title="Open the traced-to-source receipt for this answer" style="display:none">⬡ Receipt</button>
+          <button id="fragment-btn" title="Toggle URI fragments" style="display:none"># Fragment</button>
+          <button id="csv-btn" title="Download results as CSV">⬇ CSV</button>
+        </div>
+      </div>
+
+      <div id="explanation-bar"></div>
+
+      <div id="sparql-section" style="display:none">
+        <div style="display:flex;align-items:center;">
+          <button id="sparql-toggle" style="flex:1">
+            <span class="chevron">▶</span> <span id="sparql-section-label">SPARQL</span>
+          </button>
+          <button id="sparql-copy-btn" title="Copy SPARQL to clipboard"
+            style="font-size:11px;padding:4px 10px;border-radius:5px;border:1px solid var(--border);background:none;color:var(--muted);cursor:pointer;margin-right:12px;flex-shrink:0;">
+            Copy
+          </button>
+        </div>
+        <div id="sparql-code">
+          <pre id="sparql-pre"></pre>
+        </div>
+      </div>
+
+      <div id="grid-container">
+        <div id="empty-state">
+          <div class="icon">⬡</div>
+          <p>No results yet</p>
+          <span class="sub">Ask a question on the left to query the triplestore</span>
+        </div>
+        <div id="error-state"></div>
+        <div id="grid" class="ag-theme-alpine-dark" style="display:none"></div>
+      </div>
+    </div>
+
+    <!-- Receipt pane — renders the answer envelope for the active run -->
+    <div id="proof-panel">
+      <div class="pt-empty">
+        <div class="icon">⬡</div>
+        <p>No receipt yet</p>
+        <span class="sub">Ask a question on the Query tab, then click <b>⬡ Receipt</b></span>
+      </div>
+    </div>
+
+    <!-- Quality panel — issues #48, #49, #50, #51 -->
+    <div id="quality-panel" style="padding:24px 28px;">
+
+      <!-- 2.2 Coverage Metrics -->
+      <div class="quality-section">
+        <div class="quality-section-header">
+          <span class="quality-section-title">Ontology Coverage</span>
+          <span class="quality-section-hint">Proportion of source columns mapped to ontology properties</span>
+          <button class="quality-action-btn" onclick="loadCoverage()" style="margin-left:auto">↻ Refresh</button>
+        </div>
+        <div id="quality-coverage-body"><div class="quality-loading">Loading…</div></div>
+      </div>
+
+      <!-- 2.3 Triple Completeness -->
+      <div class="quality-section">
+        <div class="quality-section-header">
+          <span class="quality-section-title">Triple Completeness</span>
+          <span class="quality-section-hint">Bronze rows → Silver → Gold → RDF triples materialisation rate</span>
+          <button class="quality-action-btn" onclick="loadCompleteness()" style="margin-left:auto">↻ Refresh</button>
+        </div>
+        <div id="quality-completeness-body"><div class="quality-loading">Loading…</div></div>
+      </div>
+
+      <!-- 2.1 Mapping Quality Evaluation -->
+      <div class="quality-section">
+        <div class="quality-section-header">
+          <span class="quality-section-title">Mapping Quality Evaluation</span>
+          <span class="quality-section-hint">Precision / Recall against a manually annotated ground truth</span>
+        </div>
+        <div style="display:flex;gap:8px;align-items:center;margin-bottom:8px">
+          <select id="eval-gt-select" style="font-size:11px;padding:4px 8px;border-radius:5px;border:1px solid var(--border);background:var(--surface);color:var(--text);min-width:260px">
+            <option value="">— select a ground truth file —</option>
+          </select>
+          <button id="eval-run-btn" class="quality-action-btn" onclick="runMappingEval()">▶ Run Evaluation</button>
+          <span style="font-size:10px;color:var(--muted)">Add files to <code>eval/</code> directory</span>
+        </div>
+        <div id="quality-eval-body"></div>
+      </div>
+
+      <!-- 2.4 Benchmark Query Set -->
+      <div class="quality-section">
+        <div class="quality-section-header">
+          <span class="quality-section-title">Benchmark Queries</span>
+          <span class="quality-section-hint">Run expected-count queries against Fuseki to validate end-to-end correctness</span>
+        </div>
+        <div style="display:flex;gap:8px;align-items:center;margin-bottom:8px">
+          <select id="bench-suite-select" style="font-size:11px;padding:4px 8px;border-radius:5px;border:1px solid var(--border);background:var(--surface);color:var(--text);min-width:260px">
+            <option value="">— select a benchmark suite —</option>
+          </select>
+          <button id="bench-run-btn" class="quality-action-btn" onclick="runBenchmark()">▶ Run Benchmarks</button>
+          <span style="font-size:10px;color:var(--muted)">Add suites to <code>eval/benchmarks/</code></span>
+        </div>
+        <div id="quality-bench-body"></div>
+      </div>
+
+    </div>
+
+  </main>
+
+
+</div>
+
+<!-- Pipeline bottom drawer (outside #app so it overlays freely) -->
+<div id="pipeline-drawer" class="pd-collapsed">
+  <!-- Header — always visible, click to expand/collapse -->
+  <div id="pd-header">
+    <span style="font-size:9px;color:var(--muted);transition:transform 0.2s" id="pd-chevron">▲</span>
+    <span id="pd-label">Pipeline</span>
+    <span id="pd-state-chip"></span>
+    <span id="pd-status-chip"></span>
+    <span id="pd-status-text">Ready — select phases and click ▶ Run</span>
+    <div id="pd-footer-info">
+      <div id="token-counter" style="display:flex;gap:10px">
+        <span>Prompt: <b id="tok-prompt">0</b></span>
+        <span>Completion: <b id="tok-completion">0</b></span>
+        <span>Calls: <b id="tok-calls">0</b></span>
+        <button id="tok-reset-btn" title="Reset token counter" style="font-size:10px;padding:1px 6px;border-radius:4px;border:1px solid var(--border);background:none;color:var(--muted);cursor:pointer;margin-left:2px;">✕</button>
+      </div>
+    </div>
+    <button id="pd-btn-partial" class="pd-ctrl-btn" title="30% view">▤</button>
+    <button id="pd-btn-full"    class="pd-ctrl-btn" title="Full view">▢</button>
+    <button id="pd-btn-collapse" class="pd-ctrl-btn" title="Minimise">─</button>
+  </div>
+  <!-- Body — hidden when collapsed -->
+  <div id="pd-body">
+    <div id="pipeline-toolbar" style="flex-direction:column;align-items:stretch;gap:0;padding:0;">
+      <div style="display:flex;align-items:center;gap:10px;padding:8px 12px;border-bottom:1px solid var(--border);">
+        <button id="pipeline-run-btn" style="min-width:72px;">▶ Run</button>
+        <div id="phase-track-wrap">
+          <div class="phase-track-line" id="phase-track"></div>
+          <span id="phase-track-hint">click or drag to select</span>
+        </div>
+        <span id="pipeline-status-chip"></span>
+        <span style="flex:1"></span>
+        <button id="pipeline-copy-btn" style="font-size:11px;padding:4px 10px;border-radius:5px;border:1px solid var(--border);background:none;color:var(--muted);cursor:pointer;">Copy output</button>
+        <button id="pipeline-clear-btn" style="font-size:11px;padding:4px 10px;border-radius:5px;border:1px solid var(--border);background:none;color:var(--muted);cursor:pointer;">Clear log</button>
+      </div>
+    </div>
+    <div id="pipeline-body">
+      <div id="pipeline-history-sidebar">
+        <div id="pipeline-history-header">History</div>
+        <div id="pipeline-history-list">
+          <div style="padding:20px 12px;text-align:center;font-size:11px;color:var(--muted)">No runs yet</div>
+        </div>
+      </div>
+      <div id="pipeline-log">
+        <div id="pipeline-empty">
+          <div class="icon">⚙</div>
+          <p style="font-size:14px">Pipeline output will appear here</p>
+          <span style="font-size:12px">Select phases and click Run to start</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Mapping threshold dialog — must appear before scripts so getElementById finds it -->
+<div id="threshold-overlay" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,0.55);z-index:900;align-items:center;justify-content:center;">
+  <div style="background:var(--surface);border:1px solid var(--border);border-radius:10px;padding:28px 32px;width:360px;box-shadow:0 8px 40px rgba(0,0,0,0.5);">
+    <div style="font-size:14px;font-weight:700;color:var(--text);margin-bottom:8px;">Mapping threshold</div>
+    <div style="font-size:12px;color:var(--muted);line-height:1.6;margin-bottom:20px;">
+      Columns scored above this threshold are <b style="color:var(--text)">auto-confirmed</b> without review.
+      Lower values confirm more mappings automatically; higher values are more conservative.
+      <br><br>
+      Typical range: <b style="color:var(--accent-bright)">0.70 – 0.95</b>
+    </div>
+    <div style="display:flex;align-items:center;gap:10px;margin-bottom:24px;">
+      <input id="threshold-dialog-input" type="range" min="0" max="1" step="0.01" value="0.90"
+        style="flex:1;accent-color:var(--accent);" />
+      <span id="threshold-dialog-value" style="font-size:13px;font-weight:700;color:var(--accent-bright);min-width:36px;text-align:right;">0.90</span>
+    </div>
+    <div style="display:flex;gap:10px;justify-content:flex-end;">
+      <button id="threshold-cancel-btn" style="padding:7px 18px;border-radius:6px;border:1px solid var(--border);background:none;color:var(--muted);font-size:12px;cursor:pointer;">Cancel</button>
+      <button id="threshold-confirm-btn" style="padding:7px 20px;border-radius:6px;border:none;background:var(--accent);color:var(--bg-deep);font-size:12px;font-weight:700;cursor:pointer;">▶ Run</button>
+    </div>
+  </div>
+</div>
+
+<script src="/js/utils.js"></script>
+<script src="/js/state.js"></script>
+<script src="/js/grid.js"></script>
+<script src="/js/pipeline.js"></script>
+<script src="/js/query.js"></script>
+<script src="/js/receipt_view.js"></script>
+<script src="/js/corrections.js"></script>
+<script src="/js/mappings.js"></script>
+<script src="/js/schema.js"></script>
+<script src="/js/ontology.js"></script>
+<script src="/js/quality.js"></script>
+<script src="/js/boot.js"></script>
+
+
+<script>
+// ── Receipt pane ─────────────────────────────────────────────────────────────
+// The answer envelope for the active query, rendered by the shared receipt view.
+function _activeRunId() {
+  const t = (typeof turns !== 'undefined' && activeTurn >= 0) ? turns[activeTurn] : null;
+  return t && t.result ? (t.result.run_id || null) : null;
+}
+function _showReceiptPane() {
+  const panel = document.getElementById('proof-panel');
+  if (window.ForgeReceipt) ForgeReceipt.load(_activeRunId(), panel);
+}
+// "⬡ Receipt" on the Query tab opens the Receipt pane for this answer.
+document.getElementById('prove-btn').addEventListener('click', () => {
+  if (activeTab !== 'proof') {
+    document.querySelector('.tab-btn[data-tab="proof"]').click();  // renders via tab listener
+  } else {
+    _showReceiptPane();
+  }
+});
+// Selecting the Receipt tab (or re-selecting it) renders the active run's receipt.
+document.querySelector('.tab-btn[data-tab="proof"]').addEventListener('click', () => {
+  setTimeout(_showReceiptPane, 0);  // after boot.js toggles panel visibility
+});
+
+</script>
+
+<!-- datalist populated from loaded ontology classes for domain autocomplete -->
+<datalist id="ont-class-datalist"></datalist>
+</body>
+</html>

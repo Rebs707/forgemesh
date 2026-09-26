@@ -1,0 +1,15 @@
+# Minimal set for running only mcp_server.py (no embedding model).
+# Versions match pyproject.toml.
+sqlalchemy==2.0.34
+pymysql==1.1.2
+cryptography==43.0.0
+rdflib==7.6.0
+pydantic==2.12.5
+pydantic-settings==2.6.1
+rapidfuzz==3.14.3
+python-dotenv==1.0.0
+openai==2.9.0
+requests==2.32.3
+fastapi==0.135.2
+uvicorn==0.42.0
+mcp==1.27.0

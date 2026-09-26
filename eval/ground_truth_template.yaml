@@ -1,0 +1,36 @@
+# Ground truth for mapping-quality evaluation.
+#
+# Each entry states what a source column MEANS, not what the ontology should name
+# it, so the score doesn't depend on naming conventions. It is checked against the
+# ontology the mapping report was built with:
+#   - the mapped property's domain must be the column's table class;
+#   - refers_to: <table>  → an ObjectProperty whose range is that table's class;
+#   - value_type: <kind>  → temporal | numeric | boolean | text | categorical | identifier
+#                           (or a list of acceptable kinds). categorical accepts a link
+#                           to a value class or a coded string.
+#
+# HOW TO USE:
+#   1. Copy this file to eval/ground_truth_<dataset>.yaml and describe your columns.
+#   2. POST to /api/eval/mapping-quality with {"path": "eval/ground_truth_<dataset>.yaml"}
+#      (Quality tab in the web app), or call MappingEvaluator().evaluate(report, gt).
+#
+# This example describes the bundled Synthea sample.
+
+version: "2.0"
+dataset: "synthea"
+description: "Synthea column meanings"
+
+mappings:
+  - {table: raw_patients,   column: id,          value_type: identifier}
+  - {table: raw_patients,   column: birthdate,   value_type: temporal}
+  - {table: raw_patients,   column: gender,      value_type: categorical}
+  - {table: raw_patients,   column: race,        value_type: categorical}
+  - {table: raw_patients,   column: ethnicity,   value_type: categorical}
+  - {table: raw_encounters, column: id,          value_type: identifier, note: "Heuristic PK — no declared MySQL constraint"}
+  - {table: raw_encounters, column: patient,     refers_to: raw_patients}
+  - {table: raw_encounters, column: start,       value_type: temporal}
+  - {table: raw_encounters, column: stop,        value_type: temporal}
+  - {table: raw_conditions, column: patient,     refers_to: raw_patients}
+  - {table: raw_conditions, column: encounter,   refers_to: raw_encounters}
+  - {table: raw_conditions, column: code,        value_type: [categorical, identifier], note: "SNOMED CT code"}
+  - {table: raw_conditions, column: description, value_type: [text, categorical]}

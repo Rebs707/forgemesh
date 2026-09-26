@@ -1,0 +1,17 @@
+bronze_database_url: mysql+pymysql://root:password@localhost:3307/mimic_bronze
+description: MIMIC-III clinical database (bronze → silver → gold → RDF)
+gold_database_url: mysql+pymysql://root:password@localhost:3307/mimic_gold
+llm_model: gpt-4o
+name: mimic
+named_graph_uri: http://mesh.local/graph/mimic
+ontology_gen_model: gpt-4o
+ontology_judge_model: gpt-4o-mini
+ontology_named_graph_uri: http://mesh.local/graph/mimic/ontology
+# No MIMIC ontology ships (it would embed MIMIC vocabulary). Generate one with
+#   python main.py --project mimic --phases inspect,full,map,silver,gold,rdf
+# then set this to the generated owl/mimic_*.owl file. See datasets/mimic/README.md.
+ontology_path: ''
+query_model: gpt-4o
+rdf_dataset_name: mimic-mesh
+rdf_source_name: mimic
+silver_database_url: mysql+pymysql://root:password@localhost:3307/mimic_silver

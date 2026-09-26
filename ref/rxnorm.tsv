@@ -1,0 +1,236 @@
+# RxNorm — offline subset (stand-in for a live terminology service).
+# Real RxCUIs + names. Format: code<TAB>label.
+1000126	1 ML medroxyPROGESTERone acetate 150 MG/ML Injection
+1000126	1 ML medroxyprogesterone acetate 150 MG/ML Injection
+1014676	cetirizine hydrochloride 5 MG Oral Tablet
+1043400	Acetaminophen 21.7 MG/ML / Dextromethorphan Hydrobromide 1 MG/ML / doxylamine succinate 0.417 MG/ML Oral Solution
+1049221	Acetaminophen 325 MG / Oxycodone Hydrochloride 5 MG Oral Tablet
+1049221	Acetaminophen 325 MG / oxyCODONE Hydrochloride 5 MG Oral Tablet
+1049504	Abuse-Deterrent 12 HR Oxycodone Hydrochloride 10 MG Extended Release Oral Tablet [Oxycontin]
+1049625	Acetaminophen 325 MG / Oxycodone Hydrochloride 10 MG Oral Tablet [Percocet]
+1049630	diphenhydrAMINE Hydrochloride 25 MG Oral Tablet
+105078	Penicillin G 375 MG/ML Injectable Solution
+106258	Hydrocortisone 10 MG/ML Topical Cream
+106892	insulin isophane  human 70 UNT/ML / insulin  regular  human 30 UNT/ML Injectable Suspension [Humulin]
+108515	1 ML tacrolimus 5 MG/ML Injection [Prograf]
+1091392	Methylphenidate Hydrochloride 20 MG Oral Tablet
+1100184	Donepezil hydrochloride 23 MG Oral Tablet
+1116635	ticagrelor 90 MG Oral Tablet
+1191013	proparacaine hydrochloride 5 MG/ML Ophthalmic Solution
+1234995	Rocuronium bromide 10 MG/ML Injectable Solution
+1359133	{5 (ethinyl estradiol 0.02 MG / norethindrone acetate 1 MG Oral Tablet) / 7 (ethinyl estradiol 0.03 MG / norethindrone acetate 1 MG Oral Tablet) / 9 (ethinyl estradiol 0.035 MG / norethindrone acetate 1 MG Oral Tablet) / 7 (ferrous fumarate 75 MG Oral Tablet) } Pack [Estrostep Fe 28 Day]
+1359269	darunavir 800 MG Oral Tablet
+1361048	heparin sodium  porcine 100 UNT/ML Injectable Solution
+1361226	heparin sodium  porcine 1000 UNT/ML Injectable Solution
+1363309	Chlorpheniramine Maleate 4 MG Oral Tablet
+1366343	Levonorgestrel 0.00354 MG/HR Drug Implant
+1367439	21 DAY ethinyl estradiol 0.000625 MG/HR / etonogestrel 0.005 MG/HR Vaginal System [NuvaRing]
+141918	Terfenadine 60 MG Oral Tablet
+1431987	24 HR tacrolimus 5 MG Extended Release Oral Capsule [Astagraf]
+1433873	dolutegravir 50 MG Oral Tablet
+1437975	Glycopyrrolate 1.5 MG Oral Tablet [Glycate]
+1437975	glycopyrrolate 1.5 MG Oral Tablet [Glycate]
+1534809	168 HR Ethinyl Estradiol 0.00146 MG/HR / norelgestromin 0.00625 MG/HR Transdermal System
+1535362	sodium fluoride 0.0272 MG/MG Oral Gel
+1536148	120 ACTUAT mometasone furoate 0.2 MG/ACTUAT Metered Dose Inhaler [Asmanex]
+1599803	24 HR Donepezil hydrochloride 10 MG / Memantine hydrochloride 28 MG Extended Release Oral Capsule
+1601380	palbociclib 100 MG Oral Capsule
+1605257	levonorgestrel 0.000813 MG/HR Intrauterine System [Liletta]
+1648755	nitrofurantoin  macrocrystals 25 MG / nitrofurantoin  monohydrate 75 MG Oral Capsule
+1648756	nitrofurantoin  macrocrystals 25 MG / nitrofurantoin  monohydrate 75 MG [Macrobid]
+1649987	doxycycline hyclate 100 MG
+1656356	sacubitril 97 MG / valsartan 103 MG Oral Tablet [Entresto]
+1657066	4 ML bevacizumab 25 MG/ML Injection
+1659131	piperacillin 2000 MG / tazobactam 250 MG Injection
+1659149	Piperacillin 4000 MG / tazobactam 500 MG Injection
+1659263	1 ML heparin sodium  porcine 5000 UNT/ML Injection
+1664463	24 HR tacrolimus 1 MG Extended Release Oral Tablet [Envarsus]
+1665060	cefazolin 2000 MG Injection
+1719286	10 ML Furosemide 10 MG/ML Injection
+1723208	10 ML Alfentanil 0.5 MG/ML Injection
+1728805	2 ML morphine sulfate 1 MG/ML Injection
+1729584	remifentanil 2 MG Injection
+1732136	1 ML Morphine Sulfate 5 MG/ML Injection
+1735006	10 ML Fentanyl 0.05 MG/ML Injection
+1736776	10 ML oxaliplatin 5 MG/ML Injection
+1736854	Cisplatin 50 MG Injection
+1740467	2 ML Ondansetron 2 MG/ML Injection
+1747691	emtricitabine 200 MG / tenofovir alafenamide 25 MG Oral Tablet
+1796676	25 ML protamine sulfate (USP) 10 MG/ML Injection
+1803932	Leucovorin 100 MG Injection
+1804799	Alteplase 100 MG Injection
+1807510	150 ML vancomycin 5 MG/ML Injection
+1808217	100 ML Propofol 10 MG/ML Injection
+1809104	5 ML SUFentanil 0.05 MG/ML Injection
+1856546	levonorgestrel 0.000729 MG/HR Intrauterine System [Kyleena]
+1860154	Abuse-Deterrent 12 HR Oxycodone Hydrochloride 15 MG Extended Release Oral Tablet
+1860480	1 ML DOCEtaxel 20 MG/ML Injection
+1860491	12 HR Hydrocodone Bitartrate 10 MG Extended Release Oral Capsule
+1870230	NDA020800 0.3 ML Epinephrine 1 MG/ML Auto-Injector
+1940648	neratinib 40 MG Oral Tablet
+1946840	abemaciclib 100 MG Oral Tablet [Verzenio]
+197319	Allopurinol 100 MG Oral Tablet
+197378	Astemizole 10 MG Oral Tablet
+197380	atenolol 25 MG Oral Tablet
+197381	atenolol 50 MG Oral Tablet
+197454	cephalexin 500 MG Oral Tablet
+197511	ciprofloxacin 250 MG Oral Tablet
+197541	Colchicine 0.6 MG Oral Tablet
+197591	Diazepam 5 MG Oral Tablet
+197604	Digoxin 0.125 MG Oral Tablet
+197884	lisinopril 40 MG Oral Tablet
+198014	Naproxen 500 MG Oral Tablet
+198031	24 HR nicotine 0.292 MG/HR Transdermal System
+198039	nitroglycerin 0.4 MG Sublingual Tablet
+198188	ramipril 2.5 MG Oral Capsule
+198211	simvastatin 40 MG Oral Tablet
+198240	Tamoxifen 10 MG Oral Tablet
+198335	sulfamethoxazole 800 MG / trimethoprim 160 MG Oral Tablet
+198405	Ibuprofen 100 MG Oral Tablet
+198440	Acetaminophen 500 MG Oral Tablet
+1997015	50 ML bivalirudin 5 MG/ML Injection
+1998774	Breath-Actuated 120 ACTUAT beclomethasone dipropionate 0.04 MG/ACTUAT Metered Dose Inhaler [Qvar]
+200033	carvedilol 25 MG Oral Tablet
+2001499	Vitamin B12 5 MG/ML Injectable Solution
+200243	sevoflurane 1000 MG/ML Inhalation Solution
+200285	hydrochlorothiazide 12.5 MG / valsartan 160 MG Oral Tablet
+2003249	lamivudine 300 MG / tenofovir disoproxil fumarate 300 MG Oral Tablet
+200346	cefdinir 300 MG Oral Capsule
+200349	100 ML eptifibatide 0.75 MG/ML Injection
+204892	clonazePAM 0.25 MG Oral Tablet
+205923	1 ML Epoetin Alfa 4000 UNT/ML Injection [Epogen]
+206905	Ibuprofen 400 MG Oral Tablet [Ibu]
+209387	Acetaminophen 325 MG Oral Tablet [Tylenol]
+2119714	5 ML hyaluronidase-oysk 2000 UNT/ML / trastuzumab-oysk 120 MG/ML Injection
+212033	aspirin 325 MG Oral Tablet
+2123111	NDA020503 200 ACTUAT Albuterol 0.09 MG/ACTUAT Metered Dose Inhaler
+226719	etoposide 100 MG Injection [Etopophos]
+235389	Mestranol / Norethynodrel
+238100	Lorazepam 2 MG/ML Injectable Solution
+241834	cycloSPORINE  modified 100 MG Oral Capsule
+242969	4 ML norepinephrine 1 MG/ML Injection
+243670	Aspirin 81 MG Oral Tablet
+243670	aspirin 81 MG Oral Tablet
+245134	72 HR Fentanyl 0.025 MG/HR Transdermal System
+245314	albuterol 5 MG/ML Inhalation Solution
+2563431	aspirin 81 MG Oral Capsule [Vazalore]
+259255	atorvastatin 80 MG Oral Tablet
+284215	clindamycin 300 MG Oral Capsule
+308136	amLODIPine 2.5 MG Oral Tablet
+308182	Amoxicillin 250 MG Oral Capsule
+308192	Amoxicillin 500 MG Oral Tablet
+308971	carbamazepine 20 MG/ML Oral Suspension [Tegretol]
+309097	Cefuroxime 250 MG Oral Tablet
+309309	ciprofloxacin 500 MG Oral Tablet
+309362	Clopidogrel 75 MG Oral Tablet
+309845	Diazepam 5 MG/ML Injectable Solution
+310325	ferrous sulfate 325 MG Oral Tablet
+310385	FLUoxetine 20 MG Oral Capsule
+310436	Galantamine 4 MG Oral Tablet
+310798	Hydrochlorothiazide 25 MG Oral Tablet
+310965	Ibuprofen 200 MG Oral Tablet
+311034	insulin  regular  human 100 UNT/ML Injectable Solution
+311354	lisinopril 5 MG Oral Tablet
+311372	Loratadine 10 MG Oral Tablet
+311700	Midazolam 1 MG/ML Injectable Solution
+312617	predniSONE 5 MG Oral Tablet
+312938	Sertraline 100 MG Oral Tablet
+312961	Simvastatin 20 MG Oral Tablet
+312961	simvastatin 20 MG Oral Tablet
+313002	Sodium Chloride 9 MG/ML Injectable Solution
+313185	Tacrine 10 MG Oral Capsule
+313521	tropicamide 5 MG/ML Ophthalmic Solution
+313782	Acetaminophen 325 MG Oral Tablet
+313820	Acetaminophen 160 MG Chewable Tablet
+313988	Furosemide 40 MG Oral Tablet
+314076	lisinopril 10 MG Oral Tablet
+314077	lisinopril 20 MG Oral Tablet
+314231	Simvastatin 10 MG Oral Tablet
+314231	simvastatin 10 MG Oral Tablet
+317150	ritonavir 100 MG Oral Capsule
+349094	budesonide 0.125 MG/ML Inhalation Suspension
+349200	valsartan 320 MG Oral Tablet
+349201	valsartan 160 MG Oral Tablet
+351109	budesonide 0.25 MG/ML Inhalation Suspension
+351136	albuterol 0.417 MG/ML Inhalation Solution
+351137	albuterol 0.21 MG/ML Inhalation Solution
+351266	buprenorphine 2 MG / naloxone 0.5 MG Sublingual Tablet
+389221	Etonogestrel 68 MG Drug Implant
+477045	Chlorpheniramine Maleate 2 MG/ML Oral Solution
+542347	isoflurane 999 MG/ML Inhalation Solution
+562251	Amoxicillin 250 MG / Clavulanate 125 MG Oral Tablet
+562366	desflurane 1000 MG/ML Inhalation Solution
+562508	amoxicillin 875 MG / clavulanate 125 MG Oral Tablet
+583214	PACLitaxel 100 MG Injection
+583214	Paclitaxel 100 MG Injection
+596926	duloxetine 20 MG Delayed Release Oral Capsule
+597195	Carboplatin 10 MG/ML Injectable Solution
+608139	atomoxetine 100 MG Oral Capsule
+616830	budesonide 0.125 MG/ML Inhalation Suspension [Pulmicort]
+617296	amoxicillin 500 MG / clavulanate 125 MG Oral Tablet
+617310	atorvastatin 20 MG Oral Tablet
+617311	atorvastatin 40 MG Oral Tablet
+617312	atorvastatin 10 MG Oral Tablet
+630208	albuterol 0.83 MG/ML Inhalation Solution
+643066	efavirenz 600 MG / emtricitabine 200 MG / tenofovir disoproxil fumarate 300 MG Oral Tablet
+665078	Loratadine 5 MG Chewable Tablet
+705129	Nitroglycerin 0.4 MG/ACTUAT Mucosal Spray
+745752	NDA021457 200 ACTUAT albuterol 0.09 MG/ACTUAT Metered Dose Inhaler [ProAir]
+746763	NDA020503 200 ACTUAT albuterol 0.09 MG/ACTUAT Metered Dose Inhaler [Proventil]
+748856	{24 (drospirenone 3 MG / ethinyl estradiol 0.02 MG Oral Tablet) / 4 (inert ingredients 1 MG Oral Tablet) } Pack [Yaz 28 Day]
+748879	{21 (ethinyl estradiol 0.03 MG / levonorgestrel 0.15 MG Oral Tablet) / 7 (inert ingredients 1 MG Oral Tablet) } Pack [Levora 0.15/30 28 Day]
+748962	{28 (norethindrone 0.35 MG Oral Tablet) } Pack [Camila 28 Day]
+749196	clopidogrel 300 MG Oral Tablet
+749762	{7 (ethinyl estradiol 0.01 MG Oral Tablet) / 84 (ethinyl estradiol 0.03 MG / levonorgestrel 0.15 MG Oral Tablet) } Pack [Seasonique]
+749785	{7 (ethinyl estradiol 0.035 MG / norgestimate 0.18 MG Oral Tablet) / 7 (ethinyl estradiol 0.035 MG / norgestimate 0.215 MG Oral Tablet) / 7 (ethinyl estradiol 0.035 MG / norgestimate 0.25 MG Oral Tablet) / 7 (inert ingredients 1 MG Oral Tablet) } Pack [Ortho Tri-Cyclen 28 Day]
+749882	{7 (inert ingredients 1 MG Oral Tablet) / 21 (mestranol 0.05 MG / norethindrone 1 MG Oral Tablet) } Pack [Norinyl 1+50 28 Day]
+751905	{7 (ethinyl estradiol 0.035 MG / norgestimate 0.18 MG Oral Tablet) / 7 (ethinyl estradiol 0.035 MG / norgestimate 0.215 MG Oral Tablet) / 7 (ethinyl estradiol 0.035 MG / norgestimate 0.25 MG Oral Tablet) / 7 (inert ingredients 1 MG Oral Tablet) } Pack [Trinessa 28 Day]
+752899	0.25 ML Leuprolide Acetate 30 MG/ML Prefilled Syringe
+757594	{28 (norethindrone 0.35 MG Oral Tablet) } Pack [Jolivette 28 Day]
+789980	Ampicillin 100 MG/ML Injectable Solution
+807283	levonorgestrel 0.000833 MG/HR Intrauterine System [Mirena]
+808917	fosfomycin 3000 MG Granules for Oral Solution
+831533	{28 (norethindrone 0.35 MG Oral Tablet) } Pack [Errin 28 Day]
+833135	Milnacipran hydrochloride 100 MG Oral Tablet
+834061	Penicillin V Potassium 250 MG Oral Tablet
+834102	Penicillin V Potassium 500 MG Oral Tablet
+835603	tramadol hydrochloride 50 MG Oral Tablet
+849574	Naproxen sodium 220 MG Oral Tablet
+854235	0.4 ML Enoxaparin sodium 100 MG/ML Prefilled Syringe
+854255	enoxaparin sodium 100 MG/ML Injectable Solution
+854905	bisoprolol fumarate 5 MG Oral Tablet
+854916	bisoprolol fumarate 2.5 MG / hydrochlorothiazide 6.25 MG Oral Tablet
+855332	Warfarin Sodium 5 MG Oral Tablet
+855812	prasugrel 10 MG Oral Tablet
+856448	propranolol hydrochloride 10 MG Oral Tablet
+856535	24 HR propranolol hydrochloride 60 MG Extended Release Oral Capsule
+856556	propranolol hydrochloride 60 MG Oral Tablet
+856980	acetaminophen 300 MG / hydrocodone bitartrate 10 MG Oral Tablet
+856987	Acetaminophen 300 MG / HYDROcodone Bitartrate 5 MG Oral Tablet
+856987	Acetaminophen 300 MG / Hydrocodone Bitartrate 5 MG Oral Tablet
+857005	Acetaminophen 325 MG / HYDROcodone Bitartrate 7.5 MG Oral Tablet
+859088	NDA020983 200 ACTUAT albuterol 0.09 MG/ACTUAT Metered Dose Inhaler [Ventolin]
+859747	rosuvastatin calcium 10 MG Oral Tablet
+860975	24 HR Metformin hydrochloride 500 MG Extended Release Oral Tablet
+861467	Meperidine Hydrochloride 50 MG Oral Tablet
+866412	24 HR metoprolol succinate 100 MG Extended Release Oral Tablet
+866427	24 HR metoprolol succinate 25 MG Extended Release Oral Tablet
+866436	24 HR metoprolol succinate 50 MG Extended Release Oral Tablet
+866511	metoprolol tartrate 100 MG Oral Tablet
+866924	metoprolol tartrate 25 MG Oral Tablet
+895996	120 ACTUAT fluticasone propionate 0.044 MG/ACTUAT Metered Dose Inhaler [Flovent]
+896001	120 ACTUAT fluticasone propionate 0.11 MG/ACTUAT Metered Dose Inhaler [Flovent]
+896209	60 ACTUAT Fluticasone propionate 0.25 MG/ACTUAT / salmeterol 0.05 MG/ACTUAT Dry Powder Inhaler
+896766	labetalol hydrochloride 300 MG Oral Tablet
+897685	verapamil hydrochloride 80 MG Oral Tablet [Calan]
+898719	benazepril hydrochloride 40 MG Oral Tablet
+904419	Alendronic acid 10 MG Oral Tablet
+904475	pravastatin sodium 40 MG Oral Tablet
+966222	Levothyroxine Sodium 0.075 MG Oral Tablet
+978950	{5 (dienogest 2 MG / estradiol valerate 2 MG Oral Tablet) / 17 (dienogest 3 MG / estradiol valerate 2 MG Oral Tablet) / 2 (estradiol valerate 1 MG Oral Tablet) / 2 (estradiol valerate 3 MG Oral Tablet) / 2 (inert ingredients 1 MG Oral Tablet) } Pack [Natazia 28 Day]
+979480	losartan potassium 100 MG Oral Tablet
+979492	losartan potassium 50 MG Oral Tablet
+993770	Acetaminophen 300 MG / Codeine Phosphate 15 MG Oral Tablet
+996740	Memantine hydrochloride 2 MG/ML Oral Solution
+997488	Fexofenadine hydrochloride 30 MG Oral Tablet
+997501	Fexofenadine hydrochloride 60 MG Oral Tablet
