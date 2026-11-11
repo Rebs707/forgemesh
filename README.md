@@ -6,6 +6,24 @@ Designed to work against any MySQL database and any OWL file, with no dataset-sp
 
 ---
 
+## Project status
+
+**Early release (v0.1). Expect bugs.** ForgeMesh is a working research project, not a finished product. It has mostly been run by one person, on the datasets listed below.
+
+What is solid:
+- The pipeline (inspect → map → silver → gold → RDF) and its seven validation checks, on the four bundled project configurations.
+- Row-level provenance in the graph: every triple carries `fm:bronzeSourceRef` and `fm:goldRunId`, linking it back through gold and silver to its source row.
+
+Known gaps:
+- **Answer-to-source drill-down.** Every answer gets a receipt (interpretation, query, sources, evidence, caveats). But clicking through from an answer to the source rows behind it doesn't work for every answer yet, aggregates (counts, sums, grouped results) especially.
+- **LLM-written queries can be wrong.** The pipeline is validated; the query an LLM writes for a question it hasn't seen before is not. Check the query and the receipt. Known faulty query shapes are fixed automatically, and any rewrite is recorded in the receipt.
+- **Gold SQL mode is weaker than graph mode.** Some joins between gold tables aren't possible yet, because a source table's primary key isn't always carried into gold.
+- **MySQL is the only source database.**
+
+Bug reports from real schemas are the most useful contribution. Please [open an issue](https://github.com/tagben/forgemesh/issues).
+
+---
+
 ## What it does
 
 Given a MySQL database and an OWL ontology, the pipeline:
