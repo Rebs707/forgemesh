@@ -97,6 +97,13 @@ READABILITY RULES (these are mandatory — violations produce useless output):
        List EVERY non-aggregate SELECT variable in GROUP BY — missing even one causes a parse error.
        Example: SELECT ?a ?b (COUNT(?x) AS ?n) … GROUP BY ?a ?b
     c) In HAVING and ORDER BY you may reference the alias defined in SELECT (?xCount, ?total).
+    d) To count entities that meet a per-entity aggregate condition ("how many X have more
+       than N Y"), group in a subquery and count its rows. Never COUNT the GROUP BY variable
+       itself — that returns 1 for every group.
+         CORRECT:   SELECT (COUNT(*) AS ?xCount) WHERE {{ {{ SELECT ?x WHERE {{ ?y ont:hasX ?x }}
+                      GROUP BY ?x HAVING (COUNT(?y) > 3) }} }}
+         WRONG:     SELECT (COUNT(DISTINCT ?x) AS ?xCount) WHERE {{ ?y ont:hasX ?x }}
+                      GROUP BY ?x HAVING (COUNT(?y) > 3)
 15. When a question asks "for each X, list Y", use OPTIONAL for Y so entities
     with no Y still appear. SELECT the display fields of X and Y, not their URIs.
 16. Always use OPTIONAL for nullable properties such as hasMiddleName, hasShippedDate,
@@ -192,6 +199,94 @@ def _fix_missing_group_by(sparql: str) -> str:
             return sparql[:m.start()] + group_clause + "\n" + sparql[m.start():]
 
     return sparql.rstrip() + "\n" + group_clause
+
+
+_SELECT_KW_RE = re.compile(r"\bSELECT\b", re.IGNORECASE)
+_COUNT_DISTINCT_PROJ_RE = re.compile(
+    r"^\s*\(\s*COUNT\s*\(\s*DISTINCT\s+\?(\w+)\s*\)\s+AS\s+\?(\w+)\s*\)\s*$",
+    re.IGNORECASE | re.DOTALL,
+)
+_GROUP_TAIL_RE = re.compile(
+    r"^\s*GROUP\s+BY\s+(?P<vars>(?:\?\w+\s*)+)"
+    r"(?P<having>HAVING\s*\(.*?\))?\s*"
+    r"(?P<rest>(?:ORDER\s+BY\b.*?)?(?:LIMIT\s+\d+\s*)?(?:OFFSET\s+\d+\s*)?)$",
+    re.IGNORECASE | re.DOTALL,
+)
+
+
+def _fix_count_of_groups(sparql: str) -> Tuple[str, Optional[str]]:
+    """Rewrite a query that counts its own grouping variable into a count of groups.
+
+    ``SELECT (COUNT(DISTINCT ?x) AS ?n) WHERE {…} GROUP BY ?x [HAVING …]``
+    returns one row per group, each with ?n = 1, because counting the grouping
+    variable inside its own group is always 1. Whatever the question, that answer
+    is degenerate; the intended answer is the number of groups that survive the
+    HAVING filter. The rewrite moves the grouping into a subquery and counts its
+    rows:
+
+    ``SELECT (COUNT(*) AS ?n) WHERE { { SELECT ?x WHERE {…} GROUP BY ?x [HAVING …] } }``
+
+    Only fires when the query has a single SELECT whose sole projection is
+    ``COUNT(DISTINCT ?v)`` and ``?v`` is one of the GROUP BY variables. Returns the
+    (possibly rewritten) query and a human-readable note, or None when unchanged.
+    """
+    selects = list(_SELECT_KW_RE.finditer(sparql))
+    if len(selects) != 1:
+        return sparql, None
+    sel = selects[0]
+
+    where_m = re.search(r"\bWHERE\s*\{", sparql[sel.end():], re.IGNORECASE)
+    if not where_m:
+        return sparql, None
+    proj_end = sel.end() + where_m.start()
+    projection = sparql[sel.end():proj_end]
+    proj_m = _COUNT_DISTINCT_PROJ_RE.match(projection)
+    if not proj_m:
+        return sparql, None
+    counted_var, alias = proj_m.group(1), proj_m.group(2)
+
+    # Find the closing brace of the WHERE group pattern.
+    body_start = sel.end() + where_m.end() - 1  # index of "{"
+    depth = 0
+    body_end = -1
+    for i in range(body_start, len(sparql)):
+        ch = sparql[i]
+        if ch == "{":
+            depth += 1
+        elif ch == "}":
+            depth -= 1
+            if depth == 0:
+                body_end = i + 1
+                break
+    if body_end < 0:
+        return sparql, None
+
+    tail_m = _GROUP_TAIL_RE.match(sparql[body_end:])
+    if not tail_m:
+        return sparql, None
+    group_vars = re.findall(r"\?(\w+)", tail_m.group("vars"))
+    if counted_var not in group_vars:
+        return sparql, None
+
+    prologue = sparql[:sel.start()]
+    body = sparql[body_start:body_end]
+    having = (tail_m.group("having") or "").strip()
+    limit_m = re.search(r"LIMIT\s+\d+", tail_m.group("rest") or "", re.IGNORECASE)
+    group_clause = "GROUP BY " + " ".join(f"?{v}" for v in group_vars)
+    inner = (
+        f"SELECT {' '.join('?' + v for v in group_vars)} WHERE {body} "
+        f"{group_clause}" + (f" {having}" if having else "")
+    )
+    rewritten = (
+        f"{prologue}SELECT (COUNT(*) AS ?{alias}) WHERE {{ {{ {inner} }} }}"
+        + (f" {limit_m.group(0)}" if limit_m else "")
+    )
+    note = (
+        f"The generated query counted ?{counted_var} inside groups of ?{counted_var}, "
+        "which gives 1 for every group. It was rewritten to count the groups instead. "
+        "Original query: " + " ".join(sparql.split())
+    )
+    return rewritten, note
 
 
 def _inject_missing_prefixes(sparql: str, extra: Optional[Dict[str, str]] = None) -> str:
@@ -346,6 +441,12 @@ class SparqlQueryEngine:
         # Step 4b: Deterministic post-processing — fix object property variable mistakes
         sparql = self._fix_object_property_variables(sparql)
 
+        # Step 4c: Count-of-groups — COUNT(DISTINCT ?x) … GROUP BY ?x yields 1 per group
+        sparql, count_note = _fix_count_of_groups(sparql)
+        query_rewrites: List[str] = [count_note] if count_note else []
+        if count_note:
+            logger.info("SPARQL post-process: rewrote count-of-groups query")
+
         # Step 5: Execute against Fuseki (skipped in dry-run mode)
         if dry_run:
             result = QueryResult(
@@ -414,6 +515,7 @@ class SparqlQueryEngine:
             completion_tokens=completion_tokens,
             error=None,
             proof_record=proof_record,
+            query_rewrites=query_rewrites,
         )
         self._record_turn(question, result)
         return result
