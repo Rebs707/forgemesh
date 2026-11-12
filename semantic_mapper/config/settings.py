@@ -317,3 +317,20 @@ class Settings(BaseSettings):
     # on re-materialise at $0 (warm-run property; mirrors HistoryMatcher).
     BINDINGS_DB_PATH: str = "bindings.db"
 
+
+
+def apply_web_app_url(settings: "Settings", host: str, port: int) -> None:
+    """Point FORGEMESH_WEB_APP_URL at the address the web app is serving on.
+
+    Only when it was not set explicitly (env var or env file): an explicit value
+    always wins. Wildcard bind addresses map to loopback, since the URL is used
+    for the app's calls to itself and for receipt links.
+    """
+    if "FORGEMESH_WEB_APP_URL" in settings.model_fields_set:
+        return
+    h = (host or "").strip() or "127.0.0.1"
+    if h in ("0.0.0.0", "::", "[::]"):
+        h = "127.0.0.1"
+    elif ":" in h and not h.startswith("["):
+        h = f"[{h}]"
+    settings.FORGEMESH_WEB_APP_URL = f"http://{h}:{int(port)}"

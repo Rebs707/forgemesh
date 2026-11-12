@@ -61,6 +61,11 @@ from semantic_mapper.schema.mapping_output import (
 
 # ── Bootstrap engine ──────────────────────────────────────────────────────────
 settings = Settings(_env_file=_args.env) if _args.env else Settings()
+# The app calls its own /api/query/proof to build full receipts and links to its
+# own /runs pages. Unless FORGEMESH_WEB_APP_URL was set explicitly, point it at the
+# host and port this process is actually serving on, not the 5173 default.
+from semantic_mapper.config.settings import apply_web_app_url
+apply_web_app_url(settings, _args.host, _args.port)
 setup_logging(settings)
 
 def _empty_report() -> SemanticMappingReport:
@@ -1434,7 +1439,11 @@ def api_query_proof(body: ProofRequest, request: Request) -> Any:
                     base_uri=settings.RDF_BASE_URI, source_name=settings.RDF_SOURCE_NAME,
                 )
                 id_col = gold_def.id_column or "_gold_id"
-                chains = walker.walk_uris(subjects, gold_def.gold_table_name, id_col)
+                from semantic_mapper.prove.subject_refs import bronze_source_refs
+                chains = walker.walk_uris(
+                    subjects, gold_def.gold_table_name, id_col,
+                    bronze_refs=bronze_source_refs(subjects, _engine._execute_sparql),
+                )
         else:
             sa_eng = gold_engine if body.mode == "gold" else silver_engine
             pk_col = "_gold_id" if body.mode == "gold" else "_silver_id"
@@ -1596,11 +1605,15 @@ def _api_query_proof_row_inner(body: RowProofRequest, _sa_engine: Any, _sa_text:
                     if gdef:
                         grp = uri_groups.setdefault(gdef.gold_table_name, {"gdef": gdef, "uris": []})
                         grp["uris"].append(uri)
+                from semantic_mapper.prove.subject_refs import bronze_source_refs
+                _refs = bronze_source_refs(all_uris, _engine._execute_sparql)
                 for grp in uri_groups.values():
                     gdef = grp["gdef"]
                     id_col = gdef.id_column or "_gold_id"
                     try:
-                        for ch in walker.walk_uris(grp["uris"], gdef.gold_table_name, id_col):
+                        for ch in walker.walk_uris(
+                            grp["uris"], gdef.gold_table_name, id_col, bronze_refs=_refs,
+                        ):
                             if ch.subject_uri:
                                 all_chains_by_uri[ch.subject_uri] = ch
                     except Exception as _wc_exc:

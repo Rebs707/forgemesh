@@ -131,8 +131,15 @@ class LineageWalker:
         subject_uris: List[str],
         gold_table: str,
         id_column: str,
+        bronze_refs: Optional[Dict[str, str]] = None,
     ) -> List[LineageChain]:
         """Walk from SPARQL subject URIs → gold → silver → bronze.
+
+        ``bronze_refs`` maps subject URI → its ``fm:bronzeSourceRef`` literal as
+        read from the graph. It is the authoritative subject → gold-row join key
+        (the gold row carries the same value in ``_bronze_source_ref``), so it is
+        used first, whatever key the materialiser hashed into the URI. URIs with
+        no ref fall back to parsing the URI and matching ``id_column``.
 
         Parses each URI to extract the id value, then batch-fetches gold rows
         WHERE {id_column} IN (...).  Falls through to the gold → silver →
@@ -153,14 +160,28 @@ class LineageWalker:
         if not parsed:
             return []
 
-        id_values = [p[1] for p in parsed]
+        # Provenance join first: subject → fm:bronzeSourceRef → gold row.
+        refs = {u: r for u, r in (bronze_refs or {}).items() if r is not None}
+        ref_to_row: dict[str, dict] = {}
+        if refs:
+            for row in self._fetch_by_column(
+                self._gold, gold_table, "_bronze_source_ref",
+                list(dict.fromkeys(refs.values())),
+            ):
+                ref_to_row.setdefault(str(row.get("_bronze_source_ref")), row)
+        by_ref = {u: ref_to_row[r] for u, r in refs.items() if r in ref_to_row}
+
+        id_values = [p[1] for p in parsed if p[0] not in by_ref]
 
         # Batch-fetch gold rows. UriFactory.individual() hashes the id value
         # (sha256(str(value))[:16]), so a subject URI's last segment is that hash,
         # NOT the raw id_column value. We resolve by BOTH: the fast indexed path
         # for any raw-id URIs, then a hash-aware fetch for the (production) hashed
         # remainder. val_to_row is keyed by raw value AND hash so either shape joins.
-        gold_rows = self._fetch_gold_by_id_or_hash(gold_table, id_column, id_values)
+        gold_rows = (
+            self._fetch_gold_by_id_or_hash(gold_table, id_column, id_values)
+            if id_values else []
+        )
 
         # Build URI → gold_row mapping
         val_to_row: dict[str, dict] = {}
@@ -170,13 +191,13 @@ class LineageWalker:
             val_to_row[hash_identifier(raw)] = row
 
         # Collect silver refs from all matched gold rows
-        all_silver_refs = self._collect_silver_refs(list(gold_rows))
+        all_silver_refs = self._collect_silver_refs(list(gold_rows) + list(by_ref.values()))
         all_silver_rows = self._fetch_all_silver(all_silver_refs)
         all_bronze = self._fetch_all_bronze(all_silver_rows)
 
         chains: list[LineageChain] = []
         for uri, id_value in parsed:
-            gold_row = val_to_row.get(id_value)
+            gold_row = by_ref.get(uri) or val_to_row.get(id_value)
             if gold_row is None:
                 chains.append(self._broken_chain(
                     subject_uri=uri,
