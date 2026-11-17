@@ -4,6 +4,8 @@ A Python pipeline that automatically maps relational "bronze" tables to an OWL o
 
 Designed to work against any MySQL database and any OWL file, with no dataset-specific configuration in code.
 
+**Launch write-up:** [I've open-sourced ForgeMesh](https://humous.substack.com/p/ive-open-sourced-forgemesh-plain): what it does, why it was built, and what isn't finished yet.
+
 ---
 
 ## Project status
